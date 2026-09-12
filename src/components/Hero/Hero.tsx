@@ -3,20 +3,36 @@
 import { useEffect, useState } from "react";
 import styles from "./Hero.module.css";
 
+type Photo = {
+  src: string;
+  alt: string;
+};
+
 // Placeholder: foto di gattini, da sostituire con il portfolio reale.
-const SLIDES = [
+const SLIDES: Photo[] = [
   { src: "https://placecats.com/neo/1200/800", alt: "Gattino 1" },
   { src: "https://placecats.com/millie/1200/800", alt: "Gattino 2" },
   { src: "https://placecats.com/poppy/1200/800", alt: "Gattino 3" },
 ];
 
-const PHOTO_2 = { src: "https://placecats.com/bella/800/1200", alt: "Gattino 4" };
-const PHOTO_3 = { src: "https://placecats.com/louie/800/1200", alt: "Gattino 5" };
+const PHOTO_2: Photo = {
+  src: "https://placecats.com/bella/800/1200",
+  alt: "Gattino 4",
+};
 
-const ADJECTIVES = ["intimate", "timeless", "joyful"];
+const PHOTO_3: Photo = {
+  src: "https://placecats.com/louie/800/1200",
+  alt: "Gattino 5",
+};
+
+const ADJECTIVES = ["intimate", "timeless", "joyful"] as const;
 
 const SLIDE_INTERVAL = 4500;
 const ADJECTIVE_INTERVAL = 2600;
+
+const LONGEST_ADJECTIVE = ADJECTIVES.reduce((a, b) =>
+  b.length > a.length ? b : a
+);
 
 export default function Hero() {
   const [slide, setSlide] = useState(0);
@@ -90,9 +106,7 @@ export default function Hero() {
               </em>
             ))}
             {/* riserva lo spazio della parola più lunga */}
-            <em className={styles.adjectiveGhost}>
-              {ADJECTIVES.reduce((a, b) => (b.length > a.length ? b : a))}
-            </em>
+            <em className={styles.adjectiveGhost}>{LONGEST_ADJECTIVE}</em>
           </span>{" "}
           events and couples
         </p>
