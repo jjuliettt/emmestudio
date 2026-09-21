@@ -1,0 +1,123 @@
+/* ---------------------------------------------
+   Reviews — mobile first
+   Carosello a slide orizzontale, 4 recensioni
+--------------------------------------------- */
+
+.reviews {
+  /* stesso beige dell'header, piu' scuro del fondo pagina */
+  background-color: #f7eee7;
+  color: #2b1d17;
+  padding: 3rem 0 2.5rem;
+}
+
+.viewport {
+  overflow: hidden;
+}
+
+.track {
+  display: flex;
+  transition: transform 0.6s ease;
+}
+
+.slide {
+  flex: 0 0 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 0 1.25rem;
+}
+
+/* Layout alternato: foto a destra sulle recensioni pari */
+.slide[data-flipped="true"] {
+  flex-direction: row-reverse;
+}
+
+.photo {
+  flex: 0 0 30%;
+  max-width: 130px;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+}
+
+.body {
+  flex: 1;
+}
+
+.quote {
+  margin: 0;
+  font-family: "Didot", "Bodoni MT", "Playfair Display", Georgia,
+    "Times New Roman", serif;
+  font-size: clamp(1.05rem, 4.6vw, 1.35rem);
+  line-height: 1.35;
+}
+
+.text {
+  margin: 0.75rem 0 0;
+  font-size: clamp(0.75rem, 3.2vw, 0.85rem);
+  line-height: 1.6;
+}
+
+.author {
+  margin: 0.75rem 0 0;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: clamp(0.6rem, 2.8vw, 0.7rem);
+}
+
+/* ---------- Indicatori ---------- */
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 2rem;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: #faf4f0;
+  cursor: pointer;
+}
+
+.dot[data-active="true"] {
+  background-color: #2b1d17;
+}
+
+/* ---------------------------------------------
+   Tablet / desktop
+--------------------------------------------- */
+
+@media (min-width: 768px) {
+  .reviews {
+    padding: 4.5rem 0 3.5rem;
+  }
+
+  .slide {
+    gap: 3rem;
+    padding: 0 max(3rem, 8vw);
+  }
+
+  .photo {
+    flex: 0 0 22%;
+    max-width: 200px;
+  }
+
+  .quote {
+    font-size: clamp(1.3rem, 2.4vw, 1.8rem);
+  }
+
+  .text {
+    font-size: 0.9rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    transition: none;
+  }
+}

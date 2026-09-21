@@ -1,24 +1,137 @@
+/* ---------------------------------------------
+   Header — mobile first
+--------------------------------------------- */
+
 .header {
-  border-bottom: 1px solid var(--border);
+  background-color: #f7eee7;
+  color: #2b1d17;
 }
 
-.inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 1rem;
+.bar {
   display: flex;
-  align-items: center;
+  flex-direction: row;
   justify-content: space-between;
-  gap: 1rem;
+  align-items: center;
+  padding: 1.1rem 1.25rem;
 }
 
-.logo {
-  font-weight: 700;
-  letter-spacing: -0.02em;
+/* Nome e cognome: serif elegante, minimale */
+.name {
+  font-family: "Didot", "Bodoni MT", "Playfair Display", Georgia,
+    "Times New Roman", serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: clamp(0.8rem, 3.6vw, 1rem);
+  white-space: nowrap;
 }
+
+/* ---------- Hamburger a 2 linee ---------- */
+
+.burger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  width: 30px;
+  padding: 6px 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.burgerLine {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: #2b1d17;
+}
+
+/* ---------- Overlay ---------- */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background-color: rgba(43, 29, 23, 0.25);
+  display: none;
+}
+
+.overlay[data-open="true"] {
+  display: block;
+}
+
+/* ---------- Pannello del menu ---------- */
+
+.panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 50;
+  width: 100%;
+  /* meta' pagina o meno, da sistemare */
+  height: 50vh;
+  background-color: #f7eee7;
+  flex-direction: column;
+  display: none;
+}
+
+.panel[data-open="true"] {
+  display: flex;
+}
+
+/* Barra del pannello: stessa impaginazione dell'header */
+.panelBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.1rem 1.25rem;
+}
+
+/* ---------- X di chiusura ---------- */
+
+.close {
+  position: relative;
+  width: 30px;
+  height: 22px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.closeLine {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #2b1d17;
+}
+
+.closeLine:first-child {
+  transform: rotate(45deg);
+}
+
+.closeLine:last-child {
+  transform: rotate(-45deg);
+}
+
+/* ---------- Voci di menu ---------- */
 
 .nav {
+  flex: 1;
   display: flex;
-  gap: 1rem;
-  font-size: 0.95rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.4rem;
+}
+
+.navLink {
+  font-family: "Didot", "Bodoni MT", "Playfair Display", Georgia,
+    "Times New Roman", serif;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: clamp(0.85rem, 3.8vw, 1.05rem);
 }

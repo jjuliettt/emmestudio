@@ -71,7 +71,7 @@
 /* ---------- Riga 2: foto 2 + foto 3 sovrapposta + citazione ---------- */
 
 .rowTwo {
-  margin-top: 2rem;
+  margin-top: 2.5rem;
 }
 
 /* Riparte dal margine sinistro della sezione, non rientrata */
@@ -79,25 +79,25 @@
   position: relative;
   width: 100%;
   /* spazio per la foto 3 che sborda in basso */
-  padding-bottom: 28%;
+  padding-bottom: 26%;
 }
 
 .photoTwo {
   display: block;
-  width: 39%;
+  width: 46%;
   aspect-ratio: 2 / 3;
   object-fit: cover;
   position: relative;
   z-index: 1;
 }
 
-/* Sfalsata verso l'alto: parte oltre la metà della foto 2 e la supera in basso */
+/* Sfalsata verso l'alto: parte oltre la meta' della foto 2 e la supera in basso */
 .photoThree {
   position: absolute;
   z-index: 2;
-  top: 42%;
-  left: 30%;
-  width: 42%;
+  top: 40%;
+  left: 38%;
+  width: 44%;
   aspect-ratio: 2 / 3;
   object-fit: cover;
 }
@@ -105,14 +105,14 @@
 /* ---------- Citazione ---------- */
 
 .quote {
-  margin: 2.5rem 0 0;
+  margin: 3rem 0 0;
   padding: 0 1.25rem;
   text-align: left;
   font-family: Georgia, "Times New Roman", serif;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
-  line-height: 1.9;
-  font-size: clamp(0.75rem, 3.4vw, 0.95rem);
+  letter-spacing: 0.14em;
+  line-height: 2.1;
+  font-size: clamp(0.95rem, 4.6vw, 1.2rem);
   color: #2b1d17;
 }
 
@@ -124,6 +124,8 @@
 }
 
 .adjective {
+  color: inherit;
+  font-style: italic;
   position: absolute;
   left: 0;
   top: 0;
