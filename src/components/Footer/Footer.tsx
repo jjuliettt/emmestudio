@@ -30,10 +30,6 @@ export default function Footer() {
             {EMAIL}
           </a>
         </nav>
-
-        <span className={styles.copy}>
-          © {new Date().getFullYear()} Elisa Massetti
-        </span>
       </div>
     </footer>
   );

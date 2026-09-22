@@ -10,13 +10,13 @@ type Photo = {
 
 // Placeholder: foto di gattini, da sostituire con il portfolio reale.
 const SLIDES: Photo[] = [
-  { src: "https://placecats.com/neo/1200/800", alt: "Gattino 1" },
-  { src: "https://placecats.com/millie/1200/800", alt: "Gattino 2" },
-  { src: "https://placecats.com/poppy/1200/800", alt: "Gattino 3" },
+  { src: "https://placecats.com/neo/1200/900", alt: "Gattino 1" },
+  { src: "https://placecats.com/millie/1200/900", alt: "Gattino 2" },
+  { src: "https://placecats.com/poppy/1200/900", alt: "Gattino 3" },
 ];
 
 const PHOTO_2: Photo = {
-  src: "https://placecats.com/bella/800/1200",
+  src: "https://placecats.com/bella/900/900",
   alt: "Gattino 4",
 };
 

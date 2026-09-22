@@ -6,7 +6,8 @@
 .hero {
   background-color: #faf4f0;
   width: 100%;
-  overflow: hidden;
+  /* micro spazio tra header e hero */
+  padding-top: 0.75rem;
   padding-bottom: 3rem;
   color: #2b1d17;
 }
@@ -21,10 +22,15 @@
 .verticalText {
   flex: 0 0 20%;
   display: flex;
-  align-items: center;
+  /* le due righe partono dalla stessa quota, in basso */
+  align-items: flex-end;
   justify-content: center;
-  gap: 0.4rem;
-  padding: 0.5rem 0;
+  gap: 0.35rem;
+  /* alzato: sotto passa la riga 2, che sale in overlap */
+  padding: 0.5rem 0.35rem 10%;
+  /* il testo ruotato non deve essere tagliato dalla colonna */
+  overflow: visible;
+  min-width: 0;
 }
 
 .verticalWelcome,
@@ -37,21 +43,19 @@
 
 .verticalWelcome {
   font-style: italic;
-  font-size: clamp(1rem, 4.5vw, 1.4rem);
+  font-size: min(5.2vw, 1.6rem);
 }
 
 .verticalName {
-  font-style: italic;
-  font-size: clamp(0.7rem, 3vw, 0.95rem);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-size: min(3.4vw, 1.05rem);
+  letter-spacing: 0.04em;
 }
 
 /* Slideshow in crossfade, nessun indicatore. Foto orizzontale. */
 .slideshow {
   position: relative;
   flex: 0 0 80%;
-  aspect-ratio: 3 / 2;
+  aspect-ratio: 4 / 3;
 }
 
 .slide {
@@ -71,33 +75,39 @@
 /* ---------- Riga 2: foto 2 + foto 3 sovrapposta + citazione ---------- */
 
 .rowTwo {
-  margin-top: 2.5rem;
+  position: relative;
+  z-index: 3;
+  /* la riga 2 sale e sovrappone un po' la foto 1 */
+  margin-top: -3%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 /* Riparte dal margine sinistro della sezione, non rientrata */
 .collage {
   position: relative;
-  width: 100%;
-  /* spazio per la foto 3 che sborda in basso */
-  padding-bottom: 26%;
+  /* colonna 1: le due foto */
+  flex: 0 0 59%;
 }
 
 .photoTwo {
   display: block;
-  width: 46%;
-  aspect-ratio: 2 / 3;
+  width: 89%;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   position: relative;
   z-index: 1;
 }
 
-/* Sfalsata verso l'alto: parte oltre la meta' della foto 2 e la supera in basso */
+/* Sfalsata verso il basso, in overlap sul bordo destro della foto 2 */
 .photoThree {
   position: absolute;
   z-index: 2;
-  top: 40%;
-  left: 38%;
-  width: 44%;
+  top: 32%;
+  left: 55%;
+  width: 45%;
   aspect-ratio: 2 / 3;
   object-fit: cover;
 }
@@ -105,14 +115,15 @@
 /* ---------- Citazione ---------- */
 
 .quote {
-  margin: 3rem 0 0;
-  padding: 0 1.25rem;
+  /* colonna 2: centrata verticalmente sulla riga */
+  flex: 1;
+  margin: 0;
+  padding-right: 1.25rem;
   text-align: left;
   font-family: Georgia, "Times New Roman", serif;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  line-height: 2.1;
-  font-size: clamp(0.95rem, 4.6vw, 1.2rem);
+  letter-spacing: 0.1em;
+  line-height: 1.9;
+  font-size: clamp(0.9rem, 4vw, 1.1rem);
   color: #2b1d17;
 }
 
@@ -150,6 +161,7 @@
 
 @media (min-width: 768px) {
   .hero {
+    padding-top: 1.25rem;
     padding-bottom: 5rem;
   }
 
@@ -158,32 +170,14 @@
   }
 
   .rowTwo {
-    display: flex;
-    align-items: center;
     gap: 3rem;
-    margin-top: 3.5rem;
-  }
-
-  .collage {
-    flex: 0 0 62%;
-    padding-bottom: 20%;
-  }
-
-  .photoTwo {
-    width: 62%;
-  }
-
-  .photoThree {
-    top: 38%;
-    left: 48%;
-    width: 52%;
+    margin-top: -3%;
   }
 
   .quote {
-    flex: 1;
-    margin: 0;
     padding-right: 2.5rem;
-    line-height: 2.2;
+    line-height: 2.1;
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
   }
 }
 
