@@ -19,7 +19,7 @@
   align-items: stretch;
 }
 
-/* Colonna destra: titolo ruotato, si legge dal basso verso l'alto.
+/* Colonna sinistra: titolo ruotato, si legge dal basso verso l'alto.
    Misure prese dal mobile di cassidylynnephoto.com (30px su 320px). */
 .verticalText {
   flex: 0 0 23%;
