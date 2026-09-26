@@ -47,8 +47,18 @@
   color: #2c1a0d;
 }
 
-.verticalTitle em {
+/* Ogni riga è una colonna a sé: così si possono allineare e distanziare */
+.titleLine {
+  display: block;
+}
+
+.titleWelcome {
   font-style: italic;
+  /* il corsivo di Branch è simulato dal browser e sposta la "W":
+     la riporta allineata alla "E" di Elisa (misurato sul font) */
+  margin-inline-start: -0.15em;
+  /* un po' di aria tra le due righe */
+  margin-block-end: 0.12em;
 }
 
 /* Slideshow in crossfade, nessun indicatore. Foto orizzontale. */

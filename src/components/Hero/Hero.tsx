@@ -83,9 +83,10 @@ export default function Hero() {
 
         <div className={styles.verticalText}>
           <h1 className={`${styles.verticalTitle} ${displaySerif.variable}`}>
-            <em>Welcome to</em>
-            <br />
-            Elisa Massetti Photo
+            <em className={`${styles.titleLine} ${styles.titleWelcome}`}>
+              Welcome to
+            </em>
+            <span className={styles.titleLine}>Elisa Massetti Photo</span>
           </h1>
         </div>
       </div>
