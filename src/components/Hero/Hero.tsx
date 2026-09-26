@@ -55,6 +55,7 @@ const LONGEST_ADJECTIVE = ADJECTIVES.reduce((a, b) =>
 export default function Hero() {
   const [slide, setSlide] = useState(0);
   const [adjective, setAdjective] = useState(0);
+  const [hasBranch, setHasBranch] = useState(false);
 
   useEffect(() => {
     const id = setInterval(
@@ -72,12 +73,24 @@ export default function Hero() {
     return () => clearInterval(id);
   }, []);
 
+  // Branch c'è solo se il file è in public/fonts/ (non versionato):
+  // il suo corsivo simulato chiede un altro allineamento (vedi CSS)
+  useEffect(() => {
+    document.fonts
+      .load('1em "Branch"')
+      .then((faces) => setHasBranch(faces.length > 0))
+      .catch(() => {}); // file assente: resta Instrument Serif
+  }, []);
+
   return (
     <section className={styles.hero}>
       {/* Riga 1: testo verticale a sinistra (23%) + slideshow (77%) */}
       <div className={styles.rowOne}>
         <div className={styles.verticalText}>
-          <h1 className={`${styles.verticalTitle} ${displaySerif.variable}`}>
+          <h1
+            className={`${styles.verticalTitle} ${displaySerif.variable}`}
+            data-font={hasBranch ? "branch" : undefined}
+          >
             <em className={`${styles.titleLine} ${styles.titleWelcome}`}>
               Welcome to
             </em>
