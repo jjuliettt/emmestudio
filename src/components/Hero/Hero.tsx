@@ -1,28 +1,46 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Instrument_Serif } from "next/font/google";
 import styles from "./Hero.module.css";
+
+// cassidylynnephoto.com usa "Branch" (font a pagamento): Instrument Serif
+// è l'alternativa gratuita più vicina (serif alto e stretto, con corsivo).
+const displaySerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-instrument-serif",
+});
 
 type Photo = {
   src: string;
   alt: string;
 };
 
-// Placeholder: foto di gattini, da sostituire con il portfolio reale.
 const SLIDES: Photo[] = [
-  { src: "https://placecats.com/neo/1200/900", alt: "Gattino 1" },
-  { src: "https://placecats.com/millie/1200/900", alt: "Gattino 2" },
-  { src: "https://placecats.com/poppy/1200/900", alt: "Gattino 3" },
+  {
+    src: "/images/hero/slide-1-circuit.jpg",
+    alt: "Griglia di partenza al Circuit Zolder",
+  },
+  {
+    src: "/images/hero/slide-2-helmet.jpg",
+    alt: "Casco da corsa appoggiato sul tetto di un'auto",
+  },
+  {
+    src: "/images/hero/slide-3-champagne.jpg",
+    alt: "Flûte di spumante con un'auto in pista sullo sfondo",
+  },
 ];
 
 const PHOTO_2: Photo = {
-  src: "https://placecats.com/bella/900/900",
-  alt: "Gattino 4",
+  src: "/images/hero/guests.jpg",
+  alt: "Ospiti che chiacchierano durante l'evento",
 };
 
 const PHOTO_3: Photo = {
-  src: "https://placecats.com/louie/800/1200",
-  alt: "Gattino 5",
+  src: "/images/hero/portrait.jpg",
+  alt: "Ospite sorridente durante una conversazione",
 };
 
 const ADJECTIVES = ["intimate", "timeless", "joyful"] as const;
@@ -56,11 +74,15 @@ export default function Hero() {
 
   return (
     <section className={styles.hero}>
-      {/* Riga 1: testo verticale (20%) + slideshow (80%) */}
+      {/* Riga 1: testo verticale a sinistra (23%) + slideshow (77%) */}
       <div className={styles.rowOne}>
         <div className={styles.verticalText}>
-          <span className={styles.verticalWelcome}>Welcome</span>
-          <span className={styles.verticalName}>Elisa Massetti Photo</span>
+          <h1 className={`${styles.verticalTitle} ${displaySerif.variable}`}>
+            <em className={`${styles.titleLine} ${styles.titleWelcome}`}>
+              Welcome to
+            </em>
+            <span className={styles.titleLine}>Elisa Massetti Photo</span>
+          </h1>
         </div>
 
         <div className={styles.slideshow}>
@@ -75,6 +97,7 @@ export default function Hero() {
             />
           ))}
         </div>
+
       </div>
 
       {/* Riga 2: foto 2 + foto 3 sovrapposta + citazione */}

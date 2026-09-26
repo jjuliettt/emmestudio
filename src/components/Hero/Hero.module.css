@@ -19,43 +19,53 @@
   align-items: stretch;
 }
 
+/* Colonna sinistra: titolo ruotato, si legge dal basso verso l'alto.
+   Misure prese dal mobile di cassidylynnephoto.com (30px su 320px). */
 .verticalText {
-  flex: 0 0 20%;
+  flex: 0 0 23%;
   display: flex;
-  /* le due righe partono dalla stessa quota, in basso */
   align-items: flex-end;
   justify-content: center;
-  gap: 0.35rem;
   /* alzato: sotto passa la riga 2, che sale in overlap */
-  padding: 0.5rem 0.35rem 10%;
-  /* il testo ruotato non deve essere tagliato dalla colonna */
+  padding: 0.5rem 0 12%;
   overflow: visible;
   min-width: 0;
 }
 
-.verticalWelcome,
-.verticalName {
+.verticalTitle {
+  margin: 0;
+  /* "Branch" viene usato solo se il file è presente in public/fonts/
+     (vedi globals.css), altrimenti si ricade su Instrument Serif. */
+  font-family: "Branch", var(--font-instrument-serif), Georgia, serif;
   writing-mode: vertical-rl;
   transform: rotate(180deg);
   white-space: nowrap;
-  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  font-size: min(6.4vw, 1.9rem);
+  line-height: 0.8;
+  letter-spacing: 0;
+  color: #2c1a0d;
 }
 
-.verticalWelcome {
+/* Ogni riga è una colonna a sé: così si possono allineare e distanziare */
+.titleLine {
+  display: block;
+}
+
+.titleWelcome {
   font-style: italic;
-  font-size: min(5.2vw, 1.6rem);
-}
-
-.verticalName {
-  font-size: min(3.4vw, 1.05rem);
-  letter-spacing: 0.04em;
+  /* il corsivo di Branch è simulato dal browser e sposta la "W":
+     la riporta allineata alla "E" di Elisa (misurato sul font) */
+  margin-inline-start: -0.15em;
+  /* un po' di aria tra le due righe */
+  margin-block-end: 0.12em;
 }
 
 /* Slideshow in crossfade, nessun indicatore. Foto orizzontale. */
 .slideshow {
   position: relative;
-  flex: 0 0 80%;
-  aspect-ratio: 4 / 3;
+  flex: 0 0 77%;
+  aspect-ratio: 246 / 223;
 }
 
 .slide {
@@ -163,10 +173,6 @@
   .hero {
     padding-top: 1.25rem;
     padding-bottom: 5rem;
-  }
-
-  .verticalText {
-    gap: 1rem;
   }
 
   .rowTwo {
