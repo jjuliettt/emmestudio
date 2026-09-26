@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Cormorant_Garamond } from "next/font/google";
+import { Instrument_Serif } from "next/font/google";
 import styles from "./Hero.module.css";
 
-// Serif leggero ad alto contrasto, simile a quello di cassidylynnephoto.com
-const displaySerif = Cormorant_Garamond({
+// cassidylynnephoto.com usa "Branch" (font a pagamento): Instrument Serif
+// è l'alternativa gratuita più vicina (serif alto e stretto, con corsivo).
+const displaySerif = Instrument_Serif({
   subsets: ["latin"],
-  weight: ["300", "400"],
+  weight: "400",
   style: ["normal", "italic"],
 });
 

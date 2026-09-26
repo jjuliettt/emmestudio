@@ -19,14 +19,15 @@
   align-items: stretch;
 }
 
-/* Colonna destra: titolo ruotato, si legge dal basso verso l'alto */
+/* Colonna destra: titolo ruotato, si legge dal basso verso l'alto.
+   Misure prese dal mobile di cassidylynnephoto.com (30px su 320px). */
 .verticalText {
-  flex: 0 0 20%;
+  flex: 0 0 23%;
   display: flex;
   align-items: flex-end;
   justify-content: center;
   /* alzato: sotto passa la riga 2, che sale in overlap */
-  padding: 0.5rem 0 10%;
+  padding: 0.5rem 0 14%;
   overflow: visible;
   min-width: 0;
 }
@@ -36,11 +37,11 @@
   writing-mode: vertical-rl;
   transform: rotate(180deg);
   white-space: nowrap;
-  font-weight: 300;
-  font-size: min(7.2vw, 2.4rem);
-  line-height: 1.05;
-  letter-spacing: 0.01em;
-  color: #2b1d17;
+  font-weight: 400;
+  font-size: min(9.4vw, 2.75rem);
+  line-height: 0.8;
+  letter-spacing: 0;
+  color: #2c1a0d;
 }
 
 .verticalTitle em {
@@ -50,8 +51,8 @@
 /* Slideshow in crossfade, nessun indicatore. Foto orizzontale. */
 .slideshow {
   position: relative;
-  flex: 0 0 80%;
-  aspect-ratio: 10 / 9;
+  flex: 0 0 77%;
+  aspect-ratio: 246 / 223;
 }
 
 .slide {
