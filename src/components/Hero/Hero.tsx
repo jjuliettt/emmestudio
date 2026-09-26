@@ -1,7 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Cormorant_Garamond } from "next/font/google";
 import styles from "./Hero.module.css";
+
+// Serif leggero ad alto contrasto, simile a quello di cassidylynnephoto.com
+const displaySerif = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["300", "400"],
+  style: ["normal", "italic"],
+});
 
 type Photo = {
   src: string;
@@ -56,13 +64,8 @@ export default function Hero() {
 
   return (
     <section className={styles.hero}>
-      {/* Riga 1: testo verticale (20%) + slideshow (80%) */}
+      {/* Riga 1: slideshow (80%) + testo verticale a destra (20%) */}
       <div className={styles.rowOne}>
-        <div className={styles.verticalText}>
-          <span className={styles.verticalWelcome}>Welcome</span>
-          <span className={styles.verticalName}>Elisa Massetti Photo</span>
-        </div>
-
         <div className={styles.slideshow}>
           {SLIDES.map((photo, i) => (
             <img
@@ -74,6 +77,14 @@ export default function Hero() {
               aria-hidden={i !== slide}
             />
           ))}
+        </div>
+
+        <div className={styles.verticalText}>
+          <h1 className={`${styles.verticalTitle} ${displaySerif.className}`}>
+            <em>Welcome to</em>
+            <br />
+            Elisa Massetti Photo
+          </h1>
         </div>
       </div>
 

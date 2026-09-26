@@ -19,43 +19,39 @@
   align-items: stretch;
 }
 
+/* Colonna destra: titolo ruotato, si legge dal basso verso l'alto */
 .verticalText {
   flex: 0 0 20%;
   display: flex;
-  /* le due righe partono dalla stessa quota, in basso */
   align-items: flex-end;
   justify-content: center;
-  gap: 0.35rem;
   /* alzato: sotto passa la riga 2, che sale in overlap */
-  padding: 0.5rem 0.35rem 10%;
-  /* il testo ruotato non deve essere tagliato dalla colonna */
+  padding: 0.5rem 0 10%;
   overflow: visible;
   min-width: 0;
 }
 
-.verticalWelcome,
-.verticalName {
+.verticalTitle {
+  margin: 0;
   writing-mode: vertical-rl;
   transform: rotate(180deg);
   white-space: nowrap;
-  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 300;
+  font-size: min(7.2vw, 2.4rem);
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  color: #2b1d17;
 }
 
-.verticalWelcome {
+.verticalTitle em {
   font-style: italic;
-  font-size: min(5.2vw, 1.6rem);
-}
-
-.verticalName {
-  font-size: min(3.4vw, 1.05rem);
-  letter-spacing: 0.04em;
 }
 
 /* Slideshow in crossfade, nessun indicatore. Foto orizzontale. */
 .slideshow {
   position: relative;
   flex: 0 0 80%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 10 / 9;
 }
 
 .slide {
@@ -163,10 +159,6 @@
   .hero {
     padding-top: 1.25rem;
     padding-bottom: 5rem;
-  }
-
-  .verticalText {
-    gap: 1rem;
   }
 
   .rowTwo {
