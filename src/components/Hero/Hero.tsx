@@ -10,6 +10,7 @@ const displaySerif = Instrument_Serif({
   subsets: ["latin"],
   weight: "400",
   style: ["normal", "italic"],
+  variable: "--font-instrument-serif",
 });
 
 type Photo = {
@@ -81,7 +82,7 @@ export default function Hero() {
         </div>
 
         <div className={styles.verticalText}>
-          <h1 className={`${styles.verticalTitle} ${displaySerif.className}`}>
+          <h1 className={`${styles.verticalTitle} ${displaySerif.variable}`}>
             <em>Welcome to</em>
             <br />
             Elisa Massetti Photo

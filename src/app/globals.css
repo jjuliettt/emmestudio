@@ -5,6 +5,17 @@
   --max-width: 1100px;
 }
 
+/* Prova locale del font del titolo in Hero: il file non è versionato
+   (vedi .gitignore). Se manca, il browser usa il font di riserva. */
+@font-face {
+  font-family: "Branch";
+  src: url("/fonts/branch.woff2") format("woff2"),
+    url("/fonts/branch.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 * {
   box-sizing: border-box;
 }
