@@ -27,7 +27,7 @@
   align-items: flex-end;
   justify-content: center;
   /* alzato: sotto passa la riga 2, che sale in overlap */
-  padding: 0.5rem 0 14%;
+  padding: 0.5rem 0 12%;
   overflow: visible;
   min-width: 0;
 }
@@ -41,7 +41,7 @@
   transform: rotate(180deg);
   white-space: nowrap;
   font-weight: 400;
-  font-size: min(9.4vw, 2.75rem);
+  font-size: min(6.4vw, 1.9rem);
   line-height: 0.8;
   letter-spacing: 0;
   color: #2c1a0d;
