@@ -1,0 +1,85 @@
+/* ---------------------------------------------
+   Booking — mobile first
+   Foto ferma sullo sfondo, riquadro chiaro che ci scorre sopra,
+   come in cassidylynnephoto.com
+--------------------------------------------- */
+
+.booking {
+  position: relative;
+  /* Ritaglia la foto fissa: si vede solo dentro la sezione. Funziona
+     anche su iPhone, dove background-attachment: fixed viene ignorato. */
+  clip-path: inset(0);
+  padding: 60vh 1.25rem 35vh;
+  color: #2b1d17;
+}
+
+.background {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+
+.card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 38% 1fr;
+  align-items: center;
+  column-gap: 1.25rem;
+  max-width: 34rem;
+  margin: 0 auto;
+  padding: 0 1.5rem 2.5rem;
+  background-color: #e8e1db;
+}
+
+/* Verticale 2:3, esce un po' sopra il bordo del riquadro */
+.photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  margin-top: -2.5rem;
+}
+
+.heading {
+  margin: 0;
+  font-family: var(--font-instrument-serif), Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(1.5rem, 6.4vw, 2.2rem);
+  line-height: 1.15;
+}
+
+.links {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  margin-top: 2.25rem;
+}
+
+.link {
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid currentColor;
+  text-align: center;
+  font-family: var(--font-source-sans), system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: clamp(0.7rem, 3.2vw, 0.85rem);
+}
+
+/* ---------------------------------------------
+   Tablet / desktop
+--------------------------------------------- */
+
+@media (min-width: 768px) {
+  .booking {
+    padding: 50vh 3rem 30vh;
+  }
+
+  .card {
+    max-width: 46rem;
+    column-gap: 2.5rem;
+    padding: 0 3rem 3rem;
+  }
+}

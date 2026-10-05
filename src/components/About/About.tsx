@@ -1,26 +1,46 @@
 import styles from "./About.module.css";
 
-// Placeholder: foto di gattini, da sostituire con il ritratto reale.
+// Placeholder: foto di gattini, da sostituire con il ritratto reale (2:3).
 const PORTRAIT = {
-  src: "https://placecats.com/millie/900/1500",
+  src: "https://placecats.com/millie/1000/1500",
   alt: "Ritratto di Elisa Massetti",
 };
 
+// Frase che gira in loop nella fascia verde sopra la foto
+const BAND_TEXT = "Get to know me";
+// abbastanza ripetizioni da riempire anche uno schermo largo
+const BAND_REPEAT = 10;
+
 export default function About() {
+  const phrases = Array.from({ length: BAND_REPEAT }, (_, i) => (
+    <span key={i} className={styles.bandItem}>
+      {BAND_TEXT}
+    </span>
+  ));
+
   return (
     <section className={styles.about}>
-      <div className={styles.photoCol}>
+      {/* Fascia verde con la frase che scorre: due copie identiche in fila,
+          così il giro ricomincia senza stacchi */}
+      <div className={styles.band} aria-hidden="true">
+        <div className={styles.bandTrack}>
+          <div className={styles.bandGroup}>{phrases}</div>
+          <div className={styles.bandGroup}>{phrases}</div>
+        </div>
+      </div>
+
+      <div className={styles.photo}>
         <img
           src={PORTRAIT.src}
           alt={PORTRAIT.alt}
           className={styles.portrait}
         />
 
-        {/* Segnaposto per l'icona del logo, da sostituire quando sara' pronta */}
+        {/* Segnaposto per il logo, da sostituire quando sara' pronto */}
         <div className={styles.logoMark} aria-hidden="true" />
       </div>
 
-      <div className={styles.textCol}>
+      <div className={styles.text}>
         <p className={styles.label}>Hi, I am Elisa Massetti, and</p>
 
         <p className={styles.paragraph}>

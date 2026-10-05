@@ -1,17 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Instrument_Serif } from "next/font/google";
 import styles from "./Hero.module.css";
-
-// cassidylynnephoto.com usa "Branch" (font a pagamento): Instrument Serif
-// è l'alternativa gratuita più vicina (serif alto e stretto, con corsivo).
-const displaySerif = Instrument_Serif({
-  subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
-  variable: "--font-instrument-serif",
-});
 
 type Photo = {
   src: string;
@@ -88,7 +78,7 @@ export default function Hero() {
       <div className={styles.rowOne}>
         <div className={styles.verticalText}>
           <h1
-            className={`${styles.verticalTitle} ${displaySerif.variable}`}
+            className={styles.verticalTitle}
             data-font={hasBranch ? "branch" : undefined}
           >
             <em className={`${styles.titleLine} ${styles.titleWelcome}`}>
@@ -147,6 +137,9 @@ export default function Hero() {
           events and couples
         </p>
       </div>
+
+      {/* Linea che chiude il blocco, prima della sezione About */}
+      <hr className={styles.divider} />
     </section>
   );
 }

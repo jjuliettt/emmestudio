@@ -8,7 +8,7 @@
   width: 100%;
   /* micro spazio tra header e hero */
   padding-top: 0.75rem;
-  padding-bottom: 3rem;
+  padding-bottom: 2.5rem;
   color: #2b1d17;
 }
 
@@ -16,18 +16,20 @@
 
 .rowOne {
   display: flex;
-  align-items: stretch;
+  /* la foto resta 3:2 anche se il titolo fosse più lungo di lei */
+  align-items: flex-start;
 }
 
 /* Colonna sinistra: titolo ruotato, si legge dal basso verso l'alto.
-   Misure prese dal mobile di cassidylynnephoto.com (30px su 320px). */
+   Proporzioni prese dal mobile di cassidylynnephoto.com. */
 .verticalText {
   flex: 0 0 23%;
+  align-self: stretch;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  /* alzato: sotto passa la riga 2, che sale in overlap */
-  padding: 0.5rem 0 12%;
+  /* alzato: sotto passa la riga 2, che sale in overlap (7.5%) */
+  padding: 2.5% 0 10.5%;
   overflow: visible;
   min-width: 0;
 }
@@ -41,7 +43,8 @@
   transform: rotate(180deg);
   white-space: nowrap;
   font-weight: 400;
-  font-size: min(6.4vw, 1.9rem);
+  /* deve stare tutto accanto alla foto 3:2, sopra la riga 2 */
+  font-size: min(5.3vw, 1.9rem);
   line-height: 0.8;
   letter-spacing: 0;
   color: #2c1a0d;
@@ -68,11 +71,12 @@
   margin-inline-start: -0.15em;
 }
 
-/* Slideshow in crossfade, nessun indicatore. Foto orizzontale. */
+/* Slideshow in crossfade, nessun indicatore. Foto orizzontale 3:2,
+   come gli originali (6000×4000). */
 .slideshow {
   position: relative;
   flex: 0 0 77%;
-  aspect-ratio: 246 / 223;
+  aspect-ratio: 3 / 2;
 }
 
 .slide {
@@ -95,24 +99,24 @@
   position: relative;
   z-index: 3;
   /* la riga 2 sale e sovrappone un po' la foto 1 */
-  margin-top: -3%;
+  margin-top: -7.5%;
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 0.75rem;
 }
 
-/* Riparte dal margine sinistro della sezione, non rientrata */
+/* Colonna 1: le due foto verticali 2:3. In % della pagina, come nel
+   riferimento: foto 2 da 2.2% a 41.4%, foto 3 da 32.8% a 60.2% */
 .collage {
   position: relative;
-  /* colonna 1: le due foto */
-  flex: 0 0 59%;
+  flex: 0 0 60.5%;
 }
 
 .photoTwo {
   display: block;
-  width: 89%;
-  aspect-ratio: 1 / 1;
+  margin-left: 3.6%;
+  width: 64.8%;
+  aspect-ratio: 2 / 3;
   object-fit: cover;
   position: relative;
   z-index: 1;
@@ -122,9 +126,9 @@
 .photoThree {
   position: absolute;
   z-index: 2;
-  top: 32%;
-  left: 55%;
-  width: 45%;
+  top: 22.8%;
+  left: 54.2%;
+  width: 45.3%;
   aspect-ratio: 2 / 3;
   object-fit: cover;
 }
@@ -132,15 +136,17 @@
 /* ---------- Citazione ---------- */
 
 .quote {
-  /* colonna 2: centrata verticalmente sulla riga */
+  /* colonna 2: parte dal 63.8% della pagina; il margine in alto la
+     centra sulla foto 3 invece che sulla foto 2 */
   flex: 1;
-  margin: 0;
-  padding-right: 1.25rem;
+  margin: 9% 0 0;
+  padding: 0 3.5% 0 3.3%;
   text-align: left;
-  font-family: Georgia, "Times New Roman", serif;
-  letter-spacing: 0.1em;
-  line-height: 1.9;
-  font-size: clamp(0.9rem, 4vw, 1.1rem);
+  font-family: var(--font-source-sans), system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  line-height: 1.7;
+  font-size: clamp(0.62rem, 3vw, 0.8rem);
   color: #2b1d17;
 }
 
@@ -172,6 +178,16 @@
   white-space: nowrap;
 }
 
+/* Linea sottile che chiude il blocco: parte dal bordo della foto 2 e
+   arriva al bordo destro della pagina, come nel riferimento */
+.divider {
+  margin: 2.75rem 0 0 2.2%;
+  border: 0;
+  border-top: 1px solid currentColor;
+  /* l'hr di default è grigio: prende il marrone della sezione */
+  color: inherit;
+}
+
 /* ---------------------------------------------
    Tablet / desktop
 --------------------------------------------- */
@@ -179,18 +195,15 @@
 @media (min-width: 768px) {
   .hero {
     padding-top: 1.25rem;
-    padding-bottom: 5rem;
-  }
-
-  .rowTwo {
-    gap: 3rem;
-    margin-top: -3%;
+    padding-bottom: 4rem;
   }
 
   .quote {
-    padding-right: 2.5rem;
-    line-height: 2.1;
-    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    font-size: clamp(0.8rem, 1.1vw, 1rem);
+  }
+
+  .divider {
+    margin-top: 4rem;
   }
 }
 

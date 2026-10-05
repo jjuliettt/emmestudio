@@ -1,95 +1,105 @@
 /* ---------------------------------------------
    Portfolio — mobile first
-   Tre card in stile copertina di rivista
+   Tre copertine in stile rivista (Vogue): il nome della categoria come
+   testata, dietro al soggetto; data, nome e luogo sul lato
 --------------------------------------------- */
 
 .portfolio {
   background-color: #faf4f0;
   color: #2b1d17;
-  padding: 2rem 0 5rem;
+  padding: 3rem 1.25rem 5rem;
 }
 
-.list {
-  display: flex;
-  flex-direction: column;
-  gap: 3.5rem;
-}
-
-/* ---------- Card ---------- */
-
-.card {
-  position: relative;
-  display: block;
-  /* non full-bleed: margine laterale visibile su entrambi i lati */
-  width: 88%;
-  max-width: 480px;
+/* Su mobile due copertine per riga; se restano dispari, l'ultima va da
+   sola, centrata e della stessa misura */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  max-width: 1100px;
   margin: 0 auto;
-  /* calibrata per stare in una sola schermata mobile:
-     88vw e' la larghezza della card, quindi 132vw e' l'altezza
-     massima possibile mantenendo il rapporto 2/3 */
-  height: min(78vh, 132vw);
-  overflow: hidden;
 }
+
+.cover:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: calc(50% - 0.5rem);
+}
+
+/* ---------- Copertina ---------- */
 
 .cover {
+  position: relative;
   display: block;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  /* le misure del testo (cqw) seguono la larghezza della copertina */
+  container-type: inline-size;
+  background-color: #e6d8cc;
+  color: #fffaf6;
+}
+
+/* Strati, dal basso: foto, testata, soggetto scontornato, righe */
+.photo,
+.cutout {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  aspect-ratio: 2 / 3;
   object-fit: cover;
 }
 
-/* Gradiente scuro dietro al blocco di testo */
-.scrim {
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: 45%;
-  background: linear-gradient(
-    to bottom,
-    rgba(20, 13, 10, 0.5),
-    rgba(20, 13, 10, 0)
-  );
+.cutout {
+  z-index: 2;
 }
-
-/* ---------- Testata editoriale ---------- */
 
 .masthead {
   position: absolute;
-  top: 1.75rem;
+  z-index: 1;
+  top: 4cqw;
   left: 0;
   right: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.9rem;
-  padding: 0 1rem;
-  color: #fffaf6;
-  text-align: center;
-}
-
-.title {
-  display: block;
   text-transform: uppercase;
   font-weight: 500;
-  line-height: 1;
-  font-size: clamp(2rem, 11vw, 3.4rem);
-  letter-spacing: 0.02em;
+  line-height: 0.9;
+  letter-spacing: 0.01em;
+  /* le maiuscole di Bodoni Moda sono larghe al massimo 0.72em l'una */
+  font-size: calc(90cqw / (var(--chars) * 0.72));
+  text-shadow: 0 1px 14px rgba(20, 13, 10, 0.25);
 }
 
-.meta {
+.mastheadLine {
+  display: block;
+}
+
+.coverLines {
+  position: absolute;
+  z-index: 3;
+  left: 6cqw;
+  bottom: 8cqw;
+  max-width: 70%;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.7rem;
-  text-transform: uppercase;
-  font-size: clamp(0.6rem, 2.8vw, 0.7rem);
-  letter-spacing: 0.3em;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2.5cqw;
+  text-shadow: 0 1px 8px rgba(20, 13, 10, 0.5);
 }
 
-.metaDivider {
-  width: 18px;
-  height: 1px;
-  background-color: currentColor;
+.coverKicker {
+  font-family: var(--font-source-sans), system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: clamp(0.56rem, 6cqw, 0.8rem);
+  line-height: 1.2;
+}
+
+.coverName {
+  font-style: italic;
+  font-size: clamp(0.95rem, 11cqw, 1.9rem);
+  line-height: 1;
 }
 
 /* ---------------------------------------------
@@ -101,26 +111,14 @@
     padding: 6rem 3rem 7rem;
   }
 
-  .list {
-    flex-direction: row;
-    justify-content: center;
-    align-items: stretch;
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 2rem;
   }
 
-  .card {
-    flex: 1 1 0;
+  .cover:last-child:nth-child(odd) {
+    grid-column: auto;
+    justify-self: stretch;
     width: auto;
-    max-width: 420px;
-    height: auto;
-    margin: 0;
-  }
-
-  .cover {
-    height: auto;
-  }
-
-  .title {
-    font-size: clamp(1.6rem, 3.4vw, 2.6rem);
   }
 }

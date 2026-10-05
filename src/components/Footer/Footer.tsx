@@ -1,9 +1,9 @@
 import Link from "next/link";
+import { EMAIL } from "@/lib/contacts";
 import styles from "./Footer.module.css";
 
-// Dati fiscali e contatti: placeholder, da sostituire con quelli reali.
+// Dati fiscali: placeholder, da sostituire con quelli reali.
 const VAT = "P. IVA 00000000000";
-const EMAIL = "hello@elisamassetti.com";
 
 export default function Footer() {
   return (
