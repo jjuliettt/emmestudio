@@ -4,12 +4,16 @@
 --------------------------------------------- */
 
 .hero {
-  background-color: #faf4f0;
+  /* quanto il blocco colorato sporge a sinistra e in basso dalla foto */
+  --block-offset: 14px;
+  /* quanto la riga 2 sale sulla foto 1 */
+  --overlap: 6%;
+  background-color: var(--cream);
   width: 100%;
   /* micro spazio tra header e hero */
   padding-top: 0.75rem;
-  padding-bottom: 2.5rem;
-  color: #2b1d17;
+  padding-bottom: 3rem;
+  color: var(--espresso);
 }
 
 /* ---------- Riga 1: testo verticale + slideshow ---------- */
@@ -28,8 +32,9 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  /* alzato: sotto passa la riga 2, che sale in overlap (7.5%) */
-  padding: 2.5% 0 10.5%;
+  /* a destra resta libera la striscia del blocco colorato; sotto passa
+     la riga 2, che sale in overlap */
+  padding: 0.5% var(--block-offset) calc(var(--overlap) + 1.5%) 0;
   overflow: visible;
   min-width: 0;
 }
@@ -43,11 +48,12 @@
   transform: rotate(180deg);
   white-space: nowrap;
   font-weight: 400;
-  /* deve stare tutto accanto alla foto 3:2, sopra la riga 2 */
-  font-size: min(5.3vw, 1.9rem);
+  /* con la spaziatura tra le lettere il titolo è più lungo: un po' più
+     piccolo, per stare accanto alla foto 3:2 sopra la riga 2 */
+  font-size: min(4.85vw, 1.9rem);
   line-height: 0.8;
   letter-spacing: 0;
-  color: #2c1a0d;
+  color: var(--espresso);
 }
 
 /* Ogni riga è una colonna a sé: così si possono allineare e distanziare */
@@ -57,11 +63,17 @@
 
 .titleWelcome {
   font-style: italic;
+  /* il corsivo si stringe se troppo spaziato: aria leggera */
+  letter-spacing: 0.04em;
   /* la "W" corsiva parte più avanti della "E" di Elisa: la riporta
      allineata (misurato su Instrument Serif) */
   margin-inline-start: -0.07em;
-  /* un po' di aria tra le due righe */
-  margin-block-end: 0.12em;
+  /* aria tra le due righe, così non si toccano */
+  margin-block-end: 0.3em;
+}
+
+.titleName {
+  letter-spacing: 0.1em;
 }
 
 /* Con Branch il corsivo è simulato dal browser e sposta di più la "W"
@@ -75,8 +87,24 @@
    come gli originali (6000×4000). */
 .slideshow {
   position: relative;
+  /* contesto proprio: il blocco colorato resta sotto alle foto */
+  z-index: 0;
   flex: 0 0 77%;
   aspect-ratio: 3 / 2;
+}
+
+/* Blocco del colore di stagione, grande come la foto e spostato in basso
+   a sinistra: ne spunta una striscia. La grana è uno strato di sfondo. */
+.slideshow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transform: translate(
+    calc(-1 * var(--block-offset)),
+    var(--block-offset)
+  );
+  background: var(--grain), var(--accent);
 }
 
 .slide {
@@ -89,17 +117,26 @@
   transition: opacity 1.2s ease-in-out;
 }
 
+/* quella nuova entra sopra in dissolvenza... */
 .slide[data-active="true"] {
+  z-index: 2;
   opacity: 1;
 }
 
-/* ---------- Riga 2: foto 2 + foto 3 sovrapposta + citazione ---------- */
+/* ...mentre la precedente resta piena sotto */
+.slide[data-previous="true"] {
+  z-index: 1;
+  opacity: 1;
+  transition: none;
+}
+
+/* ---------- Riga 2: foto 2 + foto 3 sovrapposta + frase ---------- */
 
 .rowTwo {
   position: relative;
   z-index: 3;
   /* la riga 2 sale e sovrappone un po' la foto 1 */
-  margin-top: -7.5%;
+  margin-top: calc(-1 * var(--overlap));
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -126,66 +163,56 @@
 .photoThree {
   position: absolute;
   z-index: 2;
-  top: 22.8%;
+  top: calc(22.8% + 14px);
   left: 54.2%;
   width: 45.3%;
   aspect-ratio: 2 / 3;
   object-fit: cover;
 }
 
-/* ---------- Citazione ---------- */
+/* ---------- Frase ---------- */
 
 .quote {
-  /* colonna 2: parte dal 63.8% della pagina; il margine in alto la
-     centra sulla foto 3 invece che sulla foto 2 */
+  /* colonna 2: il margine in alto la centra sulla foto 3 */
   flex: 1;
-  margin: 9% 0 0;
-  padding: 0 3.5% 0 3.3%;
+  min-width: 0;
+  margin: calc(9% + 28px) 0 0;
+  padding: 0 1.5% 0 2.5%;
   text-align: left;
   font-family: var(--font-source-sans), system-ui, sans-serif;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
-  line-height: 1.7;
-  font-size: clamp(0.62rem, 3vw, 0.8rem);
-  color: #2b1d17;
+  letter-spacing: 0.1em;
+  line-height: 1.18;
+  font-size: 2.8vw;
+  color: var(--espresso);
 }
 
-/* L'aggettivo cambia in crossfade, il resto della frase resta fermo */
+/* due righe esatte, mai a capo dentro una riga */
+.quoteLine {
+  display: block;
+  white-space: nowrap;
+}
+
+/* Le tre parole nella stessa cella della griglia: la cella è larga quanto
+   la più lunga ("unforgettable"), la frase non si sposta mai */
 .adjectiveSlot {
-  position: relative;
-  display: inline-block;
-  vertical-align: bottom;
+  display: inline-grid;
 }
 
 .adjective {
-  color: inherit;
+  grid-area: 1 / 1;
+  font-family: var(--font-instrument-serif), Georgia, serif;
   font-style: italic;
-  position: absolute;
-  left: 0;
-  top: 0;
-  white-space: nowrap;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 1.6em;
+  color: var(--accent);
   opacity: 0;
-  transition: opacity 0.7s ease-in-out;
+  transition: opacity 0.45s ease-in-out;
 }
 
 .adjective[data-active="true"] {
   opacity: 1;
-}
-
-/* Fantasma invisibile: riserva la larghezza della parola più lunga */
-.adjectiveGhost {
-  visibility: hidden;
-  white-space: nowrap;
-}
-
-/* Linea sottile che chiude il blocco: parte dal bordo della foto 2 e
-   arriva al bordo destro della pagina, come nel riferimento */
-.divider {
-  margin: 2.75rem 0 0 2.2%;
-  border: 0;
-  border-top: 1px solid currentColor;
-  /* l'hr di default è grigio: prende il marrone della sezione */
-  color: inherit;
 }
 
 /* ---------------------------------------------
@@ -194,16 +221,13 @@
 
 @media (min-width: 768px) {
   .hero {
+    --block-offset: 16px;
     padding-top: 1.25rem;
     padding-bottom: 4rem;
   }
 
   .quote {
     font-size: clamp(0.8rem, 1.1vw, 1rem);
-  }
-
-  .divider {
-    margin-top: 4rem;
   }
 }
 

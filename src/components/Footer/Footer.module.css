@@ -1,46 +1,40 @@
 /* ---------------------------------------------
    Footer — mobile first
+   Due righe centrate, testo piccolo crema su espresso
 --------------------------------------------- */
 
 .footer {
-  background-color: #f7eee7;
-  color: #2b1d17;
+  background-color: var(--espresso);
+  color: var(--cream);
+  padding: 1.1rem 0.75rem 1.2rem;
+  text-align: center;
 }
 
-.inner {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1.5rem;
-  padding: 2.5rem 1.25rem 3rem;
-  text-align: left;
-}
-
-.links {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.75rem;
-}
-
-.vat,
-.link,
-.copy {
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  font-size: clamp(0.62rem, 2.8vw, 0.72rem);
+.line {
+  margin: 0;
+  font-family: var(--font-source-sans), system-ui, sans-serif;
+  font-size: 11px;
   line-height: 1.6;
+  letter-spacing: 0.02em;
 }
 
-/* il bottone delle preferenze deve leggersi come gli altri link */
+.dot {
+  margin: 0 0.4em;
+}
+
+/* il bottone dei cookie deve leggersi come gli altri link */
 .link {
   padding: 0;
-  background: none;
   border: 0;
+  background: none;
   color: inherit;
-  text-align: left;
+  font: inherit;
+  letter-spacing: inherit;
   cursor: pointer;
-  text-transform: none;
 }
 
+@media (min-width: 768px) {
+  .line {
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,11 @@
+.label {
+  margin: 0;
+  font-family: var(--font-allura), cursive;
+  font-weight: 400;
+  /* 36-44px su mobile */
+  font-size: clamp(2.25rem, 10.5vw, 2.75rem);
+  line-height: 1;
+  color: var(--accent);
+  transform: rotate(-4deg);
+  white-space: nowrap;
+}

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
-import { captionSans, displaySerif } from "./fonts";
+import { HEAD_SCRIPT, seasonOf } from "@/lib/season";
+import { captionSans, displaySerif, handScript } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -13,7 +14,17 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="it" className={`${displaySerif.variable} ${captionSans.variable}`}>
+    // data-season (e data-style) vengono aggiornati dallo script nel <head>
+    // prima dell'idratazione: da qui suppressHydrationWarning
+    <html
+      lang="en"
+      data-season={seasonOf(new Date())}
+      className={`${displaySerif.variable} ${captionSans.variable} ${handScript.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: HEAD_SCRIPT }} />
+      </head>
       <body>
         <Header />
         <main>{children}</main>

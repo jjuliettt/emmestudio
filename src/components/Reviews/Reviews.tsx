@@ -1,45 +1,44 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import SectionLabel from "@/components/SectionLabel/SectionLabel";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 import styles from "./Reviews.module.css";
 
 type Review = {
   quote: string;
-  text: string;
   author: string;
+  category: string;
+  // foto del viso; per i clienti business il logo dell'azienda
   src: string;
-  alt: string;
 };
 
 // Placeholder: foto di gattini e testi fittizi, da sostituire con le recensioni reali.
 const REVIEWS: Review[] = [
   {
     quote: "She caught the day exactly as it felt.",
-    text: "We barely noticed she was there, and yet every moment we wanted to keep is in the gallery. Looking at the photos still brings back the noise, the laughing, the whole mess of it.",
     author: "Sofia & Thomas",
-    src: "https://placecats.com/neo/600/900",
-    alt: "Sofia e Thomas",
+    category: "Events",
+    src: "https://placecats.com/neo/120/120",
   },
   {
     quote: "No posing, no pressure, just us.",
-    text: "I hate having my picture taken and somehow this was fun. Elisa made the whole shoot feel like an afternoon with a friend, and the result looks like me on a good day.",
     author: "Marta L.",
-    src: "https://placecats.com/millie/600/900",
-    alt: "Marta L.",
+    category: "Portraits",
+    src: "https://placecats.com/millie/120/120",
   },
   {
     quote: "Our brand finally looks like our brand.",
-    text: "We needed images for the shop that did not feel like stock photography. She understood the place in an hour and gave us a set of photos we have been using everywhere since.",
     author: "Atelier Nord",
-    src: "https://placecats.com/poppy/600/900",
-    alt: "Atelier Nord",
+    category: "Small Businesses",
+    // cliente business: qui va il logo
+    src: "https://placecats.com/poppy/120/120",
   },
   {
     quote: "Colours, movement, and zero stiffness.",
-    text: "The party photos are alive. People dancing badly, my grandmother crying, the cake disaster — all of it. Exactly the kind of memory we wanted to hold on to.",
     author: "Nadia B.",
-    src: "https://placecats.com/louie/600/900",
-    alt: "Nadia B.",
+    category: "Events",
+    src: "https://placecats.com/louie/120/120",
   },
 ];
 
@@ -51,16 +50,17 @@ export default function Reviews() {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const touchStartX = useRef<number | null>(null);
+  const reducedMotion = useReducedMotion();
 
   // Autoplay: avanza ogni 10s quando il carosello e' a riposo
   useEffect(() => {
-    if (paused) return;
+    if (paused || reducedMotion) return;
     const id = setInterval(
       () => setIndex((i) => (i + 1) % REVIEWS.length),
       AUTOPLAY_INTERVAL
     );
     return () => clearInterval(id);
-  }, [paused]);
+  }, [paused, reducedMotion]);
 
   // Dopo un'interazione manuale l'autoplay riparte da zero
   useEffect(() => {
@@ -89,6 +89,8 @@ export default function Reviews() {
 
   return (
     <section className={styles.reviews}>
+      <SectionLabel className={styles.label}>kind words</SectionLabel>
+
       <div
         className={styles.viewport}
         onTouchStart={onTouchStart}
@@ -99,25 +101,22 @@ export default function Reviews() {
           style={{ transform: `translateX(-${index * 100}%)` }}
         >
           {REVIEWS.map((review, i) => (
-            <article
+            <figure
               key={review.author}
               className={styles.slide}
-              /* il layout si alterna: foto a sinistra, poi a destra */
-              data-flipped={i % 2 === 1}
               aria-hidden={i !== index}
             >
-              <img
-                src={review.src}
-                alt={review.alt}
-                className={styles.photo}
-              />
+              {/* il nome è già scritto sotto: la foto è decorativa */}
+              <img src={review.src} alt="" className={styles.photo} />
 
-              <div className={styles.body}>
-                <p className={styles.quote}>&ldquo;{review.quote}&rdquo;</p>
-                <p className={styles.text}>{review.text}</p>
-                <p className={styles.author}>{review.author}</p>
-              </div>
-            </article>
+              <blockquote className={styles.quote}>
+                <p>&ldquo;{review.quote}&rdquo;</p>
+              </blockquote>
+
+              <figcaption className={styles.author}>
+                {review.author} · {review.category}
+              </figcaption>
+            </figure>
           ))}
         </div>
       </div>
@@ -130,7 +129,7 @@ export default function Reviews() {
             className={styles.dot}
             data-active={i === index}
             onClick={() => goTo(i)}
-            aria-label={`Vai alla recensione ${i + 1}`}
+            aria-label={`Go to review ${i + 1}`}
           />
         ))}
       </div>

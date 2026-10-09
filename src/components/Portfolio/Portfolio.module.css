@@ -1,29 +1,55 @@
 /* ---------------------------------------------
    Portfolio — mobile first
-   Tre copertine in stile rivista (Vogue): il nome della categoria come
-   testata, dietro al soggetto; data, nome e luogo sul lato
+   Carosello orizzontale di tre copertine in stile rivista (Vogue):
+   una copertina all'80% della larghezza, la successiva che spunta a destra
 --------------------------------------------- */
 
 .portfolio {
-  background-color: #faf4f0;
-  color: #2b1d17;
-  padding: 3rem 1.25rem 5rem;
+  background-color: var(--cream);
+  color: var(--espresso);
+  padding: 3.5rem 0 3.5rem;
+  /* le misure del carosello (cqw) seguono la larghezza della sezione */
+  container-type: inline-size;
 }
 
-/* Su mobile due copertine per riga; se restano dispari, l'ultima va da
-   sola, centrata e della stessa misura */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-  max-width: 1100px;
-  margin: 0 auto;
+.carousel {
+  /* margine laterale, spazio tra le copertine, larghezza di una copertina */
+  --m: 1.25rem;
+  --gap: 0.75rem;
+  --card: calc((100cqw - 2 * var(--m)) * 0.8);
+  position: relative;
 }
 
-.cover:last-child:nth-child(odd) {
-  grid-column: 1 / -1;
-  justify-self: center;
-  width: calc(50% - 0.5rem);
+/* "my work" a cavallo dell'angolo in alto a sinistra delle copertine */
+.label {
+  position: absolute;
+  z-index: 4;
+  top: 0;
+  left: calc(var(--m) - 0.35rem);
+  /* sporge quasi tutta sopra: tocca appena l'angolo, non la testata */
+  transform: translateY(-78%) rotate(-4deg);
+  transform-origin: left center;
+}
+
+.track {
+  display: flex;
+  gap: var(--gap);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  padding-left: var(--m);
+  scroll-padding-left: var(--m);
+  scrollbar-width: none;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+/* Spazio in coda: anche l'ultima copertina si ferma allineata a sinistra */
+.track::after {
+  content: "";
+  flex: 0 0 calc(100cqw - var(--m) - var(--card) - var(--gap));
 }
 
 /* ---------- Copertina ---------- */
@@ -31,12 +57,14 @@
 .cover {
   position: relative;
   display: block;
+  flex: 0 0 var(--card);
   aspect-ratio: 2 / 3;
   overflow: hidden;
+  scroll-snap-align: start;
   /* le misure del testo (cqw) seguono la larghezza della copertina */
   container-type: inline-size;
-  background-color: #e6d8cc;
-  color: #fffaf6;
+  background-color: var(--beige);
+  color: var(--cream);
 }
 
 /* Strati, dal basso: foto, testata, soggetto scontornato, righe */
@@ -68,7 +96,7 @@
   letter-spacing: 0.01em;
   /* le maiuscole di Bodoni Moda sono larghe al massimo 0.72em l'una */
   font-size: calc(90cqw / (var(--chars) * 0.72));
-  text-shadow: 0 1px 14px rgba(20, 13, 10, 0.25);
+  text-shadow: 0 1px 14px rgb(59 42 34 / 0.3);
 }
 
 .mastheadLine {
@@ -79,46 +107,85 @@
   position: absolute;
   z-index: 3;
   left: 6cqw;
-  bottom: 8cqw;
-  max-width: 70%;
+  bottom: 7cqw;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 2.5cqw;
-  text-shadow: 0 1px 8px rgba(20, 13, 10, 0.5);
+  gap: 2cqw;
+  text-shadow: 0 1px 8px rgb(59 42 34 / 0.55);
 }
 
 .coverKicker {
   font-family: var(--font-source-sans), system-ui, sans-serif;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
-  font-size: clamp(0.56rem, 6cqw, 0.8rem);
+  letter-spacing: 0.24em;
+  font-size: 4.2cqw;
   line-height: 1.2;
 }
 
 .coverName {
   font-style: italic;
-  font-size: clamp(0.95rem, 11cqw, 1.9rem);
+  font-size: 9cqw;
   line-height: 1;
 }
 
+/* ---------- Freccia ---------- */
+
+/* Sul bordo destro della copertina visibile, a metà altezza */
+.next {
+  position: absolute;
+  z-index: 4;
+  top: calc(var(--card) * 0.75);
+  left: calc(var(--m) + var(--card));
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: rgb(250 244 240 / 0.85);
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.next svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---------- Link sotto il carosello ---------- */
+
+.viewAll {
+  display: table;
+  margin: 2rem auto 0;
+  font-family: var(--font-source-sans), system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.72rem;
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.45em;
+}
+
 /* ---------------------------------------------
-   Tablet / desktop
+   Tablet / desktop (non ancora rifinito)
 --------------------------------------------- */
 
 @media (min-width: 768px) {
   .portfolio {
-    padding: 6rem 3rem 7rem;
+    padding: 5rem 0;
   }
 
-  .grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 2rem;
-  }
-
-  .cover:last-child:nth-child(odd) {
-    grid-column: auto;
-    justify-self: stretch;
-    width: auto;
+  .carousel {
+    --m: 3rem;
+    --card: min(calc((100cqw - 2 * var(--m)) * 0.8), 24rem);
   }
 }

@@ -39,7 +39,7 @@ export default function Header() {
           type="button"
           className={styles.burger}
           onClick={() => setOpen(true)}
-          aria-label="Apri il menu"
+          aria-label="Open menu"
           aria-expanded={open}
         >
           <span className={styles.burgerLine} />
@@ -66,7 +66,7 @@ export default function Header() {
             type="button"
             className={styles.close}
             onClick={() => setOpen(false)}
-            aria-label="Chiudi il menu"
+            aria-label="Close menu"
           >
             <span className={styles.closeLine} />
             <span className={styles.closeLine} />
