@@ -1,13 +1,15 @@
 /* ---------------------------------------------
    Portfolio — mobile first
-   Carosello orizzontale di tre copertine in stile rivista (Vogue):
-   una copertina all'80% della larghezza, la successiva che spunta a destra
+   Carosello orizzontale in loop di tre copertine in stile rivista (Vogue):
+   una copertina all'80% della larghezza, centrata, con la precedente e la
+   successiva che spuntano ai lati
+   (le copertine sono ripetute nel track, vedi Portfolio.tsx)
 --------------------------------------------- */
 
 .portfolio {
   background-color: var(--cream);
   color: var(--espresso);
-  padding: 3.5rem 0 3.5rem;
+  padding: 4.5rem 0;
   /* le misure del carosello (cqw) seguono la larghezza della sezione */
   container-type: inline-size;
 }
@@ -17,10 +19,14 @@
   --m: 1.25rem;
   --gap: 0.75rem;
   --card: calc((100cqw - 2 * var(--m)) * 0.8);
+  /* spazio ai lati della copertina centrata */
+  --side: calc((100cqw - var(--card)) / 2);
+  /* spazio sopra le copertine */
+  --top: 20px;
   position: relative;
 }
 
-/* "my work" a cavallo dell'angolo in alto a sinistra delle copertine */
+/* "my work" in alto a sinistra, a cavallo del bordo superiore delle copertine */
 .label {
   position: absolute;
   z-index: 4;
@@ -37,19 +43,12 @@
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
-  padding-left: var(--m);
-  scroll-padding-left: var(--m);
   scrollbar-width: none;
+  padding-top: var(--top);
 }
 
 .track::-webkit-scrollbar {
   display: none;
-}
-
-/* Spazio in coda: anche l'ultima copertina si ferma allineata a sinistra */
-.track::after {
-  content: "";
-  flex: 0 0 calc(100cqw - var(--m) - var(--card) - var(--gap));
 }
 
 /* ---------- Copertina ---------- */
@@ -60,7 +59,9 @@
   flex: 0 0 var(--card);
   aspect-ratio: 2 / 3;
   overflow: hidden;
-  scroll-snap-align: start;
+  scroll-snap-align: center;
+  /* una copertina per swipe: il loop non esce mai dalle copie */
+  scroll-snap-stop: always;
   /* le misure del testo (cqw) seguono la larghezza della copertina */
   container-type: inline-size;
   background-color: var(--beige);
@@ -129,14 +130,17 @@
   line-height: 1;
 }
 
-/* ---------- Freccia ---------- */
+/* ---------- Frecce ---------- */
 
-/* Sul bordo destro della copertina visibile, a metà altezza */
-.next {
+/* Ai lati della copertina centrata, alla stessa distanza dai due bordi dello
+   schermo: metà di quella che avrebbero a cavallo dei bordi della copertina */
+.arrow {
+  /* centro della freccia (larga 34px) dal bordo dello schermo */
+  --arrow-x: calc((var(--side) + 17px) / 2);
   position: absolute;
   z-index: 4;
-  top: calc(var(--card) * 0.75);
-  left: calc(var(--m) + var(--card));
+  /* metà altezza della copertina (2:3, alta 1.5 volte la larghezza) */
+  top: calc(var(--top) + var(--card) * 0.75);
   transform: translate(-50%, -50%);
   display: grid;
   place-items: center;
@@ -150,7 +154,15 @@
   cursor: pointer;
 }
 
-.next svg {
+.prev {
+  left:6vw;
+}
+
+.next {
+  left: 94vw;
+}
+
+.arrow svg {
   width: 14px;
   height: 14px;
   fill: none;
@@ -168,7 +180,7 @@
   font-family: var(--font-source-sans), system-ui, sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  font-size: 0.72rem;
+  font-size: 1rem;
   text-decoration: underline;
   text-decoration-color: var(--accent);
   text-decoration-thickness: 1px;

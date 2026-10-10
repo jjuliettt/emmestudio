@@ -34,7 +34,7 @@
   justify-content: center;
   /* a destra resta libera la striscia del blocco colorato; sotto passa
      la riga 2, che sale in overlap */
-  padding: 0.5% var(--block-offset) calc(var(--overlap) + 1.5%) 0;
+  padding: 0.5% var(--block-offset) calc(var(--overlap) + 3.5%) 0;
   overflow: visible;
   min-width: 0;
 }
@@ -163,7 +163,7 @@
 .photoThree {
   position: absolute;
   z-index: 2;
-  top: calc(22.8% + 14px);
+  top: calc(22.8% + 7px);
   left: 54.2%;
   width: 45.3%;
   aspect-ratio: 2 / 3;

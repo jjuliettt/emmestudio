@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import SectionLabel from "@/components/SectionLabel/SectionLabel";
 import { useReducedMotion } from "@/lib/useReducedMotion";
 import styles from "./Reviews.module.css";
@@ -46,19 +46,46 @@ const AUTOPLAY_INTERVAL = 10000;
 const RESUME_DELAY = 18000;
 const SWIPE_THRESHOLD = 40;
 
+// Loop: le recensioni sono ripetute tre volte di fila, si sta sempre sulla
+// serie di mezzo (HOME) e le copie ai lati fanno vedere la successiva/
+// precedente mentre si scorre. Dopo l'ultima si passa così alla prima
+// scorrendo avanti, non tornando indietro di scatto.
+const COUNT = REVIEWS.length;
+const HOME = 1;
+const SLIDES = Array.from({ length: 3 }, (_, copy) =>
+  REVIEWS.map((review, i) => ({ review, copy, key: `${copy}-${i}` }))
+).flat();
+
 export default function Reviews() {
-  const [index, setIndex] = useState(0);
+  // posizione nel track ripetuto; parte dalla prima recensione della serie di mezzo
+  const [position, setPosition] = useState(HOME * COUNT);
+  // niente transizione nello scatto silenzioso da una copia alla serie di mezzo
+  const [instant, setInstant] = useState(false);
   const [paused, setPaused] = useState(false);
   const touchStartX = useRef<number | null>(null);
   const reducedMotion = useReducedMotion();
+  const index = ((position % COUNT) + COUNT) % COUNT;
+
+  // Dopo la transizione, se si è finiti su una copia si torna (senza
+  // animazione) sulla stessa recensione della serie di mezzo: il giro non finisce
+  const onTransitionEnd = useCallback(() => {
+    const home = HOME * COUNT + index;
+    if (position === home) return;
+    setInstant(true);
+    setPosition(home);
+  }, [position, index]);
+
+  // Il frame successivo a quello che azzera la transizione la riattiva
+  useEffect(() => {
+    if (!instant) return;
+    const id = requestAnimationFrame(() => setInstant(false));
+    return () => cancelAnimationFrame(id);
+  }, [instant]);
 
   // Autoplay: avanza ogni 10s quando il carosello e' a riposo
   useEffect(() => {
     if (paused || reducedMotion) return;
-    const id = setInterval(
-      () => setIndex((i) => (i + 1) % REVIEWS.length),
-      AUTOPLAY_INTERVAL
-    );
+    const id = setInterval(() => setPosition((p) => p + 1), AUTOPLAY_INTERVAL);
     return () => clearInterval(id);
   }, [paused, reducedMotion]);
 
@@ -67,11 +94,13 @@ export default function Reviews() {
     if (!paused) return;
     const id = setTimeout(() => setPaused(false), RESUME_DELAY);
     return () => clearTimeout(id);
-  }, [paused, index]);
+  }, [paused, position]);
 
-  const goTo = (next: number) => {
+  // Scorre alla recensione i (dopo l'ultima si riparte dalla prima, sempre avanti)
+  const goTo = (i: number) => {
     setPaused(true);
-    setIndex((next + REVIEWS.length) % REVIEWS.length);
+    const delta = ((i - index + COUNT) % COUNT) || (i === index ? 0 : COUNT);
+    setPosition((p) => p + delta);
   };
 
   const onTouchStart = (e: React.TouchEvent) => {
@@ -84,7 +113,8 @@ export default function Reviews() {
     const delta = e.changedTouches[0].clientX - start;
     touchStartX.current = null;
     if (Math.abs(delta) < SWIPE_THRESHOLD) return;
-    goTo(delta < 0 ? index + 1 : index - 1);
+    setPaused(true);
+    setPosition((p) => p + (delta < 0 ? 1 : -1));
   };
 
   return (
@@ -98,13 +128,17 @@ export default function Reviews() {
       >
         <div
           className={styles.track}
-          style={{ transform: `translateX(-${index * 100}%)` }}
+          style={{
+            transform: `translateX(-${position * 100}%)`,
+            transition: instant || reducedMotion ? "none" : undefined,
+          }}
+          onTransitionEnd={onTransitionEnd}
         >
-          {REVIEWS.map((review, i) => (
+          {SLIDES.map(({ review, copy, key }) => (
             <figure
-              key={review.author}
+              key={key}
               className={styles.slide}
-              aria-hidden={i !== index}
+              aria-hidden={copy !== HOME}
             >
               {/* il nome è già scritto sotto: la foto è decorativa */}
               <img src={review.src} alt="" className={styles.photo} />
