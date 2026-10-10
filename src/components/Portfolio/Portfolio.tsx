@@ -8,18 +8,10 @@ import {
   useState,
 } from "react";
 import Link from "next/link";
-import { Bodoni_Moda } from "next/font/google";
+import { displayMasthead } from "@/app/fonts";
 import SectionLabel from "@/components/SectionLabel/SectionLabel";
 import { useReducedMotion } from "@/lib/useReducedMotion";
 import styles from "./Portfolio.module.css";
-
-// Serif ad alto contrasto (testata tipo Vogue), usato solo in questa sezione
-const bodoni = Bodoni_Moda({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  style: ["normal", "italic"],
-  display: "swap",
-});
 
 type Category = {
   title: string;
@@ -158,7 +150,7 @@ export default function Portfolio() {
   }, [paused, touches, index]);
 
   return (
-    <section className={`${styles.portfolio} ${bodoni.className}`}>
+    <section className={`${styles.portfolio} ${displayMasthead.className}`}>
       <div className={styles.carousel}>
         <SectionLabel className={styles.label}>my work</SectionLabel>
 

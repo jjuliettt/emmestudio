@@ -11,8 +11,14 @@ const PAGES = [
   { label: "Contacts", href: "/contacts" },
 ];
 
+// Sotto questa soglia l'header resta visibile: evita che sparisca per un
+// mezzo swipe in cima alla pagina
+const HIDE_THRESHOLD = 80;
+
 export default function Header() {
   const [open, setOpen] = useState(false);
+  // Appare scorrendo verso l'alto, sparisce scorrendo verso il basso
+  const [hidden, setHidden] = useState(false);
 
   // Blocca lo scroll del body quando il menu e' aperto
   useEffect(() => {
@@ -20,6 +26,32 @@ export default function Header() {
     return () => {
       document.body.style.overflow = "";
     };
+  }, [open]);
+
+  // Col menu aperto l'header resta sempre visibile
+  useEffect(() => {
+    if (open) setHidden(false);
+  }, [open]);
+
+  // Direzione dello scroll: giu' nasconde, su mostra
+  useEffect(() => {
+    if (open) return;
+    let lastY = window.scrollY;
+    let ticking = false;
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        setHidden(y > lastY && y > HIDE_THRESHOLD);
+        lastY = y;
+        ticking = false;
+      });
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, [open]);
 
   // Chiusura con ESC
@@ -33,7 +65,7 @@ export default function Header() {
   }, [open]);
 
   return (
-    <header className={styles.header}>
+    <header className={styles.header} data-hidden={hidden}>
       <div className={styles.bar}>
         <button
           type="button"

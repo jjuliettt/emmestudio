@@ -3,8 +3,25 @@
 --------------------------------------------- */
 
 .header {
+  /* sticky, non fixed: resta nel flusso, non serve riservare lo spazio
+     a mano, e lo scatto per nasconderla non lascia vuoti sotto */
+  position: sticky;
+  top: 0;
+  z-index: 30;
   background-color: var(--beige);
   color: var(--espresso);
+  transform: translateY(0);
+  transition: transform 0.3s ease;
+}
+
+.header[data-hidden="true"] {
+  transform: translateY(-100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header {
+    transition: none;
+  }
 }
 
 .bar {

@@ -1,6 +1,7 @@
 /* ---------------------------------------------
    Footer — mobile first
-   Due righe centrate, testo piccolo crema su espresso
+   Due righe centrate, testo piccolo crema su espresso;
+   da desktop diventano una riga sola (vedi .rows)
 --------------------------------------------- */
 
 .footer {
@@ -22,6 +23,11 @@
   margin: 0 0.4em;
 }
 
+/* Punto tra le due righe: serve solo da desktop, quando stanno affiancate */
+.rowsDot {
+  display: none;
+}
+
 /* il bottone dei cookie deve leggersi come gli altri link */
 .link {
   padding: 0;
@@ -36,5 +42,17 @@
 @media (min-width: 768px) {
   .line {
     font-size: 12px;
+  }
+
+  /* Le due righe diventano una sola, affiancate */
+  .rows {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+
+  .rowsDot {
+    display: inline;
   }
 }

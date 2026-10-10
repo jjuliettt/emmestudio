@@ -1,0 +1,92 @@
+/* ---------------------------------------------
+   Legal (privacy policy e simili) — mobile first
+   Testo lungo, una colonna leggibile
+--------------------------------------------- */
+
+.page {
+  background-color: var(--cream);
+  color: var(--espresso);
+  padding: 3.5rem 1.25rem 4.5rem;
+}
+
+.title {
+  margin: 0 0 0.35rem;
+  text-align: center;
+  font-family: var(--font-instrument-serif), Georgia, serif;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: clamp(2.1rem, 9vw, 3.2rem);
+  line-height: 1.15;
+}
+
+.titleLine {
+  display: block;
+}
+
+.kicker {
+  margin: 0;
+  text-align: center;
+  font-family: var(--font-source-sans), system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.72rem;
+  color: rgb(59 42 34 / 0.7);
+}
+
+.updated {
+  margin: 0.4rem 0 0;
+  text-align: center;
+  font-family: var(--font-source-sans), system-ui, sans-serif;
+  font-size: 0.85rem;
+  color: rgb(59 42 34 / 0.7);
+}
+
+.sections {
+  margin-top: 2.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.9rem;
+}
+
+.heading {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-source-sans), system-ui, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.92rem;
+  color: var(--accent);
+}
+
+.paragraph {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-source-sans), system-ui, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.paragraph:last-child {
+  margin-bottom: 0;
+}
+
+.list {
+  margin: 0 0 0.6rem;
+  padding-left: 1.2rem;
+  font-family: var(--font-source-sans), system-ui, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.list:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------------------------------------------
+   Tablet / desktop (non ancora rifinito)
+--------------------------------------------- */
+
+@media (min-width: 768px) {
+  .page {
+    padding: 5rem 3rem 6rem;
+  }
+}
