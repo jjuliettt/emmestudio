@@ -12,8 +12,7 @@ export default function About() {
     <section className={styles.about}>
       <SectionLabel className={styles.label}>about me</SectionLabel>
 
-      <p className={styles.hello}>Ciao!</p>
-      <p className={styles.intro}>I&apos;m Elisa Massetti, and</p>
+      <p className={styles.greeting}>Ciao, I&apos;m Elisa Massetti, and</p>
 
       <div className={styles.photo}>
         <img src={PHOTO.src} alt={PHOTO.alt} className={styles.image} />

@@ -1,8 +1,9 @@
 /* ---------------------------------------------
    Portfolio — mobile first
    Carosello orizzontale in loop di tre copertine in stile rivista (Vogue):
-   una copertina all'80% della larghezza, centrata, con la precedente e la
-   successiva che spuntano ai lati
+   una copertina all'80% della larghezza allineata a sinistra, con un po'
+   della successiva che spunta a destra. Si scorre solo con le dita/il
+   trackpad, nessuna freccia.
    (le copertine sono ripetute nel track, vedi Portfolio.tsx)
 --------------------------------------------- */
 
@@ -15,14 +16,13 @@
 }
 
 .carousel {
-  /* margine laterale, spazio tra le copertine, larghezza di una copertina */
+  /* margine laterale e larghezza di una copertina. Lo spazio tra una
+     copertina e l'altra (.track, gap) è lo stesso --m: a riposo, a sinistra
+     della copertina attiva c'è così solo il margine, mai un pezzo della
+     copertina precedente (che sennò sporgerebbe se il gap fosse più stretto
+     del margine) */
   --m: 1.25rem;
-  --gap: 0.75rem;
   --card: calc((100cqw - 2 * var(--m)) * 0.8);
-  /* spazio ai lati della copertina centrata */
-  --side: calc((100cqw - var(--card)) / 2);
-  /* spazio sopra le copertine */
-  --top: 20px;
   position: relative;
 }
 
@@ -39,12 +39,13 @@
 
 .track {
   display: flex;
-  gap: var(--gap);
+  gap: var(--m);
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
+  padding-left: var(--m);
+  scroll-padding-left: var(--m);
   scrollbar-width: none;
-  padding-top: var(--top);
 }
 
 .track::-webkit-scrollbar {
@@ -59,7 +60,7 @@
   flex: 0 0 var(--card);
   aspect-ratio: 2 / 3;
   overflow: hidden;
-  scroll-snap-align: center;
+  scroll-snap-align: start;
   /* una copertina per swipe: il loop non esce mai dalle copie */
   scroll-snap-stop: always;
   /* le misure del testo (cqw) seguono la larghezza della copertina */
@@ -128,48 +129,6 @@
   font-style: italic;
   font-size: 9cqw;
   line-height: 1;
-}
-
-/* ---------- Frecce ---------- */
-
-/* Ai lati della copertina centrata, alla stessa distanza dai due bordi dello
-   schermo: metà di quella che avrebbero a cavallo dei bordi della copertina */
-.arrow {
-  /* centro della freccia (larga 34px) dal bordo dello schermo */
-  --arrow-x: calc((var(--side) + 17px) / 2);
-  position: absolute;
-  z-index: 4;
-  /* metà altezza della copertina (2:3, alta 1.5 volte la larghezza) */
-  top: calc(var(--top) + var(--card) * 0.75);
-  transform: translate(-50%, -50%);
-  display: grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background-color: rgb(250 244 240 / 0.85);
-  color: var(--accent);
-  cursor: pointer;
-}
-
-.prev {
-  left:6vw;
-}
-
-.next {
-  left: 94vw;
-}
-
-.arrow svg {
-  width: 14px;
-  height: 14px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.6;
-  stroke-linecap: round;
-  stroke-linejoin: round;
 }
 
 /* ---------- Link sotto il carosello ---------- */

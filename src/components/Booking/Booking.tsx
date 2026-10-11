@@ -7,9 +7,14 @@ import { useReducedMotion } from "@/lib/useReducedMotion";
 import styles from "./Booking.module.css";
 
 // Placeholder: foto di gattini, da sostituire con la foto reale (2:3).
-const PHOTO_SRC = "https://placecats.com/neo/1000/1500";
+const DEFAULT_PHOTO_SRC = "https://placecats.com/neo/1000/1500";
 
-export default function Booking() {
+type Props = {
+  // per riusare la sezione altrove con una foto diversa da quella della home
+  photoSrc?: string;
+};
+
+export default function Booking({ photoSrc = DEFAULT_PHOTO_SRC }: Props) {
   const windowRef = useRef<HTMLDivElement>(null);
   const photoRef = useRef<HTMLImageElement>(null);
   const reducedMotion = useReducedMotion();
@@ -66,7 +71,7 @@ export default function Booking() {
 
         {/* Finestra quadrata: la foto ci scorre dietro */}
         <div ref={windowRef} className={styles.window}>
-          <img ref={photoRef} src={PHOTO_SRC} alt="" className={styles.photo} />
+          <img ref={photoRef} src={photoSrc} alt="" className={styles.photo} />
 
           <div className={styles.box}>
             <p className={styles.ask}>

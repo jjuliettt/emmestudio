@@ -7,7 +7,7 @@
 .booking {
   background-color: var(--cream);
   color: var(--espresso);
-  padding: 3.75rem 1.25rem 3.5rem;
+  padding: 3.75rem 0;
 }
 
 .frame {
@@ -53,11 +53,14 @@
   transform: translate(-50%, -50%);
   width: max-content;
   max-width: calc(100% - 2.5rem);
-  padding: 0.75rem 1.1rem 0.8rem;
   background: var(--grain), var(--accent);
   color: var(--cream);
   text-align: center;
   line-height: 1.2;
+  gap: 2vw;
+    display: flex;
+    flex-direction: column;
+    padding: 5vw
 }
 
 .ask {
@@ -80,6 +83,7 @@
   justify-content: center;
   gap: 1.25rem;
   margin: 0.45rem 0 0;
+  flex-direction: column;
 }
 
 .link {

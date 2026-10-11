@@ -10,42 +10,10 @@ import {
 import Link from "next/link";
 import { displayMasthead } from "@/app/fonts";
 import SectionLabel from "@/components/SectionLabel/SectionLabel";
+import { PORTFOLIO_CATEGORIES as CATEGORIES } from "@/lib/portfolioCategories";
 import { useReducedMotion } from "@/lib/useReducedMotion";
+import Cover from "./Cover";
 import styles from "./Portfolio.module.css";
-
-type Category = {
-  title: string;
-  href: string;
-  // foto verticale 2:3
-  src: string;
-  alt: string;
-  // Soggetto scontornato: PNG trasparente con lo stesso taglio di src.
-  // Va sopra la testata, così il titolo resta dietro al soggetto.
-  cutout?: string;
-};
-
-// Placeholder: foto di gattini, da sostituire con le copertine reali
-// (foto + soggetto scontornato).
-const CATEGORIES: Category[] = [
-  {
-    title: "Portraits",
-    href: "/portfolio/portraits",
-    src: "https://placecats.com/neo/800/1200",
-    alt: "Portraits cover",
-  },
-  {
-    title: "Events",
-    href: "/portfolio/events",
-    src: "https://placecats.com/poppy/800/1200",
-    alt: "Events cover",
-  },
-  {
-    title: "Small Businesses",
-    href: "/portfolio/small-businesses",
-    src: "https://placecats.com/louie/800/1200",
-    alt: "Small Businesses cover",
-  },
-];
 
 const YEAR = "2026";
 const BYLINE = "Elisa Massetti";
@@ -75,42 +43,34 @@ export default function Portfolio() {
   const [touches, setTouches] = useState(0);
   const reducedMotion = useReducedMotion();
 
-  // Posizione nel track: distanza tra due copertine, scroll che centra la
-  // prima (start) e copertina al centro in questo momento
+  // Posizione nel track: distanza tra due copertine e copertina allineata
+  // a sinistra in questo momento (nessun centraggio: scrollLeft 0 mette
+  // già la prima copertina al suo posto, contro il margine)
   const measure = () => {
     const track = trackRef.current;
     if (!track) return null;
     const cards = track.querySelectorAll<HTMLElement>("[data-card]");
     const step = cards[1].offsetLeft - cards[0].offsetLeft;
-    const start =
-      cards[0].offsetLeft -
-      track.offsetLeft -
-      (track.clientWidth - cards[0].offsetWidth) / 2;
-    const position = Math.round((track.scrollLeft - start) / step);
-    return { track, step, start, position };
+    return { track, step, position: Math.round(track.scrollLeft / step) };
   };
 
   // Si parte dalla serie "di casa", con le copie già pronte ai due lati
   useLayoutEffect(() => {
     const m = measure();
-    if (m) m.track.scrollLeft = m.start + HOME * COUNT * m.step;
+    if (m) m.track.scrollLeft = HOME * COUNT * m.step;
   }, []);
 
-  // Scorre di una copertina, avanti (1) o indietro (-1): dopo l'ultima c'è
-  // di nuovo la prima, e prima della prima l'ultima
-  const go = useCallback(
-    (delta: 1 | -1) => {
-      const m = measure();
-      if (!m) return;
-      m.track.scrollTo({
-        left: m.start + (m.position + delta) * m.step,
-        behavior: reducedMotion ? "auto" : "smooth",
-      });
-    },
-    [reducedMotion]
-  );
+  // Scorre alla copertina successiva: dopo l'ultima c'è di nuovo la prima
+  const goNext = useCallback(() => {
+    const m = measure();
+    if (!m) return;
+    m.track.scrollTo({
+      left: (m.position + 1) * m.step,
+      behavior: reducedMotion ? "auto" : "smooth",
+    });
+  }, [reducedMotion]);
 
-  // L'indice segue lo scorrimento, anche quello fatto a mano
+  // L'indice segue lo scorrimento, anche quello fatto a mano (con le dita)
   const onScroll = () => {
     const m = measure();
     if (!m) return;
@@ -123,13 +83,13 @@ export default function Portfolio() {
       const s = measure();
       if (!s) return;
       const home = HOME * COUNT + (((s.position % COUNT) + COUNT) % COUNT);
-      if (s.position !== home) s.track.scrollLeft = s.start + home * s.step;
+      if (s.position !== home) s.track.scrollLeft = home * s.step;
     }, SETTLE_DELAY);
   };
 
   useEffect(() => () => clearTimeout(settleRef.current), []);
 
-  // Swipe o freccia: l'autoplay si ferma
+  // Swipe: l'autoplay si ferma
   const pause = () => {
     setPaused(true);
     setTouches((n) => n + 1);
@@ -138,9 +98,9 @@ export default function Portfolio() {
   // Autoplay: avanza ogni 2s quando il carosello è a riposo
   useEffect(() => {
     if (paused || reducedMotion) return;
-    const id = setInterval(() => go(1), AUTOPLAY_INTERVAL);
+    const id = setInterval(goNext, AUTOPLAY_INTERVAL);
     return () => clearInterval(id);
-  }, [paused, reducedMotion, index, go]);
+  }, [paused, reducedMotion, index, goNext]);
 
   // Dopo un'interazione manuale riparte dopo un po' di inattività
   useEffect(() => {
@@ -161,82 +121,16 @@ export default function Portfolio() {
           onPointerDown={pause}
           onWheel={pause}
         >
-          {SLIDES.map(({ category, copy }) => {
-            const words = category.title.split(" ");
-            // la parola più lunga riempie la larghezza della copertina
-            const chars = Math.max(...words.map((word) => word.length));
-            const isCopy = copy !== HOME;
-
-            return (
-              <Link
-                key={`${copy}-${category.href}`}
-                href={category.href}
-                className={styles.cover}
-                data-card
-                aria-hidden={isCopy || undefined}
-                tabIndex={isCopy ? -1 : undefined}
-              >
-                <img
-                  src={category.src}
-                  alt={category.alt}
-                  className={styles.photo}
-                />
-
-                <span
-                  className={styles.masthead}
-                  style={{ "--chars": chars } as React.CSSProperties}
-                >
-                  {words.map((word) => (
-                    <span key={word} className={styles.mastheadLine}>
-                      {word}
-                    </span>
-                  ))}
-                </span>
-
-                {category.cutout && (
-                  <img
-                    src={category.cutout}
-                    alt=""
-                    className={styles.cutout}
-                  />
-                )}
-
-                <span className={styles.coverLines}>
-                  <span className={styles.coverKicker}>{YEAR}</span>
-                  <span className={styles.coverName}>{BYLINE}</span>
-                </span>
-              </Link>
-            );
-          })}
+          {SLIDES.map(({ category, copy }) => (
+            <Cover
+              key={`${copy}-${category.href}`}
+              category={category}
+              year={YEAR}
+              byline={BYLINE}
+              hidden={copy !== HOME}
+            />
+          ))}
         </div>
-
-        <button
-          type="button"
-          className={`${styles.arrow} ${styles.prev}`}
-          onClick={() => {
-            pause();
-            go(-1);
-          }}
-          aria-label="Previous category"
-        >
-          <svg viewBox="0 0 16 16" aria-hidden="true">
-            <path d="M10 3l-5 5 5 5" />
-          </svg>
-        </button>
-
-        <button
-          type="button"
-          className={`${styles.arrow} ${styles.next}`}
-          onClick={() => {
-            pause();
-            go(1);
-          }}
-          aria-label="Next category"
-        >
-          <svg viewBox="0 0 16 16" aria-hidden="true">
-            <path d="M6 3l5 5-5 5" />
-          </svg>
-        </button>
       </div>
 
       <Link href="/portfolio" className={styles.viewAll}>

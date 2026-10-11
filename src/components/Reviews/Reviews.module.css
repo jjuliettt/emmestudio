@@ -10,9 +10,12 @@
   text-align: center;
 }
 
+/* a sinistra, come l'etichetta delle altre sezioni (il resto resta centrato);
+   la sezione non ha un margine laterale suo, quindi lo mette la label */
 .label {
-  margin: 0 auto 1.75rem;
-  width: max-content;
+  margin: 0 0 1.75rem 1rem;
+  text-align: left;
+  transform-origin: left center;
 }
 
 .viewport {

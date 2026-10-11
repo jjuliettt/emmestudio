@@ -15,24 +15,19 @@
   transform-origin: left center;
 }
 
-/* ---------- Saluto su due livelli ---------- */
+/* ---------- Saluto, su una riga sola ---------- */
 
-.hello {
+/* "Ciao! I'm Elisa Massetti, and" nel font del "Ciao!" di prima (Source
+   Sans, maiuscoletto), con una dimensione e una spaziatura via di mezzo
+   tra quella del "Ciao!" (0.72rem, 0.24em) e quella del vecchio "I'm
+   Elisa Massetti, and" (clamp(1.35rem, 6.4vw, 1.75rem), 0.08em) */
+.greeting {
   margin: 0;
   font-family: var(--font-source-sans), system-ui, sans-serif;
   text-transform: uppercase;
-  letter-spacing: 0.24em;
-  font-size: 0.72rem;
-  line-height: 1.4;
-}
-
-.intro {
-  margin: 0.35rem 0 0;
-  font-family: var(--font-instrument-serif), Georgia, serif;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: clamp(1.35rem, 6.4vw, 1.75rem);
-  line-height: 1.1;
+  letter-spacing: 0.16em;
+  font-size: clamp(1.03rem, 3.5vw, 1.23rem);
+  line-height: 1.25;
 }
 
 /* ---------- Foto + firma ---------- */

@@ -1,0 +1,40 @@
+/* ---------------------------------------------
+   Pagina Portfolio — mobile first
+   Hero introduttiva + le copertine di "my work", una sotto l'altra
+--------------------------------------------- */
+
+.hero {
+  background-color: var(--cream);
+  color: var(--espresso);
+  padding: 3.5rem 1.25rem 2.5rem;
+  text-align: center;
+}
+
+.kicker {
+  margin: 0;
+  font-family: var(--font-source-sans), system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  font-size: 0.72rem;
+  color: rgb(59 42 34 / 0.7);
+}
+
+.title {
+  margin: 0.35rem 0 0;
+  font-family: var(--font-instrument-serif), Georgia, serif;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: clamp(2.1rem, 11vw, 2.75rem);
+  line-height: 1.1;
+}
+
+/* ---------- Copertine, una sotto l'altra ---------- */
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 0 1.25rem 3.5rem;
+  /* le misure del testo nelle copertine (cqw) seguono la loro larghezza */
+  container-type: inline-size;
+}
