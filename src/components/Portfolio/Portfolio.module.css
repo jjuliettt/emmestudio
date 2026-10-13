@@ -1,147 +1,48 @@
 /* ---------------------------------------------
    Portfolio — mobile first
-   Carosello orizzontale in loop di tre copertine in stile rivista (Vogue):
-   una copertina all'80% della larghezza allineata a sinistra, con un po'
-   della successiva che spunta a destra. Si scorre solo con le dita/il
-   trackpad, nessuna freccia.
-   (le copertine sono ripetute nel track, vedi Portfolio.tsx)
+   Tre copertine una sotto l'altra (vedi Cover), stessi margini della foto
+   dell'About
 --------------------------------------------- */
 
 .portfolio {
   background-color: var(--cream);
   color: var(--espresso);
-  padding: 4.5rem 0;
-  /* le misure del carosello (cqw) seguono la larghezza della sezione */
-  container-type: inline-size;
+  padding: 2rem 1.25rem;
 }
 
-.carousel {
-  /* margine laterale e larghezza di una copertina. Lo spazio tra una
-     copertina e l'altra (.track, gap) è lo stesso --m: a riposo, a sinistra
-     della copertina attiva c'è così solo il margine, mai un pezzo della
-     copertina precedente (che sennò sporgerebbe se il gap fosse più stretto
-     del margine) */
-  --m: 1.25rem;
-  --card: calc((100cqw - 2 * var(--m)) * 0.8);
+/* Riga scritta a mano, appena sopra la prima copertina: le code delle
+   lettere entrano di ~12px nella foto */
+.intro {
   position: relative;
-}
-
-/* "my work" in alto a sinistra, a cavallo del bordo superiore delle copertine */
-.label {
-  position: absolute;
-  z-index: 4;
-  top: 0;
-  left: calc(var(--m) - 0.35rem);
-  /* sporge quasi tutta sopra: tocca appena l'angolo, non la testata */
-  transform: translateY(-78%) rotate(-4deg);
-  transform-origin: left center;
-}
-
-.track {
-  display: flex;
-  gap: var(--m);
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scroll-snap-type: x mandatory;
-  padding-left: var(--m);
-  scroll-padding-left: var(--m);
-  scrollbar-width: none;
-}
-
-.track::-webkit-scrollbar {
-  display: none;
-}
-
-/* ---------- Copertina ---------- */
-
-.cover {
-  position: relative;
-  display: block;
-  flex: 0 0 var(--card);
-  aspect-ratio: 2 / 3;
-  overflow: hidden;
-  scroll-snap-align: start;
-  /* una copertina per swipe: il loop non esce mai dalle copie */
-  scroll-snap-stop: always;
-  /* le misure del testo (cqw) seguono la larghezza della copertina */
-  container-type: inline-size;
-  background-color: var(--beige);
-  color: var(--cream);
-}
-
-/* Strati, dal basso: foto, testata, soggetto scontornato, righe */
-.photo,
-.cutout {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.cutout {
-  z-index: 2;
-}
-
-.masthead {
-  position: absolute;
   z-index: 1;
-  top: 4cqw;
-  left: 0;
-  right: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-transform: uppercase;
-  font-weight: 500;
-  line-height: 0.9;
-  letter-spacing: 0.01em;
-  /* le maiuscole di Bodoni Moda sono larghe al massimo 0.72em l'una */
-  font-size: calc(90cqw / (var(--chars) * 0.72));
-  text-shadow: 0 1px 14px rgb(59 42 34 / 0.3);
-}
-
-.mastheadLine {
-  display: block;
-}
-
-.coverLines {
-  position: absolute;
-  z-index: 3;
-  left: 6cqw;
-  bottom: 7cqw;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2cqw;
-  text-shadow: 0 1px 8px rgb(59 42 34 / 0.55);
-}
-
-.coverKicker {
-  font-family: var(--font-source-sans), system-ui, sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 0.24em;
-  font-size: 4.2cqw;
-  line-height: 1.2;
-}
-
-.coverName {
-  font-style: italic;
-  font-size: 9cqw;
+  width: max-content;
+  margin: 0 0 -0.75rem 0.35rem;
+  font-family: var(--font-hand);
+  font-weight: 400;
+  font-size: 1.875rem;
   line-height: 1;
+  color: var(--espresso);
+  transform: rotate(-3deg);
+  transform-origin: left bottom;
 }
 
-/* ---------- Link sotto il carosello ---------- */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.125rem;
+}
+
+/* ---------- Link sotto le copertine ---------- */
 
 .viewAll {
   display: table;
-  margin: 2rem auto 0;
-  font-family: var(--font-source-sans), system-ui, sans-serif;
+  margin: 1.5rem auto 0;
+  font-family: var(--font-main);
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  font-size: 1rem;
+  font-size: 0.75rem;
   text-decoration: underline;
-  text-decoration-color: var(--accent);
+  text-decoration-color: currentColor;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.45em;
 }
@@ -152,11 +53,12 @@
 
 @media (min-width: 768px) {
   .portfolio {
-    padding: 5rem 0;
+    padding: 3rem;
   }
 
-  .carousel {
-    --m: 3rem;
-    --card: min(calc((100cqw - 2 * var(--m)) * 0.8), 24rem);
+  .portfolio > * {
+    max-width: 30rem;
+    margin-left: auto;
+    margin-right: auto;
   }
 }

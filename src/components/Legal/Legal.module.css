@@ -12,7 +12,10 @@
 .title {
   margin: 0 0 0.35rem;
   text-align: center;
-  font-family: var(--font-instrument-serif), Georgia, serif;
+  font-family: var(--font-main);
+  /* Calgary in grassetto (tratto, vedi --bold-stroke in globals.css) */
+  font-weight: 700;
+  -webkit-text-stroke: var(--bold-stroke) currentColor;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   font-size: clamp(2.1rem, 9vw, 3.2rem);
@@ -26,7 +29,7 @@
 .kicker {
   margin: 0;
   text-align: center;
-  font-family: var(--font-source-sans), system-ui, sans-serif;
+  font-family: var(--font-main);
   text-transform: uppercase;
   letter-spacing: 0.22em;
   font-size: 0.72rem;
@@ -36,7 +39,7 @@
 .updated {
   margin: 0.4rem 0 0;
   text-align: center;
-  font-family: var(--font-source-sans), system-ui, sans-serif;
+  font-family: var(--font-main);
   font-size: 0.85rem;
   color: rgb(59 42 34 / 0.7);
 }
@@ -50,17 +53,17 @@
 
 .heading {
   margin: 0 0 0.6rem;
-  font-family: var(--font-source-sans), system-ui, sans-serif;
+  font-family: var(--font-main);
   font-weight: 700;
+  -webkit-text-stroke: var(--bold-stroke) currentColor;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   font-size: 0.92rem;
-  color: var(--accent);
 }
 
 .paragraph {
   margin: 0 0 0.6rem;
-  font-family: var(--font-source-sans), system-ui, sans-serif;
+  font-family: var(--font-main);
   font-size: 0.95rem;
   line-height: 1.55;
 }
@@ -72,7 +75,7 @@
 .list {
   margin: 0 0 0.6rem;
   padding-left: 1.2rem;
-  font-family: var(--font-source-sans), system-ui, sans-serif;
+  font-family: var(--font-main);
   font-size: 0.95rem;
   line-height: 1.55;
 }

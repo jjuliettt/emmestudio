@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import SectionLabel from "@/components/SectionLabel/SectionLabel";
 import { useReducedMotion } from "@/lib/useReducedMotion";
 import styles from "./Reviews.module.css";
 
@@ -11,6 +10,7 @@ type Review = {
   category: string;
   // foto del viso; per i clienti business il logo dell'azienda
   src: string;
+  alt: string;
 };
 
 // Placeholder: foto di gattini e testi fittizi, da sostituire con le recensioni reali.
@@ -20,12 +20,14 @@ const REVIEWS: Review[] = [
     author: "Sofia & Thomas",
     category: "Events",
     src: "https://placecats.com/neo/120/120",
+    alt: "Portrait of Sofia and Thomas",
   },
   {
     quote: "No posing, no pressure, just us.",
     author: "Marta L.",
     category: "Portraits",
     src: "https://placecats.com/millie/120/120",
+    alt: "Portrait of Marta L.",
   },
   {
     quote: "Our brand finally looks like our brand.",
@@ -33,12 +35,14 @@ const REVIEWS: Review[] = [
     category: "Small Businesses",
     // cliente business: qui va il logo
     src: "https://placecats.com/poppy/120/120",
+    alt: "Atelier Nord logo",
   },
   {
     quote: "Colours, movement, and zero stiffness.",
     author: "Nadia B.",
     category: "Events",
     src: "https://placecats.com/louie/120/120",
+    alt: "Portrait of Nadia B.",
   },
 ];
 
@@ -119,8 +123,6 @@ export default function Reviews() {
 
   return (
     <section className={styles.reviews}>
-      <SectionLabel className={styles.label}>kind words</SectionLabel>
-
       <div
         className={styles.viewport}
         onTouchStart={onTouchStart}
@@ -140,8 +142,7 @@ export default function Reviews() {
               className={styles.slide}
               aria-hidden={copy !== HOME}
             >
-              {/* il nome è già scritto sotto: la foto è decorativa */}
-              <img src={review.src} alt="" className={styles.photo} />
+              <img src={review.src} alt={review.alt} className={styles.photo} />
 
               <blockquote className={styles.quote}>
                 <p>&ldquo;{review.quote}&rdquo;</p>

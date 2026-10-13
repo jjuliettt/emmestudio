@@ -10,18 +10,14 @@
   z-index: 30;
   background-color: var(--beige);
   color: var(--espresso);
-  transform: translateY(0);
+  /* niente transform a riposo: così il menu (fixed) occupa lo schermo
+     intero e non solo l'header */
+  transform: none;
   transition: transform 0.3s ease;
 }
 
 .header[data-hidden="true"] {
   transform: translateY(-100%);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .header {
-    transition: none;
-  }
 }
 
 .bar {
@@ -32,18 +28,18 @@
   padding: 1.1rem 1.25rem;
 }
 
-/* Nome e cognome: serif elegante, minimale */
+/* Logotipo: nome e cognome */
 .name {
-  font-family: "Didot", "Bodoni MT", "Playfair Display", Georgia,
-    "Times New Roman", serif;
+  font-family: var(--font-main);
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.22em;
   font-size: clamp(0.8rem, 3.6vw, 1rem);
   white-space: nowrap;
+  color: var(--espresso);
 }
 
-/* ---------- Hamburger a 2 linee ---------- */
+/* ---------- Icona del menu a 2 linee ---------- */
 
 .burger {
   display: flex;
@@ -51,7 +47,8 @@
   justify-content: center;
   gap: 6px;
   width: 30px;
-  padding: 5px 0;
+  height: 22px;
+  padding: 0;
   background: none;
   border: 0;
   cursor: pointer;
@@ -65,46 +62,30 @@
   background-color: var(--espresso);
 }
 
-/* ---------- Overlay ---------- */
-
-.overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 40;
-  background-color: rgb(59 42 34 / 0.25);
-  display: none;
-}
-
-.overlay[data-open="true"] {
-  display: block;
-}
-
-/* ---------- Pannello del menu ---------- */
+/* ---------- Menu a schermo intero ---------- */
 
 .panel {
   position: fixed;
   top: 0;
-  right: 0;
+  left: 0;
   z-index: 50;
   width: 100%;
-  /* meta' pagina o meno, da sistemare */
-  height: 50vh;
-  background-color: var(--beige);
+  height: 100dvh;
+  display: flex;
   flex-direction: column;
-  display: none;
+  background-color: var(--cream);
+  overscroll-behavior: contain;
+  /* chiuso: invisibile; il cambio di visibility aspetta la fine della
+     dissolvenza */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0s linear 0.25s;
 }
 
 .panel[data-open="true"] {
-  display: flex;
-}
-
-/* Barra del pannello: stessa impaginazione dell'header */
-.panelBar {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.1rem 1.25rem;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.25s ease, visibility 0s;
 }
 
 /* ---------- X di chiusura ---------- */
@@ -113,6 +94,7 @@
   position: relative;
   width: 30px;
   height: 22px;
+  padding: 0;
   background: none;
   border: 0;
   cursor: pointer;
@@ -136,7 +118,7 @@
   transform: rotate(-45deg);
 }
 
-/* ---------- Voci di menu ---------- */
+/* ---------- Voci di menu, al centro dello schermo ---------- */
 
 .nav {
   flex: 1;
@@ -144,13 +126,24 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1.4rem;
+  gap: 1.75rem;
+  /* compensa la barra in alto: le voci stanno al centro dello schermo */
+  padding-bottom: 3.5rem;
 }
 
 .navLink {
-  font-family: "Didot", "Bodoni MT", "Playfair Display", Georgia,
-    "Times New Roman", serif;
+  font-family: var(--font-menu);
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
-  font-size: clamp(0.85rem, 3.8vw, 1.05rem);
+  letter-spacing: 0.12em;
+  font-size: 1.25rem;
+  color: var(--espresso);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header,
+  .panel,
+  .panel[data-open="true"] {
+    transition: none;
+  }
 }

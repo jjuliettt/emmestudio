@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import styles from "./Header.module.css";
 
@@ -19,11 +19,21 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   // Appare scorrendo verso l'alto, sparisce scorrendo verso il basso
   const [hidden, setHidden] = useState(false);
+  const burgerRef = useRef<HTMLButtonElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const wasOpen = useRef(false);
 
-  // Blocca lo scroll del body quando il menu e' aperto
+  // Menu aperto: pagina ferma sotto, fuoco sulla X; alla chiusura il fuoco
+  // torna sull'icona del menu
   useEffect(() => {
+    const root = document.documentElement;
+    root.style.overflow = open ? "hidden" : "";
     document.body.style.overflow = open ? "hidden" : "";
+    if (open) closeRef.current?.focus();
+    else if (wasOpen.current) burgerRef.current?.focus();
+    wasOpen.current = open;
     return () => {
+      root.style.overflow = "";
       document.body.style.overflow = "";
     };
   }, [open]);
@@ -68,6 +78,7 @@ export default function Header() {
     <header className={styles.header} data-hidden={hidden}>
       <div className={styles.bar}>
         <button
+          ref={burgerRef}
           type="button"
           className={styles.burger}
           onClick={() => setOpen(true)}
@@ -83,22 +94,23 @@ export default function Header() {
         </Link>
       </div>
 
-      {/* Overlay cliccabile per chiudere */}
+      {/* Menu a schermo intero: la X sta dove c'è l'icona del menu */}
       <div
-        className={styles.overlay}
+        className={styles.panel}
         data-open={open}
-        onClick={() => setOpen(false)}
-        aria-hidden="true"
-      />
-
-      {/* Pannello del menu */}
-      <div className={styles.panel} data-open={open} role="dialog" aria-modal="true">
-        <div className={styles.panelBar}>
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menu"
+        aria-hidden={!open}
+      >
+        <div className={styles.bar}>
           <button
+            ref={closeRef}
             type="button"
             className={styles.close}
             onClick={() => setOpen(false)}
             aria-label="Close menu"
+            tabIndex={open ? undefined : -1}
           >
             <span className={styles.closeLine} />
             <span className={styles.closeLine} />
@@ -114,6 +126,7 @@ export default function Header() {
               href={page.href}
               className={styles.navLink}
               onClick={() => setOpen(false)}
+              tabIndex={open ? undefined : -1}
             >
               {page.label}
             </Link>

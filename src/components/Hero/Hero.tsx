@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useFitText } from "@/lib/useFitText";
 import { useReducedMotion } from "@/lib/useReducedMotion";
 import styles from "./Hero.module.css";
 
@@ -40,17 +41,52 @@ const ADJECTIVES = ["confident", "natural", "unforgettable"] as const;
 const SLIDE_INTERVAL = 4500;
 const ADJECTIVE_INTERVAL = 3000;
 
+// Il titolo verticale non deve mai essere più lungo della foto (meno lo
+// spazio sopra e sotto): se lo è, si rimpicciolisce il font, non la
+// spaziatura tra le lettere
+function measureTitle(title: HTMLElement) {
+  const column = title.parentElement!;
+  const photo = column.nextElementSibling!;
+  const pad = getComputedStyle(column);
+  return {
+    // in scrittura verticale l'altezza è la lunghezza della riga
+    size: title.offsetHeight,
+    room:
+      photo.getBoundingClientRect().height -
+      parseFloat(pad.paddingTop) -
+      parseFloat(pad.paddingBottom),
+  };
+}
+
+// La frase resta sempre su tre righe: se la più lunga ("LOOK unforgettable")
+// non entra, si rimpicciolisce tutta la frase allo stesso modo
+function measureQuote(quote: HTMLElement) {
+  const pad = getComputedStyle(quote);
+  const lines = quote.querySelectorAll<HTMLElement>("[data-line]");
+  return {
+    size: Math.max(...Array.from(lines, (line) => line.offsetWidth)),
+    room:
+      quote.clientWidth -
+      parseFloat(pad.paddingLeft) -
+      parseFloat(pad.paddingRight),
+  };
+}
+
 export default function Hero() {
   // la foto precedente resta piena sotto quella che entra in dissolvenza:
   // durante il passaggio non si vede mai il blocco colorato dietro
   const [{ slide, previous }, setSlides] = useState({ slide: 0, previous: -1 });
   const [adjective, setAdjective] = useState(0);
-  const [hasBranch, setHasBranch] = useState(false);
   // con meno movimento: prima foto e prima parola, ferme
   const reducedMotion = useReducedMotion();
   const activeSlide = reducedMotion ? 0 : slide;
   const previousSlide = reducedMotion ? -1 : previous;
   const activeAdjective = reducedMotion ? 0 : adjective;
+
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const quoteRef = useRef<HTMLParagraphElement>(null);
+  useFitText(titleRef, measureTitle);
+  useFitText(quoteRef, measureQuote);
 
   useEffect(() => {
     if (reducedMotion) return;
@@ -74,34 +110,22 @@ export default function Hero() {
     return () => clearInterval(id);
   }, [reducedMotion]);
 
-  // Branch c'è solo se il file è in public/fonts/ (non versionato):
-  // il suo corsivo simulato chiede un altro allineamento (vedi CSS)
-  useEffect(() => {
-    document.fonts
-      .load('1em "Branch"')
-      .then((faces) => setHasBranch(faces.length > 0))
-      .catch(() => {}); // file assente: resta Instrument Serif
-  }, []);
-
   return (
     <section className={styles.hero}>
       {/* Riga 1: testo verticale a sinistra (23%) + slideshow (77%) */}
       <div className={styles.rowOne}>
         <div className={styles.verticalText}>
-          <h1
-            className={styles.verticalTitle}
-            data-font={hasBranch ? "branch" : undefined}
-          >
-            <em className={`${styles.titleLine} ${styles.titleWelcome}`}>
+          <h1 ref={titleRef} className={styles.verticalTitle}>
+            <span className={`${styles.titleLine} ${styles.titleWelcome}`}>
               Welcome to
-            </em>
+            </span>
             <span className={`${styles.titleLine} ${styles.titleName}`}>
               Elisa Massetti Photo
             </span>
           </h1>
         </div>
 
-        {/* Dietro alla foto c'è il blocco del colore di stagione (CSS) */}
+        {/* Dietro alla foto c'è il blocco espresso (CSS) */}
         <div className={styles.slideshow}>
           {SLIDES.map((photo, i) => (
             <img
@@ -132,23 +156,28 @@ export default function Hero() {
           />
         </div>
 
-        {/* Al massimo due righe: la parola che cambia resta in fondo */}
-        <p className={styles.quote}>
-          <span className={styles.quoteLine}>Images that make you</span>{" "}
-          <span className={styles.quoteLine}>
+        {/* Sempre tre righe, a capo fissi */}
+        <p ref={quoteRef} className={styles.quote}>
+          <span className={styles.quoteLine} data-line>
+            Images that
+          </span>{" "}
+          <span className={styles.quoteLine} data-line>
+            make you
+          </span>{" "}
+          <span className={styles.quoteLine} data-line>
             look{" "}
             {/* le tre parole stanno nella stessa cella: lo spazio è sempre
                 quello della più lunga, così il testo non si sposta mai */}
             <span className={styles.adjectiveSlot}>
               {ADJECTIVES.map((word, i) => (
-                <em
+                <span
                   key={word}
                   className={styles.adjective}
                   data-active={i === activeAdjective}
                   aria-hidden={i !== activeAdjective}
                 >
                   {word}
-                </em>
+                </span>
               ))}
             </span>
           </span>

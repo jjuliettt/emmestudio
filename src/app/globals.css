@@ -1,41 +1,39 @@
-/* Palette: espresso per tutti i testi (mai nero puro), crema per il fondo
-   pagina, beige per le fasce About e Reviews */
+/* Palette: espresso per tutti i testi ed è l'unico colore d'accento (mai
+   nero puro), crema per il fondo pagina e per i testi su marrone, beige
+   per header, About e Reviews */
 :root {
   --espresso: #3b2a22;
   --cream: #faf4f0;
-  --beige: #efe4da;
-  /* Grana statica: solo sulle superfici del colore di stagione, come
-     strato di sfondo (mai sopra testi o foto) */
-  --grain: url("/textures/grain.svg");
-  /* Colore di stagione. data-season su <html> lo mette lo script in
-     <head> prima del primo disegno (vedi src/lib/season.ts) */
-  --accent: #a13d2d;
+  --beige: #f7eee7;
+
+  /* Font: Calgary per quasi tutto, Constane (corsivo) per gli aggettivi,
+     le recensioni e "work together?", Quicksand solo per il menu */
+  --font-main: "Calgary", Georgia, "Times New Roman", serif;
+  --font-script: "Constane", "Snell Roundhand", cursive;
+  --font-menu: var(--font-quicksand), system-ui, sans-serif;
+  /* il font scritto a mano comprato: finché non arriva, Constane */
+  --font-hand: var(--font-script);
+
+  /* Calgary ha solo il Regular: dove serve il grassetto si usa
+     font-weight: 700 più questo tratto (-webkit-text-stroke). Se arriva un
+     vero Bold, aggiungere la sua @font-face con font-weight 700 e mettere
+     qui 0. */
+  --bold-stroke: 0.4px;
 }
 
-:root[data-season="autumn"] {
-  --accent: #a13d2d;
-}
-
-:root[data-season="winter"] {
-  --accent: #3e5c76;
-}
-
-:root[data-season="spring"] {
-  --accent: #5e7044;
-}
-
-:root[data-season="summer"] {
-  --accent: #a9532a;
-}
-
-/* Prova locale del font del titolo in Hero: il file non è versionato
-   (vedi .gitignore). Se manca, il browser usa il font di riserva. */
+/* Font con licenza (file forniti da Elisa, in public/webfonts/). Se i file
+   mancano, il browser usa i font di riserva elencati sopra. */
 @font-face {
-  font-family: "Branch";
-  src: url("/fonts/branch.woff2") format("woff2"),
-    url("/fonts/branch.woff") format("woff"),
-    url("/fonts/branch.otf") format("opentype"),
-    url("/fonts/branch.ttf") format("truetype");
+  font-family: "Calgary";
+  src: url("/webfonts/calgary-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Constane";
+  src: url("/webfonts/constane-regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -52,14 +50,15 @@ body {
 }
 
 body {
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   color: var(--espresso);
   background: var(--cream);
-  font-family: var(--font-source-sans), system-ui, -apple-system, "Segoe UI",
-    Roboto, sans-serif;
+  font-family: var(--font-main);
   line-height: 1.5;
+  /* niente grassetto finto del browser (sfocato): solo il corsivo */
+  font-synthesis: style;
 }
 
 main {

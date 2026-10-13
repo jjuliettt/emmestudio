@@ -1,0 +1,74 @@
+/* ---------------------------------------------
+   Copertina di una categoria (home e /portfolio)
+--------------------------------------------- */
+
+.cover {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  /* le misure del testo (cqw) seguono la larghezza della copertina */
+  container-type: inline-size;
+  background-color: var(--beige);
+  color: var(--cream);
+}
+
+.photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Velatura scura uniforme per leggere il testo crema (espresso, non nero) */
+.cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgb(59 42 34 / 0.35);
+}
+
+/* Cornice sottile crema, rientrata dal bordo, senza riempimento */
+.frame {
+  position: absolute;
+  z-index: 1;
+  inset: 13px;
+  border: 1px solid var(--cream);
+}
+
+.text {
+  position: absolute;
+  z-index: 2;
+  inset: 13px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3.5cqw;
+  padding: 0 1rem;
+  text-align: center;
+  font-family: var(--font-main);
+}
+
+/* Calgary in grassetto, grande */
+.name {
+  font-weight: 700;
+  -webkit-text-stroke: var(--bold-stroke) currentColor;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 10cqw;
+  line-height: 1.05;
+}
+
+.nameLine {
+  display: block;
+}
+
+.byline {
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 3.1cqw;
+  line-height: 1.3;
+}

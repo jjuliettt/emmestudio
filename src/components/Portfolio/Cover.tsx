@@ -1,50 +1,33 @@
 import Link from "next/link";
 import type { PortfolioCategory } from "@/lib/portfolioCategories";
-import styles from "./Portfolio.module.css";
+import styles from "./Cover.module.css";
+
+// Riga piccola sotto il nome della categoria
+const BYLINE = "2026 — Elisa Massetti";
 
 type Props = {
   category: PortfolioCategory;
-  year: string;
-  byline: string;
-  // per le copie nascoste del carosello in loop (vedi Portfolio.tsx)
-  hidden?: boolean;
 };
 
-// Una copertina: foto, testata, soggetto scontornato (se c'è) e le due
-// righe in basso. Condivisa dal carosello in home e dalla pagina /portfolio.
-export default function Cover({ category, year, byline, hidden }: Props) {
-  const words = category.title.split(" ");
-  // la parola più lunga riempie la larghezza della copertina
-  const chars = Math.max(...words.map((word) => word.length));
-
+// Una copertina: foto velata, cornice sottile rientrata e il nome della
+// categoria al centro. Condivisa dalla home e dalla pagina /portfolio.
+export default function Cover({ category }: Props) {
   return (
-    <Link
-      href={category.href}
-      className={styles.cover}
-      data-card
-      aria-hidden={hidden || undefined}
-      tabIndex={hidden ? -1 : undefined}
-    >
+    <Link href={category.href} className={styles.cover}>
       <img src={category.src} alt={category.alt} className={styles.photo} />
 
-      <span
-        className={styles.masthead}
-        style={{ "--chars": chars } as React.CSSProperties}
-      >
-        {words.map((word) => (
-          <span key={word} className={styles.mastheadLine}>
-            {word}
-          </span>
-        ))}
-      </span>
+      <span className={styles.frame} aria-hidden="true" />
 
-      {category.cutout && (
-        <img src={category.cutout} alt="" className={styles.cutout} />
-      )}
-
-      <span className={styles.coverLines}>
-        <span className={styles.coverKicker}>{year}</span>
-        <span className={styles.coverName}>{byline}</span>
+      <span className={styles.text}>
+        {/* una parola per riga: "Small Businesses" va su due righe */}
+        <span className={styles.name}>
+          {category.title.split(" ").map((word) => (
+            <span key={word} className={styles.nameLine}>
+              {word}
+            </span>
+          ))}
+        </span>
+        <span className={styles.byline}>{BYLINE}</span>
       </span>
     </Link>
   );

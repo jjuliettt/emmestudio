@@ -7,21 +7,11 @@
 .booking {
   background-color: var(--cream);
   color: var(--espresso);
-  padding: 3.75rem 0;
+  padding: 2rem 0;
 }
 
 .frame {
   position: relative;
-}
-
-/* "get in touch" a cavallo del bordo superiore della finestra */
-.label {
-  position: absolute;
-  z-index: 2;
-  top: 0;
-  left: 0.5rem;
-  transform: translateY(-62%) rotate(-4deg);
-  transform-origin: left center;
 }
 
 .window {
@@ -45,7 +35,7 @@
 
 /* ---------- Riquadro di testo ---------- */
 
-/* Variante A: colore di stagione con la grana, testi crema */
+/* Espresso, compatto; testi e sottolineature crema */
 .box {
   position: absolute;
   top: 50%;
@@ -53,59 +43,49 @@
   transform: translate(-50%, -50%);
   width: max-content;
   max-width: calc(100% - 2.5rem);
-  background: var(--grain), var(--accent);
+  padding: 0.75rem 1.1rem 0.8rem;
+  background-color: var(--espresso);
   color: var(--cream);
   text-align: center;
-  line-height: 1.2;
-  gap: 2vw;
-    display: flex;
-    flex-direction: column;
-    padding: 5vw
+  line-height: 1.15;
 }
 
-.ask {
-  margin: 0;
-  font-family: var(--font-source-sans), system-ui, sans-serif;
+/* "WANT TO", "GET IN TOUCH", "SEE PRICES": Calgary in grassetto, piccolo */
+.ask,
+.link {
+  font-family: var(--font-main);
+  font-weight: 700;
+  -webkit-text-stroke: var(--bold-stroke) currentColor;
   text-transform: uppercase;
   letter-spacing: 0.14em;
   font-size: 0.72rem;
 }
 
-.ask em {
-  font-family: var(--font-instrument-serif), Georgia, serif;
+.ask {
+  margin: 0;
+}
+
+/* "work together?": Constane minuscolo, stessa dimensione */
+.script {
+  font-family: var(--font-script);
+  font-weight: 400;
+  -webkit-text-stroke: 0;
   text-transform: none;
   letter-spacing: 0;
-  font-size: 1.55em;
 }
 
 .links {
   display: flex;
   justify-content: center;
-  gap: 1.25rem;
-  margin: 0.45rem 0 0;
-  flex-direction: column;
+  gap: 1.1rem;
+  margin: 0.55rem 0 0;
 }
 
 .link {
-  font-family: var(--font-source-sans), system-ui, sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  font-size: 0.66rem;
   text-decoration: underline;
   text-decoration-color: currentColor;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.35em;
-}
-
-/* Variante B (?style=boldest): riquadro crema senza grana, testi
-   espresso e sottolineature del colore di stagione */
-:global(html[data-style="boldest"]) .box {
-  background: var(--cream);
-  color: var(--espresso);
-}
-
-:global(html[data-style="boldest"]) .link {
-  text-decoration-color: var(--accent);
 }
 
 /* ---------------------------------------------
@@ -114,7 +94,7 @@
 
 @media (min-width: 768px) {
   .booking {
-    padding: 5rem 3rem;
+    padding: 3rem;
   }
 
   .frame {

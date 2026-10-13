@@ -1,41 +1,39 @@
 /* ---------------------------------------------
    About — mobile first
-   Una colonna: etichetta, saluto, foto 3:2 con la firma, descrizione
+   Una colonna: saluto, foto 3:2 con la firma, descrizione
 --------------------------------------------- */
 
 .about {
   background-color: var(--beige);
   color: var(--espresso);
-  padding: 2.5rem 1.25rem 3.5rem;
+  padding: 2rem 0;
 }
 
-.label {
-  /* in alto a sinistra, un po' fuori dal margine */
-  margin: 0 0 1.25rem -0.25rem;
-  transform-origin: left center;
-}
+/* ---------- Saluto ---------- */
 
-/* ---------- Saluto, su una riga sola ---------- */
-
-/* "Ciao! I'm Elisa Massetti, and" nel font del "Ciao!" di prima (Source
-   Sans, maiuscoletto), con una dimensione e una spaziatura via di mezzo
-   tra quella del "Ciao!" (0.72rem, 0.24em) e quella del vecchio "I'm
-   Elisa Massetti, and" (clamp(1.35rem, 6.4vw, 1.75rem), 0.08em) */
+/* Calgary in grassetto, maiuscolo piccolo: margini laterali più larghi di
+   quelli della foto */
 .greeting {
-  margin: 0;
-  font-family: var(--font-source-sans), system-ui, sans-serif;
+  margin: 0 2.5rem;
+  font-family: var(--font-main);
+  font-weight: 700;
+  -webkit-text-stroke: var(--bold-stroke) currentColor;
   text-transform: uppercase;
-  letter-spacing: 0.16em;
-  font-size: clamp(1.03rem, 3.5vw, 1.23rem);
-  line-height: 1.25;
+  letter-spacing: 0.14em;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.nowrap {
+  white-space: nowrap;
 }
 
 /* ---------- Foto + firma ---------- */
 
 .photo {
   position: relative;
-  /* spazio per la firma che esce sopra la foto */
-  margin-top: 2.75rem;
+  margin: 1.6rem 1.25rem 0;
 }
 
 .image {
@@ -45,26 +43,52 @@
   object-fit: cover;
 }
 
+/* La firma: metà della larghezza della foto, un po' fuori e un po' sopra
+   l'angolo in alto a sinistra. multiply fa sparire un eventuale fondo
+   bianco del file. */
 .signature {
   position: absolute;
   top: 0;
   left: -0.5rem;
-  transform: translateY(-58%) rotate(-6deg);
+  width: 50%;
+  height: auto;
+  transform: translateY(-55%) rotate(-4deg);
   transform-origin: left center;
-  font-family: var(--font-allura), cursive;
-  font-size: clamp(2.1rem, 9.5vw, 2.6rem);
+  mix-blend-mode: multiply;
+}
+
+/* Finché non c'è il file: il nome nel corsivo del sito, stessa posizione */
+.signatureStandIn {
+  position: absolute;
+  top: 0;
+  left: -0.5rem;
+  transform: translateY(-58%) rotate(-4deg);
+  transform-origin: left center;
+  font-family: var(--font-script);
+  font-size: clamp(1.8rem, 8.5vw, 2.4rem);
   line-height: 1;
   white-space: nowrap;
-  color: var(--espresso);
 }
 
 /* ---------- Descrizione ---------- */
 
+/* Calgary, giustificato con la sillabazione automatica (lang="en") */
 .description {
-  margin: 1.5rem 0 0;
-  font-family: var(--font-source-sans), system-ui, sans-serif;
+  margin: 1.25rem 1.25rem 0;
+  font-family: var(--font-main);
   font-size: 0.97rem;
   line-height: 1.5;
+  text-align: justify;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.description p {
+  margin: 0;
+}
+
+.description p + p {
+  margin-top: 0.75em;
 }
 
 /* ---------------------------------------------
@@ -73,7 +97,7 @@
 
 @media (min-width: 768px) {
   .about {
-    padding: 4rem 3rem 5rem;
+    padding: 3rem 3rem;
   }
 
   .about > * {

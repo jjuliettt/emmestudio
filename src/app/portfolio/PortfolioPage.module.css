@@ -1,40 +1,45 @@
 /* ---------------------------------------------
    Pagina Portfolio — mobile first
-   Hero introduttiva + le copertine di "my work", una sotto l'altra
+   Titolo + le tre copertine una sotto l'altra (le stesse della home)
 --------------------------------------------- */
 
-.hero {
+.page {
   background-color: var(--cream);
   color: var(--espresso);
-  padding: 3.5rem 1.25rem 2.5rem;
-  text-align: center;
+  padding: 2rem 1.25rem;
 }
 
-.kicker {
-  margin: 0;
-  font-family: var(--font-source-sans), system-ui, sans-serif;
+/* Calgary in grassetto, maiuscolo spaziato */
+.title {
+  margin: 0 0 1.5rem;
+  font-family: var(--font-main);
+  font-weight: 700;
+  -webkit-text-stroke: var(--bold-stroke) currentColor;
   text-transform: uppercase;
   letter-spacing: 0.24em;
-  font-size: 0.72rem;
-  color: rgb(59 42 34 / 0.7);
+  font-size: 1.15rem;
+  line-height: 1.2;
+  text-align: center;
 }
-
-.title {
-  margin: 0.35rem 0 0;
-  font-family: var(--font-instrument-serif), Georgia, serif;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: clamp(2.1rem, 11vw, 2.75rem);
-  line-height: 1.1;
-}
-
-/* ---------- Copertine, una sotto l'altra ---------- */
 
 .list {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  padding: 0 1.25rem 3.5rem;
-  /* le misure del testo nelle copertine (cqw) seguono la loro larghezza */
-  container-type: inline-size;
+  gap: 1.125rem;
+}
+
+/* ---------------------------------------------
+   Tablet / desktop (non ancora rifinito)
+--------------------------------------------- */
+
+@media (min-width: 768px) {
+  .page {
+    padding: 3rem;
+  }
+
+  .page > * {
+    max-width: 30rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }

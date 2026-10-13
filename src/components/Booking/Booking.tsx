@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
-import SectionLabel from "@/components/SectionLabel/SectionLabel";
 import { useReducedMotion } from "@/lib/useReducedMotion";
 import styles from "./Booking.module.css";
 
@@ -67,15 +66,13 @@ export default function Booking({ photoSrc = DEFAULT_PHOTO_SRC }: Props) {
   return (
     <section className={styles.booking}>
       <div className={styles.frame}>
-        <SectionLabel className={styles.label}>get in touch</SectionLabel>
-
         {/* Finestra quadrata: la foto ci scorre dietro */}
         <div ref={windowRef} className={styles.window}>
           <img ref={photoRef} src={photoSrc} alt="" className={styles.photo} />
 
           <div className={styles.box}>
             <p className={styles.ask}>
-              Want to <em>work together</em>?
+              Want to <span className={styles.script}>work together?</span>
             </p>
             <p className={styles.links}>
               <Link href="/contacts" className={styles.link}>

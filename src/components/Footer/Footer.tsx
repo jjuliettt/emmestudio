@@ -24,8 +24,9 @@ export default function Footer() {
         <Dot className={styles.rowsDot} />
 
         <p className={styles.line}>
+          {/* testo corto: il footer su mobile deve stare su due righe */}
           <Link href="/privacy-policy" className={styles.link}>
-            Privacy Policy &amp; Legal Notice
+            Privacy &amp; Legal
           </Link>
           <Dot />
           {/* Aprirà il pannello delle preferenze cookie, una volta integrato */}

@@ -7,13 +7,15 @@
   /* quanto il blocco colorato sporge a sinistra e in basso dalla foto */
   --block-offset: 14px;
   /* quanto la riga 2 sale sulla foto 1 */
-  --overlap: 6%;
+  --overlap: calc(6% + 10px);
   background-color: var(--cream);
   width: 100%;
-  /* micro spazio tra header e hero */
-  padding-top: 0.75rem;
-  padding-bottom: 3rem;
+  /* un po' d'aria tra header e collage */
+  padding-top: 1.5rem;
+  padding-bottom: 2rem;
   color: var(--espresso);
+  /* niente scroll orizzontale se un testo sborda prima di essere adattato */
+  overflow-x: clip;
 }
 
 /* ---------- Riga 1: testo verticale + slideshow ---------- */
@@ -41,16 +43,14 @@
 
 .verticalTitle {
   margin: 0;
-  /* "Branch" viene usato solo se il file è presente in public/fonts/
-     (vedi globals.css), altrimenti si ricade su Instrument Serif. */
-  font-family: "Branch", var(--font-instrument-serif), Georgia, serif;
+  font-family: var(--font-main);
   writing-mode: vertical-rl;
   transform: rotate(180deg);
   white-space: nowrap;
   font-weight: 400;
-  /* con la spaziatura tra le lettere il titolo è più lungo: un po' più
-     piccolo, per stare accanto alla foto 3:2 sopra la riga 2 */
-  font-size: min(4.85vw, 1.9rem);
+  /* --fit (≤ 1) lo mette Hero.tsx se il titolo è più lungo della foto:
+     si rimpicciolisce il font, mai la spaziatura tra le lettere */
+  font-size: calc(min(4.85vw, 1.9rem) * var(--fit, 1));
   line-height: 0.8;
   letter-spacing: 0;
   color: var(--espresso);
@@ -61,26 +61,17 @@
   display: block;
 }
 
+/* Calgary in grassetto (tratto, vedi --bold-stroke in globals.css) */
 .titleWelcome {
-  font-style: italic;
-  /* il corsivo si stringe se troppo spaziato: aria leggera */
+  font-weight: 700;
+  -webkit-text-stroke: var(--bold-stroke) currentColor;
   letter-spacing: 0.04em;
-  /* la "W" corsiva parte più avanti della "E" di Elisa: la riporta
-     allineata (misurato su Instrument Serif) */
-  margin-inline-start: -0.07em;
   /* aria tra le due righe, così non si toccano */
   margin-block-end: 0.3em;
 }
 
 .titleName {
   letter-spacing: 0.1em;
-}
-
-/* Con Branch il corsivo è simulato dal browser e sposta di più la "W"
-   (misurato sul font). data-font viene messo da Hero.tsx solo se il
-   file di Branch è stato caricato. */
-.verticalTitle[data-font="branch"] .titleWelcome {
-  margin-inline-start: -0.15em;
 }
 
 /* Slideshow in crossfade, nessun indicatore. Foto orizzontale 3:2,
@@ -93,8 +84,8 @@
   aspect-ratio: 3 / 2;
 }
 
-/* Blocco del colore di stagione, grande come la foto e spostato in basso
-   a sinistra: ne spunta una striscia. La grana è uno strato di sfondo. */
+/* Blocco espresso, grande come la foto e spostato in basso a sinistra:
+   ne spunta una striscia */
 .slideshow::before {
   content: "";
   position: absolute;
@@ -104,7 +95,7 @@
     calc(-1 * var(--block-offset)),
     var(--block-offset)
   );
-  background: var(--grain), var(--accent);
+  background-color: var(--espresso);
 }
 
 .slide {
@@ -172,24 +163,30 @@
 
 /* ---------- Frase ---------- */
 
+/* Calgary in grassetto maiuscolo; --fit (≤ 1) lo mette Hero.tsx se la
+   riga più lunga non entra: si rimpicciolisce tutta la frase */
 .quote {
   /* colonna 2: il margine in alto la centra sulla foto 3 */
   flex: 1;
   min-width: 0;
-  margin: calc(9% + 28px) 0 0;
+  margin: calc(9% + 14px) 0 0;
   padding: 0 1.5% 0 2.5%;
   text-align: left;
-  font-family: var(--font-source-sans), system-ui, sans-serif;
+  font-family: var(--font-main);
+  font-weight: 700;
+  -webkit-text-stroke: var(--bold-stroke) currentColor;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   line-height: 1.18;
-  font-size: 2.8vw;
+  font-size: calc(3.6vw * var(--fit, 1));
   color: var(--espresso);
 }
 
-/* due righe esatte, mai a capo dentro una riga */
+/* tre righe esatte, mai a capo dentro una riga (larghe quanto il testo,
+   così Hero.tsx può misurarle) */
 .quoteLine {
   display: block;
+  width: max-content;
   white-space: nowrap;
 }
 
@@ -199,14 +196,15 @@
   display: inline-grid;
 }
 
+/* Constane minuscolo, stessa dimensione del resto della frase */
 .adjective {
   grid-area: 1 / 1;
-  font-family: var(--font-instrument-serif), Georgia, serif;
-  font-style: italic;
+  font-family: var(--font-script);
+  font-weight: 400;
+  -webkit-text-stroke: 0;
   text-transform: none;
   letter-spacing: 0;
-  font-size: 1.6em;
-  color: var(--accent);
+  color: var(--espresso);
   opacity: 0;
   transition: opacity 0.45s ease-in-out;
 }
@@ -227,7 +225,7 @@
   }
 
   .quote {
-    font-size: clamp(0.8rem, 1.1vw, 1rem);
+    font-size: calc(clamp(0.8rem, 1.3vw, 1.1rem) * var(--fit, 1));
   }
 }
 
