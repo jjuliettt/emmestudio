@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import Cover from "@/components/Portfolio/Cover";
+import CoverList from "@/components/Portfolio/CoverList";
 import Booking from "@/components/Booking/Booking";
-import { PORTFOLIO_CATEGORIES } from "@/lib/portfolioCategories";
 import styles from "./PortfolioPage.module.css";
 
 // Titolo della scheda: "Portfolio | Emme Studio" (modello in layout.tsx)
@@ -20,11 +19,7 @@ export default function PortfolioPage() {
       <section className={styles.page}>
         <h1 className={styles.title}>Portfolio</h1>
 
-        <div className={styles.list}>
-          {PORTFOLIO_CATEGORIES.map((category) => (
-            <Cover key={category.href} category={category} />
-          ))}
-        </div>
+        <CoverList />
       </section>
 
       <Booking photoSrc={BOOKING_PHOTO_SRC} />

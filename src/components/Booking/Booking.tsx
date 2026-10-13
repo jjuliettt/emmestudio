@@ -72,7 +72,7 @@ export default function Booking({ photoSrc = DEFAULT_PHOTO_SRC }: Props) {
 
           <div className={styles.box}>
             <p className={styles.ask}>
-              Want to <span className={styles.script}>work together?</span>
+              Want to <em>work together</em>?
             </p>
             <p className={styles.links}>
               <Link href="/contacts" className={styles.link}>

@@ -17,3 +17,16 @@ export const menuSans = localFont({
   ],
   variable: "--font-quicksand",
 });
+
+// Scrittura a mano (font libero OFL) per la riga sopra le copertine del
+// portfolio: sta al posto del font scritto a mano che verrà comprato
+export const handwriting = localFont({
+  src: [
+    {
+      path: "./fonts/HerrVonMuellerhoff-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+  ],
+  variable: "--font-handwriting",
+});

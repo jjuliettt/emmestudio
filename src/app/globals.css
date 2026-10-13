@@ -11,14 +11,9 @@
   --font-main: "Calgary", Georgia, "Times New Roman", serif;
   --font-script: "Constane", "Snell Roundhand", cursive;
   --font-menu: var(--font-quicksand), system-ui, sans-serif;
-  /* il font scritto a mano comprato: finché non arriva, Constane */
-  --font-hand: var(--font-script);
-
-  /* Calgary ha solo il Regular: dove serve il grassetto si usa
-     font-weight: 700 più questo tratto (-webkit-text-stroke). Se arriva un
-     vero Bold, aggiungere la sua @font-face con font-weight 700 e mettere
-     qui 0. */
-  --bold-stroke: 0.4px;
+  /* il font scritto a mano comprato: finché non arriva, Herr Von
+     Muellerhoff (libero), che sembra una vera scrittura a mano */
+  --font-hand: var(--font-handwriting), cursive;
 }
 
 /* Font con licenza (file forniti da Elisa, in public/webfonts/). Se i file
@@ -59,6 +54,20 @@ body {
   line-height: 1.5;
   /* niente grassetto finto del browser (sfocato): solo il corsivo */
   font-synthesis: style;
+}
+
+/* Per ora niente grassetto da nessuna parte, neanche nei titoli (si
+   rivede quando arrivano i font definitivi) */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+b,
+strong,
+th {
+  font-weight: 400;
 }
 
 main {

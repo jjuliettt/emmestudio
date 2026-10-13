@@ -35,7 +35,8 @@
 
 /* ---------- Riquadro di testo ---------- */
 
-/* Espresso, compatto; testi e sottolineature crema */
+/* Impaginazione di Giulia (colonna, link uno sotto l'altro), da non
+   cambiare; colori e font sono quelli attuali del sito */
 .box {
   position: absolute;
   top: 50%;
@@ -43,45 +44,46 @@
   transform: translate(-50%, -50%);
   width: max-content;
   max-width: calc(100% - 2.5rem);
-  padding: 0.75rem 1.1rem 0.8rem;
   background-color: var(--espresso);
   color: var(--cream);
   text-align: center;
-  line-height: 1.15;
+  line-height: 1.2;
+  gap: 2vw;
+  display: flex;
+  flex-direction: column;
+  padding: 5vw;
 }
 
-/* "WANT TO", "GET IN TOUCH", "SEE PRICES": Calgary in grassetto, piccolo */
-.ask,
-.link {
+.ask {
+  margin: 0;
   font-family: var(--font-main);
-  font-weight: 700;
-  -webkit-text-stroke: var(--bold-stroke) currentColor;
   text-transform: uppercase;
   letter-spacing: 0.14em;
   font-size: 0.72rem;
 }
 
-.ask {
-  margin: 0;
-}
-
-/* "work together?": Constane minuscolo, stessa dimensione */
-.script {
+/* "work together": Constane (è già un corsivo, niente inclinazione finta) */
+.ask em {
   font-family: var(--font-script);
-  font-weight: 400;
-  -webkit-text-stroke: 0;
+  font-style: normal;
   text-transform: none;
   letter-spacing: 0;
+  font-size: 1.55em;
 }
 
 .links {
   display: flex;
   justify-content: center;
-  gap: 1.1rem;
-  margin: 0.55rem 0 0;
+  gap: 1.25rem;
+  margin: 0.45rem 0 0;
+  flex-direction: column;
 }
 
 .link {
+  font-family: var(--font-main);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.66rem;
   text-decoration: underline;
   text-decoration-color: currentColor;
   text-decoration-thickness: 1px;

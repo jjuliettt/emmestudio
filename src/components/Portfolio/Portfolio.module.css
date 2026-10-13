@@ -1,7 +1,6 @@
 /* ---------------------------------------------
    Portfolio — mobile first
-   Tre copertine una sotto l'altra (vedi Cover), stessi margini della foto
-   dell'About
+   Riga scritta a mano e copertine (vedi CoverList), poi il link
 --------------------------------------------- */
 
 .portfolio {
@@ -10,33 +9,11 @@
   padding: 2rem 1.25rem;
 }
 
-/* Riga scritta a mano, appena sopra la prima copertina: le code delle
-   lettere entrano di ~12px nella foto */
-.intro {
-  position: relative;
-  z-index: 1;
-  width: max-content;
-  margin: 0 0 -0.75rem 0.35rem;
-  font-family: var(--font-hand);
-  font-weight: 400;
-  font-size: 1.875rem;
-  line-height: 1;
-  color: var(--espresso);
-  transform: rotate(-3deg);
-  transform-origin: left bottom;
-}
-
-.list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.125rem;
-}
-
 /* ---------- Link sotto le copertine ---------- */
 
 .viewAll {
   display: table;
-  margin: 1.5rem auto 0;
+  margin: 2rem auto 0;
   font-family: var(--font-main);
   text-transform: uppercase;
   letter-spacing: 0.2em;

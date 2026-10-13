@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import { LICENSED_FONTS, publicFileExists } from "@/lib/publicFiles";
-import { menuSans } from "./fonts";
+import { handwriting, menuSans } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -21,7 +21,10 @@ export default function RootLayout({
   const fonts = LICENSED_FONTS.filter(publicFileExists);
 
   return (
-    <html lang="en" className={menuSans.variable}>
+    <html
+      lang="en"
+      className={`${menuSans.variable} ${handwriting.variable}`}
+    >
       <head>
         {fonts.map((href) => (
           <link

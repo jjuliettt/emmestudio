@@ -13,9 +13,7 @@
   margin: 0 0 0.35rem;
   text-align: center;
   font-family: var(--font-main);
-  /* Calgary in grassetto (tratto, vedi --bold-stroke in globals.css) */
-  font-weight: 700;
-  -webkit-text-stroke: var(--bold-stroke) currentColor;
+  font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   font-size: clamp(2.1rem, 9vw, 3.2rem);
@@ -54,8 +52,7 @@
 .heading {
   margin: 0 0 0.6rem;
   font-family: var(--font-main);
-  font-weight: 700;
-  -webkit-text-stroke: var(--bold-stroke) currentColor;
+  font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   font-size: 0.92rem;

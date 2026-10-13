@@ -1,6 +1,6 @@
 /* ---------------------------------------------
    Pagina Portfolio — mobile first
-   Titolo + le tre copertine una sotto l'altra (le stesse della home)
+   Titolo + riga scritta a mano e copertine (CoverList, le stesse della home)
 --------------------------------------------- */
 
 .page {
@@ -9,23 +9,16 @@
   padding: 2rem 1.25rem;
 }
 
-/* Calgary in grassetto, maiuscolo spaziato */
+/* Calgary, maiuscolo spaziato */
 .title {
-  margin: 0 0 1.5rem;
+  margin: 0 0 2.75rem;
   font-family: var(--font-main);
-  font-weight: 700;
-  -webkit-text-stroke: var(--bold-stroke) currentColor;
   text-transform: uppercase;
+  font-weight: 400;
   letter-spacing: 0.24em;
   font-size: 1.15rem;
   line-height: 1.2;
   text-align: center;
-}
-
-.list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.125rem;
 }
 
 /* ---------------------------------------------

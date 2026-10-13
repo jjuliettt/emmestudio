@@ -11,13 +11,11 @@
 
 /* ---------- Saluto ---------- */
 
-/* Calgary in grassetto, maiuscolo piccolo: margini laterali più larghi di
-   quelli della foto */
+/* Calgary, maiuscolo piccolo: margini laterali più larghi di quelli della
+   foto */
 .greeting {
   margin: 0 2.5rem;
   font-family: var(--font-main);
-  font-weight: 700;
-  -webkit-text-stroke: var(--bold-stroke) currentColor;
   text-transform: uppercase;
   letter-spacing: 0.14em;
   font-size: 0.78rem;
@@ -33,7 +31,8 @@
 
 .photo {
   position: relative;
-  margin: 1.6rem 1.25rem 0;
+  /* sopra resta lo spazio per la parte alta della firma */
+  margin: 4rem 1.25rem 0;
 }
 
 .image {
@@ -43,18 +42,18 @@
   object-fit: cover;
 }
 
-/* La firma: metà della larghezza della foto, un po' fuori e un po' sopra
-   l'angolo in alto a sinistra. multiply fa sparire un eventuale fondo
-   bianco del file. */
+/* La firma (PNG trasparente, inchiostro espresso): poco più di metà della
+   foto, a cavallo dell'angolo in alto a sinistra, leggera. "Elisa" resta
+   sopra la foto, "Massetti" passa sul bordo */
 .signature {
   position: absolute;
   top: 0;
-  left: -0.5rem;
-  width: 50%;
+  left: -0.75rem;
+  width: 56%;
   height: auto;
-  transform: translateY(-55%) rotate(-4deg);
-  transform-origin: left center;
-  mix-blend-mode: multiply;
+  transform: translateY(-68%);
+  opacity: 0.8;
+  pointer-events: none;
 }
 
 /* Finché non c'è il file: il nome nel corsivo del sito, stessa posizione */
@@ -104,5 +103,9 @@
     max-width: 40rem;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  .photo {
+    margin-top: 6.25rem;
   }
 }
