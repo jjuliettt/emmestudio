@@ -6,10 +6,11 @@
   --cream: #faf4f0;
   --beige: #f7eee7;
 
-  /* Font: Calgary per quasi tutto, Constane (corsivo) per gli aggettivi,
-     le recensioni e "work together?", Quicksand solo per il menu */
+  /* Font: Calgary per quasi tutto, Constanley (corsivo) per gli
+     aggettivi, le recensioni e "work together?", Quicksand per il menu e
+     le etichette piccole */
   --font-main: "Calgary", Georgia, "Times New Roman", serif;
-  --font-script: "Constane", "Snell Roundhand", cursive;
+  --font-script: "Constanley", "Snell Roundhand", cursive;
   --font-menu: var(--font-quicksand), system-ui, sans-serif;
   /* il font scritto a mano comprato: finché non arriva, Herr Von
      Muellerhoff (libero), che sembra una vera scrittura a mano */
@@ -27,8 +28,8 @@
 }
 
 @font-face {
-  font-family: "Constane";
-  src: url("/webfonts/constane-regular.woff2") format("woff2");
+  font-family: "Constanley";
+  src: url("/webfonts/constanley-regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;

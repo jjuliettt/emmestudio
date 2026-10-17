@@ -12,5 +12,5 @@ export function publicFileExists(href: string) {
 // sito usa i font di riserva e non li precarica.
 export const LICENSED_FONTS = [
   "/webfonts/calgary-regular.woff2",
-  "/webfonts/constane-regular.woff2",
+  "/webfonts/constanley-regular.woff2",
 ];

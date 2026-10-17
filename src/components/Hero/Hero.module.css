@@ -191,7 +191,7 @@
   display: inline-grid;
 }
 
-/* Constane minuscolo, stessa dimensione del resto della frase */
+/* Constanley minuscolo, stessa dimensione del resto della frase */
 .adjective {
   grid-area: 1 / 1;
   font-family: var(--font-script);

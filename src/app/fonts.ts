@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 // Font auto-ospitati: file .woff2 (sottoinsieme "latin") in ./fonts,
 // scaricati da Google Fonts invece di farli scaricare a next/font in build.
 //
-// Calgary e Constane (con licenza) non passano da qui: sono in
+// Calgary e Constanley (con licenza) non passano da qui: sono in
 // public/webfonts/ e dichiarati in globals.css, così basta aggiungere i file.
 
 // Solo per il menu a schermo intero
