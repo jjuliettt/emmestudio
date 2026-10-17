@@ -1,37 +1,26 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ContactForm from "@/components/Contact/ContactForm";
-import HandTitle from "@/components/HandTitle/HandTitle";
+import PageTitle from "@/components/PageTitle/PageTitle";
 import { EMAIL, INSTAGRAM } from "@/lib/contacts";
-import { publicFileExists } from "@/lib/publicFiles";
 import styles from "./ContactsPage.module.css";
 
-// Titolo della scheda: "Contacts | Emme Studio" (modello in layout.tsx)
+// Titolo della scheda: "Contacts | Elisa Massetti Photo" (modello in layout.tsx)
 export const metadata: Metadata = {
   title: "Contacts",
   description:
-    "Get in touch with Elisa Massetti, photographer based in Antwerp, working across Belgium.",
+    "Get in touch with Elisa Massetti, photographer working across Antwerp and Belgium.",
 };
 
-// Il ritratto di Elisa (4:5): basta metterlo in public/images/contacts/ con
-// uno di questi nomi. Finché manca, una foto segnaposto.
-const PORTRAIT_FILES = [
-  "/images/contacts/elisa.jpg",
-  "/images/contacts/elisa.webp",
-];
-const PORTRAIT_PLACEHOLDER = "https://placecats.com/millie/800/1000";
-
 export default function ContactsPage() {
-  const portrait = PORTRAIT_FILES.find(publicFileExists) ?? PORTRAIT_PLACEHOLDER;
-
   return (
     <>
       <section className={styles.intro}>
-        <HandTitle as="h1" lines={["Let’s talk."]} className={styles.title} />
-        <p className={styles.lead}>
-          Tell me what you have in mind. I usually reply within 1–2 working
-          days.
-        </p>
+        <PageTitle>Let’s talk</PageTitle>
+        <div className={styles.lead}>
+          <p>Tell me what you have in mind.</p>
+          <p>I usually reply within 1–2 working days.</p>
+        </div>
       </section>
 
       <section className={styles.formSection} aria-label="Contact form">
@@ -43,45 +32,37 @@ export default function ContactsPage() {
         <dl className={styles.details}>
           <div>
             <dt>Email</dt>
-            <dd>
-              <a href={`mailto:${EMAIL}`} className={styles.detailLink}>
-                {EMAIL}
-              </a>
-            </dd>
+            {/* solo testo finché il dominio non è comprato */}
+            <dd>{EMAIL}</dd>
           </div>
-          <div>
-            <dt>Instagram</dt>
-            <dd>
-              <a href={INSTAGRAM} className={styles.detailLink}>
-                Follow my work
-              </a>
-            </dd>
-          </div>
+          {INSTAGRAM && (
+            <div>
+              <dt>Instagram</dt>
+              <dd>
+                <a href={INSTAGRAM} className="u-link">
+                  Follow my work
+                </a>
+              </dd>
+            </div>
+          )}
           <div>
             <dt>Area</dt>
-            <dd>Based in Antwerp, working across Belgium.</dd>
-          </div>
-          <div>
-            <dt>Languages</dt>
-            <dd>Italian, English, German, Spanish.</dd>
+            <dd>Working across Antwerp and Belgium.</dd>
           </div>
         </dl>
       </section>
 
-      {/* ---------- Ritratto, frase finale, link ---------- */}
+      {/* ---------- Frase finale e link ---------- */}
       <section className={styles.closing}>
-        <figure className={styles.portrait}>
-          <img src={portrait} alt="Elisa Massetti" className={styles.photo} />
-          <span className={styles.frame} aria-hidden="true" />
-        </figure>
-
-        <p className={styles.closingLine}>I can&apos;t wait to hear your story.</p>
+        <p className={styles.closingLine}>
+          <span>I can’t wait to hear</span> <span>your story.</span>
+        </p>
 
         <p className={styles.links}>
-          <Link href="/prices" className={styles.link}>
+          <Link href="/prices" className={`u-link ${styles.link}`}>
             See prices
           </Link>
-          <Link href="/portfolio" className={styles.link}>
+          <Link href="/portfolio" className={`u-link ${styles.link}`}>
             See portfolio
           </Link>
         </p>

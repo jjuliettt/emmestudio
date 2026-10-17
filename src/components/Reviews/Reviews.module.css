@@ -21,42 +21,58 @@
 }
 
 .slide {
+  /* misure fisse del blocco di testo */
+  --quote-line: 1.85rem;
+  --author-line: 1.1rem;
+  --name-gap: 0.5rem;
   flex: 0 0 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.7rem;
   margin: 0;
   padding: 0 2rem;
 }
 
-/* Foto (o logo) rotonda e piccola */
+/* Foto (o logo) rotonda, uguale su ogni recensione */
 .photo {
-  width: 46px;
-  height: 46px;
+  flex: none;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   object-fit: cover;
+}
+
+/* Sempre alto come tre righe di citazione più il nome */
+.text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--name-gap);
+  min-height: calc(3 * var(--quote-line) + var(--name-gap) + var(--author-line));
 }
 
 .quote {
   margin: 0;
 }
 
-/* Constanley */
+/* Snell Roundhand */
 .quote p {
   margin: 0;
   max-width: 20rem;
   font-family: var(--font-script);
-  font-size: 1.35rem;
-  line-height: 1.25;
+  font-weight: 400;
+  letter-spacing: 0;
+  font-size: 1.45rem;
+  line-height: var(--quote-line);
 }
 
-/* Calgary, piccolo */
+/* Spectral 300, piccolo */
 .author {
   font-family: var(--font-main);
+  font-weight: 300;
   font-size: 0.75rem;
-  letter-spacing: 0.04em;
-  line-height: 1.3;
+  line-height: var(--author-line);
 }
 
 /* ---------- Indicatori ---------- */
@@ -65,7 +81,7 @@
   display: flex;
   justify-content: center;
   gap: 0.55rem;
-  margin-top: 0.9rem;
+  margin-top: 1.25rem;
 }
 
 .dot {
@@ -74,7 +90,7 @@
   padding: 0;
   border: 0;
   border-radius: 50%;
-  background-color: #d5c6b8;
+  background-color: var(--dot);
   cursor: pointer;
 }
 

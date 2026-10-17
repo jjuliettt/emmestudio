@@ -6,30 +6,41 @@ type Props = {
   category: PortfolioCategory;
 };
 
-// Stellina a quattro punte tra le parole piccole
-function Star() {
-  return (
-    <svg className={styles.star} viewBox="0 0 10 10" aria-hidden="true">
-      <path d="M5 0Q5.6 4.4 10 5Q5.6 5.6 5 10Q4.4 5.6 0 5Q4.4 4.4 5 0Z" />
-    </svg>
-  );
-}
-
 // "Events" -> ["EV", "EN", "TS"]
 function pairs(word: string) {
   return word.match(/.{1,2}/g) ?? [word];
 }
 
+// Sigillo: le parole girano lungo un cerchio (testo su tracciato SVG),
+// tra due cerchi sottili; textLength le distribuisce su tutto il giro
+function Seal({ words }: { words: string[] }) {
+  const text = words.map((word) => `${word.toUpperCase()} · `).join("");
+  return (
+    <svg className={styles.sealRing} viewBox="0 0 100 100" aria-hidden="true">
+      <defs>
+        <path id="seal-path" d="M50 13 a37 37 0 1 1 -0.01 0" />
+      </defs>
+      <circle cx="50" cy="50" r="44" className={styles.sealLine} />
+      <circle cx="50" cy="50" r="34" className={styles.sealLine} />
+      <text className={styles.sealText}>
+        <textPath href="#seal-path" textLength="232" lengthAdjust="spacing">
+          {text}
+        </textPath>
+      </text>
+    </svg>
+  );
+}
+
 function Lettering({ category }: Props) {
   const { title, lettering } = category;
 
-  if (lettering.kind === "classic") {
+  if (lettering.kind === "seal") {
     return (
-      <span className={styles.classic}>
-        <span className={styles.classicName}>{title}</span>
-        <span className={styles.classicSub}>{lettering.subline}</span>
-        <span className={styles.classicTiny}>
-          {lettering.tiny[0]} <Star /> {lettering.tiny[1]}
+      <span className={styles.seal}>
+        <Seal words={lettering.ring} />
+        <span className={styles.sealCenter}>
+          <span className={styles.sealScript}>{lettering.script}</span>
+          <span className={styles.title}>{title}</span>
         </span>
       </span>
     );
@@ -66,7 +77,7 @@ function Lettering({ category }: Props) {
     );
   }
 
-  const [first, ...rest] = title.split(" ");
+  // il nome su due righe ("SMALL" / "BUSINESSES"), della stessa misura
   return (
     <span className={styles.monogram}>
       <span className={styles.monogramTop}>
@@ -74,8 +85,11 @@ function Lettering({ category }: Props) {
         <span className={styles.monogramMark}>{lettering.mark}</span>
         <span className={styles.monogramFlank}>{lettering.flank[1]}</span>
       </span>
-      <span className={styles.monogramName}>{first}</span>
-      <span className={styles.monogramSub}>{rest.join(" ")}</span>
+      {title.split(" ").map((word) => (
+        <span key={word} className={styles.title}>
+          {word}
+        </span>
+      ))}
     </span>
   );
 }

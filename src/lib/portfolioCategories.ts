@@ -1,12 +1,13 @@
 // Scritta al centro della copertina, sul modello delle copertine di
 // alisabethdesigns.com (stile, non loghi né nomi):
-// - "classic": nome grande, riga spaziata sotto e una riga piccolissima
+// - "seal": il nome al centro di un sigillo rotondo, con le parole che
+//   girano intorno e una parola in corsivo sopra il nome
 // - "stacked": lettere grandi a coppie una sotto l'altra, etichette piccole
 //   ai lati e una parola in corsivo tra due righe sottili
-// - "monogram": un segno piccolo tra due parole, poi la prima parola grande
-//   e la seconda spaziata sotto
+// - "monogram": un segno in corsivo tra due parole, poi il nome su due
+//   righe della stessa misura
 export type CoverLettering =
-  | { kind: "classic"; subline: string; tiny: [string, string] }
+  | { kind: "seal"; ring: string[]; script: string }
   | { kind: "stacked"; labels: [string[], string[], string[]]; script: string }
   | { kind: "monogram"; mark: string; flank: [string, string] };
 
@@ -23,14 +24,14 @@ export type PortfolioCategory = {
 // Usate sia dalla home sia dalla pagina /portfolio.
 export const PORTFOLIO_CATEGORIES: PortfolioCategory[] = [
   {
-    title: "Portraits",
-    href: "/portfolio/portraits",
+    title: "Private",
+    href: "/portfolio/private",
     src: "https://placecats.com/neo/800/900",
-    alt: "Portraits cover",
+    alt: "Private sessions cover",
     lettering: {
-      kind: "classic",
-      subline: "Elisa Massetti",
-      tiny: ["2026", "Belgium"],
+      kind: "seal",
+      ring: ["Portraits", "Couples", "Families", "Just you"],
+      script: "sessions",
     },
   },
   {
@@ -45,7 +46,7 @@ export const PORTFOLIO_CATEGORIES: PortfolioCategory[] = [
         ["For", "every"],
         ["Big", "moment"],
       ],
-      script: "by elisa",
+      script: "by Elisa",
     },
   },
   {

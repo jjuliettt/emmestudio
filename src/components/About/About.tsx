@@ -1,34 +1,28 @@
 import { publicFileExists } from "@/lib/publicFiles";
 import styles from "./About.module.css";
 
-// Placeholder: foto di gattini, da sostituire con una foto reale (3:2).
-const PHOTO = {
-  src: "https://placecats.com/millie/1500/1000",
-  alt: "Elisa Massetti",
-};
-
-// La firma di Elisa (immagine con fondo trasparente): basta metterla in
-// public/images/about/ con uno di questi nomi. Finché manca, al suo posto
-// c'è il nome scritto nel corsivo del sito.
-const SIGNATURE_FILES = [
-  "/images/about/signature.svg",
-  "/images/about/signature.png",
-  "/images/about/signature.webp",
-];
+// File provvisori in public/assets/REPLACE-ME/: si sostituiscono con file
+// dallo stesso nome, senza toccare il codice (vedi il README lì dentro).
+// Foto 3:2: finché il file non c'è, resta la foto segnaposto di adesso.
+const PHOTO_FILE = "/assets/REPLACE-ME/REPLACE-ME_photo-elisa.jpg";
+const PHOTO_PLACEHOLDER = "https://placecats.com/millie/1500/1000";
+// Firma: PNG con fondo trasparente
+const SIGNATURE_FILE = "/assets/REPLACE-ME/REPLACE-ME_signature.png";
 
 export default function About() {
-  const signature = SIGNATURE_FILES.find(publicFileExists);
+  const photo = publicFileExists(PHOTO_FILE) ? PHOTO_FILE : PHOTO_PLACEHOLDER;
+  const signature = publicFileExists(SIGNATURE_FILE) ? SIGNATURE_FILE : null;
 
   return (
     <section className={styles.about}>
       {/* se non sta su una riga va a capo solo dopo "Ciao," */}
       <p className={styles.greeting}>
         <span className={styles.nowrap}>Ciao,</span>{" "}
-        <span className={styles.nowrap}>I&apos;m Elisa, and</span>
+        <span className={styles.nowrap}>I&apos;m Elisa</span>
       </p>
 
       <div className={styles.photo}>
-        <img src={PHOTO.src} alt={PHOTO.alt} className={styles.image} />
+        <img src={photo} alt="Elisa Massetti" className={styles.image} />
 
         {/* A cavallo dell'angolo in alto a sinistra della foto */}
         {signature ? (

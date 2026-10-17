@@ -11,13 +11,14 @@
 
 /* ---------- Saluto ---------- */
 
-/* Calgary, maiuscolo piccolo: margini laterali più larghi di quelli della
-   foto */
+/* Spectral maiuscolo piccolo, un rigo più in basso dell'inizio della
+   fascia; margini laterali più larghi di quelli della foto */
 .greeting {
-  margin: 0 2.5rem;
+  margin: 1.4rem 2.5rem 0;
   font-family: var(--font-main);
+  font-weight: 300;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
+  letter-spacing: var(--tracking-caps);
   font-size: 0.78rem;
   line-height: 1.4;
   text-align: center;
@@ -43,8 +44,7 @@
 }
 
 /* La firma (PNG trasparente, inchiostro espresso): poco più di metà della
-   foto, a cavallo dell'angolo in alto a sinistra, leggera. "Elisa" resta
-   sopra la foto, "Massetti" passa sul bordo */
+   foto, a cavallo dell'angolo in alto a sinistra */
 .signature {
   position: absolute;
   top: 0;
@@ -52,7 +52,6 @@
   width: 56%;
   height: auto;
   transform: translateY(-68%);
-  opacity: 0.8;
   pointer-events: none;
 }
 
@@ -71,10 +70,12 @@
 
 /* ---------- Descrizione ---------- */
 
-/* Calgary, giustificato con la sillabazione automatica (lang="en") */
+/* Spectral 300, giustificato con la sillabazione automatica (lang="en"),
+   più stretto della foto e centrato */
 .description {
-  margin: 1.25rem 1.25rem 0;
+  margin: 1.5rem 2.25rem 0;
   font-family: var(--font-main);
+  font-weight: 300;
   font-size: 0.97rem;
   line-height: 1.5;
   text-align: justify;

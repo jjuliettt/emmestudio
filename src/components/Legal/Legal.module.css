@@ -1,67 +1,40 @@
 /* ---------------------------------------------
-   Legal (privacy policy e simili) — mobile first
-   Testo lungo, una colonna leggibile
+   Legal (Privacy & Legal) — mobile first
+   Testo lungo, una colonna leggibile; Spectral 300 alla misura del testo
+   del resto del sito
 --------------------------------------------- */
 
 .page {
   background-color: var(--cream);
   color: var(--espresso);
-  padding: 3.5rem 1.25rem 4.5rem;
-}
-
-.title {
-  margin: 0 0 0.35rem;
-  text-align: center;
-  font-family: var(--font-main);
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  font-size: clamp(2.1rem, 9vw, 3.2rem);
-  line-height: 1.15;
-}
-
-.titleLine {
-  display: block;
-}
-
-.kicker {
-  margin: 0;
-  text-align: center;
-  font-family: var(--font-main);
-  text-transform: uppercase;
-  letter-spacing: 0.22em;
-  font-size: 0.72rem;
-  color: rgb(59 42 34 / 0.7);
+  padding: 2rem 1.25rem 4.5rem;
 }
 
 .updated {
-  margin: 0.4rem 0 0;
+  margin: 0.6rem 0 0;
   text-align: center;
-  font-family: var(--font-main);
-  font-size: 0.85rem;
-  color: rgb(59 42 34 / 0.7);
+  font-size: 0.8rem;
 }
 
 .sections {
-  margin-top: 2.25rem;
+  margin-top: 2.5rem;
   display: flex;
   flex-direction: column;
   gap: 1.9rem;
 }
 
+/* Spectral maiuscolo spaziato */
 .heading {
   margin: 0 0 0.6rem;
-  font-family: var(--font-main);
-  font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-size: 0.92rem;
+  letter-spacing: var(--tracking-caps);
+  font-size: 0.85rem;
+  line-height: 1.45;
 }
 
 .paragraph {
   margin: 0 0 0.6rem;
-  font-family: var(--font-main);
-  font-size: 0.95rem;
+  font-size: 0.97rem;
   line-height: 1.55;
 }
 
@@ -72,9 +45,12 @@
 .list {
   margin: 0 0 0.6rem;
   padding-left: 1.2rem;
-  font-family: var(--font-main);
-  font-size: 0.95rem;
+  font-size: 0.97rem;
   line-height: 1.55;
+}
+
+.list li + li {
+  margin-top: 0.35rem;
 }
 
 .list:last-child {
@@ -87,6 +63,12 @@
 
 @media (min-width: 768px) {
   .page {
-    padding: 5rem 3rem 6rem;
+    padding: 3rem 3rem 6rem;
+  }
+
+  .sections {
+    max-width: 40rem;
+    margin-left: auto;
+    margin-right: auto;
   }
 }

@@ -1,32 +1,37 @@
 import localFont from "next/font/local";
 
-// Font auto-ospitati: file .woff2 (sottoinsieme "latin") in ./fonts,
-// scaricati da Google Fonts invece di farli scaricare a next/font in build.
+// Font auto-ospitati (licenza OFL): file .woff2 (sottoinsieme "latin") in
+// ./fonts, scaricati da Google Fonts. Il sito non chiede niente a Google.
 //
-// Calgary e Constanley (con licenza) non passano da qui: sono in
-// public/webfonts/ e dichiarati in globals.css, così basta aggiungere i file.
+// Il corsivo (Snell Roundhand) è un font di sistema Apple e il font scritto
+// a mano dei titoli è in public/assets/REPLACE-ME/: vedi globals.css.
 
-// Solo per il menu a schermo intero
+// Font 1: tutto il testo. 200 per i testi grandi, 300 per quelli piccoli
+export const spectral = localFont({
+  src: [
+    { path: "./fonts/Spectral-ExtraLight.woff2", weight: "200", style: "normal" },
+    { path: "./fonts/Spectral-Light.woff2", weight: "300", style: "normal" },
+  ],
+  variable: "--font-spectral",
+});
+
+// 700 corsivo, solo per "Welcome to". È una famiglia a parte: se stesse
+// con le altre due, ogni corsivo del sito (<em>) diventerebbe grassetto
+export const spectralBoldItalic = localFont({
+  src: [
+    { path: "./fonts/Spectral-BoldItalic.woff2", weight: "700", style: "italic" },
+  ],
+  variable: "--font-spectral-bold-italic",
+});
+
+// Font 3: solo il menu e le etichette dei campi dei moduli
 export const menuSans = localFont({
   src: [
     {
       path: "./fonts/Quicksand-Variable.woff2",
-      weight: "400 500",
-      style: "normal",
-    },
-  ],
-  variable: "--font-quicksand",
-});
-
-// Scrittura a mano (font libero OFL) per la riga sopra le copertine del
-// portfolio: sta al posto del font scritto a mano che verrà comprato
-export const handwriting = localFont({
-  src: [
-    {
-      path: "./fonts/HerrVonMuellerhoff-Regular.woff2",
       weight: "400",
       style: "normal",
     },
   ],
-  variable: "--font-handwriting",
+  variable: "--font-quicksand",
 });

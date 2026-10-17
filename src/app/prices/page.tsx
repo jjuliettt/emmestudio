@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import Booking from "@/components/Booking/Booking";
 import Faq from "@/components/Faq/Faq";
 import HandTitle from "@/components/HandTitle/HandTitle";
+import PageTitle from "@/components/PageTitle/PageTitle";
 import PriceGuideForm from "@/components/Prices/PriceGuideForm";
 import ScrollLink from "@/components/Prices/ScrollLink";
 import { GUIDE_CATEGORIES, PRICE_GUIDE_ID, type GuideCategory } from "@/lib/forms";
 import styles from "./PricesPage.module.css";
 
-// Titolo della scheda: "Prices | Emme Studio" (modello in layout.tsx)
+// Titolo della scheda: "Prices | Elisa Massetti Photo" (modello in layout.tsx)
 export const metadata: Metadata = {
   title: "Prices",
   description:
@@ -67,44 +68,40 @@ const SMALL_BUSINESSES: Package[] = [
   },
 ];
 
-const EVENT_TYPES = [
-  "Conferences",
-  "Team days",
-  "Product launches",
-  "Team portraits",
-  "LinkedIn photos",
-];
-
-// Testi provvisori (tranne i titoli), da confermare con Elisa
-const REASONS = [
-  {
-    title: "Fixed prices, no surprises",
-    text: "The price in the guide is the price you pay. Any extra is agreed with you first.",
-  },
-  {
-    title: "Delivery in 7–10 working days",
-    text: "Your edited photos are ready within 7 to 10 working days of the session.",
-  },
-  {
-    title: "Private online gallery",
-    text: "View, download and share your photos from your own private gallery.",
-  },
+const PROMISES = [
+  "One honest price, and never a surprise.",
+  "Your photos, ready in 7 to 10 working days.",
+  "A private gallery, just for you and your people.",
 ];
 
 const FAQ = [
   {
     question: "What if it rains?",
-    answer: "We move the session to another day that suits you, or find a covered spot nearby.",
+    answer:
+      "No stress. If the weather doesn't cooperate for an outdoor private session, we simply pick another day, free of charge.",
   },
   {
     question: "How does booking work?",
-    answer: "Get in touch, we pick a date together and I confirm everything by email.",
+    answer:
+      "Tell me what you have in mind and we agree on the details together. A small deposit confirms your date for private sessions, and the rest is paid when I deliver your photos. For businesses and events, we sign a short written agreement first.",
   },
   {
-    question: "How fast do I get my photos?",
-    answer: "Within 7 to 10 working days, in a private online gallery where you can download them.",
+    question: "When do I get my photos?",
+    answer:
+      "Private sessions within 10 working days. Cafés and small businesses within 7 to 10 working days, depending on the package. Events within 10 working days. Always in a private online gallery.",
   },
 ];
+
+// Righe centrate, una frase per riga
+function Lines({ lines, className }: { lines: string[]; className?: string }) {
+  return (
+    <div className={`${styles.lines} ${className ?? ""}`}>
+      {lines.map((line) => (
+        <p key={line}>{line}</p>
+      ))}
+    </div>
+  );
+}
 
 function Cards({ packages }: { packages: Package[] }) {
   return (
@@ -129,9 +126,23 @@ function Cards({ packages }: { packages: Package[] }) {
   );
 }
 
-function GuideButton({ category, children }: { category: GuideCategory; children: string }) {
+// I link al modulo della guida, con la categoria preselezionata: stesso
+// stile e stessa distanza dal contenuto sopra in tutte e tre le sezioni
+function GuideLink({
+  category,
+  className,
+  children,
+}: {
+  category: GuideCategory;
+  className: string;
+  children: string;
+}) {
   return (
-    <ScrollLink href={`#${PRICE_GUIDE_ID}`} category={category} className={styles.button}>
+    <ScrollLink
+      href={`#${PRICE_GUIDE_ID}`}
+      category={category}
+      className={`u-link ${className}`}
+    >
       {children}
     </ScrollLink>
   );
@@ -140,19 +151,26 @@ function GuideButton({ category, children }: { category: GuideCategory; children
 export default function PricesPage() {
   return (
     <>
-      {/* ---------- Intro ---------- */}
+      {/* ---------- Intro e menu delle categorie ---------- */}
       <section className={styles.intro}>
-        <p className={styles.kicker}>Prices 2026</p>
-        <h1 className={styles.heading}>Simple, honest pricing.</h1>
-        <p className={styles.lead}>
-          Choose the session that fits you. The full price list is one email
-          away.
-        </p>
-        <nav aria-label="Categories">
-          <ul className={styles.jump}>
+        <PageTitle>Prices 2026</PageTitle>
+        <p className={styles.heading}>Simple, honest pricing.</p>
+        <Lines
+          lines={[
+            "Choose the session that fits you.",
+            "The full price list is one email away.",
+          ]}
+          className={styles.lead}
+        />
+
+        <nav aria-label="Categories" className={styles.menu}>
+          <ul className={styles.menuList}>
             {GUIDE_CATEGORIES.map((category) => (
               <li key={category.value}>
-                <ScrollLink href={`#${category.sectionId}`} className={styles.jumpLink}>
+                <ScrollLink
+                  href={`#${category.sectionId}`}
+                  className={`u-link ${styles.menuLink}`}
+                >
                   {category.label}
                 </ScrollLink>
               </li>
@@ -162,74 +180,96 @@ export default function PricesPage() {
       </section>
 
       {/* ---------- Private ---------- */}
-      <section id="private" className={styles.category} tabIndex={-1}>
-        <HandTitle lines={["Private"]} className={styles.title} />
-        <p className={styles.from}>Starting at €150</p>
+      <section id="private" className={styles.category} data-tone="cream" tabIndex={-1}>
+        <h2 className={styles.title}>Private</h2>
+        <GuideLink category="private" className={styles.from}>
+          Starting at €150
+        </GuideLink>
 
         <Cards packages={PRIVATE} />
 
-        <p className={styles.note}>
-          Extra photos, travel and payment terms are in the full guide.
-        </p>
-        <GuideButton category="private">Get the full guide</GuideButton>
+        <Lines
+          lines={[
+            "Any extra information, prices, travel and payment terms are in the full guide.",
+          ]}
+          className={styles.after}
+        />
+        <GuideLink category="private" className={styles.button}>
+          Get the full guide
+        </GuideLink>
       </section>
 
       {/* ---------- Small Businesses ---------- */}
-      <section id="small-businesses" className={styles.category} tabIndex={-1}>
-        <HandTitle lines={["Small", "Businesses"]} className={styles.title} />
-        <p className={styles.from}>Starting at €295</p>
+      <section
+        id="small-businesses"
+        className={styles.category}
+        data-tone="beige"
+        tabIndex={-1}
+      >
+        <h2 className={styles.title}>Small Businesses</h2>
+        <GuideLink category="small-businesses" className={styles.from}>
+          Starting at €295
+        </GuideLink>
 
-        <p className={styles.highlight}>
-          Free 30-minute consultation at your place. No obligation. You get a
-          written shot list and a fixed quote.
-        </p>
+        <Lines
+          lines={[
+            "Free 30-minute consultation at your place.",
+            "No obligation.",
+            "You get a written shot list and a fixed quote.",
+          ]}
+          className={styles.before}
+        />
 
         <Cards packages={SMALL_BUSINESSES} />
 
-        <div className={styles.teasers}>
-          <p>Team portraits available</p>
-          <p>
-            Seasonal Formula: four sessions a year, one every season. Ask for
-            details.
-          </p>
-        </div>
-        <GuideButton category="small-businesses">Get the full guide</GuideButton>
+        <Lines
+          lines={[
+            "Team portraits available.",
+            "Seasonal Formula: four sessions a year, one every season.",
+            "Ask for details.",
+          ]}
+          className={styles.after}
+        />
+        <GuideLink category="small-businesses" className={styles.button}>
+          Get the full guide
+        </GuideLink>
       </section>
 
       {/* ---------- Companies & Events: nessun prezzo ---------- */}
-      <section id="companies-events" className={styles.category} tabIndex={-1}>
-        <HandTitle lines={["Companies", "& Events"]} className={styles.title} />
+      <section
+        id="companies-events"
+        className={styles.category}
+        data-tone="cream"
+        tabIndex={-1}
+      >
+        <h2 className={styles.title}>Companies &amp; Events</h2>
 
-        <p className={styles.text}>
-          Every company and event is different. Tell me about your event, how
-          long it lasts and your budget, and I&apos;ll build a quote that fits.
-        </p>
-
-        <ul className={styles.types} aria-label="For example">
-          {EVENT_TYPES.map((type) => (
-            <li key={type}>{type}</li>
-          ))}
-        </ul>
-
-        <GuideButton category="companies-events">Tell me about your event</GuideButton>
+        <Lines
+          lines={[
+            "Every company and event is different. Tell me about your event, how long it lasts and your budget, and I'll build a quote that fits.",
+          ]}
+          className={styles.before}
+        />
+        <Lines
+          lines={[
+            "Conferences · team days · product launches · team portraits and LinkedIn photos.",
+          ]}
+          className={styles.after}
+        />
+        <GuideLink category="companies-events" className={styles.button}>
+          Tell me about your event
+        </GuideLink>
       </section>
 
-      {/* ---------- Why book with me ---------- */}
-      <section className={styles.why}>
-        <h2 className={styles.sectionTitle}>Why book with me</h2>
-        <ul className={styles.reasons}>
-          {REASONS.map((reason) => (
-            <li key={reason.title}>
-              <h3 className={styles.reasonTitle}>{reason.title}</h3>
-              <p className={styles.reasonText}>{reason.text}</p>
-            </li>
-          ))}
-        </ul>
+      {/* ---------- Promesse (fascia beige) ---------- */}
+      <section className={styles.promises}>
+        <h2 className={styles.scriptHeading}>A few little promises</h2>
+        <Lines lines={PROMISES} className={styles.promiseLines} />
       </section>
 
       {/* ---------- FAQ ---------- */}
       <section className={styles.faq}>
-        <h2 className={styles.sectionTitle}>FAQ</h2>
+        <h2 className={styles.scriptHeading}>Good to know</h2>
         <Faq items={FAQ} />
       </section>
 
@@ -241,6 +281,7 @@ export default function PricesPage() {
         aria-labelledby="price-guide-title"
       >
         <HandTitle
+          slot="price-guide"
           id="price-guide-title"
           lines={["Get the full", "price guide"]}
           className={styles.guideTitle}
@@ -252,9 +293,7 @@ export default function PricesPage() {
         <PriceGuideForm />
       </section>
 
-      {/* qui "See prices" porterebbe alla pagina stessa: al suo posto il
-          portfolio */}
-      <Booking second={{ href: "/portfolio", label: "See portfolio" }} />
+      <Booking />
     </>
   );
 }

@@ -25,7 +25,7 @@ const REVIEWS: Review[] = [
   {
     quote: "No posing, no pressure, just us.",
     author: "Marta L.",
-    category: "Portraits",
+    category: "Private",
     src: "https://placecats.com/millie/120/120",
     alt: "Portrait of Marta L.",
   },
@@ -144,13 +144,18 @@ export default function Reviews() {
             >
               <img src={review.src} alt={review.alt} className={styles.photo} />
 
-              <blockquote className={styles.quote}>
-                <p>&ldquo;{review.quote}&rdquo;</p>
-              </blockquote>
+              {/* blocco di altezza fissa (tre righe di citazione + nome): il
+                  nome segue sempre la citazione alla stessa distanza e i
+                  pallini sotto non si spostano mai */}
+              <div className={styles.text}>
+                <blockquote className={styles.quote}>
+                  <p>&ldquo;{review.quote}&rdquo;</p>
+                </blockquote>
 
-              <figcaption className={styles.author}>
-                {review.author} · {review.category}
-              </figcaption>
+                <figcaption className={styles.author}>
+                  {review.author} · {review.category}
+                </figcaption>
+              </div>
             </figure>
           ))}
         </div>

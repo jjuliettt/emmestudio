@@ -1,5 +1,5 @@
 /* ---------------------------------------------
-   Riga scritta a mano + copertine (home e /portfolio)
+   Titolo scritto a mano + copertine (home e /portfolio)
    Copertine piccole e centrate (~70% dello schermo), come su mobile in
    alisabethdesigns.com
 --------------------------------------------- */
@@ -8,29 +8,12 @@
   position: relative;
 }
 
-/* Scrittura a mano sciolta: due righe, la seconda rientrata, che entra
-   nell'angolo della prima copertina */
+/* Sopra le copertine e sovrapposto all'angolo della prima */
 .intro {
   position: relative;
   z-index: 3;
-  width: max-content;
-  margin: 0 0 -1.9rem 0.5rem;
-  font-family: var(--font-hand);
-  font-weight: 400;
-  font-size: 3.1rem;
-  line-height: 0.82;
-  color: rgb(59 42 34 / 0.8);
-  transform: rotate(-4deg);
-  transform-origin: left bottom;
+  margin: 0 0 -1.6rem 0.5rem;
   pointer-events: none;
-}
-
-.introLine {
-  display: block;
-}
-
-.introIndent {
-  padding-left: 2.6em;
 }
 
 .list {

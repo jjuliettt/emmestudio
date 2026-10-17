@@ -8,7 +8,7 @@ export default function Portfolio() {
     <section className={styles.portfolio}>
       <CoverList />
 
-      <Link href="/portfolio" className={styles.viewAll}>
+      <Link href="/portfolio" className={`u-link ${styles.viewAll}`}>
         View my portfolio
       </Link>
     </section>

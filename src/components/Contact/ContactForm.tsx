@@ -179,7 +179,10 @@ export default function ContactForm() {
       </Check>
 
       <p className={styles.privacy}>
-        How your details are used: <Link href="/privacy-policy">privacy policy</Link>.
+        How your details are used:{" "}
+        <Link href="/privacy-policy" className="u-link">
+          Privacy &amp; Legal
+        </Link>
       </p>
 
       <button type="submit" className={styles.submit}>

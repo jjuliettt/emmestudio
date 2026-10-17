@@ -1,6 +1,7 @@
 /* ---------------------------------------------
    Pagina Prezzi — mobile first
-   Intro, tre categorie, perché prenotare, FAQ, modulo della guida
+   Intro con il menu delle categorie, tre sezioni a fondo alternato,
+   promesse, FAQ, modulo della guida
 --------------------------------------------- */
 
 /* Le parti a cui portano i link della pagina: lo scorrimento si ferma poco
@@ -15,82 +16,111 @@
   outline: none;
 }
 
-/* ---------- Etichette piccole: Quicksand in maiuscolo ---------- */
+/* Righe centrate, una frase per riga (Spectral 300) */
+.lines {
+  text-align: center;
+  font-size: 0.97rem;
+  line-height: 1.55;
+}
 
-.kicker,
-.from,
-.jumpLink,
-.button,
-.cardMeta,
-.types,
-.reasonTitle {
-  font-family: var(--font-menu);
-  text-transform: uppercase;
+.lines p {
+  max-width: 22rem;
+  margin: 0 auto;
 }
 
 /* ---------- Intro ---------- */
 
+/* sotto c'è lo spazio grande prima della linea della prima sezione */
 .intro {
-  padding: 2.75rem 1.25rem 1rem;
+  padding: 2rem 0 4.5rem;
   text-align: center;
 }
 
-.kicker {
-  margin: 0;
-  letter-spacing: 0.26em;
-  font-size: 0.7rem;
-}
-
+/* Spectral 200, circa il 60% di prima */
 .heading {
-  margin: 1rem 0 0;
-  font-family: var(--font-main);
-  font-size: clamp(1.9rem, 8.4vw, 2.4rem);
-  line-height: 1.15;
+  margin: 1.75rem 1.25rem 0;
+  font-weight: 200;
+  font-size: 1.25rem;
+  line-height: 1.3;
 }
 
 .lead {
-  max-width: 20rem;
-  margin: 1rem auto 0;
-  font-size: 1rem;
-  line-height: 1.5;
+  margin: 0.75rem 1.25rem 0;
 }
 
-.jump {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.95rem;
-  margin: 2rem 0 0;
-  padding: 0;
+/* Fascia espresso a tutta larghezza: tre colonne uguali */
+.menu {
+  margin-top: 2.25rem;
+  background-color: var(--espresso);
+  color: var(--cream);
+}
+
+.menuList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0;
+  padding: 0 0.5rem;
   list-style: none;
 }
 
-.jumpLink {
-  letter-spacing: 0.2em;
-  font-size: 0.72rem;
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.45em;
+/* almeno 44px di altezza da toccare; il nome può andare su due righe */
+.menuLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.5rem;
+  padding: 0.6rem 0.35rem;
+  font-size: 0.68rem;
+  line-height: 1.6;
+  text-align: center;
 }
 
 /* ---------- Categorie ---------- */
 
+/* Fondi alternati, linea sottile in cima; sotto, lo stesso spazio grande
+   prima della sezione successiva */
 .category {
-  padding: 3.25rem 1.25rem 3.5rem;
+  padding: 3.5rem 1.25rem 4.5rem;
+  border-top: 1px solid var(--espresso);
   text-align: center;
 }
 
-/* il titolo a mano parte da sinistra, come nel riferimento (rientrato:
-   l'attacco della prima lettera sporge a sinistra) */
-.title {
-  margin-left: 0.75rem;
+.category[data-tone="cream"] {
+  background-color: var(--cream);
 }
 
-/* subito sotto il titolo, allineato a sinistra con la scritta */
+.category[data-tone="beige"] {
+  background-color: var(--beige);
+}
+
+/* Snell Roundhand, grande */
+.title {
+  margin: 0;
+  font-family: var(--font-script);
+  font-weight: 400;
+  letter-spacing: 0;
+  font-size: 2.6rem;
+  line-height: 1.2;
+}
+
 .from {
-  margin: 1rem 0 0 1.4rem;
-  text-align: left;
-  letter-spacing: 0.22em;
+  display: table;
+  margin: 0.9rem auto 0;
+  font-size: 0.75rem;
+}
+
+.before {
+  margin-top: 1.75rem;
+}
+
+.after {
+  margin-top: 1.75rem;
+}
+
+/* i tre pulsanti: stessa distanza dal contenuto sopra */
+.button {
+  display: table;
+  margin: 1.75rem auto 0;
   font-size: 0.75rem;
 }
 
@@ -98,62 +128,72 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
-  margin: 2.25rem 0 0;
+  gap: 1.1rem;
+  margin: 2rem 0 0;
   padding: 0;
   list-style: none;
 }
 
-/* Riquadro beige con la cornice sottile rientrata delle copertine */
+/* Riquadro con la cornice sottile rientrata delle copertine; il fondo è
+   l'altro dei due chiari, così si vede su entrambe le sezioni */
 .card {
   position: relative;
   width: min(84vw, 22rem);
-  padding: 2.4rem 1.75rem 2.3rem;
-  background-color: var(--beige);
+  padding: 1.5rem 1.6rem 1.45rem;
   color: var(--espresso);
+}
+
+.category[data-tone="cream"] .card {
+  background-color: var(--beige);
+}
+
+.category[data-tone="beige"] .card {
+  background-color: var(--cream);
 }
 
 .card::before {
   content: "";
   position: absolute;
-  inset: 10px;
-  border: 1px solid rgb(59 42 34 / 0.55);
+  inset: 8px;
+  border: 1px solid var(--espresso);
   pointer-events: none;
 }
 
-/* la formula più scelta: fondo espresso, testi e cornice crema */
-.card[data-featured] {
+/* la formula più scelta: fondo espresso, testi e cornice crema; più aria
+   in alto per la targhetta */
+.category .card[data-featured] {
+  padding-top: 2rem;
   background-color: var(--espresso);
   color: var(--cream);
 }
 
 .card[data-featured]::before {
-  border-color: rgb(250 244 240 / 0.7);
+  border-color: var(--cream);
 }
 
 /* "most chosen" a cavallo della cornice, che si interrompe dietro */
 .tag {
   position: absolute;
-  top: 10px;
+  top: 8px;
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 0 0.6rem;
   background-color: var(--espresso);
   font-family: var(--font-script);
-  font-size: 1.2rem;
-  /* alta meno di 20px: non sporge sopra il riquadro */
+  font-weight: 400;
+  letter-spacing: 0;
+  font-size: 1.15rem;
   line-height: 1;
   white-space: nowrap;
 }
 
+/* Spectral 200 maiuscolo */
 .cardName {
-  margin: 0;
-  font-family: var(--font-main);
+  margin: 0 calc(-1 * var(--tracking-caps)) 0 0;
+  font-weight: 200;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
-  /* il maiuscolo spaziato finisce con uno spazio: si ricentra */
-  margin-right: -0.2em;
-  font-size: 1.3rem;
+  letter-spacing: var(--tracking-caps);
+  font-size: 1.25rem;
   line-height: 1.2;
 }
 
@@ -162,169 +202,71 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 0 0.6em;
-  margin: 0.75rem 0 0;
-  letter-spacing: 0.14em;
+  margin: 0.45rem 0 0;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
   font-size: 0.66rem;
   line-height: 1.6;
 }
 
 .cardText {
-  max-width: 16rem;
-  margin: 0.9rem auto 0;
-  font-size: 0.95rem;
-  line-height: 1.5;
+  max-width: 16.5rem;
+  margin: 0.5rem auto 0;
+  font-size: 0.92rem;
+  line-height: 1.45;
 }
 
-.note {
-  max-width: 19rem;
-  margin: 2rem auto 0;
-  font-size: 0.95rem;
-  line-height: 1.5;
-}
+/* ---------- Promesse (fascia beige) e FAQ ---------- */
 
-/* Pulsante con bordo sottile; la versione piena è quella del modulo */
-.button {
-  display: table;
-  margin: 1.5rem auto 0;
-  padding: 1rem 1.6rem;
-  border: 1px solid var(--espresso);
-  letter-spacing: 0.2em;
-  font-size: 0.72rem;
-  line-height: 1.2;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.button:focus-visible {
-  outline: 1px solid var(--espresso);
-  outline-offset: 3px;
-}
-
-@media (hover: hover) {
-  .button:hover {
-    background-color: var(--espresso);
-    color: var(--cream);
-  }
-}
-
-/* Small Businesses: consulenza gratuita, riquadro beige */
-.highlight {
-  width: min(84vw, 22rem);
-  margin: 2rem auto 0;
-  padding: 1.4rem 1.5rem;
-  background-color: var(--beige);
-  font-size: 1rem;
-  line-height: 1.5;
-}
-
-.teasers {
-  margin-top: 2rem;
+/* Snell Roundhand */
+.scriptHeading {
+  margin: 0;
   font-family: var(--font-script);
-  font-size: 1.2rem;
-  line-height: 1.35;
+  font-weight: 400;
+  letter-spacing: 0;
+  font-size: 2.1rem;
+  line-height: 1.25;
+  text-align: center;
 }
 
-.teasers p {
-  max-width: 19rem;
-  margin: 0 auto;
+.promises {
+  padding: 3.25rem 1.25rem;
+  background-color: var(--beige);
 }
 
-.teasers p + p {
+.promiseLines {
+  margin-top: 1.25rem;
+}
+
+.promiseLines p + p {
   margin-top: 0.6rem;
 }
 
-/* Companies & Events */
-.text {
-  max-width: 20rem;
-  margin: 2rem auto 0;
-  font-size: 1rem;
-  line-height: 1.55;
-}
-
-.types {
-  width: min(84vw, 22rem);
-  margin: 1.75rem auto 0;
-  padding: 0;
-  list-style: none;
-  letter-spacing: 0.18em;
-  font-size: 0.7rem;
-}
-
-.types li {
-  padding: 0.8rem 0;
-  border-bottom: 1px solid rgb(59 42 34 / 0.3);
-}
-
-.types li:first-child {
-  border-top: 1px solid rgb(59 42 34 / 0.3);
-}
-
-/* ---------- Perché prenotare (fascia beige) e FAQ ---------- */
-
-.sectionTitle {
-  margin: 0;
-  font-family: var(--font-main);
-  text-transform: uppercase;
-  letter-spacing: 0.24em;
-  margin-right: -0.24em;
-  font-size: 1.05rem;
-  line-height: 1.3;
-  text-align: center;
-}
-
-.why {
-  padding: 3rem 1.25rem;
-  background-color: var(--beige);
-}
-
-.reasons {
-  display: flex;
-  flex-direction: column;
-  gap: 1.75rem;
-  margin: 2rem 0 0;
-  padding: 0;
-  list-style: none;
-  text-align: center;
-}
-
-.reasonTitle {
-  margin: 0;
-  letter-spacing: 0.18em;
-  font-size: 0.68rem;
-  line-height: 1.5;
-}
-
-.reasonText {
-  max-width: 19rem;
-  margin: 0.45rem auto 0;
-  font-size: 0.95rem;
-  line-height: 1.5;
-}
-
 .faq {
-  padding: 3rem 1.25rem 3.25rem;
+  padding: 3.25rem 1.25rem;
 }
 
-.faq .sectionTitle {
-  margin-bottom: 1.75rem;
+.faq .scriptHeading {
+  margin-bottom: 1.5rem;
 }
 
 /* ---------- Modulo della guida (fascia beige) ---------- */
 
 .guide {
-  padding: 3.25rem 1.25rem 3.5rem;
+  padding: 2.75rem 1.25rem 3rem;
   background-color: var(--beige);
   text-align: center;
 }
 
 .guideTitle {
-  font-size: clamp(2.9rem, 13vw, 3.6rem);
+  font-size: clamp(2.6rem, 11.5vw, 3.2rem);
   margin-left: 0.75rem;
 }
 
 .guideLead {
   max-width: 20rem;
-  margin: 1.5rem auto 2rem;
-  font-size: 1rem;
+  margin: 1.25rem auto 1.5rem;
+  font-size: 0.97rem;
   line-height: 1.5;
 }
 
@@ -334,15 +276,18 @@
 
 @media (min-width: 768px) {
   .category,
-  .why,
+  .promises,
   .faq,
   .guide {
     padding-left: 3rem;
     padding-right: 3rem;
   }
 
-  .category > *,
-  .why > *,
+  .menuList {
+    max-width: 40rem;
+    margin: 0 auto;
+  }
+
   .faq > * {
     max-width: 30rem;
     margin-left: auto;

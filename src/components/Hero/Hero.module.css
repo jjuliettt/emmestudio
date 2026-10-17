@@ -47,7 +47,7 @@
   writing-mode: vertical-rl;
   transform: rotate(180deg);
   white-space: nowrap;
-  font-weight: 400;
+  font-weight: 200;
   /* --fit (≤ 1) lo mette Hero.tsx se il titolo è più lungo della foto:
      si rimpicciolisce il font, mai la spaziatura tra le lettere */
   font-size: calc(min(4.85vw, 1.9rem) * var(--fit, 1));
@@ -61,7 +61,11 @@
   display: block;
 }
 
+/* l'unico grassetto del sito: Spectral 700 corsivo */
 .titleWelcome {
+  font-family: var(--font-spectral-bold-italic), var(--font-main);
+  font-weight: 700;
+  font-style: italic;
   letter-spacing: 0.04em;
   /* aria tra le due righe, così non si toccano */
   margin-block-end: 0.3em;
@@ -160,8 +164,8 @@
 
 /* ---------- Frase ---------- */
 
-/* Calgary maiuscolo; --fit (≤ 1) lo mette Hero.tsx se la riga più lunga
-   non entra: si rimpicciolisce tutta la frase */
+/* Spectral 200 maiuscolo; --fit (≤ 1) lo mette Hero.tsx se la riga più
+   lunga non entra: si rimpicciolisce tutta la frase, aggettivo compreso */
 .quote {
   /* colonna 2: il margine in alto la centra sulla foto 3 */
   flex: 1;
@@ -170,8 +174,9 @@
   padding: 0 1.5% 0 2.5%;
   text-align: left;
   font-family: var(--font-main);
+  font-weight: 200;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--tracking-caps);
   line-height: 1.18;
   font-size: calc(3.6vw * var(--fit, 1));
   color: var(--espresso);
@@ -191,10 +196,14 @@
   display: inline-grid;
 }
 
-/* Constanley minuscolo, stessa dimensione del resto della frase */
+/* Snell Roundhand minuscolo, ingrandito quanto basta per sembrare della
+   stessa misura del resto della frase */
 .adjective {
   grid-area: 1 / 1;
   font-family: var(--font-script);
+  font-weight: 400;
+  font-size: calc(var(--script-scale) * 1em);
+  line-height: 1;
   text-transform: none;
   letter-spacing: 0;
   color: var(--espresso);

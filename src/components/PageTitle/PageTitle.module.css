@@ -1,0 +1,13 @@
+/* Spectral 200 maiuscolo, spaziatura larga. Il rientro a sinistra
+   ricentra la scritta (compensa lo spazio dopo l'ultima lettera) */
+.title {
+  margin: 1.25rem 0 0;
+  padding-left: 0.25em;
+  font-family: var(--font-main);
+  font-weight: 200;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  font-size: 1.3rem;
+  line-height: 1.3;
+  text-align: center;
+}

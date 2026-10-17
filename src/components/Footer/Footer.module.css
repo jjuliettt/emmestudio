@@ -1,6 +1,6 @@
 /* ---------------------------------------------
    Footer — mobile first
-   Due righe centrate, testo piccolo crema su espresso;
+   Due righe al massimo, centrate, Spectral 300 crema su espresso;
    da desktop diventano una riga sola (vedi .rows)
 --------------------------------------------- */
 
@@ -14,13 +14,19 @@
 .line {
   margin: 0;
   font-family: var(--font-main);
-  font-size: 11px;
-  line-height: 1.6;
+  font-weight: 300;
+  /* sui telefoni più stretti un filo più piccolo: sempre due righe */
+  font-size: min(11px, 2.85vw);
   letter-spacing: 0.02em;
+  line-height: 1.7;
 }
 
 .dot {
   margin: 0 0.4em;
+}
+
+.nowrap {
+  white-space: nowrap;
 }
 
 /* Punto tra le due righe: serve solo da desktop, quando stanno affiancate */
@@ -28,15 +34,13 @@
   display: none;
 }
 
-/* il bottone dei cookie deve leggersi come gli altri link */
+/* come gli altri link del sito: maiuscolo, sottolineato */
 .link {
-  padding: 0;
-  border: 0;
-  background: none;
-  color: inherit;
-  font: inherit;
-  letter-spacing: inherit;
-  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.35em;
 }
 
 @media (min-width: 768px) {

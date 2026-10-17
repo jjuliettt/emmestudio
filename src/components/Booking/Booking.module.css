@@ -57,18 +57,20 @@
 .ask {
   margin: 0;
   font-family: var(--font-main);
+  font-weight: 300;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
+  letter-spacing: var(--tracking-caps);
   font-size: 0.72rem;
 }
 
-/* "work together": Constanley (è già un corsivo, niente inclinazione finta) */
+/* "work together?": Snell Roundhand (è già un corsivo, niente inclinazione
+   finta), un po' più grande perché sembri della misura di "WANT TO" */
 .ask em {
   font-family: var(--font-script);
   font-style: normal;
   text-transform: none;
   letter-spacing: 0;
-  font-size: 1.55em;
+  font-size: calc(var(--script-scale) * 1em);
 }
 
 .links {
@@ -79,15 +81,9 @@
   flex-direction: column;
 }
 
+/* stile dei link del sito (.u-link), qui un po' più piccolo */
 .link {
-  font-family: var(--font-main);
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
   font-size: 0.66rem;
-  text-decoration: underline;
-  text-decoration-color: currentColor;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.35em;
 }
 
 /* ---------------------------------------------

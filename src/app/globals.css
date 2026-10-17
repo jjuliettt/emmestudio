@@ -1,35 +1,36 @@
-/* Palette: espresso per tutti i testi ed è l'unico colore d'accento (mai
-   nero puro), crema per il fondo pagina e per i testi su marrone, beige
-   per header, About e Reviews */
+/* Palette: solo questi quattro colori, senza sfumature né trasparenze.
+   Espresso per tutti i testi, i blocchi marroni e ogni accento; crema per
+   il fondo pagina e per i testi su marrone; beige per le fasce; il quarto
+   solo per i pallini non attivi delle recensioni */
 :root {
   --espresso: #3b2a22;
   --cream: #faf4f0;
   --beige: #f7eee7;
+  --dot: #d5c6b8;
 
-  /* Font: Calgary per quasi tutto, Constanley (corsivo) per gli
-     aggettivi, le recensioni e "work together?", Quicksand per il menu e
-     le etichette piccole */
-  --font-main: "Calgary", Georgia, "Times New Roman", serif;
-  --font-script: "Constanley", "Snell Roundhand", cursive;
+  /* Font 1 (Spectral) per tutto il testo; Font 2 (Snell Roundhand, solo
+     sui dispositivi Apple) per le parole in corsivo; Font 3 (Quicksand)
+     solo per il menu e le etichette dei moduli */
+  --font-main: var(--font-spectral), Georgia, "Times New Roman", serif;
+  --font-script: "Snell Roundhand", "SnellRoundhand", cursive;
   --font-menu: var(--font-quicksand), system-ui, sans-serif;
-  /* il font scritto a mano comprato: finché non arriva, Herr Von
-     Muellerhoff (libero), che sembra una vera scrittura a mano */
-  --font-hand: var(--font-handwriting), cursive;
+  /* Snell Roundhand sulla stessa riga di Spectral: un po' più grande,
+     così a occhio sembrano della stessa misura */
+  --script-scale: 1.25;
+
+  /* Titoli scritti a mano ("favorite frames", "Get the full price
+     guide"): solo qui. Per ora Allura; il font definitivo sostituisce il
+     file in public/assets/REPLACE-ME/ */
+  --font-handwriting: "Handwriting", cursive;
+
+  /* spaziatura delle lettere: normale e per maiuscole ed etichette */
+  --tracking: 0.04em;
+  --tracking-caps: 0.15em;
 }
 
-/* Font con licenza (file forniti da Elisa, in public/webfonts/). Se i file
-   mancano, il browser usa i font di riserva elencati sopra. */
 @font-face {
-  font-family: "Calgary";
-  src: url("/webfonts/calgary-regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Constanley";
-  src: url("/webfonts/constanley-regular.woff2") format("woff2");
+  font-family: "Handwriting";
+  src: url("/assets/REPLACE-ME/REPLACE-ME_handwriting.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -45,6 +46,7 @@ body {
   padding: 0;
 }
 
+/* Testo piccolo: Spectral 300. I testi grandi (dai 20px circa) usano 200 */
 body {
   min-height: 100dvh;
   display: flex;
@@ -52,13 +54,14 @@ body {
   color: var(--espresso);
   background: var(--cream);
   font-family: var(--font-main);
+  font-weight: 300;
+  letter-spacing: var(--tracking);
   line-height: 1.5;
-  /* niente grassetto finto del browser (sfocato): solo il corsivo */
+  /* niente grassetto finto del browser: solo il corsivo */
   font-synthesis: style;
 }
 
-/* Per ora niente grassetto da nessuna parte, neanche nei titoli (si
-   rivede quando arrivano i font definitivi) */
+/* Niente grassetto da nessuna parte (tranne "Welcome to" nella home) */
 h1,
 h2,
 h3,
@@ -68,7 +71,18 @@ h6,
 b,
 strong,
 th {
-  font-weight: 400;
+  font-weight: inherit;
+}
+
+/* i campi dei moduli e i pulsanti non ereditano font e colore da soli */
+input,
+select,
+textarea,
+button {
+  color: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
 }
 
 main {
@@ -78,4 +92,17 @@ main {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+/* Link sottolineato: tutti i link di testo e le call to action.
+   Spectral in maiuscolo, linea di 1px un po' staccata dal testo */
+.u-link {
+  font-family: var(--font-main);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.35em;
 }
