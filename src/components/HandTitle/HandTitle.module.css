@@ -1,0 +1,24 @@
+/* Scrittura a mano sciolta: grande, inclinata, inchiostro leggermente
+   trasparente; le righe dopo la prima rientrano */
+.title {
+  width: max-content;
+  max-width: 100%;
+  margin: 0;
+  text-align: left;
+  font-family: var(--font-hand);
+  font-weight: 400;
+  font-size: clamp(3.3rem, 15vw, 4.2rem);
+  line-height: 0.85;
+  color: rgb(59 42 34 / 0.82);
+  transform: rotate(-4deg);
+  transform-origin: left bottom;
+}
+
+.line {
+  display: block;
+  white-space: nowrap;
+}
+
+.indent {
+  padding-left: 1.5em;
+}

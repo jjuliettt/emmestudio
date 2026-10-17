@@ -1,0 +1,190 @@
+"use client";
+
+import { useEffect, useRef, useState, type FormEvent } from "react";
+import Link from "next/link";
+import { Check, Field, controlProps } from "@/components/Forms/Fields";
+import { isValidEmail } from "@/lib/forms";
+import styles from "@/components/Forms/Form.module.css";
+
+const INTERESTS = [
+  "Private",
+  "Small Business",
+  "Company or Event",
+  "Something else",
+];
+
+type Values = {
+  name: string;
+  email: string;
+  interest: string;
+  when: string;
+  message: string;
+  consent: boolean;
+};
+
+type Errors = Partial<Record<keyof Values, string>>;
+
+const EMPTY: Values = {
+  name: "",
+  email: "",
+  interest: "",
+  when: "",
+  message: "",
+  consent: false,
+};
+
+// id dei campi, nell'ordine della pagina: il primo errore riceve il fuoco
+const IDS = {
+  name: "contact-name",
+  email: "contact-email",
+  interest: "contact-interest",
+  when: "contact-when",
+  message: "contact-message",
+  consent: "contact-consent",
+} as const;
+const ORDER = Object.keys(IDS) as (keyof typeof IDS)[];
+
+// data o periodo: facoltativo
+function validate(values: Values): Errors {
+  const errors: Errors = {};
+  if (!values.name.trim()) errors.name = "Please enter your name.";
+  if (!values.email.trim()) errors.email = "Please enter your email address.";
+  else if (!isValidEmail(values.email))
+    errors.email = "Please check your email address.";
+  if (!values.interest) errors.interest = "Please choose what you're interested in.";
+  if (!values.message.trim()) errors.message = "Please write a short message.";
+  if (!values.consent)
+    errors.consent = "Please tick this box so I can answer your message.";
+  return errors;
+}
+
+// Modulo contatti. Per ora controlla i dati e mostra il grazie, ma non
+// invia niente: il collegamento all'email arriva insieme alla fase 2.
+export default function ContactForm() {
+  const [values, setValues] = useState<Values>(EMPTY);
+  const [errors, setErrors] = useState<Errors>({});
+  // dopo il primo invio gli errori si aggiornano mentre si scrive
+  const [attempted, setAttempted] = useState(false);
+  const [sent, setSent] = useState(false);
+  const thanksRef = useRef<HTMLParagraphElement>(null);
+
+  const update = <K extends keyof Values>(key: K, value: Values[K]) => {
+    const next = { ...values, [key]: value };
+    setValues(next);
+    if (attempted) setErrors(validate(next));
+  };
+
+  useEffect(() => {
+    if (sent) thanksRef.current?.focus();
+  }, [sent]);
+
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const found = validate(values);
+    setErrors(found);
+    setAttempted(true);
+    const first = ORDER.find((key) => found[key]);
+    if (first) {
+      document.getElementById(IDS[first])?.focus();
+      return;
+    }
+    // TODO fase 2: inviare il messaggio all'email di Elisa tramite una
+    // route del server
+    setSent(true);
+  };
+
+  if (sent) {
+    return (
+      <p ref={thanksRef} className={styles.thanks} tabIndex={-1} role="status">
+        Thank you! I&apos;ll get back to you soon.
+      </p>
+    );
+  }
+
+  return (
+    <form className={styles.form} onSubmit={onSubmit} noValidate>
+      <Field id={IDS.name} label="Name" error={errors.name}>
+        <input
+          type="text"
+          {...controlProps(IDS.name, errors.name)}
+          className={styles.input}
+          autoComplete="name"
+          autoCapitalize="words"
+          value={values.name}
+          onChange={(e) => update("name", e.target.value)}
+        />
+      </Field>
+
+      <Field id={IDS.email} label="Email" error={errors.email}>
+        <input
+          type="email"
+          {...controlProps(IDS.email, errors.email)}
+          className={styles.input}
+          autoComplete="email"
+          inputMode="email"
+          autoCapitalize="off"
+          spellCheck={false}
+          value={values.email}
+          onChange={(e) => update("email", e.target.value)}
+        />
+      </Field>
+
+      <Field id={IDS.interest} label="I'm interested in" error={errors.interest}>
+        <select
+          {...controlProps(IDS.interest, errors.interest)}
+          className={`${styles.input} ${styles.select}`}
+          data-empty={values.interest === ""}
+          value={values.interest}
+          onChange={(e) => update("interest", e.target.value)}
+        >
+          <option value="" disabled>
+            Choose one
+          </option>
+          {INTERESTS.map((interest) => (
+            <option key={interest} value={interest}>
+              {interest}
+            </option>
+          ))}
+        </select>
+      </Field>
+
+      <Field id={IDS.when} label="Date or period" optional>
+        <input
+          type="text"
+          {...controlProps(IDS.when)}
+          className={styles.input}
+          placeholder="e.g. a Saturday in May"
+          value={values.when}
+          onChange={(e) => update("when", e.target.value)}
+        />
+      </Field>
+
+      <Field id={IDS.message} label="Message" error={errors.message}>
+        <textarea
+          {...controlProps(IDS.message, errors.message)}
+          className={`${styles.input} ${styles.textarea}`}
+          rows={6}
+          value={values.message}
+          onChange={(e) => update("message", e.target.value)}
+        />
+      </Field>
+
+      <Check
+        id={IDS.consent}
+        checked={values.consent}
+        onChange={(checked) => update("consent", checked)}
+        error={errors.consent}
+      >
+        I agree that my details are used to answer my message.
+      </Check>
+
+      <p className={styles.privacy}>
+        How your details are used: <Link href="/privacy-policy">privacy policy</Link>.
+      </p>
+
+      <button type="submit" className={styles.submit}>
+        Send message
+      </button>
+    </form>
+  );
+}

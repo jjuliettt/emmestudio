@@ -1,0 +1,128 @@
+/* ---------------------------------------------
+   Pagina Contatti — mobile first
+   Intro, modulo, contatti diretti, ritratto, frase finale, link
+--------------------------------------------- */
+
+.intro {
+  padding: 2.75rem 1.25rem 0;
+  text-align: center;
+}
+
+.title {
+  margin: 0 auto;
+}
+
+.lead {
+  max-width: 20rem;
+  margin: 1.5rem auto 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.formSection {
+  padding: 2.25rem 1.25rem 3.25rem;
+}
+
+/* ---------- Contatti diretti ---------- */
+
+.direct {
+  padding: 2.75rem 1.25rem;
+  background-color: var(--beige);
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 0;
+  text-align: center;
+}
+
+.details dt {
+  font-family: var(--font-menu);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.66rem;
+  line-height: 1.5;
+}
+
+.details dd {
+  margin: 0.35rem 0 0;
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+.detailLink {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+  overflow-wrap: anywhere;
+}
+
+/* ---------- Ritratto e chiusura ---------- */
+
+.closing {
+  padding: 3.25rem 1.25rem 3rem;
+  text-align: center;
+}
+
+/* 4:5, con la cornice sottile rientrata delle copertine */
+.portrait {
+  position: relative;
+  width: min(70vw, 22rem);
+  aspect-ratio: 4 / 5;
+  margin: 0 auto;
+  overflow: hidden;
+  background-color: var(--beige);
+}
+
+.photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.frame {
+  position: absolute;
+  inset: 12px 10px;
+  border: 1px solid var(--cream);
+}
+
+.closingLine {
+  margin: 2.25rem auto 0;
+  font-family: var(--font-script);
+  font-size: 1.75rem;
+  line-height: 1.25;
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.9rem 1.75rem;
+  margin: 2.25rem 0 0;
+}
+
+.link {
+  font-family: var(--font-menu);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.72rem;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.45em;
+}
+
+/* ---------------------------------------------
+   Tablet / desktop (non ancora rifinito)
+--------------------------------------------- */
+
+@media (min-width: 768px) {
+  .formSection,
+  .direct {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
