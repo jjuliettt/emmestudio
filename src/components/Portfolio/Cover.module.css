@@ -39,17 +39,14 @@
   border: 1px solid var(--cream);
 }
 
-/* Copertina ad arco: angoli in alto arrotondati (mezzo cerchio), base
-   piatta; la cornice segue la stessa forma, rientrata. Fuori dall'arco si
-   vede il fondo della pagina */
-.cover[data-shape="arch"] {
-  border-radius: 999px 999px 0 0;
-  background-color: transparent;
+/* Copertina già finita (4:5): niente velatura, la grafica ha già la sua
+   cornice */
+.cover[data-shape="image"] {
+  aspect-ratio: 4 / 5;
 }
 
-.cover[data-shape="arch"] .frame {
-  inset: 10px;
-  border-radius: 999px 999px 0 0;
+.cover[data-shape="image"]::after {
+  content: none;
 }
 
 .text {

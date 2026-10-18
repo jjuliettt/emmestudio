@@ -14,10 +14,8 @@ function pairs(word: string) {
 function Lettering({ category }: Props) {
   const { title, lettering } = category;
 
-  // ad arco: solo il nome, al centro (la forma è nella copertina)
-  if (lettering.kind === "arch") {
-    return <span className={styles.title}>{title}</span>;
-  }
+  // copertina già finita: niente scritte da aggiungere
+  if (lettering.kind === "image") return null;
 
   if (lettering.kind === "stacked") {
     const rows = pairs(title);
@@ -71,11 +69,24 @@ function Lettering({ category }: Props) {
 // Una copertina: foto velata, cornice sottile rientrata e la scritta al
 // centro. Condivisa dalla home e dalla pagina /portfolio.
 export default function Cover({ category }: Props) {
+  // copertina già finita: solo l'immagine, alla stessa larghezza delle altre
+  if (category.lettering.kind === "image") {
+    return (
+      <Link
+        href={category.href}
+        className={styles.cover}
+        data-shape="image"
+        aria-label={category.title}
+      >
+        <img src={category.src} alt={category.alt} className={styles.photo} />
+      </Link>
+    );
+  }
+
   return (
     <Link
       href={category.href}
       className={styles.cover}
-      data-shape={category.lettering.kind === "arch" ? "arch" : undefined}
       aria-label={category.title}
     >
       <img src={category.src} alt={category.alt} className={styles.photo} />
