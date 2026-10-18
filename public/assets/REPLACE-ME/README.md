@@ -6,7 +6,7 @@ the same name, then push. No code needs to change.
 | File | What it is | Used on |
 |---|---|---|
 | `REPLACE-ME_signature.png` | Signature over the greeting photo. PNG with a transparent background, ink in #3B2A22. | Home |
-| `REPLACE-ME_photo-elisa.jpg` | Greeting photo, 3:2 landscape. While this file is missing, the current placeholder photo is shown. | Home |
+| `REPLACE-ME_photo-elisa.jpg` | Greeting photo, 3:2 landscape (now the real photo; replace it with a file of the same name to change it). While this file is missing, the placeholder photo is shown. | Home |
 | `REPLACE-ME_hw-selected-work.png` | Handwritten "Selected Work" above the portfolio cards. Transparent PNG, ink in #3B2A22. | Home |
 | `REPLACE-ME_review-01.jpg` … `-04.jpg` | Photo (or logo) of each review, in order: Hania, Paulina, Tawake, Prof. Tacik. Square works best; it is shown as a circle. | Home |
 | `REPLACE-ME_private-01.jpg`, `-02.jpg`, … | Photos of the Private page, in number order. | /portfolio/private |
