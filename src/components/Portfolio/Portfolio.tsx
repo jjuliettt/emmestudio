@@ -6,7 +6,7 @@ import styles from "./Portfolio.module.css";
 export default function Portfolio() {
   return (
     <section className={styles.portfolio}>
-      <CoverList />
+      <CoverList title />
 
       <Link href="/portfolio" className={`u-link ${styles.viewAll}`}>
         View my portfolio

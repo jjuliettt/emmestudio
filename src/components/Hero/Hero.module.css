@@ -63,7 +63,6 @@
 
 /* l'unico grassetto del sito: Spectral 700 corsivo */
 .titleWelcome {
-  font-family: var(--font-spectral-bold-italic), var(--font-main);
   font-weight: 700;
   font-style: italic;
   letter-spacing: 0.04em;
@@ -196,8 +195,8 @@
   display: inline-grid;
 }
 
-/* Snell Roundhand minuscolo, ingrandito quanto basta per sembrare della
-   stessa misura del resto della frase */
+/* Tangerine minuscolo, ingrandito quanto basta per sembrare della stessa
+   misura del resto della frase (si rimpicciolisce con lei, --fit) */
 .adjective {
   grid-area: 1 / 1;
   font-family: var(--font-script);

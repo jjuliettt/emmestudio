@@ -23,19 +23,45 @@
   gap: 1.9rem;
 }
 
-/* Spectral maiuscolo spaziato */
+/* Spectral grassetto, maiuscolo spaziato */
 .heading {
   margin: 0 0 0.6rem;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: var(--tracking-caps);
   font-size: 0.85rem;
   line-height: 1.45;
 }
 
+/* Spectral 300: i paragrafi giustificati con la sillabazione (lang="en");
+   i punti con il titoletto in grassetto restano a sinistra, giustificati
+   lascerebbero buchi */
+.paragraph,
+.list {
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.paragraph {
+  text-align: justify;
+}
+
 .paragraph {
   margin: 0 0 0.6rem;
   font-size: 0.97rem;
   line-height: 1.55;
+}
+
+/* i dati uno per riga restano a sinistra */
+.details {
+  margin: 0 0 0.6rem;
+  font-size: 0.97rem;
+  line-height: 1.55;
+}
+
+/* titoletto di ogni punto */
+.label {
+  font-weight: 700;
 }
 
 .paragraph:last-child {

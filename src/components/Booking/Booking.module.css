@@ -60,11 +60,12 @@
   font-weight: 300;
   text-transform: uppercase;
   letter-spacing: var(--tracking-caps);
-  font-size: 0.72rem;
+  /* con "work together?" a 1.8 volte: Tangerine resta sopra i 24px */
+  font-size: 0.84rem;
 }
 
-/* "work together?": Snell Roundhand (è già un corsivo, niente inclinazione
-   finta), un po' più grande perché sembri della misura di "WANT TO" */
+/* "work together?": Tangerine (è già un corsivo, niente inclinazione
+   finta), più grande perché sembri della misura di "WANT TO" */
 .ask em {
   font-family: var(--font-script);
   font-style: normal;

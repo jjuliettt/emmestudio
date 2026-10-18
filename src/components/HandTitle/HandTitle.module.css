@@ -1,5 +1,6 @@
-/* Scrittura a mano sciolta: grande, inclinata; le righe dopo la prima
-   rientrano. Solo il font degli spazi scritti a mano (--font-handwriting) */
+/* Spazio scritto a mano: di solito un'immagine (già inclinata, la
+   scrittura vera); senza immagine, il testo nel font --font-handwriting,
+   grande e un po' inclinato, con le righe dopo la prima rientrate */
 .title {
   width: max-content;
   max-width: 100%;
@@ -8,11 +9,15 @@
   font-family: var(--font-handwriting);
   font-weight: 400;
   letter-spacing: 0;
-  font-size: clamp(3rem, 13.5vw, 3.8rem);
-  line-height: 0.85;
+  font-size: clamp(3.2rem, 15vw, 4.2rem);
+  line-height: 0.8;
   color: var(--espresso);
   transform: rotate(-4deg);
   transform-origin: left bottom;
+}
+
+.title[data-image] {
+  transform: none;
 }
 
 .line {
@@ -24,9 +29,9 @@
   padding-left: 1.5em;
 }
 
-/* l'immagine che prenderà il posto del testo: larga circa quanto lui */
+/* larghezza data dal componente che la usa (className) */
 .image {
   display: block;
-  width: min(72vw, 18rem);
+  width: 100%;
   height: auto;
 }

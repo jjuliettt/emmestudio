@@ -1,13 +1,13 @@
 // Scritta al centro della copertina, sul modello delle copertine di
 // alisabethdesigns.com (stile, non loghi né nomi):
-// - "seal": il nome al centro di un sigillo rotondo, con le parole che
-//   girano intorno e una parola in corsivo sopra il nome
+// - "arch": finestra ad arco (angoli in alto arrotondati, base piatta),
+//   cornice sottile ad arco e il nome al centro
 // - "stacked": lettere grandi a coppie una sotto l'altra, etichette piccole
 //   ai lati e una parola in corsivo tra due righe sottili
-// - "monogram": un segno in corsivo tra due parole, poi il nome su due
-//   righe della stessa misura
+// - "monogram": un segno in corsivo tra due parole, poi il nome in
+//   grassetto su due righe della stessa misura
 export type CoverLettering =
-  | { kind: "seal"; ring: string[]; script: string }
+  | { kind: "arch" }
   | { kind: "stacked"; labels: [string[], string[], string[]]; script: string }
   | { kind: "monogram"; mark: string; flank: [string, string] };
 
@@ -28,11 +28,7 @@ export const PORTFOLIO_CATEGORIES: PortfolioCategory[] = [
     href: "/portfolio/private",
     src: "https://placecats.com/neo/800/900",
     alt: "Private sessions cover",
-    lettering: {
-      kind: "seal",
-      ring: ["Portraits", "Couples", "Families", "Just you"],
-      script: "sessions",
-    },
+    lettering: { kind: "arch" },
   },
   {
     title: "Events",

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { Check, Field, controlProps } from "@/components/Forms/Fields";
+import Select from "@/components/Forms/Select";
 import {
   GUIDE_CATEGORIES,
   GUIDE_SELECT_EVENT,
@@ -150,22 +151,14 @@ export default function PriceGuideForm() {
       </Field>
 
       <Field id={IDS.category} label="I'm interested in" error={errors.category}>
-        <select
-          {...controlProps(IDS.category, errors.category)}
-          className={`${styles.input} ${styles.select}`}
-          data-empty={values.category === ""}
+        <Select
+          id={IDS.category}
+          options={GUIDE_CATEGORIES}
           value={values.category}
-          onChange={(e) => update("category", e.target.value as GuideCategory)}
-        >
-          <option value="" disabled>
-            Choose one
-          </option>
-          {GUIDE_CATEGORIES.map((category) => (
-            <option key={category.value} value={category.value}>
-              {category.label}
-            </option>
-          ))}
-        </select>
+          onChange={(value) => update("category", value as GuideCategory)}
+          placeholder="Choose one"
+          error={errors.category}
+        />
       </Field>
 
       <Check

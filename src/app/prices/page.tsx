@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Booking from "@/components/Booking/Booking";
 import Faq from "@/components/Faq/Faq";
-import HandTitle from "@/components/HandTitle/HandTitle";
 import PageTitle from "@/components/PageTitle/PageTitle";
 import PriceGuideForm from "@/components/Prices/PriceGuideForm";
 import ScrollLink from "@/components/Prices/ScrollLink";
@@ -90,6 +89,11 @@ const FAQ = [
     answer:
       "Private sessions within 10 working days. Cafés and small businesses within 7 to 10 working days, depending on the package. Events within 10 working days. Always in a private online gallery.",
   },
+  {
+    question: "Can I use my photos online?",
+    answer:
+      "Yes. Private photos are for personal use. Cafés, businesses and companies can use theirs on their own website, social media and print. I always ask before showing your photos in my portfolio.",
+  },
 ];
 
 // Righe centrate, una frase per riga
@@ -153,8 +157,7 @@ export default function PricesPage() {
     <>
       {/* ---------- Intro e menu delle categorie ---------- */}
       <section className={styles.intro}>
-        <PageTitle>Prices 2026</PageTitle>
-        <p className={styles.heading}>Simple, honest pricing.</p>
+        <PageTitle>Prices</PageTitle>
         <Lines
           lines={[
             "Choose the session that fits you.",
@@ -280,12 +283,9 @@ export default function PricesPage() {
         tabIndex={-1}
         aria-labelledby="price-guide-title"
       >
-        <HandTitle
-          slot="price-guide"
-          id="price-guide-title"
-          lines={["Get the full", "price guide"]}
-          className={styles.guideTitle}
-        />
+        <h2 id="price-guide-title" className={styles.guideTitle}>
+          Get the full price guide
+        </h2>
         <p className={styles.guideLead}>
           All packages, extras and conditions, sent straight to your inbox as a
           PDF you can save.
@@ -293,7 +293,8 @@ export default function PricesPage() {
         <PriceGuideForm />
       </section>
 
-      <Booking />
+      {/* qui "See prices" porterebbe alla pagina stessa */}
+      <Booking second={{ href: "/portfolio", label: "See portfolio" }} />
     </>
   );
 }

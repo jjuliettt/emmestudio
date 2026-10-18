@@ -1,12 +1,12 @@
 import { publicFileExists } from "@/lib/publicFiles";
 import styles from "./HandTitle.module.css";
 
-// Gli spazi per i titoli scritti a mano. Il testo usa --font-handwriting
-// (per ora Allura); se in public/assets/REPLACE-ME/ c'è un'immagine con il
-// nome dello spazio (REPLACE-ME_hw-<slot>.svg/.png/.webp), si usa quella.
-export type HandSlot = "favorite-frames" | "price-guide";
+// Gli spazi scritti a mano: l'immagine in public/assets/REPLACE-ME/ con il
+// nome dello spazio (REPLACE-ME_hw-<slot>.png/.svg/.webp). Se manca, il
+// testo nel font --font-handwriting (per ora Tangerine).
+export type HandSlot = "selected-work" | "love-notes";
 
-const EXTENSIONS = ["svg", "png", "webp"];
+const EXTENSIONS = ["png", "svg", "webp"];
 
 type Props = {
   slot: HandSlot;
@@ -23,7 +23,12 @@ export default function HandTitle({ slot, lines, as: Tag = "h2", id, className }
   ).find(publicFileExists);
 
   return (
-    <Tag id={id} className={`${styles.title} ${className ?? ""}`} data-slot={slot}>
+    <Tag
+      id={id}
+      className={`${styles.title} ${className ?? ""}`}
+      data-slot={slot}
+      data-image={image ? true : undefined}
+    >
       {image ? (
         <img src={image} alt={lines.join(" ")} className={styles.image} />
       ) : (

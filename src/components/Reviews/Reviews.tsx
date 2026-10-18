@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { useReducedMotion } from "@/lib/useReducedMotion";
 import styles from "./Reviews.module.css";
 
@@ -60,7 +60,13 @@ const SLIDES = Array.from({ length: 3 }, (_, copy) =>
   REVIEWS.map((review, i) => ({ review, copy, key: `${copy}-${i}` }))
 ).flat();
 
-export default function Reviews() {
+type Props = {
+  // "love notes" scritto a mano, in un angolo della fascia (dalla home:
+  // l'immagine si cerca al momento della build, lato server)
+  note?: ReactNode;
+};
+
+export default function Reviews({ note }: Props) {
   // posizione nel track ripetuto; parte dalla prima recensione della serie di mezzo
   const [position, setPosition] = useState(HOME * COUNT);
   // niente transizione nello scatto silenzioso da una copia alla serie di mezzo
@@ -123,6 +129,8 @@ export default function Reviews() {
 
   return (
     <section className={styles.reviews}>
+      {note && <div className={styles.note}>{note}</div>}
+
       <div
         className={styles.viewport}
         onTouchStart={onTouchStart}

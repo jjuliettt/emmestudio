@@ -11,10 +11,17 @@ const DEFAULT_PHOTO_SRC = "https://placecats.com/neo/1000/1500";
 type Props = {
   // per riusare la sezione altrove con una foto diversa da quella della home
   photoSrc?: string;
+  // il secondo link: "See prices", tranne nella pagina prezzi
+  second?: { href: string; label: string };
 };
 
-// Uguale in tutte le pagine (riquadro, link e finestra con la foto)
-export default function Booking({ photoSrc = DEFAULT_PHOTO_SRC }: Props) {
+const SEE_PRICES = { href: "/prices", label: "See prices" };
+
+// Uguale in tutte le pagine (riquadro, finestra con la foto, primo link)
+export default function Booking({
+  photoSrc = DEFAULT_PHOTO_SRC,
+  second = SEE_PRICES,
+}: Props) {
   const windowRef = useRef<HTMLDivElement>(null);
   const photoRef = useRef<HTMLImageElement>(null);
   const reducedMotion = useReducedMotion();
@@ -79,8 +86,8 @@ export default function Booking({ photoSrc = DEFAULT_PHOTO_SRC }: Props) {
               <Link href="/contacts" className={`u-link ${styles.link}`}>
                 Get in touch
               </Link>
-              <Link href="/prices" className={`u-link ${styles.link}`}>
-                See prices
+              <Link href={second.href} className={`u-link ${styles.link}`}>
+                {second.label}
               </Link>
             </p>
           </div>

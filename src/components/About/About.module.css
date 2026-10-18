@@ -33,7 +33,7 @@
 .photo {
   position: relative;
   /* sopra resta lo spazio per la parte alta della firma */
-  margin: 4rem 1.25rem 0;
+  margin: 4.5rem 1.25rem 0;
 }
 
 .image {
@@ -49,9 +49,9 @@
   position: absolute;
   top: 0;
   left: -0.75rem;
-  width: 56%;
+  width: 50%;
   height: auto;
-  transform: translateY(-68%);
+  transform: translateY(-62%);
   pointer-events: none;
 }
 

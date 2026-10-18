@@ -9,14 +9,14 @@ import styles from "./ContactsPage.module.css";
 export const metadata: Metadata = {
   title: "Contacts",
   description:
-    "Get in touch with Elisa Massetti, photographer working across Antwerp and Belgium.",
+    "Get in touch with Elisa Massetti, photographer based in Belgium and open to work across Belgium.",
 };
 
 export default function ContactsPage() {
   return (
     <>
       <section className={styles.intro}>
-        <PageTitle>Let’s talk</PageTitle>
+        <PageTitle>Let's talk</PageTitle>
         <div className={styles.lead}>
           <p>Tell me what you have in mind.</p>
           <p>I usually reply within 1–2 working days.</p>
@@ -47,17 +47,13 @@ export default function ContactsPage() {
           )}
           <div>
             <dt>Area</dt>
-            <dd>Working across Antwerp and Belgium.</dd>
+            <dd>Based in Belgium, open to work across Belgium.</dd>
           </div>
         </dl>
       </section>
 
-      {/* ---------- Frase finale e link ---------- */}
+      {/* ---------- Link ---------- */}
       <section className={styles.closing}>
-        <p className={styles.closingLine}>
-          <span>I can’t wait to hear</span> <span>your story.</span>
-        </p>
-
         <p className={styles.links}>
           <Link href="/prices" className={`u-link ${styles.link}`}>
             See prices

@@ -8,11 +8,13 @@
   position: relative;
 }
 
-/* Sopra le copertine e sovrapposto all'angolo della prima */
-.intro {
+/* Sopra le copertine e sovrapposto all'angolo della prima (.wrap davanti:
+   vince sulla larghezza di base del titolo) */
+.wrap .intro {
   position: relative;
   z-index: 3;
-  margin: 0 0 -1.6rem 0.5rem;
+  width: min(68vw, 17rem);
+  margin: 0 0 -1.4rem 0;
   pointer-events: none;
 }
 

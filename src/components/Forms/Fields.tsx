@@ -33,7 +33,7 @@ type FieldProps = {
 export function Field({ id, label, error, optional, children }: FieldProps) {
   return (
     <div className={styles.field}>
-      <label htmlFor={id} className={styles.label}>
+      <label htmlFor={id} id={`${id}-label`} className={styles.label}>
         {label}
         {optional && <span className={styles.optional}> (optional)</span>}
       </label>

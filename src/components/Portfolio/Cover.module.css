@@ -39,6 +39,19 @@
   border: 1px solid var(--cream);
 }
 
+/* Copertina ad arco: angoli in alto arrotondati (mezzo cerchio), base
+   piatta; la cornice segue la stessa forma, rientrata. Fuori dall'arco si
+   vede il fondo della pagina */
+.cover[data-shape="arch"] {
+  border-radius: 999px 999px 0 0;
+  background-color: transparent;
+}
+
+.cover[data-shape="arch"] .frame {
+  inset: 10px;
+  border-radius: 999px 999px 0 0;
+}
+
 .text {
   position: absolute;
   z-index: 2;
@@ -64,6 +77,11 @@
   line-height: 1.05;
 }
 
+/* SMALL BUSINESSES: l'unico titolo di copertina in grassetto */
+.bold {
+  font-weight: 700;
+}
+
 /* Le scritte piccole: Spectral 300 maiuscolo, spaziato */
 .small {
   font-family: var(--font-main);
@@ -72,55 +90,6 @@
   letter-spacing: var(--tracking-caps);
   font-size: 2.9cqw;
   line-height: 1.3;
-}
-
-/* ---------- "seal": sigillo rotondo con il nome al centro ---------- */
-
-.seal {
-  position: relative;
-  display: grid;
-  place-items: center;
-}
-
-.sealRing {
-  grid-area: 1 / 1;
-  display: block;
-  /* il cerchio interno lascia passare "PRIVATE" alla misura dei titoli */
-  width: 92cqw;
-  height: 92cqw;
-  overflow: visible;
-}
-
-.sealLine {
-  fill: none;
-  stroke: var(--cream);
-  stroke-width: 1px;
-  vector-effect: non-scaling-stroke;
-}
-
-.sealText {
-  fill: var(--cream);
-  font-family: var(--font-main);
-  font-weight: 300;
-  font-size: 5.2px;
-  letter-spacing: 0;
-}
-
-.sealCenter {
-  grid-area: 1 / 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* la parola in corsivo appoggiata sopra il nome, un po' sovrapposta */
-.sealScript {
-  margin-bottom: -2.2cqw;
-  font-family: var(--font-script);
-  font-weight: 400;
-  font-size: 9cqw;
-  line-height: 1;
-  letter-spacing: 0;
 }
 
 /* ---------- "stacked": lettere a coppie con etichette ai lati ---------- */
@@ -168,17 +137,17 @@
   align-items: flex-start;
 }
 
-/* "by Elisa" in corsivo tra due righe sottili */
+/* "by Elisa" in Tangerine tra due righe sottili */
 .stackedScript {
   width: 42cqw;
   margin-top: 3.5cqw;
-  padding: 0.1em 0 0.15em;
+  padding: 0 0 0.05em;
   border-top: 1px solid currentColor;
   border-bottom: 1px solid currentColor;
   font-family: var(--font-script);
   font-weight: 400;
-  font-size: 7.5cqw;
-  line-height: 1.1;
+  font-size: 11cqw;
+  line-height: 1;
   letter-spacing: 0;
 }
 
@@ -204,7 +173,7 @@
 .monogramMark {
   font-family: var(--font-script);
   font-weight: 400;
-  font-size: 18cqw;
-  line-height: 0.9;
+  font-size: 24cqw;
+  line-height: 0.8;
   letter-spacing: 0;
 }

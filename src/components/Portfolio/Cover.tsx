@@ -11,39 +11,12 @@ function pairs(word: string) {
   return word.match(/.{1,2}/g) ?? [word];
 }
 
-// Sigillo: le parole girano lungo un cerchio (testo su tracciato SVG),
-// tra due cerchi sottili; textLength le distribuisce su tutto il giro
-function Seal({ words }: { words: string[] }) {
-  const text = words.map((word) => `${word.toUpperCase()} · `).join("");
-  return (
-    <svg className={styles.sealRing} viewBox="0 0 100 100" aria-hidden="true">
-      <defs>
-        <path id="seal-path" d="M50 13 a37 37 0 1 1 -0.01 0" />
-      </defs>
-      <circle cx="50" cy="50" r="44" className={styles.sealLine} />
-      <circle cx="50" cy="50" r="34" className={styles.sealLine} />
-      <text className={styles.sealText}>
-        <textPath href="#seal-path" textLength="232" lengthAdjust="spacing">
-          {text}
-        </textPath>
-      </text>
-    </svg>
-  );
-}
-
 function Lettering({ category }: Props) {
   const { title, lettering } = category;
 
-  if (lettering.kind === "seal") {
-    return (
-      <span className={styles.seal}>
-        <Seal words={lettering.ring} />
-        <span className={styles.sealCenter}>
-          <span className={styles.sealScript}>{lettering.script}</span>
-          <span className={styles.title}>{title}</span>
-        </span>
-      </span>
-    );
+  // ad arco: solo il nome, al centro (la forma è nella copertina)
+  if (lettering.kind === "arch") {
+    return <span className={styles.title}>{title}</span>;
   }
 
   if (lettering.kind === "stacked") {
@@ -77,7 +50,8 @@ function Lettering({ category }: Props) {
     );
   }
 
-  // il nome su due righe ("SMALL" / "BUSINESSES"), della stessa misura
+  // il nome in grassetto su due righe ("SMALL" / "BUSINESSES"), della
+  // stessa misura
   return (
     <span className={styles.monogram}>
       <span className={styles.monogramTop}>
@@ -86,7 +60,7 @@ function Lettering({ category }: Props) {
         <span className={styles.monogramFlank}>{lettering.flank[1]}</span>
       </span>
       {title.split(" ").map((word) => (
-        <span key={word} className={styles.title}>
+        <span key={word} className={`${styles.title} ${styles.bold}`}>
           {word}
         </span>
       ))}
@@ -101,6 +75,7 @@ export default function Cover({ category }: Props) {
     <Link
       href={category.href}
       className={styles.cover}
+      data-shape={category.lettering.kind === "arch" ? "arch" : undefined}
       aria-label={category.title}
     >
       <img src={category.src} alt={category.alt} className={styles.photo} />

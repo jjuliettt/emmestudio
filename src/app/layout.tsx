@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
-import { menuSans, spectral, spectralBoldItalic } from "./fonts";
+import { menuSans, spectral, tangerine } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${spectral.variable} ${spectralBoldItalic.variable} ${menuSans.variable}`}
+      className={`${spectral.variable} ${tangerine.variable} ${menuSans.variable}`}
     >
       <body>
         <Header />

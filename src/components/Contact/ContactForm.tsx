@@ -3,15 +3,14 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { Check, Field, controlProps } from "@/components/Forms/Fields";
+import Select from "@/components/Forms/Select";
 import { isValidEmail } from "@/lib/forms";
 import styles from "@/components/Forms/Form.module.css";
 
-const INTERESTS = [
-  "Private",
-  "Small Business",
-  "Company or Event",
-  "Something else",
-];
+// il valore è il nome stesso: arriva così nell'email
+const INTERESTS = ["Private", "Small Business", "Company or Event", "Something else"].map(
+  (label) => ({ value: label, label })
+);
 
 type Values = {
   name: string;
@@ -146,22 +145,14 @@ export default function ContactForm() {
       </Field>
 
       <Field id={IDS.interest} label="I'm interested in" error={errors.interest}>
-        <select
-          {...controlProps(IDS.interest, errors.interest)}
-          className={`${styles.input} ${styles.select}`}
-          data-empty={values.interest === ""}
+        <Select
+          id={IDS.interest}
+          options={INTERESTS}
           value={values.interest}
-          onChange={(e) => update("interest", e.target.value)}
-        >
-          <option value="" disabled>
-            Choose one
-          </option>
-          {INTERESTS.map((interest) => (
-            <option key={interest} value={interest}>
-              {interest}
-            </option>
-          ))}
-        </select>
+          onChange={(value) => update("interest", value)}
+          placeholder="Choose one"
+          error={errors.interest}
+        />
       </Field>
 
       <Field id={IDS.when} label="Date or period" optional>

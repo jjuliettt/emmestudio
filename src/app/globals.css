@@ -8,32 +8,24 @@
   --beige: #f7eee7;
   --dot: #d5c6b8;
 
-  /* Font 1 (Spectral) per tutto il testo; Font 2 (Snell Roundhand, solo
-     sui dispositivi Apple) per le parole in corsivo; Font 3 (Quicksand)
-     solo per il menu e le etichette dei moduli */
+  /* Font 1 (Spectral) per tutto il testo; Font 2 (Tangerine) per le parole
+     in corsivo; Font 3 (Quicksand) solo per il menu e le etichette dei
+     moduli */
   --font-main: var(--font-spectral), Georgia, "Times New Roman", serif;
-  --font-script: "Snell Roundhand", "SnellRoundhand", cursive;
+  --font-script: var(--font-tangerine), cursive;
   --font-menu: var(--font-quicksand), system-ui, sans-serif;
-  /* Snell Roundhand sulla stessa riga di Spectral: un po' più grande,
-     così a occhio sembrano della stessa misura */
-  --script-scale: 1.25;
+  /* Tangerine ha le minuscole piccolissime: sulla stessa riga di Spectral
+     va ingrandito perché a occhio sembrino della stessa misura */
+  --script-scale: 1.8;
 
-  /* Titoli scritti a mano ("favorite frames", "Get the full price
-     guide"): solo qui. Per ora Allura; il font definitivo sostituisce il
-     file in public/assets/REPLACE-ME/ */
-  --font-handwriting: "Handwriting", cursive;
+  /* Gli spazi scritti a mano ("selected work", "love notes") sono
+     immagini in public/assets/REPLACE-ME/; se un'immagine manca, il testo
+     usa questo font (per ora Tangerine) */
+  --font-handwriting: var(--font-tangerine), cursive;
 
   /* spaziatura delle lettere: normale e per maiuscole ed etichette */
   --tracking: 0.04em;
   --tracking-caps: 0.15em;
-}
-
-@font-face {
-  font-family: "Handwriting";
-  src: url("/assets/REPLACE-ME/REPLACE-ME_handwriting.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
 }
 
 * {
@@ -61,7 +53,7 @@ body {
   font-synthesis: style;
 }
 
-/* Niente grassetto da nessuna parte (tranne "Welcome to" nella home) */
+/* Il grassetto solo dove è previsto, con una classe o una regola apposta */
 h1,
 h2,
 h3,
@@ -77,6 +69,7 @@ th {
 /* i campi dei moduli e i pulsanti non ereditano font e colore da soli */
 input,
 select,
+option,
 textarea,
 button {
   color: inherit;
