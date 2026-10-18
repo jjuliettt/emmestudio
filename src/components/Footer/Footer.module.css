@@ -34,10 +34,9 @@
   display: none;
 }
 
-/* come gli altri link del sito: maiuscolo, sottolineato */
+/* stesso font/stile delle altre scritte del footer: solo sottolineato,
+   niente maiuscolo né spaziatura extra (quelli sono per i link-pulsante) */
 .link {
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-caps);
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.35em;

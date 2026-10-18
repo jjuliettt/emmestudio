@@ -10,7 +10,6 @@ here with exactly the same name, then push. No code needs to change.
 | `REPLACE-ME_handwriting.woff2` | Font of the handwritten titles (`--font-handwriting`). Placeholder: Allura (free, OFL). | Home, Portfolio, Prices |
 | `REPLACE-ME_hw-favorite-frames.svg` / `.png` / `.webp` | Optional: an image of the handwritten "favorite frames". If present, it replaces the text. | Home, Portfolio |
 | `REPLACE-ME_hw-price-guide.svg` / `.png` / `.webp` | Optional: an image of the handwritten "Get the full price guide". If present, it replaces the text. | Prices |
-
 The handwritten titles are text in `--font-handwriting` until an image with
 one of the `REPLACE-ME_hw-…` names is added. The final handwriting font must
 be a `.woff2` file named `REPLACE-ME_handwriting.woff2`.

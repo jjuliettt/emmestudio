@@ -58,13 +58,15 @@ function validate(values: Values): Errors {
   return errors;
 }
 
-// Modulo contatti. Per ora controlla i dati e mostra il grazie, ma non
-// invia niente: il collegamento all'email arriva insieme alla fase 2.
+// Modulo contatti: controlla i dati e li manda a /api/contact, che invia
+// l'email con Resend.
 export default function ContactForm() {
   const [values, setValues] = useState<Values>(EMPTY);
   const [errors, setErrors] = useState<Errors>({});
   // dopo il primo invio gli errori si aggiornano mentre si scrive
   const [attempted, setAttempted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState(false);
   const [sent, setSent] = useState(false);
   const thanksRef = useRef<HTMLParagraphElement>(null);
 
@@ -78,8 +80,9 @@ export default function ContactForm() {
     if (sent) thanksRef.current?.focus();
   }, [sent]);
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (sending) return;
     const found = validate(values);
     setErrors(found);
     setAttempted(true);
@@ -88,9 +91,22 @@ export default function ContactForm() {
       document.getElementById(IDS[first])?.focus();
       return;
     }
-    // TODO fase 2: inviare il messaggio all'email di Elisa tramite una
-    // route del server
-    setSent(true);
+
+    setSending(true);
+    setSendError(false);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+      if (!response.ok) throw new Error(String(response.status));
+      setSent(true);
+    } catch {
+      setSendError(true);
+    } finally {
+      setSending(false);
+    }
   };
 
   if (sent) {
@@ -180,13 +196,19 @@ export default function ContactForm() {
 
       <p className={styles.privacy}>
         How your details are used:{" "}
-        <Link href="/privacy-policy" className="u-link">
+        <Link href="/privacy-policy" className={styles.privacyLink}>
           Privacy &amp; Legal
         </Link>
       </p>
 
-      <button type="submit" className={styles.submit}>
-        Send message
+      {sendError && (
+        <p className={styles.error} role="alert">
+          Sorry, the message couldn&apos;t be sent. Please try again in a moment.
+        </p>
+      )}
+
+      <button type="submit" className={styles.submit} disabled={sending}>
+        {sending ? "Sending…" : "Send message"}
       </button>
     </form>
   );

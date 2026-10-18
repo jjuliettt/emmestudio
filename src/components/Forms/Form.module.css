@@ -171,6 +171,14 @@
   line-height: 1.45;
 }
 
+/* stesso font e stile del testo intorno: solo sottolineato, niente
+   maiuscolo né spaziatura extra (quelli sono per i link-pulsante) */
+.privacyLink {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.35em;
+}
+
 .submit {
   align-self: center;
   min-height: 2.75rem;
