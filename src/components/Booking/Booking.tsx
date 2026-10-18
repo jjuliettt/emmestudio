@@ -6,22 +6,19 @@ import { useReducedMotion } from "@/lib/useReducedMotion";
 import styles from "./Booking.module.css";
 
 // Placeholder: foto di gattini, da sostituire con la foto reale (2:3).
-const DEFAULT_PHOTO_SRC = "https://placecats.com/neo/1000/1500";
+const PHOTO_SRC = "https://placecats.com/neo/1000/1500";
 
 type Props = {
-  // per riusare la sezione altrove con una foto diversa da quella della home
-  photoSrc?: string;
-  // il secondo link: "See prices", tranne nella pagina prezzi
-  second?: { href: string; label: string };
+  // solo nella pagina prezzi: "See portfolio" al posto di "See prices"
+  onPricesPage?: boolean;
 };
 
-const SEE_PRICES = { href: "/prices", label: "See prices" };
-
-// Uguale in tutte le pagine (riquadro, finestra con la foto, primo link)
-export default function Booking({
-  photoSrc = DEFAULT_PHOTO_SRC,
-  second = SEE_PRICES,
-}: Props) {
+// Un solo componente, identico in tutte le pagine (foto, finestra,
+// riquadro, testi). Cambia solo il secondo link nella pagina prezzi.
+export default function Booking({ onPricesPage = false }: Props) {
+  const second = onPricesPage
+    ? { href: "/portfolio", label: "See portfolio" }
+    : { href: "/prices", label: "See prices" };
   const windowRef = useRef<HTMLDivElement>(null);
   const photoRef = useRef<HTMLImageElement>(null);
   const reducedMotion = useReducedMotion();
@@ -76,7 +73,7 @@ export default function Booking({
       <div className={styles.frame}>
         {/* Finestra quadrata: la foto ci scorre dietro */}
         <div ref={windowRef} className={styles.window}>
-          <img ref={photoRef} src={photoSrc} alt="" className={styles.photo} />
+          <img ref={photoRef} src={PHOTO_SRC} alt="" className={styles.photo} />
 
           <div className={styles.box}>
             <p className={styles.ask}>

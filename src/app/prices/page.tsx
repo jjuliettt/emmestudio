@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Booking from "@/components/Booking/Booking";
 import Faq from "@/components/Faq/Faq";
-import PageTitle from "@/components/PageTitle/PageTitle";
+import PageTitle, { PageLead } from "@/components/PageTitle/PageTitle";
 import PriceGuideForm from "@/components/Prices/PriceGuideForm";
 import ScrollLink from "@/components/Prices/ScrollLink";
 import { GUIDE_CATEGORIES, PRICE_GUIDE_ID, type GuideCategory } from "@/lib/forms";
@@ -67,32 +67,26 @@ const SMALL_BUSINESSES: Package[] = [
   },
 ];
 
-const PROMISES = [
-  "One honest price, and never a surprise.",
-  "Your photos, ready in 7 to 10 working days.",
-  "A private gallery, just for you and your people.",
-];
-
 const FAQ = [
+  {
+    question: "How do I book a session?",
+    answer:
+      "Get in touch through the contact form or by email, and tell me a little about what you have in mind. We'll discuss your needs, find the right package and agree on the details before confirming your booking.",
+  },
+  {
+    question: "When will I receive my photos?",
+    answer:
+      "Your edited photos will be delivered through a private download link in high resolution. Delivery times depend on the type of shoot, with most galleries ready within 7–10 working days.",
+  },
   {
     question: "What if it rains?",
     answer:
-      "No stress. If the weather doesn't cooperate for an outdoor private session, we simply pick another day, free of charge.",
-  },
-  {
-    question: "How does booking work?",
-    answer:
-      "Tell me what you have in mind and we agree on the details together. A small deposit confirms your date for private sessions, and the rest is paid when I deliver your photos. For businesses and events, we sign a short written agreement first.",
-  },
-  {
-    question: "When do I get my photos?",
-    answer:
-      "Private sessions within 10 working days. Cafés and small businesses within 7 to 10 working days, depending on the package. Events within 10 working days. Always in a private online gallery.",
+      "No stress. If bad weather affects an outdoor private session, we'll simply reschedule for another day, free of charge.",
   },
   {
     question: "Can I use my photos online?",
     answer:
-      "Yes. Private photos are for personal use. Cafés, businesses and companies can use theirs on their own website, social media and print. I always ask before showing your photos in my portfolio.",
+      "Of course! Personal sessions include sharing on your personal social media, while business and event packages include use on your website, social media and other agreed communication channels. Commercial use of personal portraits isn't included.",
   },
 ];
 
@@ -131,7 +125,7 @@ function Cards({ packages }: { packages: Package[] }) {
 }
 
 // I link al modulo della guida, con la categoria preselezionata: stesso
-// stile e stessa distanza dal contenuto sopra in tutte e tre le sezioni
+// stile in tutte e tre le sezioni (le distanze le dà la sezione)
 function GuideLink({
   category,
   className,
@@ -158,12 +152,11 @@ export default function PricesPage() {
       {/* ---------- Intro e menu delle categorie ---------- */}
       <section className={styles.intro}>
         <PageTitle>Prices</PageTitle>
-        <Lines
+        <PageLead
           lines={[
             "Choose the session that fits you.",
             "The full price list is one email away.",
           ]}
-          className={styles.lead}
         />
 
         <nav aria-label="Categories" className={styles.menu}>
@@ -184,10 +177,12 @@ export default function PricesPage() {
 
       {/* ---------- Private ---------- */}
       <section id="private" className={styles.category} data-tone="cream" tabIndex={-1}>
-        <h2 className={styles.title}>Private</h2>
-        <GuideLink category="private" className={styles.from}>
-          Starting at €150
-        </GuideLink>
+        <div className={styles.head}>
+          <h2 className={styles.title}>Private</h2>
+          <GuideLink category="private" className={styles.from}>
+            Starting at €150
+          </GuideLink>
+        </div>
 
         <Cards packages={PRIVATE} />
 
@@ -195,7 +190,6 @@ export default function PricesPage() {
           lines={[
             "Any extra information, prices, travel and payment terms are in the full guide.",
           ]}
-          className={styles.after}
         />
         <GuideLink category="private" className={styles.button}>
           Get the full guide
@@ -209,10 +203,12 @@ export default function PricesPage() {
         data-tone="beige"
         tabIndex={-1}
       >
-        <h2 className={styles.title}>Small Businesses</h2>
-        <GuideLink category="small-businesses" className={styles.from}>
-          Starting at €295
-        </GuideLink>
+        <div className={styles.head}>
+          <h2 className={styles.title}>Small Businesses</h2>
+          <GuideLink category="small-businesses" className={styles.from}>
+            Starting at €295
+          </GuideLink>
+        </div>
 
         <Lines
           lines={[
@@ -220,7 +216,6 @@ export default function PricesPage() {
             "No obligation.",
             "You get a written shot list and a fixed quote.",
           ]}
-          className={styles.before}
         />
 
         <Cards packages={SMALL_BUSINESSES} />
@@ -231,7 +226,6 @@ export default function PricesPage() {
             "Seasonal Formula: four sessions a year, one every season.",
             "Ask for details.",
           ]}
-          className={styles.after}
         />
         <GuideLink category="small-businesses" className={styles.button}>
           Get the full guide
@@ -245,34 +239,28 @@ export default function PricesPage() {
         data-tone="cream"
         tabIndex={-1}
       >
-        <h2 className={styles.title}>Companies &amp; Events</h2>
+        <div className={styles.head}>
+          <h2 className={styles.title}>Companies &amp; Events</h2>
+        </div>
 
         <Lines
           lines={[
             "Every company and event is different. Tell me about your event, how long it lasts and your budget, and I'll build a quote that fits.",
           ]}
-          className={styles.before}
         />
         <Lines
           lines={[
             "Conferences · team days · product launches · team portraits and LinkedIn photos.",
           ]}
-          className={styles.after}
         />
         <GuideLink category="companies-events" className={styles.button}>
           Tell me about your event
         </GuideLink>
       </section>
 
-      {/* ---------- Promesse (fascia beige) ---------- */}
-      <section className={styles.promises}>
-        <h2 className={styles.scriptHeading}>A few little promises</h2>
-        <Lines lines={PROMISES} className={styles.promiseLines} />
-      </section>
-
       {/* ---------- FAQ ---------- */}
       <section className={styles.faq}>
-        <h2 className={styles.scriptHeading}>Good to know</h2>
+        <h2 className={styles.scriptHeading}>FAQ</h2>
         <Faq items={FAQ} />
       </section>
 
@@ -294,7 +282,7 @@ export default function PricesPage() {
       </section>
 
       {/* qui "See prices" porterebbe alla pagina stessa */}
-      <Booking second={{ href: "/portfolio", label: "See portfolio" }} />
+      <Booking onPricesPage />
     </>
   );
 }

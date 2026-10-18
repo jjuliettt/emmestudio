@@ -1,14 +1,14 @@
 /* ---------------------------------------------
    Pagina Prezzi — mobile first
-   Intro con il menu delle categorie, tre sezioni a fondo alternato,
-   promesse, FAQ, modulo della guida
+   Intro con il menu delle categorie, tre sezioni a fondo alternato, FAQ,
+   modulo della guida. Spazi solo dalla scala (--space-*)
 --------------------------------------------- */
 
 /* Le parti a cui portano i link della pagina: lo scorrimento si ferma poco
    sopra, il fuoco (per la tastiera) non disegna il contorno */
 .category,
 .guide {
-  scroll-margin-top: 0.5rem;
+  scroll-margin-top: var(--space-s);
 }
 
 .category:focus,
@@ -30,21 +30,17 @@
 
 /* ---------- Intro ---------- */
 
-/* sotto c'è lo spazio grande prima della linea della prima sezione */
+/* frase → fascia, fascia → linea, linea → "Private": tutti --space-l */
 .intro {
-  padding: 2rem 0 4.5rem;
+  padding: var(--space-xl) 1.25rem var(--space-l);
   text-align: center;
-}
-
-.lead {
-  margin: 0.9rem 1.25rem 0;
 }
 
 /* Fascia espresso a tutta larghezza: le tre categorie una sotto l'altra,
    centrate */
 .menu {
-  margin-top: 1.5rem;
-  padding: 0.5rem 1.25rem;
+  margin: var(--space-l) -1.25rem 0;
+  padding: var(--space-s) 1.25rem;
   background-color: var(--espresso);
   color: var(--cream);
 }
@@ -63,17 +59,22 @@
   display: inline-flex;
   align-items: center;
   min-height: 2.75rem;
-  padding: 0 1rem;
+  padding: 0 var(--space-s);
   font-size: 0.75rem;
   line-height: 1.3;
 }
 
 /* ---------- Categorie ---------- */
 
-/* Fondi alternati, linea sottile in cima; sotto, lo stesso spazio grande
-   prima della sezione successiva */
+/* Fondi alternati, linea sottile in cima. Dentro, gli stessi spazi in tutte
+   e tre: --space-l sopra il titolo e dopo l'ultimo elemento, --space-m tra
+   un elemento e l'altro (pulsante compreso) */
 .category {
-  padding: 3.5rem 1.25rem 4.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-m);
+  padding: var(--space-l) 1.25rem;
   border-top: 1px solid var(--espresso);
   text-align: center;
 }
@@ -86,34 +87,35 @@
   background-color: var(--beige);
 }
 
-/* Tangerine 700 (il file vero del grassetto), grande */
+/* l'ultima delle tre: chiusa anche sotto da una linea */
+.category[id="companies-events"] {
+  border-bottom: 1px solid var(--espresso);
+}
+
+/* titolo e "STARTING AT" insieme */
+.head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-s);
+}
+
+/* Tangerine 700 (il file vero del grassetto), sui 30px: più piccolo si
+   legge male */
 .title {
   margin: 0;
   font-family: var(--font-script);
   font-weight: 700;
   letter-spacing: 0;
-  font-size: 3.6rem;
-  line-height: 1.05;
+  font-size: 1.875rem;
+  line-height: 1.1;
 }
 
 .from {
-  display: table;
-  margin: 0.9rem auto 0;
   font-size: 0.75rem;
 }
 
-.before {
-  margin-top: 1.75rem;
-}
-
-.after {
-  margin-top: 1.75rem;
-}
-
-/* i tre pulsanti: stessa distanza dal contenuto sopra */
 .button {
-  display: table;
-  margin: 1.75rem auto 0;
   font-size: 0.75rem;
 }
 
@@ -121,8 +123,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.1rem;
-  margin: 2rem 0 0;
+  gap: var(--space-m);
+  margin: 0;
   padding: 0;
   list-style: none;
 }
@@ -132,7 +134,7 @@
 .card {
   position: relative;
   width: min(84vw, 22rem);
-  padding: 1.2rem 1.4rem 1.15rem;
+  padding: var(--space-m);
   color: var(--espresso);
 }
 
@@ -147,13 +149,15 @@
 .card::before {
   content: "";
   position: absolute;
-  inset: 8px;
+  inset: var(--space-s);
   border: 1px solid var(--espresso);
   pointer-events: none;
 }
 
-/* la formula più scelta: fondo espresso, testi e cornice crema */
+/* la formula più scelta: fondo espresso, testi e cornice crema; più aria
+   in alto per la targhetta */
 .category .card[data-featured] {
+  padding-top: var(--space-l);
   background-color: var(--espresso);
   color: var(--cream);
 }
@@ -162,16 +166,24 @@
   border-color: var(--cream);
 }
 
-/* "most chosen" dentro la cornice, sopra il nome (Tangerine: mai sotto i
-   24px) */
+/* "most chosen" sulla linea della cornice in alto, con una toppa crema
+   dietro che la interrompe (Tangerine: mai sotto i 24px) */
 .tag {
-  display: block;
-  margin: -0.3rem 0 0.1rem;
+  position: absolute;
+  z-index: 1;
+  top: var(--space-s);
+  left: 50%;
+  /* centrata sulla linea, ma senza uscire sopra il riquadro */
+  transform: translate(-50%, max(-50%, calc(-1 * var(--space-s))));
+  padding: 0 var(--space-s);
+  background-color: var(--cream);
+  color: var(--espresso);
   font-family: var(--font-script);
   font-weight: 400;
   letter-spacing: 0;
-  font-size: 1.6rem;
-  line-height: 1.1;
+  font-size: 1.5rem;
+  line-height: 1.15;
+  white-space: nowrap;
 }
 
 /* Spectral 200 maiuscolo */
@@ -189,7 +201,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 0 0.6em;
-  margin: 0.45rem 0 0;
+  margin: var(--space-s) 0 0;
   text-transform: uppercase;
   letter-spacing: var(--tracking-caps);
   font-size: 0.66rem;
@@ -198,16 +210,16 @@
 
 .cardText {
   max-width: 16.5rem;
-  margin: 0.4rem auto 0;
+  margin: var(--space-s) auto 0;
   font-size: 0.9rem;
   line-height: 1.4;
 }
 
-/* ---------- Promesse (fascia beige) e FAQ ---------- */
+/* ---------- FAQ ---------- */
 
 /* Tangerine 400 */
 .scriptHeading {
-  margin: 0;
+  margin: 0 0 var(--space-m);
   font-family: var(--font-script);
   font-weight: 400;
   letter-spacing: 0;
@@ -216,31 +228,14 @@
   text-align: center;
 }
 
-.promises {
-  padding: 3.25rem 1.25rem;
-  background-color: var(--beige);
-}
-
-.promiseLines {
-  margin-top: 1.25rem;
-}
-
-.promiseLines p + p {
-  margin-top: 0.6rem;
-}
-
 .faq {
-  padding: 3.25rem 1.25rem;
-}
-
-.faq .scriptHeading {
-  margin-bottom: 1.5rem;
+  padding: var(--space-l) 1.25rem;
 }
 
 /* ---------- Modulo della guida (fascia beige) ---------- */
 
 .guide {
-  padding: 2.75rem 1.25rem 3rem;
+  padding: var(--space-l) 1.25rem;
   background-color: var(--beige);
   text-align: center;
 }
@@ -257,7 +252,7 @@
 
 /* sempre su due righe: un filo più piccolo sui telefoni stretti */
 .guideLead {
-  margin: 0.9rem auto 1.5rem;
+  margin: var(--space-s) auto var(--space-m);
   font-size: min(0.95rem, 3.75vw);
   line-height: 1.5;
   text-wrap: balance;
@@ -269,7 +264,6 @@
 
 @media (min-width: 768px) {
   .category,
-  .promises,
   .faq,
   .guide {
     padding-left: 3rem;

@@ -7,25 +7,25 @@
 .page {
   background-color: var(--cream);
   color: var(--espresso);
-  padding: 2rem 1.25rem 4.5rem;
+  padding: var(--space-xl) 1.25rem;
 }
 
 .updated {
-  margin: 0.6rem 0 0;
+  margin: var(--space-s) 0 0;
   text-align: center;
   font-size: 0.8rem;
 }
 
 .sections {
-  margin-top: 2.5rem;
+  margin-top: var(--space-l);
   display: flex;
   flex-direction: column;
-  gap: 1.9rem;
+  gap: var(--space-l);
 }
 
 /* Spectral grassetto, maiuscolo spaziato */
 .heading {
-  margin: 0 0 0.6rem;
+  margin: 0 0 var(--space-s);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: var(--tracking-caps);
@@ -47,14 +47,14 @@
 }
 
 .paragraph {
-  margin: 0 0 0.6rem;
+  margin: 0 0 var(--space-s);
   font-size: 0.97rem;
   line-height: 1.55;
 }
 
 /* i dati uno per riga restano a sinistra */
 .details {
-  margin: 0 0 0.6rem;
+  margin: 0 0 var(--space-s);
   font-size: 0.97rem;
   line-height: 1.55;
 }
@@ -69,14 +69,14 @@
 }
 
 .list {
-  margin: 0 0 0.6rem;
+  margin: 0 0 var(--space-s);
   padding-left: 1.2rem;
   font-size: 0.97rem;
   line-height: 1.55;
 }
 
 .list li + li {
-  margin-top: 0.35rem;
+  margin-top: var(--space-s);
 }
 
 .list:last-child {
@@ -89,7 +89,7 @@
 
 @media (min-width: 768px) {
   .page {
-    padding: 3rem 3rem 6rem;
+    padding: var(--space-xl) 3rem;
   }
 
   .sections {

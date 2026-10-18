@@ -1,0 +1,102 @@
+/* ---------------------------------------------
+   Griglia delle foto di una categoria — mobile first
+   Due colonne, spazi uguali, ogni foto nelle sue proporzioni
+--------------------------------------------- */
+
+.grid {
+  columns: 2;
+  column-gap: var(--space-s);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  break-inside: avoid;
+  margin-bottom: var(--space-s);
+}
+
+.thumb {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+}
+
+.thumb:focus-visible {
+  outline: 1px solid var(--espresso);
+  outline-offset: 3px;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ---------- A tutto schermo ---------- */
+
+.viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-l) var(--space-s);
+  background-color: var(--espresso);
+  cursor: zoom-out;
+}
+
+.full {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+/* X in crema, come quella del menu */
+.close {
+  position: absolute;
+  top: var(--space-s);
+  right: var(--space-s);
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.closeLine {
+  position: absolute;
+  top: 50%;
+  left: 11px;
+  width: 22px;
+  height: 2px;
+  margin-top: -1px;
+  background-color: var(--cream);
+}
+
+.closeLine:first-child {
+  transform: rotate(45deg);
+}
+
+.closeLine:last-child {
+  transform: rotate(-45deg);
+}
+
+.close:focus-visible {
+  outline: 1px solid var(--cream);
+  outline-offset: -4px;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    columns: 3;
+  }
+}

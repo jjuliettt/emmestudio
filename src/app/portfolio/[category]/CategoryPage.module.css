@@ -1,0 +1,42 @@
+/* ---------------------------------------------
+   Pagina di una categoria — mobile first
+   Link per tornare, titolo, griglia di foto, link alle altre categorie
+--------------------------------------------- */
+
+.page {
+  padding: var(--space-l) 1.25rem;
+  background-color: var(--cream);
+  color: var(--espresso);
+}
+
+.back {
+  display: table;
+  font-size: 0.7rem;
+}
+
+.title {
+  margin: var(--space-m) 0 var(--space-l);
+}
+
+.others {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-m);
+  margin-top: var(--space-l);
+}
+
+.link {
+  font-size: 0.75rem;
+}
+
+/* ---------------------------------------------
+   Tablet / desktop (non ancora rifinito)
+--------------------------------------------- */
+
+@media (min-width: 768px) {
+  .page {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}

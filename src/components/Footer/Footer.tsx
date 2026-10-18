@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BRAND, EMAIL, ENTERPRISE_NO } from "@/lib/contacts";
+import { EMAIL, ENTERPRISE_NO } from "@/lib/contacts";
 import styles from "./Footer.module.css";
 
 function Dot({ className }: { className?: string }) {
@@ -17,7 +17,7 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className={styles.rows}>
         <p className={styles.line}>
-          © {new Date().getFullYear()} {BRAND} <Dot /> Enterprise number{" "}
+          © {new Date().getFullYear()} Elisa Massetti<Dot />Enterprise number{" "}
           <span className={styles.nowrap}>{ENTERPRISE_NO}</span>
         </p>
 

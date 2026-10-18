@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ContactForm from "@/components/Contact/ContactForm";
-import PageTitle from "@/components/PageTitle/PageTitle";
+import PageTitle, { PageLead } from "@/components/PageTitle/PageTitle";
 import { EMAIL, INSTAGRAM } from "@/lib/contacts";
 import styles from "./ContactsPage.module.css";
 
@@ -17,10 +17,12 @@ export default function ContactsPage() {
     <>
       <section className={styles.intro}>
         <PageTitle>Let's talk</PageTitle>
-        <div className={styles.lead}>
-          <p>Tell me what you have in mind.</p>
-          <p>I usually reply within 1–2 working days.</p>
-        </div>
+        <PageLead
+          lines={[
+            "Tell me what you have in mind.",
+            "I usually reply within 1–2 working days.",
+          ]}
+        />
       </section>
 
       <section className={styles.formSection} aria-label="Contact form">

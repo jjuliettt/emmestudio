@@ -4,7 +4,7 @@ import styles from "./HandTitle.module.css";
 // Gli spazi scritti a mano: l'immagine in public/assets/REPLACE-ME/ con il
 // nome dello spazio (REPLACE-ME_hw-<slot>.png/.svg/.webp). Se manca, il
 // testo nel font --font-handwriting (per ora Tangerine).
-export type HandSlot = "selected-work" | "love-notes";
+export type HandSlot = "selected-work";
 
 const EXTENSIONS = ["png", "svg", "webp"];
 

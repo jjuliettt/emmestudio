@@ -18,9 +18,16 @@
      va ingrandito perché a occhio sembrino della stessa misura */
   --script-scale: 1.8;
 
-  /* Gli spazi scritti a mano ("selected work", "love notes") sono
-     immagini in public/assets/REPLACE-ME/; se un'immagine manca, il testo
-     usa questo font (per ora Tangerine) */
+  /* Spaziature: solo questi quattro valori per gli spazi verticali tra
+     blocchi e sezioni. "Spazio uguale" = lo stesso valore sopra e sotto */
+  --space-s: 12px;
+  --space-m: 24px;
+  --space-l: 48px;
+  --space-xl: 72px;
+
+  /* Lo spazio scritto a mano ("selected work") è un'immagine in
+     public/assets/REPLACE-ME/; se manca, il testo usa questo font (per ora
+     Tangerine) */
   --font-handwriting: var(--font-tangerine), cursive;
 
   /* spaziatura delle lettere: normale e per maiuscole ed etichette */

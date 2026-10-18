@@ -11,6 +11,11 @@ function pairs(word: string) {
   return word.match(/.{1,2}/g) ?? [word];
 }
 
+// "VIEW" sotto il titolo: compare passando sopra (o toccando) la copertina
+function View() {
+  return <span className={styles.view}>View</span>;
+}
+
 function Lettering({ category }: Props) {
   const { title, lettering } = category;
 
@@ -44,6 +49,7 @@ function Lettering({ category }: Props) {
           ))}
         </span>
         <span className={styles.stackedScript}>{lettering.script}</span>
+        <View />
       </span>
     );
   }
@@ -62,12 +68,15 @@ function Lettering({ category }: Props) {
           {word}
         </span>
       ))}
+      <View />
     </span>
   );
 }
 
 // Una copertina: foto velata, cornice sottile rientrata e la scritta al
-// centro. Condivisa dalla home e dalla pagina /portfolio.
+// centro. Condivisa dalla home e dalla pagina /portfolio. Al passaggio (o al
+// tocco) la foto si ingrandisce piano, la cornice rientra e compare "VIEW".
+// Porta alla pagina della categoria.
 export default function Cover({ category }: Props) {
   // copertina già finita: solo l'immagine, alla stessa larghezza delle altre
   if (category.lettering.kind === "image") {
@@ -79,6 +88,10 @@ export default function Cover({ category }: Props) {
         aria-label={category.title}
       >
         <img src={category.src} alt={category.alt} className={styles.photo} />
+        {/* sotto le parole piccole della grafica, nello stesso marrone */}
+        <span className={styles.imageView} aria-hidden="true">
+          <View />
+        </span>
       </Link>
     );
   }

@@ -7,7 +7,7 @@
 .booking {
   background-color: var(--cream);
   color: var(--espresso);
-  padding: 2rem 0;
+  padding: var(--space-l) 0;
 }
 
 .frame {
@@ -48,10 +48,10 @@
   color: var(--cream);
   text-align: center;
   line-height: 1.2;
-  gap: 2vw;
+  gap: var(--space-s);
   display: flex;
   flex-direction: column;
-  padding: 5vw;
+  padding: var(--space-m);
 }
 
 .ask {
@@ -65,20 +65,20 @@
 }
 
 /* "work together?": Tangerine (è già un corsivo, niente inclinazione
-   finta), più grande perché sembri della misura di "WANT TO" */
+   finta), della misura di "WANT TO" e poi un 12% in più */
 .ask em {
   font-family: var(--font-script);
   font-style: normal;
   text-transform: none;
   letter-spacing: 0;
-  font-size: calc(var(--script-scale) * 1em);
+  font-size: calc(var(--script-scale) * 1.12em);
 }
 
 .links {
   display: flex;
   justify-content: center;
-  gap: 1.25rem;
-  margin: 0.45rem 0 0;
+  gap: var(--space-m);
+  margin: var(--space-s) 0 0;
   flex-direction: column;
 }
 

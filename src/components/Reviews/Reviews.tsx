@@ -1,48 +1,47 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "@/lib/useReducedMotion";
 import styles from "./Reviews.module.css";
 
 type Review = {
   quote: string;
-  author: string;
-  category: string;
-  // foto del viso; per i clienti business il logo dell'azienda
+  name: string;
+  label: string;
+  // foto (o logo): segnaposto in public/assets/REPLACE-ME/, da sostituire
+  // con file dallo stesso nome
   src: string;
-  alt: string;
 };
 
-// Placeholder: foto di gattini e testi fittizi, da sostituire con le recensioni reali.
+// Recensioni vere (brief v3)
 const REVIEWS: Review[] = [
   {
-    quote: "She caught the day exactly as it felt.",
-    author: "Sofia & Thomas",
-    category: "Events",
-    src: "https://placecats.com/neo/120/120",
-    alt: "Portrait of Sofia and Thomas",
+    quote:
+      "I was so nervous at first, but Elisa made me feel comfortable from the beginning. We found poses that felt natural to me, and she always checked that I liked how I looked in the photos. It made such a difference!",
+    name: "Hania",
+    label: "Private photoshoot",
+    src: "/assets/REPLACE-ME/REPLACE-ME_review-01.jpg",
   },
   {
-    quote: "No posing, no pressure, just us.",
-    author: "Marta L.",
-    category: "Private",
-    src: "https://placecats.com/millie/120/120",
-    alt: "Portrait of Marta L.",
+    quote:
+      "I loved how Elisa captured all those little moments happening in between the big ones. The photos felt so natural and spontaneous, and we could all just relax and be ourselves.",
+    name: "Paulina",
+    label: "Event of the Multicultural Centre of Krakow",
+    src: "/assets/REPLACE-ME/REPLACE-ME_review-02.jpg",
   },
   {
-    quote: "Our brand finally looks like our brand.",
-    author: "Atelier Nord",
-    category: "Small Businesses",
-    // cliente business: qui va il logo
-    src: "https://placecats.com/poppy/120/120",
-    alt: "Atelier Nord logo",
+    quote:
+      "I absolutely loved the photos! I felt confident and empowered in them, and the whole experience was genuinely enjoyable. Elisa made it feel easy and natural.",
+    name: "Tawake",
+    label: "LinkedIn Photo Session, Private Firm",
+    src: "/assets/REPLACE-ME/REPLACE-ME_review-03.jpg",
   },
   {
-    quote: "Colours, movement, and zero stiffness.",
-    author: "Nadia B.",
-    category: "Events",
-    src: "https://placecats.com/louie/120/120",
-    alt: "Portrait of Nadia B.",
+    quote:
+      "I hardly noticed Elisa was there, yet she captured such beautiful, natural moments. The photos really reflect the atmosphere of the conference without ever feeling staged.",
+    name: "Prof. Tacik",
+    label: "Conference of the NOMOS Centre",
+    src: "/assets/REPLACE-ME/REPLACE-ME_review-04.jpg",
   },
 ];
 
@@ -60,13 +59,7 @@ const SLIDES = Array.from({ length: 3 }, (_, copy) =>
   REVIEWS.map((review, i) => ({ review, copy, key: `${copy}-${i}` }))
 ).flat();
 
-type Props = {
-  // "love notes" scritto a mano, in un angolo della fascia (dalla home:
-  // l'immagine si cerca al momento della build, lato server)
-  note?: ReactNode;
-};
-
-export default function Reviews({ note }: Props) {
+export default function Reviews() {
   // posizione nel track ripetuto; parte dalla prima recensione della serie di mezzo
   const [position, setPosition] = useState(HOME * COUNT);
   // niente transizione nello scatto silenzioso da una copia alla serie di mezzo
@@ -128,9 +121,7 @@ export default function Reviews({ note }: Props) {
   };
 
   return (
-    <section className={styles.reviews}>
-      {note && <div className={styles.note}>{note}</div>}
-
+    <section className={styles.reviews} aria-label="Reviews">
       <div
         className={styles.viewport}
         onTouchStart={onTouchStart}
@@ -150,20 +141,19 @@ export default function Reviews({ note }: Props) {
               className={styles.slide}
               aria-hidden={copy !== HOME}
             >
-              <img src={review.src} alt={review.alt} className={styles.photo} />
+              <img src={review.src} alt={review.name} className={styles.photo} />
 
-              {/* blocco di altezza fissa (tre righe di citazione + nome): il
-                  nome segue sempre la citazione alla stessa distanza e i
-                  pallini sotto non si spostano mai */}
-              <div className={styles.text}>
-                <blockquote className={styles.quote}>
-                  <p>&ldquo;{review.quote}&rdquo;</p>
-                </blockquote>
+              {/* tutte le slide sono alte come la più lunga (stessa riga del
+                  carosello): il nome segue sempre la citazione alla stessa
+                  distanza e i pallini sotto non si spostano mai */}
+              <blockquote className={styles.quote}>
+                <p>&ldquo;{review.quote}&rdquo;</p>
+              </blockquote>
 
-                <figcaption className={styles.author}>
-                  {review.author} · {review.category}
-                </figcaption>
-              </div>
+              <figcaption className={styles.author}>
+                <span className={styles.name}>{review.name}</span>
+                <span className={styles.label}>{review.label}</span>
+              </figcaption>
             </figure>
           ))}
         </div>
@@ -172,7 +162,7 @@ export default function Reviews({ note }: Props) {
       <div className={styles.dots}>
         {REVIEWS.map((review, i) => (
           <button
-            key={review.author}
+            key={review.name}
             type="button"
             className={styles.dot}
             data-active={i === index}

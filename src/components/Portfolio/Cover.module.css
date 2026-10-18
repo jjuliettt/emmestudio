@@ -21,6 +21,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.6s ease;
 }
 
 /* Velatura uniforme per leggere il testo crema (espresso, non nero) */
@@ -37,6 +38,7 @@
   z-index: 1;
   inset: 12px 10px;
   border: 1px solid var(--cream);
+  transition: inset 0.6s ease;
 }
 
 /* Copertina già finita (4:5): niente velatura, la grafica ha già la sua
@@ -173,4 +175,98 @@
   font-size: 24cqw;
   line-height: 0.8;
   letter-spacing: 0;
+}
+
+/* ---------- Passaggio del mouse / tocco ---------- */
+
+/* "VIEW" come gli altri link: Spectral maiuscolo sottolineato */
+.view {
+  display: block;
+  margin-top: 3.5cqw;
+  font-family: var(--font-main);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-size: 3.4cqw;
+  line-height: 1;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.35em;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+/* nella copertina finita: sotto la lineetta che chiude le parole piccole */
+.imageView {
+  position: absolute;
+  z-index: 2;
+  left: 8.4%;
+  top: 60.5%;
+  color: var(--espresso);
+}
+
+.imageView .view {
+  margin-top: 0;
+}
+
+/* col mouse al passaggio; col dito mentre si tocca; con la tastiera al
+   fuoco */
+@media (hover: hover) {
+  .cover:hover .photo {
+    transform: scale(1.05);
+  }
+
+  .cover:hover .frame {
+    inset: 18px 16px;
+  }
+
+  .cover:hover .view {
+    opacity: 1;
+  }
+}
+
+.cover:active .photo,
+.cover:focus-visible .photo {
+  transform: scale(1.05);
+}
+
+.cover:active .frame,
+.cover:focus-visible .frame {
+  inset: 18px 16px;
+}
+
+.cover:active .view,
+.cover:focus-visible .view {
+  opacity: 1;
+}
+
+.cover:focus-visible {
+  outline: 1px solid var(--espresso);
+  outline-offset: 4px;
+}
+
+/* meno movimento: niente effetto */
+@media (prefers-reduced-motion: reduce) {
+  .photo,
+  .frame,
+  .view {
+    transition: none;
+  }
+
+  .cover:hover .photo,
+  .cover:active .photo,
+  .cover:focus-visible .photo {
+    transform: none;
+  }
+
+  .cover:hover .frame,
+  .cover:active .frame,
+  .cover:focus-visible .frame {
+    inset: 12px 10px;
+  }
+
+  .cover:hover .view,
+  .cover:active .view {
+    opacity: 0;
+  }
 }

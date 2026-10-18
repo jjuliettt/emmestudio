@@ -1,38 +1,29 @@
 /* ---------------------------------------------
    Pagina Contatti — mobile first
-   Titolo, modulo, contatti diretti, link
+   Titolo, modulo, contatti diretti, link. Tra una parte e l'altra sempre
+   lo stesso spazio (--space-l)
 --------------------------------------------- */
 
 .intro {
-  padding: 2rem 1.25rem 0;
+  padding: var(--space-xl) 1.25rem 0;
   text-align: center;
 }
 
-.lead {
-  margin-top: 1.25rem;
-  font-size: 0.97rem;
-  line-height: 1.55;
-}
-
-.lead p {
-  margin: 0;
-}
-
 .formSection {
-  padding: 2.25rem 1.25rem 3.25rem;
+  padding: var(--space-l) 1.25rem;
 }
 
 /* ---------- Contatti diretti ---------- */
 
 .direct {
-  padding: 2.5rem 1.25rem;
+  padding: var(--space-l) 1.25rem;
   background-color: var(--beige);
 }
 
 .details {
   display: flex;
   flex-direction: column;
-  gap: 1.4rem;
+  gap: var(--space-m);
   margin: 0;
   text-align: center;
 }
@@ -46,7 +37,7 @@
 }
 
 .details dd {
-  margin: 0.3rem 0 0;
+  margin: 0;
   font-size: 1rem;
   line-height: 1.45;
   overflow-wrap: anywhere;
@@ -55,7 +46,7 @@
 /* ---------- Chiusura ---------- */
 
 .closing {
-  padding: 3.25rem 1.25rem 3.25rem;
+  padding: var(--space-l) 1.25rem;
   text-align: center;
 }
 
@@ -64,7 +55,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.25rem;
+  gap: var(--space-m);
   margin: 0;
 }
 

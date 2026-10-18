@@ -11,8 +11,8 @@
   background-color: var(--cream);
   width: 100%;
   /* un po' d'aria tra header e collage */
-  padding-top: 1.5rem;
-  padding-bottom: 2rem;
+  padding-top: var(--space-m);
+  padding-bottom: var(--space-l);
   color: var(--espresso);
   /* niente scroll orizzontale se un testo sborda prima di essere adattato */
   overflow-x: clip;
@@ -195,14 +195,15 @@
   display: inline-grid;
 }
 
-/* Tangerine minuscolo, ingrandito quanto basta per sembrare della stessa
-   misura del resto della frase (si rimpicciolisce con lei, --fit) */
+/* Tangerine minuscolo, poco più grande della frase: il corpo delle lettere
+   arriva all'altezza delle maiuscole (si rimpicciolisce con lei, --fit).
+   Interlinea zero: la terza riga resta alta come le altre due */
 .adjective {
   grid-area: 1 / 1;
   font-family: var(--font-script);
   font-weight: 400;
-  font-size: calc(var(--script-scale) * 1em);
-  line-height: 1;
+  font-size: 1.45em;
+  line-height: 0;
   text-transform: none;
   letter-spacing: 0;
   color: var(--espresso);

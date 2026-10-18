@@ -1,17 +1,17 @@
 /* ---------------------------------------------
    Pagina Portfolio — mobile first
-   Titolo + riga scritta a mano e copertine (CoverList, le stesse della home)
+   Titolo, frase e copertine (CoverList, le stesse della home)
 --------------------------------------------- */
 
 .page {
   background-color: var(--cream);
   color: var(--espresso);
-  padding: 2rem 1.25rem;
+  padding: var(--space-xl) 1.25rem var(--space-l);
 }
 
-/* sotto il titolo (PageTitle) */
+/* sotto la frase: lo stesso spazio che c'è tra titolo e frase */
 .covers {
-  margin-top: 2.75rem;
+  margin-top: var(--space-m);
 }
 
 /* ---------------------------------------------

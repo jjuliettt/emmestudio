@@ -6,7 +6,7 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 1.1rem;
+  gap: var(--space-m);
   width: 100%;
   max-width: 24rem;
   margin: 0 auto;
@@ -16,7 +16,7 @@
 .field {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--space-s);
 }
 
 /* Col fuoco sul primo errore la pagina risale e l'header ricompare:
@@ -65,6 +65,33 @@
   color: var(--espresso);
   font-style: italic;
   opacity: 1;
+}
+
+/* Riempimento automatico del browser: stesso font, stesso colore, stesso
+   fondo (senza il giallo/azzurro di Chrome e Safari) */
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--espresso);
+  -webkit-box-shadow: 0 0 0 1000px var(--cream) inset;
+  box-shadow: 0 0 0 1000px var(--cream) inset;
+  caret-color: var(--espresso);
+  font-family: var(--font-main);
+  transition: background-color 600000s 0s;
+}
+
+.input:-webkit-autofill::first-line {
+  font-family: var(--font-main);
+  font-weight: 300;
+  font-size: 16px;
+}
+
+.input:autofill {
+  font-family: var(--font-main);
+}
+
+.input::placeholder {
+  font-family: var(--font-main);
 }
 
 .input:focus {
@@ -151,7 +178,7 @@
 .check {
   display: flex;
   align-items: flex-start;
-  gap: 0.75rem;
+  gap: var(--space-s);
 }
 
 .checkbox {
@@ -203,14 +230,14 @@
 }
 
 .check + .error {
-  margin-top: 0.4rem;
+  margin-top: var(--space-s);
   padding-left: 2rem;
 }
 
 /* ---------- Privacy, pulsante, grazie ---------- */
 
 .privacy {
-  margin: -0.35rem 0 0;
+  margin: 0;
   font-family: var(--font-main);
   font-size: 0.85rem;
   line-height: 1.45;
@@ -227,8 +254,8 @@
 .submit {
   align-self: center;
   min-height: 2.75rem;
-  margin-top: 0.3rem;
-  padding: 0.9rem 2rem;
+  margin-top: 0;
+  padding: var(--space-s) var(--space-m);
   border: 1px solid var(--espresso);
   border-radius: 0;
   background-color: var(--espresso);

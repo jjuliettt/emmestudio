@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import CoverList from "@/components/Portfolio/CoverList";
-import PageTitle from "@/components/PageTitle/PageTitle";
+import PageTitle, { PageLead } from "@/components/PageTitle/PageTitle";
 import Booking from "@/components/Booking/Booking";
 import styles from "./PortfolioPage.module.css";
 
@@ -11,21 +11,24 @@ export const metadata: Metadata = {
     "Private sessions, events and small businesses: a selection of photographs by Elisa Massetti, photographer in Belgium.",
 };
 
-// Foto diversa da quella usata in home per la stessa sezione (altro gatto).
-const BOOKING_PHOTO_SRC = "https://placecats.com/bella/1000/1500";
-
 export default function PortfolioPage() {
   return (
     <>
       <section className={styles.page}>
         <PageTitle>Portfolio</PageTitle>
+        <PageLead
+          lines={[
+            "From busy events to quieter moments in front of the camera, here’s a look at the people and stories I’ve had the chance to photograph.",
+          ]}
+        />
 
+        {/* stesso spazio sopra (titolo → frase) e sotto (frase → copertine) */}
         <div className={styles.covers}>
           <CoverList />
         </div>
       </section>
 
-      <Booking photoSrc={BOOKING_PHOTO_SRC} />
+      <Booking />
     </>
   );
 }

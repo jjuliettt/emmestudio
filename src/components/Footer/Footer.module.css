@@ -7,7 +7,7 @@
 .footer {
   background-color: var(--espresso);
   color: var(--cream);
-  padding: 1.1rem 0.75rem 1.2rem;
+  padding: var(--space-m) 0.75rem;
   text-align: center;
 }
 
@@ -21,8 +21,9 @@
   line-height: 1.7;
 }
 
+/* niente spazi intorno al punto: solo questo margine, uguale ovunque */
 .dot {
-  margin: 0 0.4em;
+  margin: 0 0.6em;
 }
 
 .nowrap {
@@ -34,12 +35,9 @@
   display: none;
 }
 
-/* stesso font/stile delle altre scritte del footer: solo sottolineato,
-   niente maiuscolo né spaziatura extra (quelli sono per i link-pulsante) */
+/* stesso font e stile delle altre scritte del footer, senza sottolineatura */
 .link {
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.35em;
+  text-decoration: none;
 }
 
 @media (min-width: 768px) {

@@ -23,6 +23,14 @@ export default function Header() {
   const closeRef = useRef<HTMLButtonElement>(null);
   const wasOpen = useRef(false);
 
+  // Safari su iPhone applica :active (l'effetto al tocco delle copertine)
+  // solo se la pagina ascolta i tocchi: un ascoltatore vuoto basta
+  useEffect(() => {
+    const noop = () => {};
+    document.addEventListener("touchstart", noop, { passive: true });
+    return () => document.removeEventListener("touchstart", noop);
+  }, []);
+
   // Menu aperto: pagina ferma sotto, fuoco sulla X; alla chiusura il fuoco
   // torna sull'icona del menu
   useEffect(() => {

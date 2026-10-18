@@ -8,21 +8,18 @@
   position: relative;
 }
 
-/* Sopra le copertine e sovrapposto all'angolo della prima (.wrap davanti:
-   vince sulla larghezza di base del titolo) */
+/* Sopra le copertine, staccato dalla prima (.wrap davanti: vince sulla
+   larghezza di base del titolo) */
 .wrap .intro {
-  position: relative;
-  z-index: 3;
   width: min(68vw, 17rem);
-  margin: 0 0 -1.4rem 0;
-  pointer-events: none;
+  margin: 0 0 var(--space-m);
 }
 
 .list {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2.25rem;
+  gap: var(--space-l);
 }
 
 .list > * {

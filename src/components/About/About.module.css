@@ -1,20 +1,20 @@
 /* ---------------------------------------------
    About — mobile first
-   Una colonna: saluto, foto 3:2 con la firma, descrizione
+   Una colonna: saluto, firma sopra la foto 3:2, "A little about me" e il
+   testo
 --------------------------------------------- */
 
 .about {
   background-color: var(--beige);
   color: var(--espresso);
-  padding: 2rem 0;
+  padding: var(--space-l) 0;
 }
 
 /* ---------- Saluto ---------- */
 
-/* Spectral maiuscolo piccolo, un rigo più in basso dell'inizio della
-   fascia; margini laterali più larghi di quelli della foto */
+/* Spectral maiuscolo piccolo: sopra e sotto lo stesso spazio (--space-l) */
 .greeting {
-  margin: 1.4rem 2.5rem 0;
+  margin: 0 2.5rem;
   font-family: var(--font-main);
   font-weight: 300;
   text-transform: uppercase;
@@ -28,59 +28,65 @@
   white-space: nowrap;
 }
 
-/* ---------- Foto + firma ---------- */
+/* ---------- Firma + foto ---------- */
 
 .photo {
-  position: relative;
-  /* sopra resta lo spazio per la parte alta della firma */
-  margin: 4.5rem 1.25rem 0;
+  margin: var(--space-l) 1.25rem 0;
 }
 
 .image {
+  position: relative;
+  z-index: 0;
   display: block;
   width: 100%;
   aspect-ratio: 3 / 2;
   object-fit: cover;
 }
 
-/* La firma (PNG trasparente, inchiostro espresso): poco più di metà della
-   foto, a cavallo dell'angolo in alto a sinistra */
+/* La firma (PNG trasparente, inchiostro espresso): metà foto, un po'
+   inclinata; la parte bassa scende sull'angolo in alto a sinistra della
+   foto (il margine negativo in % è sulla larghezza: 38% della sua altezza) */
 .signature {
-  position: absolute;
-  top: 0;
-  left: -0.75rem;
+  position: relative;
+  z-index: 1;
+  display: block;
   width: 50%;
   height: auto;
-  transform: translateY(-62%);
+  margin: 0 0 -10.4% -0.75rem;
+  transform: rotate(-4deg);
+  transform-origin: left bottom;
   pointer-events: none;
 }
 
 /* Finché non c'è il file: il nome nel corsivo del sito, stessa posizione */
 .signatureStandIn {
-  position: absolute;
-  top: 0;
-  left: -0.5rem;
-  transform: translateY(-58%) rotate(-4deg);
-  transform-origin: left center;
+  position: relative;
+  z-index: 1;
+  display: block;
+  margin: 0 0 -0.6em -0.5rem;
+  transform: rotate(-4deg);
+  transform-origin: left bottom;
   font-family: var(--font-script);
-  font-size: clamp(1.8rem, 8.5vw, 2.4rem);
+  font-size: 3rem;
   line-height: 1;
   white-space: nowrap;
 }
 
-/* ---------- Descrizione ---------- */
+/* ---------- A little about me ---------- */
 
-/* Spectral 300, giustificato con la sillabazione automatica (lang="en"),
-   più stretto della foto e centrato */
+/* Spectral 300 giustificato, un po' più stretto della foto e centrato.
+   Niente sillabazione: le parole non si spezzano mai. Larghezza e misura
+   scelte misurando le righe: così si allargano il meno possibile */
 .description {
-  margin: 1.5rem 2.25rem 0;
+  margin: var(--space-l) 1.5rem 0;
   font-family: var(--font-main);
   font-weight: 300;
-  font-size: 0.97rem;
-  line-height: 1.5;
+  font-size: 0.92rem;
+  line-height: 1.55;
   text-align: justify;
-  -webkit-hyphens: auto;
-  hyphens: auto;
+  -webkit-hyphens: none;
+  hyphens: none;
+  text-wrap: pretty;
 }
 
 .description p {
@@ -88,7 +94,18 @@
 }
 
 .description p + p {
-  margin-top: 0.75em;
+  margin-top: var(--space-s);
+}
+
+/* Tangerine, centrato */
+.heading {
+  margin: 0 0 var(--space-m);
+  font-family: var(--font-script);
+  font-weight: 400;
+  letter-spacing: 0;
+  font-size: 2.6rem;
+  line-height: 1;
+  text-align: center;
 }
 
 /* ---------------------------------------------
@@ -97,16 +114,12 @@
 
 @media (min-width: 768px) {
   .about {
-    padding: 3rem 3rem;
+    padding: var(--space-xl) 3rem;
   }
 
   .about > * {
     max-width: 40rem;
     margin-left: auto;
     margin-right: auto;
-  }
-
-  .photo {
-    margin-top: 6.25rem;
   }
 }
