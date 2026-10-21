@@ -88,8 +88,12 @@ export default function Cover({ category }: Props) {
         aria-label={category.title}
       >
         <img src={category.src} alt={category.alt} className={styles.photo} />
-        {/* sotto le parole piccole della grafica, nello stesso marrone */}
-        <span className={styles.imageView} aria-hidden="true">
+        {/* sotto le parole piccole della grafica, nel loro colore */}
+        <span
+          className={styles.imageView}
+          data-ink={category.lettering.viewInk}
+          aria-hidden="true"
+        >
           <View />
         </span>
       </Link>

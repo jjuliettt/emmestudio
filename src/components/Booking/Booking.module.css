@@ -60,18 +60,20 @@
   font-weight: 300;
   text-transform: uppercase;
   letter-spacing: var(--tracking-caps);
-  /* con "work together?" a 1.8 volte: Tangerine resta sopra i 24px */
+  /* con "work together" a 2.7 volte: Tangerine resta sopra i 24px */
   font-size: 0.84rem;
 }
 
-/* "work together?": Tangerine (è già un corsivo, niente inclinazione
-   finta), della misura di "WANT TO" e poi un 12% in più */
+/* "work together": Tangerine (è già un corsivo, niente inclinazione
+   finta). Il corpo delle minuscole alto quanto le maiuscole di "WANT TO",
+   così a occhio è tutto della stessa misura (crema su espresso serve più
+   grande che nella frase dell'hero) */
 .ask em {
   font-family: var(--font-script);
   font-style: normal;
   text-transform: none;
   letter-spacing: 0;
-  font-size: calc(var(--script-scale) * 1.12em);
+  font-size: calc(var(--script-scale) * 1.5em);
 }
 
 .links {

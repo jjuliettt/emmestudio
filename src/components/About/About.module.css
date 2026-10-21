@@ -1,7 +1,6 @@
 /* ---------------------------------------------
    About — mobile first
-   Una colonna: saluto, firma sopra la foto 3:2, "A little about me" e il
-   testo
+   Una colonna: saluto, firma sopra la foto 3:2, testo
 --------------------------------------------- */
 
 .about {
@@ -12,7 +11,8 @@
 
 /* ---------- Saluto ---------- */
 
-/* Spectral maiuscolo piccolo: sopra e sotto lo stesso spazio (--space-l) */
+/* Spectral maiuscolo piccolo: sopra --space-l (inizio della fascia), sotto
+   --space-m fino alla firma (vedi .photo) */
 .greeting {
   margin: 0 2.5rem;
   font-family: var(--font-main);
@@ -31,7 +31,7 @@
 /* ---------- Firma + foto ---------- */
 
 .photo {
-  margin: var(--space-l) 1.25rem 0;
+  margin: var(--space-m) 1.25rem 0;
 }
 
 .image {
@@ -72,13 +72,14 @@
   white-space: nowrap;
 }
 
-/* ---------- A little about me ---------- */
+/* ---------- Testo ---------- */
 
-/* Spectral 300 giustificato, un po' più stretto della foto e centrato.
-   Niente sillabazione: le parole non si spezzano mai. Larghezza e misura
-   scelte misurando le righe: così si allargano il meno possibile */
+/* Subito sotto la foto. Spectral 300 giustificato, un po' più stretto della
+   foto e centrato. Niente sillabazione: le parole non si spezzano mai.
+   Larghezza e misura scelte misurando le righe: così si allargano il meno
+   possibile */
 .description {
-  margin: var(--space-l) 1.5rem 0;
+  margin: var(--space-m) 1.5rem 0;
   font-family: var(--font-main);
   font-weight: 300;
   font-size: 0.92rem;
@@ -95,17 +96,6 @@
 
 .description p + p {
   margin-top: var(--space-s);
-}
-
-/* Tangerine, centrato */
-.heading {
-  margin: 0 0 var(--space-m);
-  font-family: var(--font-script);
-  font-weight: 400;
-  letter-spacing: 0;
-  font-size: 2.6rem;
-  line-height: 1;
-  text-align: center;
 }
 
 /* ---------------------------------------------

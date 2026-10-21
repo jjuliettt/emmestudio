@@ -31,9 +31,8 @@ export default function About() {
         <span className={styles.nowrap}>I&apos;m Elisa, and</span>
       </p>
 
-      {/* la firma è nel flusso, sopra la foto, e scende sul suo angolo: così
-          lo spazio tra il saluto e la firma è uguale a quello sopra il
-          saluto */}
+      {/* la firma è nel flusso, sopra la foto, e scende sul suo angolo: lo
+          spazio tra il saluto e la firma è quello del margine della foto */}
       <div className={styles.photo}>
         {signature ? (
           <img src={signature} alt="" className={styles.signature} />
@@ -46,7 +45,6 @@ export default function About() {
       </div>
 
       <div className={styles.description}>
-        <h2 className={styles.heading}>A little about me</h2>
         {TEXT.map((paragraph) => (
           <p key={paragraph.slice(0, 24)}>{paragraph}</p>
         ))}
