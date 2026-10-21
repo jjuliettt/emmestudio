@@ -1,0 +1,89 @@
+# Elisa Massetti Photo: notes for Claude
+
+The website of Elisa Massetti Photo: Next.js 16 (App Router), React 19,
+TypeScript and CSS Modules, with static pages. Vercel deploys `main` to the
+live site and builds a preview for every other branch. `HANDOVER.md` explains
+where everything is; read the relevant part before changing something.
+
+The person you work with is usually Elisa, a photographer, not a developer.
+Explain in plain words. Don't ask her to approve plans: do the work and ask
+only when something is genuinely unclear. She checks the live site on her
+phone afterwards and asks for changes if needed.
+
+## Workflow
+
+- `main` is the live site. Never push to `main`. Start from the latest
+  `main`, work on a new branch, push it and open a pull request, then merge
+  it yourself with `gh pr merge <number> --merge` once the build passes
+  (Elisa's choice since October 2026). Tell her what went live and link the
+  pull request; Vercel can take up to about 10 minutes to publish.
+- One change, or one group of related changes, per pull request, so each
+  one can be undone with GitHub's **Revert**.
+- `npm run build` must pass before every push. `npx tsc --noEmit` is a quick
+  type check. `npm run lint` doesn't work (Next.js 16 removed `next lint` and
+  there is no ESLint config).
+- Check changes at phone width (360 to 430 px): no horizontal scroll, nothing
+  overflowing.
+
+## The repository is public
+
+- Never commit keys, passwords or `.env*` files. The Resend keys live only in
+  Vercel's environment variables and in `.env.local`.
+- Never commit fonts that are not free to redistribute. `public/fonts/` is
+  git-ignored on purpose for personal-use or demo fonts; don't change that
+  rule. Fonts are self-hosted (`src/app/fonts.ts`). Never load them from
+  Google Fonts or copy font files from other websites.
+- Strip location metadata from photos, and keep them web-sized (about
+  1200 to 1600 px on the long side). The site uses plain `<img>`, with no
+  resizing.
+
+## Design rules (details in HANDOVER.md, section 9)
+
+- Colours: only `--espresso`, `--cream`, `--beige` and `--dot` from
+  `src/app/globals.css`, always through the variables.
+- Fonts:
+  - Spectral (`--font-main`): all text; 200 for large, 300 for small, 700
+    only where bold is already used.
+  - Tangerine (`--font-script`): script words; 400, with 700 only for the
+    Prices category titles, and not below about 24 px.
+  - Quicksand (`--font-menu`): only the menu and form labels.
+  - No faux bold.
+- Vertical spacing only from `--space-s/m/l/xl` (12/24/48/72 px).
+- Text links and calls to action use the global `u-link` class.
+- One shared `Booking` component on every page; only Prices passes
+  `onPricesPage`.
+- Mobile first; the `@media (min-width: 768px)` blocks are not refined yet.
+- Keep `alt` text on images and the reduced-motion behaviour.
+
+## Content
+
+- Swappable images are in `public/assets/REPLACE-ME/` and are picked up by
+  file name; see the README there. Category pages show
+  `REPLACE-ME_<category>-NN.(jpg|png|webp)` in number order.
+- Texts sit at the top of each component or page, in constants such as
+  `TEXT`, `REVIEWS`, `PRIVATE` and `FAQ`.
+- Code comments are in Italian; match the surrounding style.
+
+## Changed since HANDOVER.md was written (October 2026)
+
+Trust the code where the handover differs:
+- The categories are **Private People**, **Small Businesses** and
+  **Companies & Events** everywhere (covers, page titles, Prices, both
+  forms). The addresses are still `/portfolio/private` and
+  `/portfolio/events`, so the photos are still `REPLACE-ME_private-NN` and
+  `REPLACE-ME_events-NN`.
+- The three covers are Elisa's finished graphics (4:5 `.webp` in
+  `public/images/portfolio/`); no more cat photos there. The booking photo
+  is still a placeholder.
+- Category pages: a description under the title (`description` in
+  `src/lib/portfolioCategories.ts`), a magazine-style photo layout chosen
+  from each photo's shape (`src/components/Gallery/`), a cream full-screen
+  view with an Info button (details from an optional `.txt` file with the
+  photo's name; see the README in `public/assets/REPLACE-ME/`), and circle
+  arrows to the previous/next category with "Back to home" underneath
+  (`src/components/CategoryNav/`).
+- Every page has a back-to-top button. All arrows are the same hand-drawn
+  one (`src/components/HandArrow/`).
+- "A little about me" was removed from About at Elisa's request; don't add
+  it back. The FAQ title is Spectral, not Tangerine. Form placeholders are
+  upright Spectral 200.
