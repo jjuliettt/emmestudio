@@ -1,24 +1,63 @@
 /* ---------------------------------------------
-   Griglia delle foto di una categoria — mobile first
-   Due colonne, spazi uguali, ogni foto nelle sue proporzioni
+   Foto di una categoria — mobile first
+   Impaginazione da rivista (vedi layout() in Gallery.tsx): ogni foto nelle
+   sue proporzioni, mai tagliata, con aria tra un gruppo e l'altro
 --------------------------------------------- */
 
-.grid {
-  columns: 2;
-  column-gap: var(--space-s);
-  margin: 0;
-  padding: 0;
-  list-style: none;
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
 }
 
-.item {
-  break-inside: avoid;
-  margin-bottom: var(--space-s);
+.block {
+  display: flex;
+  gap: var(--space-s);
+}
+
+/* a tutta larghezza */
+.block[data-kind="full"] > * {
+  flex: 1;
+}
+
+/* una foto da sola, spostata da un lato */
+.block[data-kind="offset"] > * {
+  width: 72%;
+}
+
+.block[data-kind="offset"][data-side="right"] {
+  justify-content: flex-end;
+}
+
+/* due orizzontali: una più grande dell'altra, allineate in basso */
+.block[data-kind="pair"] {
+  align-items: flex-end;
+}
+
+.block[data-kind="pair"] > :first-child {
+  flex: 1.3 1 0;
+}
+
+.block[data-kind="pair"] > :last-child {
+  flex: 1 1 0;
+}
+
+/* due verticali sfalsate: quella a destra parte più in basso */
+.block[data-kind="stagger"] {
+  align-items: flex-start;
+}
+
+.block[data-kind="stagger"] > * {
+  flex: 1 1 0;
+}
+
+.block[data-kind="stagger"] > :last-child {
+  margin-top: var(--space-l);
 }
 
 .thumb {
   display: block;
-  width: 100%;
+  min-width: 0;
   padding: 0;
   border: 0;
   background: none;
@@ -38,6 +77,8 @@
 
 /* ---------- A tutto schermo ---------- */
 
+/* Fondo crema: la foto intera al centro, la X espresso in alto a destra,
+   "info" sotto la foto */
 .viewer {
   position: fixed;
   inset: 0;
@@ -45,21 +86,128 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-l) var(--space-s);
-  background-color: var(--espresso);
+  padding: var(--space-xl) var(--space-s) var(--space-m);
+  background-color: var(--cream);
+  color: var(--espresso);
   cursor: zoom-out;
 }
 
+.figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-s);
+  max-width: 100%;
+  margin: 0;
+}
+
+/* la sfocatura resta dentro i bordi della foto */
+.frame {
+  position: relative;
+  overflow: hidden;
+}
+
+/* spazio per la X sopra e per "info" sotto */
 .full {
   display: block;
   max-width: 100%;
-  max-height: 100%;
+  max-height: calc(100dvh - var(--space-xl) - var(--space-m) - var(--space-s) - 44px);
   width: auto;
   height: auto;
-  object-fit: contain;
+  transition:
+    filter 0.35s ease,
+    transform 0.35s ease;
 }
 
-/* X in crema, come quella del menu */
+/* molto sfocata e più scura, così il testo crema si legge; un filo più
+   grande perché i bordi sfocati non entrino dentro la foto */
+.full[data-blurred="true"] {
+  filter: blur(18px) brightness(0.5);
+  transform: scale(1.1);
+}
+
+/* ---------- Informazioni della foto ---------- */
+
+.info {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-s);
+  padding: var(--space-m) 1.25rem;
+  overflow-y: auto;
+  color: var(--cream);
+  text-align: center;
+  cursor: pointer;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+  margin: 0;
+}
+
+/* come nella pagina Contacts: etichetta piccola maiuscola, poi il dato */
+.details dt {
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-size: 0.62rem;
+  line-height: 1.5;
+}
+
+.details dd {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.text {
+  max-width: 22rem;
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+/* "ⓘ INFO": Spectral maiuscolo spaziato, alto 44px da toccare */
+.infoButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  min-height: 44px;
+  padding: 0 var(--space-s);
+  border: 0;
+  background: none;
+  color: var(--espresso);
+  font-family: var(--font-main);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.infoButton:focus-visible {
+  outline: 1px solid var(--espresso);
+  outline-offset: -4px;
+}
+
+.infoIcon {
+  width: 1.35em;
+  height: 1.35em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.1;
+  stroke-linecap: round;
+}
+
+.infoDot {
+  fill: currentColor;
+}
+
+/* X espresso, spessa */
 .close {
   position: absolute;
   top: var(--space-s);
@@ -75,11 +223,12 @@
 .closeLine {
   position: absolute;
   top: 50%;
-  left: 11px;
-  width: 22px;
-  height: 2px;
-  margin-top: -1px;
-  background-color: var(--cream);
+  left: 10px;
+  width: 24px;
+  height: 3px;
+  margin-top: -1.5px;
+  border-radius: 1.5px;
+  background-color: var(--espresso);
 }
 
 .closeLine:first-child {
@@ -91,12 +240,23 @@
 }
 
 .close:focus-visible {
-  outline: 1px solid var(--cream);
+  outline: 1px solid var(--espresso);
   outline-offset: -4px;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .full {
+    transition: none;
+  }
+}
+
+/* ---------------------------------------------
+   Tablet / desktop (non ancora rifinito)
+--------------------------------------------- */
+
 @media (min-width: 768px) {
-  .grid {
-    columns: 3;
+  .layout {
+    max-width: 48rem;
+    margin: 0 auto;
   }
 }

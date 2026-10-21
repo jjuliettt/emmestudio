@@ -14,6 +14,8 @@ export type CoverLettering =
 
 export type PortfolioCategory = {
   title: string;
+  // la frase sotto il titolo nella pagina della categoria
+  description: string;
   href: string;
   // foto della copertina (tagliata quasi quadrata, 8:9; "image": 4:5)
   src: string;
@@ -26,6 +28,8 @@ export type PortfolioCategory = {
 export const PORTFOLIO_CATEGORIES: PortfolioCategory[] = [
   {
     title: "Private",
+    description:
+      "Portraits that celebrate you, just as you are. From a confidence boost or a personal milestone to couples, families and the little moments worth remembering.",
     href: "/portfolio/private",
     src: "/images/portfolio/private-cover.webp",
     alt: "Private People: portraits, lifestyle, personal moments",
@@ -33,6 +37,8 @@ export const PORTFOLIO_CATEGORIES: PortfolioCategory[] = [
   },
   {
     title: "Small Businesses",
+    description:
+      "Photos that bring your business to life, from the spaces and products you create to the people and details that make it yours.",
     href: "/portfolio/small-businesses",
     src: "/images/portfolio/small-businesses-cover.webp",
     alt: "Small Businesses: cafés, shops, brands",
@@ -40,7 +46,11 @@ export const PORTFOLIO_CATEGORIES: PortfolioCategory[] = [
     lettering: { kind: "image", viewInk: "cream" },
   },
   {
-    title: "Events",
+    // l'indirizzo resta /portfolio/events: così valgono i nomi delle foto
+    // (REPLACE-ME_events-NN)
+    title: "Companies & Events",
+    description:
+      "From corporate gatherings to community celebrations, I capture the interactions, expressions and spontaneous moments that bring an event to life.",
     href: "/portfolio/events",
     src: "/images/portfolio/events-cover.webp",
     alt: "Companies & Events: corporate, events, brand content",

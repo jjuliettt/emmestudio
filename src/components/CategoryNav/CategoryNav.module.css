@@ -1,0 +1,73 @@
+/* ---------------------------------------------
+   Frecce per le altre categorie — una a sinistra, una a destra, il nome
+   sotto, allineato al proprio lato
+--------------------------------------------- */
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-m);
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+  max-width: 50%;
+  color: var(--espresso);
+}
+
+.item[data-side="left"] {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.item[data-side="right"] {
+  align-items: flex-end;
+  text-align: right;
+}
+
+/* tratto sottile e arrotondato, come un pennarello */
+.arrow {
+  width: 6.5rem;
+  height: auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  overflow: visible;
+  transition: transform 0.4s ease;
+}
+
+.name {
+  font-size: 0.7rem;
+  line-height: 1.6;
+}
+
+/* passando sopra, la freccia si sposta un poco verso dove porta */
+@media (hover: hover) {
+  .item[data-side="left"]:hover .arrow {
+    transform: translateX(-4px);
+  }
+
+  .item[data-side="right"]:hover .arrow {
+    transform: translateX(4px);
+  }
+}
+
+.item:focus-visible {
+  outline: 1px solid var(--espresso);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arrow {
+    transition: none;
+  }
+
+  .item:hover .arrow {
+    transform: none;
+  }
+}

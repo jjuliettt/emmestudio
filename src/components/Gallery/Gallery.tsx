@@ -10,12 +10,64 @@ type Props = {
   label: string;
 };
 
-// Griglia a due colonne, spazi uguali, foto nelle loro proporzioni. Un tocco
-// apre la foto a tutto schermo; si chiude toccando, con la X o con Esc.
+type Shape = "landscape" | "portrait";
+
+// I gruppi dell'impaginazione: una foto a tutta larghezza, una foto spostata
+// a sinistra o a destra, due orizzontali affiancate, due verticali sfalsate
+type Block =
+  | { kind: "full"; items: [number] }
+  | { kind: "offset"; items: [number]; side: "left" | "right" }
+  | { kind: "pair"; items: [number, number] }
+  | { kind: "stagger"; items: [number, number] };
+
+// quasi quadrate contano come verticali: stanno meglio sfalsate
+const shapeOf = (photo: CategoryPhoto): Shape =>
+  photo.width / photo.height > 1.1 ? "landscape" : "portrait";
+
+// Impaginazione da rivista, decisa dalla forma delle foto e mai due volte di
+// fila lo stesso gruppo: due orizzontali vicine → affiancate; due verticali
+// → sfalsate; un'orizzontale da sola → a tutta larghezza; il resto spostato
+// da un lato, alternando sinistra e destra
+function layout(photos: CategoryPhoto[]): Block[] {
+  const blocks: Block[] = [];
+  let side: "left" | "right" = "left";
+  let i = 0;
+  while (i < photos.length) {
+    const last = blocks.at(-1)?.kind;
+    const a = shapeOf(photos[i]);
+    const b = i + 1 < photos.length ? shapeOf(photos[i + 1]) : null;
+    if (a === "landscape" && b === "landscape" && last !== "pair") {
+      blocks.push({ kind: "pair", items: [i, i + 1] });
+      i += 2;
+    } else if (a === "portrait" && b === "portrait" && last !== "stagger") {
+      blocks.push({ kind: "stagger", items: [i, i + 1] });
+      i += 2;
+    } else if (a === "landscape" && last !== "full") {
+      blocks.push({ kind: "full", items: [i] });
+      i += 1;
+    } else {
+      blocks.push({ kind: "offset", items: [i], side });
+      side = side === "left" ? "right" : "left";
+      i += 1;
+    }
+  }
+  return blocks;
+}
+
+// Foto nelle loro proporzioni, mai tagliate. Un tocco apre la foto a tutto
+// schermo; si chiude con la X, toccando fuori dalla foto o con Esc. "info"
+// sfoca la foto e ne mostra i dati (se la foto ha il suo file di testo).
 export default function Gallery({ photos, label }: Props) {
   const [open, setOpen] = useState<number | null>(null);
+  const [showInfo, setShowInfo] = useState(false);
   const closeRef = useRef<HTMLButtonElement>(null);
   const openerRef = useRef<HTMLButtonElement | null>(null);
+
+  // cambiando foto, le informazioni si richiudono
+  const show = (i: number | null) => {
+    setShowInfo(false);
+    setOpen(i);
+  };
 
   useEffect(() => {
     if (open === null) return;
@@ -23,10 +75,15 @@ export default function Gallery({ photos, label }: Props) {
     root.style.overflow = "hidden";
     closeRef.current?.focus();
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(null);
-      if (e.key === "ArrowRight") setOpen((i) => (i === null ? i : (i + 1) % photos.length));
-      if (e.key === "ArrowLeft")
-        setOpen((i) => (i === null ? i : (i - 1 + photos.length) % photos.length));
+      if (e.key === "Escape") {
+        setShowInfo(false);
+        setOpen(null);
+      }
+      if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+        const step = e.key === "ArrowRight" ? 1 : -1;
+        setShowInfo(false);
+        setOpen((i) => (i === null ? i : (i + step + photos.length) % photos.length));
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => {
@@ -37,55 +94,121 @@ export default function Gallery({ photos, label }: Props) {
   }, [open, photos.length]);
 
   const alt = (i: number) => `${label}, photo ${i + 1}`;
+  const current = open === null ? null : photos[open];
 
   return (
     <>
-      <ul className={styles.grid}>
-        {photos.map((photo, i) => (
-          <li key={photo.src} className={styles.item}>
-            <button
-              type="button"
-              className={styles.thumb}
-              onClick={(e) => {
-                openerRef.current = e.currentTarget;
-                setOpen(i);
-              }}
-              aria-label={`Open ${alt(i)}`}
-            >
-              <img
-                src={photo.src}
-                width={photo.width}
-                height={photo.height}
-                alt={alt(i)}
-                loading={i < 4 ? "eager" : "lazy"}
-                className={styles.image}
-              />
-            </button>
-          </li>
+      <div className={styles.layout}>
+        {layout(photos).map((block) => (
+          <div
+            key={block.items[0]}
+            className={styles.block}
+            data-kind={block.kind}
+            data-side={block.kind === "offset" ? block.side : undefined}
+          >
+            {block.items.map((i) => (
+              <button
+                key={photos[i].src}
+                type="button"
+                className={styles.thumb}
+                onClick={(e) => {
+                  openerRef.current = e.currentTarget;
+                  show(i);
+                }}
+                aria-label={`Open ${alt(i)}`}
+              >
+                <img
+                  src={photos[i].src}
+                  width={photos[i].width}
+                  height={photos[i].height}
+                  alt={alt(i)}
+                  loading={i < 4 ? "eager" : "lazy"}
+                  className={styles.image}
+                />
+              </button>
+            ))}
+          </div>
         ))}
-      </ul>
+      </div>
 
-      {open !== null && (
+      {open !== null && current && (
         <div
           className={styles.viewer}
           role="dialog"
           aria-modal="true"
           aria-label={alt(open)}
-          onClick={() => setOpen(null)}
+          onClick={() => show(null)}
         >
-          <img
-            src={photos[open].src}
-            width={photos[open].width}
-            height={photos[open].height}
-            alt={alt(open)}
-            className={styles.full}
-          />
+          <figure className={styles.figure}>
+            {/* toccando la foto: con le informazioni aperte le richiude,
+                altrimenti chiude la foto come il resto dello schermo */}
+            <div
+              className={styles.frame}
+              onClick={(e) => {
+                if (!showInfo) return;
+                e.stopPropagation();
+                setShowInfo(false);
+              }}
+            >
+              <img
+                src={current.src}
+                width={current.width}
+                height={current.height}
+                alt={alt(open)}
+                className={styles.full}
+                data-blurred={showInfo}
+              />
+              {showInfo && current.info && (
+                <div className={styles.info} id="photo-info">
+                  {current.info.details.length > 0 && (
+                    <dl className={styles.details}>
+                      {current.info.details.map((detail) => (
+                        <div key={detail.label}>
+                          <dt>{detail.label}</dt>
+                          <dd>{detail.value}</dd>
+                        </div>
+                      ))}
+                    </dl>
+                  )}
+                  {current.info.text.map((line) => (
+                    <p key={line} className={styles.text}>
+                      {line}
+                    </p>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {current.info && (
+              <figcaption>
+                <button
+                  type="button"
+                  className={styles.infoButton}
+                  aria-expanded={showInfo}
+                  aria-controls="photo-info"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setShowInfo((value) => !value);
+                  }}
+                >
+                  {/* la "i" nel cerchio, disegnata */}
+                  <svg viewBox="0 0 20 20" className={styles.infoIcon} aria-hidden="true">
+                    <circle cx="10" cy="10" r="8.6" />
+                    <path d="M10 8.6v5.6" />
+                    <circle cx="10" cy="5.9" r="0.4" className={styles.infoDot} />
+                  </svg>
+                  Info
+                </button>
+              </figcaption>
+            )}
+          </figure>
+
           <button
             ref={closeRef}
             type="button"
             className={styles.close}
             aria-label="Close"
-            onClick={() => setOpen(null)}
+            onClick={() => show(null)}
           >
             <span className={styles.closeLine} />
             <span className={styles.closeLine} />
