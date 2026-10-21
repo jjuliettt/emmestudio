@@ -75,9 +75,11 @@
   font-size: 0.78rem;
 }
 
+/* su due righe di lunghezza simile: il "·" resta in mezzo, mai in fondo */
 .label {
   max-width: 20rem;
   font-size: 0.8rem;
+  text-wrap: balance;
 }
 
 /* ---------- Indicatori ---------- */

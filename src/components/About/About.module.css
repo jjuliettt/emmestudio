@@ -3,15 +3,17 @@
    Una colonna: saluto, firma sopra la foto 3:2, testo
 --------------------------------------------- */
 
+/* sopra e sotto lo stesso spazio della foto più bassa dell'hero e della
+   riga "selected work": --space-m */
 .about {
   background-color: var(--beige);
   color: var(--espresso);
-  padding: var(--space-l) 0;
+  padding: var(--space-m) 0;
 }
 
 /* ---------- Saluto ---------- */
 
-/* Spectral maiuscolo piccolo: sopra --space-l (inizio della fascia), sotto
+/* Spectral maiuscolo piccolo: sopra --space-m (inizio della fascia), sotto
    --space-m fino alla firma (vedi .photo) */
 .greeting {
   margin: 0 2.5rem;
@@ -52,7 +54,8 @@
   display: block;
   width: 50%;
   height: auto;
-  margin: 0 0 -10.4% -0.75rem;
+  /* l'inizio della firma in linea con il bordo sinistro della foto */
+  margin: 0 0 -10.4% 0.4rem;
   transform: rotate(-4deg);
   transform-origin: left bottom;
   pointer-events: none;
@@ -63,7 +66,7 @@
   position: relative;
   z-index: 1;
   display: block;
-  margin: 0 0 -0.6em -0.5rem;
+  margin: 0 0 -0.6em 0.4rem;
   transform: rotate(-4deg);
   transform-origin: left bottom;
   font-family: var(--font-script);
@@ -74,12 +77,11 @@
 
 /* ---------- Testo ---------- */
 
-/* Subito sotto la foto. Spectral 300 giustificato, un po' più stretto della
-   foto e centrato. Niente sillabazione: le parole non si spezzano mai.
-   Larghezza e misura scelte misurando le righe: così si allargano il meno
-   possibile */
+/* Subito sotto la foto. Spectral 300 giustificato, centrato e più stretto
+   della foto (inizia e finisce 1rem più all'interno dei suoi bordi).
+   Niente sillabazione: le parole non si spezzano mai */
 .description {
-  margin: var(--space-m) 1.5rem 0;
+  margin: var(--space-m) 2.25rem 0;
   font-family: var(--font-main);
   font-weight: 300;
   font-size: 0.92rem;

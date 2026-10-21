@@ -3,10 +3,12 @@
    Riga scritta a mano e copertine (vedi CoverList), poi il link
 --------------------------------------------- */
 
+/* sopra --space-m: lo stesso spazio tra la fine della fascia dell'About e
+   "selected work" che c'è all'inizio della fascia */
 .portfolio {
   background-color: var(--cream);
   color: var(--espresso);
-  padding: var(--space-l) 1.25rem;
+  padding: var(--space-m) 1.25rem var(--space-l);
 }
 
 /* ---------- Link sotto le copertine ---------- */

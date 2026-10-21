@@ -260,7 +260,7 @@ export default function PricesPage() {
 
       {/* ---------- FAQ ---------- */}
       <section className={styles.faq}>
-        <h2 className={styles.scriptHeading}>FAQ</h2>
+        <h2 className={styles.faqTitle}>FAQ</h2>
         <Faq items={FAQ} />
       </section>
 

@@ -63,6 +63,9 @@ export default function ContactsPage() {
           <Link href="/portfolio" className={`u-link ${styles.link}`}>
             See portfolio
           </Link>
+          <Link href="/" className={`u-link ${styles.link}`}>
+            Back to home
+          </Link>
         </p>
       </section>
     </>
