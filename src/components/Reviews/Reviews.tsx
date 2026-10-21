@@ -19,28 +19,28 @@ const REVIEWS: Review[] = [
     quote:
       "I was so nervous at first, but Elisa made me feel comfortable from the beginning. We found poses that felt natural to me, and she always checked that I liked how I looked in the photos. It made such a difference!",
     name: "Hania",
-    label: "Private photoshoot",
+    label: "Private Client, Portrait Photography · Belgium",
     src: "/assets/REPLACE-ME/REPLACE-ME_review-01.jpg",
   },
   {
     quote:
       "I loved how Elisa captured all those little moments happening in between the big ones. The photos felt so natural and spontaneous, and we could all just relax and be ourselves.",
     name: "Paulina",
-    label: "Event of the Multicultural Centre of Krakow",
+    label: "Multicultural Centre of Krakow, Event Photography · Krakow, Poland",
     src: "/assets/REPLACE-ME/REPLACE-ME_review-02.jpg",
   },
   {
     quote:
       "I absolutely loved the photos! I felt confident and empowered in them, and the whole experience was genuinely enjoyable. Elisa made it feel easy and natural.",
     name: "Tawake",
-    label: "LinkedIn Photo Session, Private Firm",
+    label: "AUTO1 Group, Team Portrait Photography · Antwerp, Belgium",
     src: "/assets/REPLACE-ME/REPLACE-ME_review-03.jpg",
   },
   {
     quote:
       "I hardly noticed Elisa was there, yet she captured such beautiful, natural moments. The photos really reflect the atmosphere of the conference without ever feeling staged.",
     name: "Prof. Tacik",
-    label: "Conference of the NOMOS Centre",
+    label: "NOMOS Centre, Academic Conference Photography · Krakow, Poland",
     src: "/assets/REPLACE-ME/REPLACE-ME_review-04.jpg",
   },
 ];

@@ -12,7 +12,8 @@
   width: 100%;
   /* un po' d'aria tra header e collage */
   padding-top: var(--space-m);
-  padding-bottom: var(--space-l);
+  /* sotto la foto più bassa, fino alla fascia dell'About */
+  padding-bottom: var(--space-m);
   color: var(--espresso);
   /* niente scroll orizzontale se un testo sborda prima di essere adattato */
   overflow-x: clip;
@@ -50,7 +51,7 @@
   font-weight: 200;
   /* --fit (≤ 1) lo mette Hero.tsx se il titolo è più lungo della foto:
      si rimpicciolisce il font, mai la spaziatura tra le lettere */
-  font-size: calc(min(4.85vw, 1.9rem) * var(--fit, 1));
+  font-size: calc(min(5.6vw, 2.2rem) * var(--fit, 1));
   line-height: 0.8;
   letter-spacing: 0;
   color: var(--espresso);
@@ -74,14 +75,15 @@
   letter-spacing: 0.1em;
 }
 
-/* Slideshow in crossfade, nessun indicatore. Foto orizzontale 3:2,
-   come gli originali (6000×4000). */
+/* Slideshow in crossfade, nessun indicatore. Foto orizzontale, un po' più
+   alta del 3:2 degli originali (6000×4000): il blocco è più grande senza
+   uscire dalla pagina, si taglia un filo dei lati */
 .slideshow {
   position: relative;
   /* contesto proprio: il blocco colorato resta sotto alle foto */
   z-index: 0;
   flex: 0 0 77%;
-  aspect-ratio: 3 / 2;
+  aspect-ratio: 1.3;
 }
 
 /* Blocco espresso, grande come la foto e spostato in basso a sinistra:
@@ -133,11 +135,11 @@
   align-items: center;
 }
 
-/* Colonna 1: le due foto verticali 2:3. In % della pagina, come nel
-   riferimento: foto 2 da 2.2% a 41.4%, foto 3 da 32.8% a 60.2% */
+/* Colonna 1: le due foto verticali 2:3, larga il 68% della pagina (era il
+   60.5% del riferimento: tutto un 12% più grande, stesse proporzioni) */
 .collage {
   position: relative;
-  flex: 0 0 60.5%;
+  flex: 0 0 68%;
 }
 
 .photoTwo {
@@ -178,9 +180,9 @@
   font-weight: 200;
   text-transform: uppercase;
   letter-spacing: var(--tracking-caps);
-  /* righe distanti come prima (1.18 × 3.6vw): le aste alte dell'aggettivo
-     non toccano la riga sopra */
-  line-height: 1.63;
+  /* righe abbastanza distanti perché le aste alte dell'aggettivo non
+     tocchino la riga sopra */
+  line-height: 1.9;
   font-size: calc(2.6vw * var(--fit, 1));
   color: var(--espresso);
 }
@@ -199,16 +201,21 @@
   display: inline-grid;
 }
 
-/* Tangerine minuscolo, il doppio della frase (5.2vw, la misura scelta da
-   Elisa): il corpo delle lettere arriva all'altezza delle maiuscole (si
-   rimpicciolisce con lei, --fit). Interlinea zero: la terza riga resta alta
-   come le altre due */
+/* Tangerine minuscolo, 2.4 volte la frase: il corpo delle lettere un po'
+   più alto delle maiuscole (si rimpicciolisce con lei, --fit). Interlinea
+   zero: la terza riga resta alta come le altre due */
 .adjective {
   grid-area: 1 / 1;
   font-family: var(--font-script);
   font-weight: 400;
-  font-size: 2em;
+  font-size: 2.4em;
   line-height: 0;
+  /* le lettere di Tangerine escono molto dal riquadro (alto zero): Safari,
+     durante la dissolvenza, ridisegna solo il riquadro e lascia pezzi della
+     parola di prima. Il padding lo allarga fino a coprire le lettere, il
+     margine negativo lo toglie dall'impaginazione */
+  padding: 0.7em 0.35em;
+  margin: -0.7em -0.35em;
   text-transform: none;
   letter-spacing: 0;
   color: var(--espresso);

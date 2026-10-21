@@ -100,14 +100,14 @@
   gap: var(--space-s);
 }
 
-/* Tangerine 700 (il file vero del grassetto), sui 30px: più piccolo si
+/* Tangerine 700 (il file vero del grassetto), sui 34px: più piccolo si
    legge male */
 .title {
   margin: 0;
   font-family: var(--font-script);
   font-weight: 700;
   letter-spacing: 0;
-  font-size: 1.875rem;
+  font-size: 2.15rem;
   line-height: 1.1;
 }
 
@@ -218,13 +218,17 @@
 /* ---------- FAQ ---------- */
 
 /* Tangerine 400 */
-.scriptHeading {
+/* "FAQ": Spectral 200 maiuscolo, spaziato come i titoli delle pagine. Il
+   rientro a sinistra ricentra la scritta (lo spazio dopo l'ultima lettera) */
+.faqTitle {
   margin: 0 0 var(--space-m);
-  font-family: var(--font-script);
-  font-weight: 400;
-  letter-spacing: 0;
-  font-size: 3rem;
-  line-height: 1.1;
+  padding-left: 0.25em;
+  font-family: var(--font-main);
+  font-weight: 200;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  font-size: 1.75rem;
+  line-height: 1.2;
   text-align: center;
 }
 

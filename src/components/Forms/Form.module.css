@@ -60,10 +60,11 @@
   appearance: none;
 }
 
-/* segnaposto: stesso colore del testo, in corsivo per distinguerlo */
+/* segnaposto: stesso colore e stesso font del testo, dritto; più leggero
+   (Spectral 200) per distinguerlo da quello che si scrive */
 .input::placeholder {
   color: var(--espresso);
-  font-style: italic;
+  font-weight: 200;
   opacity: 1;
 }
 
@@ -113,9 +114,9 @@
   cursor: pointer;
 }
 
-/* finché non si sceglie, "Choose one" è in corsivo come i segnaposto */
+/* finché non si sceglie, "Choose one" è leggero come i segnaposto */
 .select[data-empty="true"] {
-  font-style: italic;
+  font-weight: 200;
 }
 
 /* Lista del menu a tendina (Select.tsx): sotto il campo, stesso bordo;

@@ -61,12 +61,18 @@
   transform: rotate(0deg);
 }
 
+/* giustificata, senza sillabazione: le parole non si spezzano mai */
 .answer {
   margin: 0;
   padding: 0 1.5rem 1.25rem 0;
   font-family: var(--font-main);
   font-size: 0.95rem;
   line-height: 1.55;
+  text-align: justify;
+  -webkit-hyphens: none;
+  hyphens: none;
+  overflow-wrap: normal;
+  text-wrap: pretty;
 }
 
 @media (prefers-reduced-motion: reduce) {

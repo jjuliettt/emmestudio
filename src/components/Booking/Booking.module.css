@@ -48,10 +48,11 @@
   color: var(--cream);
   text-align: center;
   line-height: 1.2;
+  /* frase → link e link → link: lo stesso spazio */
   gap: var(--space-s);
   display: flex;
   flex-direction: column;
-  padding: var(--space-m);
+  padding: var(--space-m) 1.25rem;
 }
 
 .ask {
@@ -62,6 +63,8 @@
   letter-spacing: var(--tracking-caps);
   /* con "work together" a 2.7 volte: Tangerine resta sopra i 24px */
   font-size: 0.84rem;
+  /* la riga alta quanto il corsivo, non di più */
+  line-height: 1;
 }
 
 /* "work together": Tangerine (è già un corsivo, niente inclinazione
@@ -79,14 +82,14 @@
 .links {
   display: flex;
   justify-content: center;
-  gap: var(--space-m);
-  margin: var(--space-s) 0 0;
+  gap: var(--space-s);
+  margin: 0;
   flex-direction: column;
 }
 
 /* stile dei link del sito (.u-link), qui un po' più piccolo */
 .link {
-  font-size: 0.66rem;
+  font-size: 0.62rem;
 }
 
 /* ---------------------------------------------
