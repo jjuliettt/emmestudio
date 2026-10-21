@@ -9,7 +9,7 @@ the same name, then push. No code needs to change.
 | `REPLACE-ME_photo-elisa.jpg` | Greeting photo, 3:2 landscape (now the real photo; replace it with a file of the same name to change it). While this file is missing, the placeholder photo is shown. | Home |
 | `REPLACE-ME_hw-selected-work.png` | Handwritten "Selected Work" above the portfolio cards. Transparent PNG, ink in #3B2A22. | Home |
 | `REPLACE-ME_review-01.jpg` … `-04.jpg` | Photo (or logo) of each review, in order: Hania, Paulina, Tawake, Prof. Tacik. Square works best; it is shown as a circle. | Home |
-| `REPLACE-ME_private-01.jpg`, `-02.jpg`, … | Photos of the Private page, in number order. | /portfolio/private |
+| `REPLACE-ME_private-01.jpg`, `-02.jpg`, … | Photos of the Private People page, in number order. | /portfolio/private |
 | `REPLACE-ME_events-01.jpg`, `-02.jpg`, … | Photos of the Companies & Events page, in number order. | /portfolio/events |
 | `REPLACE-ME_small-businesses-01.jpg`, `-02.jpg`, … | Photos of the Small Businesses page, in number order. | /portfolio/small-businesses |
 
@@ -31,8 +31,9 @@ Date: May 2025
 Two days of talks and workshops with researchers from all over Europe.
 ```
 
-A photo without a `.txt` file has no Info button. When you rename or
-renumber a photo, rename its `.txt` file too. Everything here is public, so
+A photo without a `.txt` file still has the Info button, which then only
+shows its category. When you rename or renumber a photo, rename its `.txt`
+file too. Everything here is public, so
 only write what you're happy for visitors to read.
 
 The handwriting slot can also be `.svg` or `.webp` with the same name. If it

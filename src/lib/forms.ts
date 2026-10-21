@@ -10,7 +10,7 @@ export function isValidEmail(value: string) {
 // Le tre categorie della pagina prezzi: valore del menu a tendina, nome
 // mostrato e id della sezione nella pagina
 export const GUIDE_CATEGORIES = [
-  { value: "private", label: "Private", sectionId: "private" },
+  { value: "private", label: "Private People", sectionId: "private" },
   { value: "small-businesses", label: "Small Businesses", sectionId: "small-businesses" },
   { value: "companies-events", label: "Companies & Events", sectionId: "companies-events" },
 ] as const;

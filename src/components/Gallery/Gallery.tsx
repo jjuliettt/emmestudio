@@ -55,8 +55,9 @@ function layout(photos: CategoryPhoto[]): Block[] {
 }
 
 // Foto nelle loro proporzioni, mai tagliate. Un tocco apre la foto a tutto
-// schermo; si chiude con la X, toccando fuori dalla foto o con Esc. "info"
-// sfoca la foto e ne mostra i dati (se la foto ha il suo file di testo).
+// schermo; si chiude con la X, toccando fuori dalla foto o con Esc. "Info"
+// sfoca la foto e ne mostra i dati (dal suo file di testo; se non c'è, la
+// categoria).
 export default function Gallery({ photos, label }: Props) {
   const [open, setOpen] = useState<number | null>(null);
   const [showInfo, setShowInfo] = useState(false);
@@ -95,6 +96,8 @@ export default function Gallery({ photos, label }: Props) {
 
   const alt = (i: number) => `${label}, photo ${i + 1}`;
   const current = open === null ? null : photos[open];
+  // senza il file di testo della foto, almeno la categoria
+  const info = current?.info ?? { details: [{ label: "Category", value: label }], text: [] };
 
   return (
     <>
@@ -139,7 +142,20 @@ export default function Gallery({ photos, label }: Props) {
           aria-label={alt(open)}
           onClick={() => show(null)}
         >
-          <figure className={styles.figure}>
+          {/* la X appena sopra la foto, a destra; "info" appena sotto, a
+              sinistra: stanno sul bordo di .stage, largo quanto la foto */}
+          <div className={styles.stage}>
+            <button
+              ref={closeRef}
+              type="button"
+              className={styles.close}
+              aria-label="Close"
+              onClick={() => show(null)}
+            >
+              <span className={styles.closeLine} />
+              <span className={styles.closeLine} />
+            </button>
+
             {/* toccando la foto: con le informazioni aperte le richiude,
                 altrimenti chiude la foto come il resto dello schermo */}
             <div
@@ -158,19 +174,17 @@ export default function Gallery({ photos, label }: Props) {
                 className={styles.full}
                 data-blurred={showInfo}
               />
-              {showInfo && current.info && (
+              {showInfo && (
                 <div className={styles.info} id="photo-info">
-                  {current.info.details.length > 0 && (
-                    <dl className={styles.details}>
-                      {current.info.details.map((detail) => (
-                        <div key={detail.label}>
-                          <dt>{detail.label}</dt>
-                          <dd>{detail.value}</dd>
-                        </div>
-                      ))}
-                    </dl>
-                  )}
-                  {current.info.text.map((line) => (
+                  <dl className={styles.details}>
+                    {info.details.map((detail) => (
+                      <div key={detail.label}>
+                        <dt>{detail.label}</dt>
+                        <dd>{detail.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                  {info.text.map((line) => (
                     <p key={line} className={styles.text}>
                       {line}
                     </p>
@@ -179,40 +193,25 @@ export default function Gallery({ photos, label }: Props) {
               )}
             </div>
 
-            {current.info && (
-              <figcaption>
-                <button
-                  type="button"
-                  className={styles.infoButton}
-                  aria-expanded={showInfo}
-                  aria-controls="photo-info"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setShowInfo((value) => !value);
-                  }}
-                >
-                  {/* la "i" nel cerchio, disegnata */}
-                  <svg viewBox="0 0 20 20" className={styles.infoIcon} aria-hidden="true">
-                    <circle cx="10" cy="10" r="8.6" />
-                    <path d="M10 8.6v5.6" />
-                    <circle cx="10" cy="5.9" r="0.4" className={styles.infoDot} />
-                  </svg>
-                  Info
-                </button>
-              </figcaption>
-            )}
-          </figure>
-
-          <button
-            ref={closeRef}
-            type="button"
-            className={styles.close}
-            aria-label="Close"
-            onClick={() => show(null)}
-          >
-            <span className={styles.closeLine} />
-            <span className={styles.closeLine} />
-          </button>
+            <button
+              type="button"
+              className={styles.infoButton}
+              aria-expanded={showInfo}
+              aria-controls="photo-info"
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowInfo((value) => !value);
+              }}
+            >
+              {/* la "i" nel cerchio, disegnata */}
+              <svg viewBox="0 0 20 20" className={styles.infoIcon} aria-hidden="true">
+                <circle cx="10" cy="10" r="8.6" />
+                <path d="M10 8.6v5.6" />
+                <circle cx="10" cy="5.9" r="0.4" className={styles.infoDot} />
+              </svg>
+              Info
+            </button>
+          </div>
         </div>
       )}
     </>

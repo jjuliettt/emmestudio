@@ -27,7 +27,7 @@ export type PortfolioCategory = {
 // Usate sia dalla home sia dalla pagina /portfolio.
 export const PORTFOLIO_CATEGORIES: PortfolioCategory[] = [
   {
-    title: "Private",
+    title: "Private People",
     description:
       "Portraits that celebrate you, just as you are. From a confidence boost or a personal milestone to couples, families and the little moments worth remembering.",
     href: "/portfolio/private",

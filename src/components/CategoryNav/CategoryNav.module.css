@@ -1,20 +1,20 @@
 /* ---------------------------------------------
-   Frecce per le altre categorie — una a sinistra, una a destra, il nome
-   sotto, allineato al proprio lato
+   In fondo alle categorie — a sinistra e a destra un cerchio espresso con
+   la freccia (come il pulsante per tornare su) e il nome sotto; sotto
+   entrambi, al centro, il piccolo riquadro espresso "Back to home"
 --------------------------------------------- */
 
 .nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: var(--space-m);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  gap: var(--space-m) var(--space-s);
 }
 
 .item {
   display: flex;
   flex-direction: column;
   gap: var(--space-s);
-  max-width: 50%;
   color: var(--espresso);
 }
 
@@ -28,46 +28,78 @@
   text-align: right;
 }
 
-/* tratto sottile e arrotondato, come un pennarello */
-.arrow {
-  width: 6.5rem;
-  height: auto;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.6;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  overflow: visible;
+.circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--espresso);
+  color: var(--cream);
   transition: transform 0.4s ease;
 }
 
+.arrow {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* una parola per riga, ognuna sottolineata come i link del sito */
 .name {
+  display: flex;
+  flex-direction: column;
+  align-items: inherit;
+  gap: 0.15em;
+}
+
+.word {
   font-size: 0.7rem;
   line-height: 1.6;
 }
 
-/* passando sopra, la freccia si sposta un poco verso dove porta */
+/* piccolo riquadro espresso con il link crema, sulla riga sotto, al centro */
+.home {
+  grid-column: 1 / -1;
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 0.9rem;
+  background-color: var(--espresso);
+  color: var(--cream);
+  font-size: 0.58rem;
+  white-space: nowrap;
+}
+
+/* passando sopra, il cerchio si sposta un poco verso dove porta */
 @media (hover: hover) {
-  .item[data-side="left"]:hover .arrow {
+  .item[data-side="left"]:hover .circle {
     transform: translateX(-4px);
   }
 
-  .item[data-side="right"]:hover .arrow {
+  .item[data-side="right"]:hover .circle {
     transform: translateX(4px);
   }
 }
 
-.item:focus-visible {
+.item:focus-visible,
+.home:focus-visible {
   outline: 1px solid var(--espresso);
   outline-offset: 4px;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .arrow {
+  .circle {
     transition: none;
   }
 
-  .item:hover .arrow {
+  .item:hover .circle {
     transform: none;
   }
 }

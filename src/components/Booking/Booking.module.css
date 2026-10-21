@@ -61,8 +61,8 @@
   font-weight: 300;
   text-transform: uppercase;
   letter-spacing: var(--tracking-caps);
-  /* con "work together" a 2.7 volte: Tangerine resta sopra i 24px */
-  font-size: 0.84rem;
+  /* con "work together" a 2.7 volte (32px): Tangerine resta sopra i 24px */
+  font-size: 0.74rem;
   /* la riga alta quanto il corsivo, non di più */
   line-height: 1;
 }

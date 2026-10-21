@@ -77,8 +77,8 @@
 
 /* ---------- A tutto schermo ---------- */
 
-/* Fondo crema: la foto intera al centro, la X espresso in alto a destra,
-   "info" sotto la foto */
+/* Fondo crema, la foto intera al centro; sopra e sotto lo spazio per la X
+   e per "Info" */
 .viewer {
   position: fixed;
   inset: 0;
@@ -86,19 +86,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-xl) var(--space-s) var(--space-m);
+  padding: var(--space-xl) var(--space-s);
   background-color: var(--cream);
   color: var(--espresso);
   cursor: zoom-out;
 }
 
-.figure {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-s);
+/* largo e alto quanto la foto: la X e "Info" si appoggiano ai suoi bordi */
+.stage {
+  position: relative;
   max-width: 100%;
-  margin: 0;
 }
 
 /* la sfocatura resta dentro i bordi della foto */
@@ -107,11 +104,10 @@
   overflow: hidden;
 }
 
-/* spazio per la X sopra e per "info" sotto */
 .full {
   display: block;
   max-width: 100%;
-  max-height: calc(100dvh - var(--space-xl) - var(--space-m) - var(--space-s) - 44px);
+  max-height: calc(100dvh - 2 * var(--space-xl));
   width: auto;
   height: auto;
   transition:
@@ -171,8 +167,13 @@
   line-height: 1.5;
 }
 
-/* "ⓘ INFO": Spectral maiuscolo spaziato, alto 44px da toccare */
+/* "ⓘ INFO" appena sotto la foto, a sinistra: Spectral maiuscolo spaziato,
+   espresso, alto 44px da toccare (il testo in linea con il bordo della
+   foto) */
 .infoButton {
+  position: absolute;
+  top: 100%;
+  left: calc(-1 * var(--space-s));
   display: inline-flex;
   align-items: center;
   gap: 0.45em;
@@ -207,11 +208,12 @@
   fill: currentColor;
 }
 
-/* X espresso, spessa */
+/* X espresso, spessa, appena sopra la foto a destra (le stanghette in
+   linea con il bordo della foto) */
 .close {
   position: absolute;
-  top: var(--space-s);
-  right: var(--space-s);
+  bottom: 100%;
+  right: -10px;
   width: 44px;
   height: 44px;
   padding: 0;
