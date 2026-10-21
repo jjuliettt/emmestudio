@@ -1,7 +1,7 @@
 /* ---------------------------------------------
-   In fondo alle categorie — a sinistra e a destra un cerchio espresso con
-   la freccia (come il pulsante per tornare su) e il nome sotto; sotto
-   entrambi, al centro, il piccolo riquadro espresso "Back to home"
+   In fondo alle categorie — a sinistra e a destra la freccia espresso
+   (quella del pulsante per tornare su, senza il cerchio) e il nome sotto;
+   sotto entrambi, al centro, il piccolo riquadro espresso "Back to home"
 --------------------------------------------- */
 
 .nav {
@@ -28,21 +28,36 @@
   text-align: right;
 }
 
+/* 44px da toccare; la freccia in linea con il bordo del nome */
 .circle {
   display: flex;
   align-items: center;
-  justify-content: center;
   width: 44px;
   height: 44px;
-  border-radius: 50%;
-  background-color: var(--espresso);
-  color: var(--cream);
+  color: var(--espresso);
   transition: transform 0.4s ease;
 }
 
+.item[data-side="left"] .circle {
+  justify-content: flex-start;
+}
+
+.item[data-side="right"] .circle {
+  justify-content: flex-end;
+}
+
+/* il disegno ha un po' di margine nel suo riquadro: lo si recupera */
+.item[data-side="left"] .arrow {
+  margin-left: -5px;
+}
+
+.item[data-side="right"] .arrow {
+  margin-right: -5px;
+}
+
 .arrow {
-  width: 22px;
-  height: 22px;
+  width: 30px;
+  height: 30px;
   fill: none;
   stroke: currentColor;
   stroke-width: 1.5;

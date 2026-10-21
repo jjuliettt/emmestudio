@@ -61,8 +61,9 @@
   font-weight: 300;
   text-transform: uppercase;
   letter-spacing: var(--tracking-caps);
-  /* con "work together" a 2.7 volte (32px): Tangerine resta sopra i 24px */
-  font-size: 0.74rem;
+  /* grande quanto i link; con "work together" a 2.7 volte (27px) Tangerine
+     resta sopra i 24px */
+  font-size: 0.62rem;
   /* la riga alta quanto il corsivo, non di più */
   line-height: 1;
 }
@@ -79,10 +80,11 @@
   font-size: calc(var(--script-scale) * 1.5em);
 }
 
+/* tra i due link un po' più spazio che tra la frase e il primo link */
 .links {
   display: flex;
   justify-content: center;
-  gap: var(--space-s);
+  gap: var(--space-m);
   margin: 0;
   flex-direction: column;
 }
