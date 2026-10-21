@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import HandArrow from "@/components/HandArrow/HandArrow";
 import { useReducedMotion } from "@/lib/useReducedMotion";
 import styles from "./BackToTop.module.css";
 
-// Pulsante per tornare su, in basso a destra in tutte le pagine: compare
-// dopo aver sceso di mezza schermata (così anche nelle pagine corte, come
-// Contacts). Con meno movimento il salto è immediato.
+// Pulsante per tornare su, a destra all'altezza del pollice in tutte le
+// pagine: compare dopo aver sceso di mezza schermata (così anche nelle
+// pagine corte, come Contacts). Con meno movimento il salto è immediato.
 export default function BackToTop() {
   const [visible, setVisible] = useState(false);
   const reducedMotion = useReducedMotion();
@@ -35,11 +36,7 @@ export default function BackToTop() {
         window.scrollTo({ top: 0, behavior: reducedMotion ? "auto" : "smooth" })
       }
     >
-      {/* freccia disegnata a mano: asta un po' ondulata, punta aperta */}
-      <svg viewBox="0 0 24 24" className={styles.arrow} aria-hidden="true">
-        <path d="M12.3 19.6c-.9-3.6.6-7.4-.3-14.4" />
-        <path d="M7.4 9.7c1.9-1.2 3.4-2.8 4.6-4.5 1.2 1.6 2.8 3 4.9 4" />
-      </svg>
+      <HandArrow direction="up" className={styles.arrow} />
     </button>
   );
 }

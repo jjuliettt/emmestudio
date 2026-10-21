@@ -8,7 +8,8 @@ import { isValidEmail } from "@/lib/forms";
 import styles from "@/components/Forms/Form.module.css";
 
 // il valore è il nome stesso: arriva così nell'email
-const INTERESTS = ["Private", "Small Business", "Company or Event", "Something else"].map(
+// (gli stessi nomi delle categorie del sito)
+const INTERESTS = ["Private People", "Small Businesses", "Companies & Events", "Something else"].map(
   (label) => ({ value: label, label })
 );
 

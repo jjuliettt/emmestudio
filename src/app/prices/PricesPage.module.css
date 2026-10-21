@@ -30,7 +30,8 @@
 
 /* ---------- Intro ---------- */
 
-/* frase → fascia, fascia → linea, linea → "Private": tutti --space-l */
+/* frase → fascia, fascia → linea, linea → "Private People": tutti
+   --space-l */
 .intro {
   padding: var(--space-xl) 1.25rem var(--space-l);
   text-align: center;
@@ -100,14 +101,13 @@
   gap: var(--space-s);
 }
 
-/* Tangerine 700 (il file vero del grassetto), sui 34px: più piccolo si
-   legge male */
+/* Tangerine 700 (il file vero del grassetto), sui 42px */
 .title {
   margin: 0;
   font-family: var(--font-script);
   font-weight: 700;
   letter-spacing: 0;
-  font-size: 2.15rem;
+  font-size: 2.6rem;
   line-height: 1.1;
 }
 
@@ -166,8 +166,9 @@
   border-color: var(--cream);
 }
 
-/* "most chosen" sulla linea della cornice in alto, con una toppa crema
-   dietro che la interrompe (Tangerine: mai sotto i 24px) */
+/* "most chosen" sulla linea della cornice in alto: il fondo è quello del
+   riquadro, così la linea sembra solo interrotta dalla scritta (Tangerine:
+   mai sotto i 24px) */
 .tag {
   position: absolute;
   z-index: 1;
@@ -176,8 +177,8 @@
   /* centrata sulla linea, ma senza uscire sopra il riquadro */
   transform: translate(-50%, max(-50%, calc(-1 * var(--space-s))));
   padding: 0 var(--space-s);
-  background-color: var(--cream);
-  color: var(--espresso);
+  background-color: var(--espresso);
+  color: var(--cream);
   font-family: var(--font-script);
   font-weight: 400;
   letter-spacing: 0;

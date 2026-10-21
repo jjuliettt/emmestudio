@@ -13,10 +13,10 @@
 
 /* ---------- Saluto ---------- */
 
-/* Spectral maiuscolo piccolo: sopra --space-m (inizio della fascia), sotto
-   --space-m fino alla firma (vedi .photo) */
+/* Spectral maiuscolo piccolo, un po' sotto l'inizio della fascia (--space-m
+   + --space-s) e più vicino alla firma (--space-s, vedi .photo) */
 .greeting {
-  margin: 0 2.5rem;
+  margin: var(--space-s) 2.5rem 0;
   font-family: var(--font-main);
   font-weight: 300;
   text-transform: uppercase;
@@ -33,7 +33,7 @@
 /* ---------- Firma + foto ---------- */
 
 .photo {
-  margin: var(--space-m) 1.25rem 0;
+  margin: var(--space-s) 1.25rem 0;
 }
 
 .image {

@@ -175,10 +175,10 @@ export default function PricesPage() {
         </nav>
       </section>
 
-      {/* ---------- Private ---------- */}
+      {/* ---------- Private People ---------- */}
       <section id="private" className={styles.category} data-tone="cream" tabIndex={-1}>
         <div className={styles.head}>
-          <h2 className={styles.title}>Private</h2>
+          <h2 className={styles.title}>Private People</h2>
           <GuideLink category="private" className={styles.from}>
             Starting at €150
           </GuideLink>
