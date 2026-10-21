@@ -163,8 +163,10 @@
 
 /* ---------- Frase ---------- */
 
-/* Spectral 200 maiuscolo; --fit (≤ 1) lo mette Hero.tsx se la riga più
-   lunga non entra: si rimpicciolisce tutta la frase, aggettivo compreso */
+/* Spectral 200 maiuscolo, piccolo: le maiuscole alte quanto il corpo delle
+   minuscole dell'aggettivo, così a occhio è tutto della stessa misura.
+   --fit (≤ 1) lo mette Hero.tsx se la riga più lunga non entra: si
+   rimpicciolisce tutta la frase, aggettivo compreso */
 .quote {
   /* colonna 2: il margine in alto la centra sulla foto 3 */
   flex: 1;
@@ -176,8 +178,10 @@
   font-weight: 200;
   text-transform: uppercase;
   letter-spacing: var(--tracking-caps);
-  line-height: 1.18;
-  font-size: calc(3.6vw * var(--fit, 1));
+  /* righe distanti come prima (1.18 × 3.6vw): le aste alte dell'aggettivo
+     non toccano la riga sopra */
+  line-height: 1.63;
+  font-size: calc(2.6vw * var(--fit, 1));
   color: var(--espresso);
 }
 
@@ -195,14 +199,15 @@
   display: inline-grid;
 }
 
-/* Tangerine minuscolo, poco più grande della frase: il corpo delle lettere
-   arriva all'altezza delle maiuscole (si rimpicciolisce con lei, --fit).
-   Interlinea zero: la terza riga resta alta come le altre due */
+/* Tangerine minuscolo, il doppio della frase (5.2vw, la misura scelta da
+   Elisa): il corpo delle lettere arriva all'altezza delle maiuscole (si
+   rimpicciolisce con lei, --fit). Interlinea zero: la terza riga resta alta
+   come le altre due */
 .adjective {
   grid-area: 1 / 1;
   font-family: var(--font-script);
   font-weight: 400;
-  font-size: 1.45em;
+  font-size: 2em;
   line-height: 0;
   text-transform: none;
   letter-spacing: 0;
@@ -226,8 +231,9 @@
     padding-bottom: 4rem;
   }
 
+  /* stesse proporzioni del telefono: l'aggettivo resta com'era */
   .quote {
-    font-size: calc(clamp(0.8rem, 1.3vw, 1.1rem) * var(--fit, 1));
+    font-size: calc(clamp(0.58rem, 0.94vw, 0.8rem) * var(--fit, 1));
   }
 }
 

@@ -205,6 +205,11 @@
   color: var(--espresso);
 }
 
+/* sulle copertine con le parole piccole crema (Small Businesses) */
+.imageView[data-ink="cream"] {
+  color: var(--cream);
+}
+
 .imageView .view {
   margin-top: 0;
 }
