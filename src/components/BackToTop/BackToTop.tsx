@@ -5,7 +5,7 @@ import HandArrow from "@/components/HandArrow/HandArrow";
 import { useReducedMotion } from "@/lib/useReducedMotion";
 import styles from "./BackToTop.module.css";
 
-// Pulsante per tornare su, a destra all'altezza del pollice in tutte le
+// Pulsante per tornare su, a destra a un terzo dello schermo in tutte le
 // pagine: compare dopo aver sceso di mezza schermata (così anche nelle
 // pagine corte, come Contacts). Con meno movimento il salto è immediato.
 export default function BackToTop() {

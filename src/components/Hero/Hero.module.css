@@ -5,7 +5,7 @@
 
 .hero {
   /* quanto il blocco colorato sporge a sinistra e in basso dalla foto */
-  --block-offset: 16px;
+  --block-offset: 14px;
   /* quanto la riga 2 sale sulla foto 1 */
   --overlap: calc(6% + 10px);
   background-color: var(--cream);
@@ -27,10 +27,10 @@
   align-items: flex-start;
 }
 
-/* Colonna sinistra: titolo ruotato, si legge dal basso verso l'alto. Il 18%
-   della pagina basta per le due righe: il resto va allo slideshow */
+/* Colonna sinistra: titolo ruotato, si legge dal basso verso l'alto.
+   Proporzioni prese dal mobile di cassidylynnephoto.com. */
 .verticalText {
-  flex: 0 0 18%;
+  flex: 0 0 23%;
   align-self: stretch;
   display: flex;
   align-items: flex-end;
@@ -51,7 +51,7 @@
   font-weight: 200;
   /* --fit (≤ 1) lo mette Hero.tsx se il titolo è più lungo della foto:
      si rimpicciolisce il font, mai la spaziatura tra le lettere */
-  font-size: calc(min(5.6vw, 2.2rem) * var(--fit, 1));
+  font-size: calc(min(4.85vw, 1.9rem) * var(--fit, 1));
   line-height: 0.8;
   letter-spacing: 0;
   color: var(--espresso);
@@ -75,15 +75,14 @@
   letter-spacing: 0.1em;
 }
 
-/* Slideshow in crossfade, nessun indicatore. Foto orizzontale, un po' più
-   alta del 3:2 degli originali (6000×4000): il blocco è più grande senza
-   uscire dalla pagina, si taglia un filo dei lati */
+/* Slideshow in crossfade, nessun indicatore. Foto orizzontale 3:2,
+   come gli originali (6000×4000). */
 .slideshow {
   position: relative;
   /* contesto proprio: il blocco colorato resta sotto alle foto */
   z-index: 0;
-  flex: 0 0 82%;
-  aspect-ratio: 1.3;
+  flex: 0 0 77%;
+  aspect-ratio: 3 / 2;
 }
 
 /* Blocco espresso, grande come la foto e spostato in basso a sinistra:
@@ -135,11 +134,11 @@
   align-items: center;
 }
 
-/* Colonna 1: le due foto verticali 2:3, larga il 64% della pagina (a metà
-   tra il 60.5% del riferimento e il 68% provato dopo) */
+/* Colonna 1: le due foto verticali 2:3. In % della pagina, come nel
+   riferimento: foto 2 da 2.2% a 41.4%, foto 3 da 32.8% a 60.2% */
 .collage {
   position: relative;
-  flex: 0 0 64.25%;
+  flex: 0 0 60.5%;
 }
 
 .photoTwo {
@@ -201,14 +200,14 @@
   display: inline-grid;
 }
 
-/* Tangerine minuscolo, 2.9 volte la frase: il corpo delle lettere più alto
+/* Tangerine minuscolo, 2.7 volte la frase: il corpo delle lettere più alto
    delle maiuscole (si rimpicciolisce con lei, --fit). Interlinea zero: la
    terza riga resta alta come le altre due */
 .adjective {
   grid-area: 1 / 1;
   font-family: var(--font-script);
   font-weight: 400;
-  font-size: 2.9em;
+  font-size: 2.7em;
   line-height: 0;
   /* le lettere di Tangerine escono molto dal riquadro (alto zero): Safari,
      durante la dissolvenza, ridisegna solo il riquadro e lascia pezzi della

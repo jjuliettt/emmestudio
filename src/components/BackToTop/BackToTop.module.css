@@ -1,14 +1,14 @@
 /* ---------------------------------------------
-   Torna su — cerchio espresso con la freccia crema, fisso a destra
-   all'altezza del pollice: a circa due terzi dello schermo (sopra il
-   contenuto, sotto il menu aperto e la foto a schermo intero)
+   Torna su — cerchio espresso con la freccia crema, fisso a destra a circa
+   un terzo dello schermo dall'alto (sopra il contenuto, sotto il menu
+   aperto e la foto a schermo intero)
 --------------------------------------------- */
 
 .button {
   position: fixed;
   z-index: 40;
   right: 1.25rem;
-  bottom: 28dvh;
+  top: calc(30dvh - 22px);
   display: flex;
   align-items: center;
   justify-content: center;
