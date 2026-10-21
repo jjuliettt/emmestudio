@@ -5,9 +5,24 @@ import path from "node:path";
 // che si chiamano REPLACE-ME_<categoria>-01.jpg, -02.jpg, ... (anche .png o
 // .webp), in ordine di numero. Si leggono al momento della build: per
 // aggiungere, togliere o cambiare una foto basta il file.
+//
+// Le informazioni di una foto (il pulsante "info" a schermo intero) stanno in
+// un file di testo con lo stesso nome: REPLACE-ME_events-01.txt. Una riga
+// "Nome: valore" per ogni dato (Type: …, Setting: …, Date: …); le altre righe
+// sono il testo libero. Senza file, niente pulsante.
 const FOLDER = path.join(process.cwd(), "public", "assets", "REPLACE-ME");
 
-export type CategoryPhoto = { src: string; width: number; height: number };
+export type PhotoInfo = {
+  details: { label: string; value: string }[];
+  text: string[];
+};
+
+export type CategoryPhoto = {
+  src: string;
+  width: number;
+  height: number;
+  info?: PhotoInfo;
+};
 
 export function categoryPhotos(slug: string): CategoryPhoto[] {
   const pattern = new RegExp(`^REPLACE-ME_${slug}-(\\d+)\\.(jpe?g|png|webp)$`, "i");
@@ -18,8 +33,24 @@ export function categoryPhotos(slug: string): CategoryPhoto[] {
     .sort((a, b) => Number(a.match![1]) - Number(b.match![1]))
     .map(({ file }) => {
       const size = imageSize(path.join(FOLDER, file));
-      return { src: `/assets/REPLACE-ME/${file}`, ...size };
+      const info = photoInfo(path.join(FOLDER, file.replace(/\.\w+$/, ".txt")));
+      return { src: `/assets/REPLACE-ME/${file}`, ...size, ...(info && { info }) };
     });
+}
+
+// "Date: May 2025" → dato; le righe senza "Nome:" davanti → testo. Il nome è
+// fatto solo di lettere e spazi, così un orario ("alle 10:30") resta testo
+function photoInfo(file: string): PhotoInfo | undefined {
+  if (!fs.existsSync(file)) return undefined;
+  const info: PhotoInfo = { details: [], text: [] };
+  for (const raw of fs.readFileSync(file, "utf8").split(/\r?\n/)) {
+    const line = raw.trim();
+    if (!line) continue;
+    const detail = line.match(/^([\p{L} &'’-]{1,24}):\s+(.+)$/u);
+    if (detail) info.details.push({ label: detail[1].trim(), value: detail[2].trim() });
+    else info.text.push(line);
+  }
+  return info.details.length || info.text.length ? info : undefined;
 }
 
 // Larghezza e altezza leggendo l'intestazione del file (JPEG, PNG, WebP):

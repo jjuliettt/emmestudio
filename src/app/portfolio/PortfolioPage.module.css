@@ -3,15 +3,17 @@
    Titolo, frase e copertine (CoverList, le stesse della home)
 --------------------------------------------- */
 
+/* sotto le copertine lo spazio lo mette il riquadro "Want to work
+   together" (--space-l): due spazi di fila sarebbero il doppio */
 .page {
   background-color: var(--cream);
   color: var(--espresso);
-  padding: var(--space-xl) 1.25rem var(--space-l);
+  padding: var(--space-xl) 1.25rem 0;
 }
 
-/* sotto la frase: lo stesso spazio che c'è tra titolo e frase */
+/* frase → copertine: --space-l, come frase → contenuto nelle altre pagine */
 .covers {
-  margin-top: var(--space-m);
+  margin-top: var(--space-l);
 }
 
 /* ---------------------------------------------
@@ -20,7 +22,7 @@
 
 @media (min-width: 768px) {
   .page {
-    padding: 3rem;
+    padding: 3rem 3rem 0;
   }
 
   .page > * {

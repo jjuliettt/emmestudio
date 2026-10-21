@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Booking from "@/components/Booking/Booking";
+import CategoryNav from "@/components/CategoryNav/CategoryNav";
 import Gallery from "@/components/Gallery/Gallery";
-import PageTitle from "@/components/PageTitle/PageTitle";
+import PageTitle, { PageLead } from "@/components/PageTitle/PageTitle";
 import { categoryPhotos } from "@/lib/categoryPhotos";
 import { PORTFOLIO_CATEGORIES } from "@/lib/portfolioCategories";
 import styles from "./CategoryPage.module.css";
@@ -25,14 +26,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const category = findCategory((await params).category)!;
   return {
     title: `${category.title} | Portfolio`,
-    description: `${category.title}: a selection of photographs by Elisa Massetti, photographer in Belgium.`,
+    description: category.description,
   };
 }
 
 export default async function CategoryPage({ params }: Props) {
   const slug = (await params).category;
   const category = findCategory(slug)!;
-  const others = PORTFOLIO_CATEGORIES.filter((other) => other !== category);
+  // in giro: dopo l'ultima si torna alla prima, prima della prima c'è l'ultima
+  const index = PORTFOLIO_CATEGORIES.indexOf(category);
+  const count = PORTFOLIO_CATEGORIES.length;
+  const previous = PORTFOLIO_CATEGORIES[(index - 1 + count) % count];
+  const next = PORTFOLIO_CATEGORIES[(index + 1) % count];
 
   return (
     <>
@@ -43,17 +48,14 @@ export default async function CategoryPage({ params }: Props) {
 
         <div className={styles.title}>
           <PageTitle>{category.title}</PageTitle>
+          <PageLead lines={[category.description]} />
         </div>
 
         <Gallery photos={categoryPhotos(slug)} label={category.title} />
 
-        <nav aria-label="Other categories" className={styles.others}>
-          {others.map((other) => (
-            <Link key={other.href} href={other.href} className={`u-link ${styles.link}`}>
-              {other.title}
-            </Link>
-          ))}
-        </nav>
+        <div className={styles.others}>
+          <CategoryNav previous={previous} next={next} />
+        </div>
       </section>
 
       <Booking />
