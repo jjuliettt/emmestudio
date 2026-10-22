@@ -263,32 +263,62 @@
   }
 }
 
-/* Portatile: foto più grandi e più aria tra un gruppo e l'altro */
+/* le colonne del portatile: nascoste sul telefono */
+.columns {
+  display: none;
+}
+
+/* ---------------------------------------------
+   Portatile: tre colonne sfalsate su tutta la larghezza della pagina, foto
+   più piccole che sul telefono, sempre intere; "Info" a destra della foto
+   a schermo intero, nella parte alta
+--------------------------------------------- */
+
 @media (min-width: 1024px) {
   .layout {
-    max-width: 60rem;
+    display: none;
+  }
+
+  .columns {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: start;
+    column-gap: var(--space-l);
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: var(--space-l);
   }
 
-  .block {
-    gap: var(--space-m);
+  /* la colonna di mezzo parte più in basso, la terza un po' meno */
+  .column:nth-child(2) {
+    margin-top: var(--space-xl);
   }
 
-  .block[data-kind="stagger"] > :last-child {
-    margin-top: var(--space-xl);
+  .column:nth-child(3) {
+    margin-top: var(--space-l);
   }
 
   /* nessuna foto più alta di circa quattro quinti dello schermo: si vede
      sempre intera senza scorrere (--ratio = larghezza / altezza, da
      Gallery.tsx) */
   .thumb {
+    width: 100%;
     max-width: calc(78dvh * var(--ratio, 1));
   }
 
-  /* se una foto si stringe, il gruppo resta al centro */
-  .block[data-kind="full"],
-  .block[data-kind="pair"],
-  .block[data-kind="stagger"] {
-    justify-content: center;
+  /* spazio ai lati per "Info" accanto alla foto */
+  .viewer {
+    padding-left: 9rem;
+    padding-right: 9rem;
+  }
+
+  .infoButton {
+    top: 35%;
+    left: calc(100% + var(--space-s));
+    transform: translateY(-50%);
   }
 }

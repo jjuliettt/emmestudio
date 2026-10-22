@@ -252,10 +252,12 @@
   text-underline-offset: 0.35em;
 }
 
+/* una riga di spazio in più prima del pulsante (--space-m più lo spazio
+   tra le parti del modulo) */
 .submit {
   align-self: center;
   min-height: 2.75rem;
-  margin-top: 0;
+  margin-top: var(--space-m);
   padding: var(--space-s) var(--space-m);
   border: 1px solid var(--espresso);
   border-radius: 0;

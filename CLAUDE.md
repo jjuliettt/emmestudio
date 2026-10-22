@@ -91,5 +91,8 @@ Trust the code where the handover differs:
   upright Spectral 200.
 - Laptop version (from 1024 px): menu links in a row in the header; the
   hero's two phone rows side by side; About with the photo left and the text
-  right; covers and price packages three in a row; gallery photos never
-  taller than about 80% of the screen.
+  right; covers and price packages three in a row (covers blur and show
+  "VIEW" in the middle on hover); category photos in three staggered
+  columns across the page (never taller than about 80% of the screen), with
+  "Info" to the right of the full-screen photo; the booking photo as wide as
+  the page with a horizontal box.
