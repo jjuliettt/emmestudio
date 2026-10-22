@@ -120,14 +120,17 @@
     height: min(80dvh, 56.25vw);
   }
 
-  /* orizzontale: la domanda sopra, i due link affiancati sotto */
+  /* orizzontale: la domanda a sinistra, i due link uno sotto l'altro a
+     destra; tra domanda e link più spazio che tra un link e l'altro */
   .box {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-l);
     padding: var(--space-l) 3rem;
   }
 
-  .links {
-    flex-direction: row;
-    gap: var(--space-l);
+  .ask {
+    margin: 0;
   }
 
   .ask {
