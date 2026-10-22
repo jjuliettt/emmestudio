@@ -54,6 +54,20 @@ function layout(photos: CategoryPhoto[]): Block[] {
   return blocks;
 }
 
+// Portatile: le foto in colonne, ognuna aggiunta alla colonna più corta
+// (contando le proporzioni), così le colonne finiscono quasi pari e l'ordine
+// resta da sinistra a destra, dall'alto in basso
+function columns(photos: CategoryPhoto[], count: number): number[][] {
+  const cols: number[][] = Array.from({ length: count }, () => []);
+  const heights = new Array<number>(count).fill(0);
+  photos.forEach((photo, i) => {
+    const shortest = heights.indexOf(Math.min(...heights));
+    cols[shortest].push(i);
+    heights[shortest] += photo.height / photo.width;
+  });
+  return cols;
+}
+
 // Foto nelle loro proporzioni, mai tagliate. Un tocco apre la foto a tutto
 // schermo; si chiude con la X, toccando fuori dalla foto o con Esc. "Info"
 // sfoca la foto e ne mostra i dati (dal suo file di testo; se non c'è, la
@@ -99,8 +113,35 @@ export default function Gallery({ photos, label }: Props) {
   // senza il file di testo della foto, almeno la categoria
   const info = current?.info ?? { details: [{ label: "Category", value: label }], text: [] };
 
+  // una miniatura: la stessa nelle due impaginazioni
+  const thumb = (i: number) => (
+    <button
+      key={photos[i].src}
+      type="button"
+      className={styles.thumb}
+      // le proporzioni della foto: sul portatile nessuna foto è più alta
+      // dello schermo (vedi .thumb nel CSS)
+      style={{ "--ratio": photos[i].width / photos[i].height } as CSSProperties}
+      onClick={(e) => {
+        openerRef.current = e.currentTarget;
+        show(i);
+      }}
+      aria-label={`Open ${alt(i)}`}
+    >
+      <img
+        src={photos[i].src}
+        width={photos[i].width}
+        height={photos[i].height}
+        alt={alt(i)}
+        loading={i < 4 ? "eager" : "lazy"}
+        className={styles.image}
+      />
+    </button>
+  );
+
   return (
     <>
+      {/* telefono: i gruppi da rivista */}
       <div className={styles.layout}>
         {layout(photos).map((block) => (
           <div
@@ -109,30 +150,17 @@ export default function Gallery({ photos, label }: Props) {
             data-kind={block.kind}
             data-side={block.kind === "offset" ? block.side : undefined}
           >
-            {block.items.map((i) => (
-              <button
-                key={photos[i].src}
-                type="button"
-                className={styles.thumb}
-                // le proporzioni della foto: sul portatile nessuna foto è
-                // più alta dello schermo (vedi .thumb nel CSS)
-                style={{ "--ratio": photos[i].width / photos[i].height } as CSSProperties}
-                onClick={(e) => {
-                  openerRef.current = e.currentTarget;
-                  show(i);
-                }}
-                aria-label={`Open ${alt(i)}`}
-              >
-                <img
-                  src={photos[i].src}
-                  width={photos[i].width}
-                  height={photos[i].height}
-                  alt={alt(i)}
-                  loading={i < 4 ? "eager" : "lazy"}
-                  className={styles.image}
-                />
-              </button>
-            ))}
+            {block.items.map(thumb)}
+          </div>
+        ))}
+      </div>
+
+      {/* portatile: tre colonne sfalsate su tutta la larghezza (solo una
+          delle due impaginazioni si vede, l'altra è nascosta dal CSS) */}
+      <div className={styles.columns}>
+        {columns(photos, 3).map((column, c) => (
+          <div key={c} className={styles.column}>
+            {column.map(thumb)}
           </div>
         ))}
       </div>

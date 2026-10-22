@@ -109,6 +109,32 @@
   outline-offset: 4px;
 }
 
+/* Portatile: frecce, nomi e "Back to home" più grandi */
+@media (min-width: 1024px) {
+  .arrow {
+    width: 38px;
+    height: 38px;
+  }
+
+  .item[data-side="left"] .arrow {
+    margin-left: -6px;
+  }
+
+  .item[data-side="right"] .arrow {
+    margin-right: -6px;
+  }
+
+  .word {
+    font-size: 0.85rem;
+  }
+
+  .home {
+    min-height: 44px;
+    padding: 0 1.2rem;
+    font-size: 0.72rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .circle {
     transition: none;
