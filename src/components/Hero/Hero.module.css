@@ -330,7 +330,8 @@
     grid-row: 3;
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    /* le due scritte sulla stessa linea di base */
+    align-items: baseline;
     margin-top: var(--space-m);
     padding-bottom: var(--space-s);
     border-bottom: 1px solid var(--espresso);
@@ -345,16 +346,17 @@
     font-size: 0.82rem;
   }
 
+  /* grande quanto "Photographer based in Belgium" */
   .cta {
     display: inline-flex;
     align-items: center;
     gap: 0.6em;
-    font-size: 0.88rem;
+    font-size: 0.82rem;
   }
 
   .ctaArrow {
-    width: 30px;
-    height: 30px;
+    width: 26px;
+    height: 26px;
     fill: none;
     stroke: currentColor;
     stroke-width: 1.5;
