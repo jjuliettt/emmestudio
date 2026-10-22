@@ -86,10 +86,54 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-xl) var(--space-s);
+  /* ai lati lo spazio per ‹ e › */
+  padding: var(--space-xl) 2.75rem;
   background-color: var(--cream);
   color: var(--espresso);
   cursor: zoom-out;
+}
+
+/* ‹ e › espresso, ai lati dello schermo, a metà altezza */
+.prev,
+.next {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--espresso);
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.prev {
+  left: 0;
+}
+
+.next {
+  right: 0;
+}
+
+.chevron {
+  width: 26px;
+  height: 26px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.prev:focus-visible,
+.next:focus-visible {
+  outline: 1px solid var(--espresso);
+  outline-offset: -4px;
 }
 
 /* largo e alto quanto la foto: la X e "Info" si appoggiano ai suoi bordi */
@@ -310,10 +354,23 @@
     max-width: calc(78dvh * var(--ratio, 1));
   }
 
-  /* spazio ai lati per "Info" accanto alla foto */
+  /* spazio ai lati per "Info" accanto alla foto e per ‹ › */
   .viewer {
     padding-left: 9rem;
     padding-right: 9rem;
+  }
+
+  .prev {
+    left: 2rem;
+  }
+
+  .next {
+    right: 2rem;
+  }
+
+  .chevron {
+    width: 34px;
+    height: 34px;
   }
 
   .infoButton {

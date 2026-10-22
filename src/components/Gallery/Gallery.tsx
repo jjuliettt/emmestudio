@@ -84,6 +84,15 @@ export default function Gallery({ photos, label }: Props) {
     setOpen(i);
   };
 
+  // la foto dopo (1) o prima (-1), in giro: dopo l'ultima torna la prima
+  const step = (by: number) => {
+    setShowInfo(false);
+    setOpen((i) => (i === null ? i : (i + by + photos.length) % photos.length));
+  };
+
+  // sul telefono si passa da una foto all'altra anche col dito
+  const swipeStart = useRef<{ x: number; y: number } | null>(null);
+
   useEffect(() => {
     if (open === null) return;
     const root = document.documentElement;
@@ -95,9 +104,9 @@ export default function Gallery({ photos, label }: Props) {
         setOpen(null);
       }
       if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
-        const step = e.key === "ArrowRight" ? 1 : -1;
+        const by = e.key === "ArrowRight" ? 1 : -1;
         setShowInfo(false);
-        setOpen((i) => (i === null ? i : (i + step + photos.length) % photos.length));
+        setOpen((i) => (i === null ? i : (i + by + photos.length) % photos.length));
       }
     };
     window.addEventListener("keydown", onKey);
@@ -172,7 +181,54 @@ export default function Gallery({ photos, label }: Props) {
           aria-modal="true"
           aria-label={alt(open)}
           onClick={() => show(null)}
+          onTouchStart={(e) => {
+            const t = e.touches[0];
+            swipeStart.current = { x: t.clientX, y: t.clientY };
+          }}
+          onTouchEnd={(e) => {
+            const start = swipeStart.current;
+            swipeStart.current = null;
+            if (!start || photos.length < 2) return;
+            const t = e.changedTouches[0];
+            const dx = t.clientX - start.x;
+            // un movimento orizzontale deciso, non un tocco o uno scorrimento
+            if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(t.clientY - start.y)) {
+              step(dx < 0 ? 1 : -1);
+            }
+          }}
         >
+          {/* ‹ e › ai lati per la foto prima e dopo */}
+          {photos.length > 1 && (
+            <>
+              <button
+                type="button"
+                className={styles.prev}
+                aria-label="Previous photo"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  step(-1);
+                }}
+              >
+                <svg viewBox="0 0 24 24" className={styles.chevron} aria-hidden="true">
+                  <path d="M15 4.5 7.5 12l7.5 7.5" />
+                </svg>
+              </button>
+              <button
+                type="button"
+                className={styles.next}
+                aria-label="Next photo"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  step(1);
+                }}
+              >
+                <svg viewBox="0 0 24 24" className={styles.chevron} aria-hidden="true">
+                  <path d="M9 4.5 16.5 12 9 19.5" />
+                </svg>
+              </button>
+            </>
+          )}
+
           {/* la X appena sopra la foto, a destra; "info" appena sotto, a
               sinistra: stanno sul bordo di .stage, largo quanto la foto */}
           <div className={styles.stage}>

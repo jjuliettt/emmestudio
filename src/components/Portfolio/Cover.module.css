@@ -215,10 +215,11 @@
   color: var(--cream);
 }
 
-/* più grande del "VIEW" delle altre copertine */
+/* più grande del "VIEW" delle altre copertine, Spectral grassetto */
 .imageView .view {
   margin-top: 0;
   margin-right: calc(-1 * var(--tracking-caps));
+  font-weight: 700;
   font-size: 5.5cqw;
 }
 
