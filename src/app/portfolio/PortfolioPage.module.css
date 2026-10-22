@@ -33,10 +33,10 @@
 }
 
 /* Portatile: titolo e frase al centro, le tre copertine in riga; sotto,
-   prima della foto di "Want to work together", --space-xl in tutto */
+   prima della foto di "Want to work together", --space-l + --space-l */
 @media (min-width: 1024px) {
   .page {
-    padding-bottom: var(--space-m);
+    padding-bottom: var(--space-l);
   }
 
   .page > * {

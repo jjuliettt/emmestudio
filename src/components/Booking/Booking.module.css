@@ -110,14 +110,14 @@
 
 /* ---------------------------------------------
    Portatile: come sul telefono la foto è larga quanto la pagina (una fascia
-   alta al massimo quattro quinti dello schermo, la foto ci scorre dietro);
+   alta al massimo tre quinti dello schermo, la foto ci scorre dietro);
    riquadro e testi più grandi, stesse proporzioni
 --------------------------------------------- */
 
 @media (min-width: 1024px) {
   .window {
     aspect-ratio: auto;
-    height: min(80dvh, 56.25vw);
+    height: min(60dvh, 42vw);
   }
 
   /* orizzontale: la domanda a sinistra, i due link uno sotto l'altro a
