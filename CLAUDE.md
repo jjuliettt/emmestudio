@@ -91,9 +91,11 @@ Trust the code where the handover differs:
   it back. The FAQ title is Spectral, not Tangerine. Form placeholders are
   upright Spectral 200.
 - Laptop version (from 1024 px): menu links in a row in the header; the
-  hero across the full width in three columns (big vertical title, photo 2
-  with photo 3 overlapping and the sentence under it, the slideshow as the
-  biggest photo); About with the photo left and the text
+  hero across the full width in three columns (vertical title at the bottom
+  left, photo 2 with photo 3 overlapping and the sentence under it, the
+  slideshow as the biggest photo) over a thin espresso line with
+  "Photographer based in Belgium" and a "View my portfolio" link (laptop
+  only); About with the photo left and the text
   right; covers and price packages three in a row (covers blur and show
   "VIEW" in the middle on hover); category photos in three staggered
   columns across the page (never taller than about 80% of the screen), with

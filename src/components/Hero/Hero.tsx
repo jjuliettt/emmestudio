@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import HandArrow from "@/components/HandArrow/HandArrow";
 import { useFitText } from "@/lib/useFitText";
 import { useReducedMotion } from "@/lib/useReducedMotion";
 import styles from "./Hero.module.css";
@@ -184,6 +186,16 @@ export default function Hero() {
             </span>
           </span>
         </p>
+      </div>
+
+      {/* Solo sul portatile: la riga sottile in fondo, con dove lavoro a
+          sinistra e il portfolio a destra (sul telefono è nascosta) */}
+      <div className={styles.footline}>
+        <span className={styles.place}>Photographer based in Belgium</span>
+        <Link href="/portfolio" className={`u-link ${styles.cta}`}>
+          View my portfolio
+          <HandArrow direction="right" className={styles.ctaArrow} />
+        </Link>
       </div>
     </section>
   );
