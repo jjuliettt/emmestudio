@@ -243,25 +243,32 @@
   }
 }
 
+/* la riga in fondo: solo sul portatile */
+.footline {
+  display: none;
+}
+
 /* ---------------------------------------------
-   Portatile: tutta la larghezza della pagina, in tre colonne — il titolo
-   verticale grande a sinistra, poi la foto 2 con la foto 3 sovrapposta e
-   sotto la frase, poi lo slideshow, la foto più grande, un po' più in
-   basso. Le due righe del telefono (.rowOne, .rowTwo) si sciolgono nella
-   griglia (display: contents)
+   Portatile: tutta la larghezza della pagina — il titolo verticale a
+   sinistra (in basso, allineato alla riga in fondo), poi la foto 2 con la
+   foto 3 sovrapposta e sotto la frase, poi lo slideshow, la foto più
+   grande, un po' più in basso; sotto le foto una riga sottile espresso con
+   "Photographer based in Belgium" e il link al portfolio. Le due righe del
+   telefono (.rowOne, .rowTwo) si sciolgono nella griglia (display:
+   contents)
 --------------------------------------------- */
 
 @media (min-width: 1024px) {
   .hero {
     --block-offset: 18px;
     display: grid;
-    grid-template-columns: 13% 22% minmax(0, 1fr);
-    grid-template-rows: auto 1fr;
+    grid-template-columns: 7% 26% minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
     column-gap: 3%;
     align-items: start;
     max-width: 110rem;
     margin: 0 auto;
-    padding: var(--space-l) 3rem;
+    padding: var(--space-m) 3rem var(--space-l);
   }
 
   .rowOne,
@@ -269,17 +276,17 @@
     display: contents;
   }
 
-  /* il titolo occupa tutta l'altezza, dall'alto fino al fondo dello
-     slideshow (lo misura Hero.tsx) */
+  /* tutta l'altezza: il titolo sta in fondo, all'altezza della riga */
   .verticalText {
     grid-column: 1;
-    grid-row: 1 / span 2;
+    grid-row: 1 / -1;
+    align-self: stretch;
     padding: 0;
     justify-content: flex-start;
   }
 
   .verticalTitle {
-    font-size: calc(min(4.4vw, 4rem) * var(--fit, 1));
+    font-size: calc(min(2.5vw, 2.4rem) * var(--fit, 1));
   }
 
   /* la foto più grande, che parte un po' più in basso delle altre */
@@ -303,9 +310,9 @@
 
   /* più piccola, sovrapposta al bordo destro della foto 2 */
   .photoThree {
-    top: 38%;
-    left: 72%;
-    width: 58%;
+    top: 40%;
+    left: 70%;
+    width: 55%;
   }
 
   .quote {
@@ -313,7 +320,59 @@
     grid-row: 2;
     margin: var(--space-m) 0 0;
     padding: 0;
-    font-size: calc(clamp(0.75rem, 0.95vw, 0.95rem) * var(--fit, 1));
+    font-size: calc(clamp(0.8rem, 1.05vw, 1rem) * var(--fit, 1));
+  }
+
+  .footline {
+    grid-column: 2 / -1;
+    grid-row: 3;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: var(--space-m);
+    padding-bottom: var(--space-s);
+    border-bottom: 1px solid var(--espresso);
+  }
+
+  /* Spectral maiuscolo piccolo, spaziato */
+  .place {
+    font-family: var(--font-main);
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-caps);
+    font-size: 0.72rem;
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+    font-size: 0.78rem;
+  }
+
+  .ctaArrow {
+    width: 26px;
+    height: 26px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform 0.4s ease;
+  }
+
+  .cta:hover .ctaArrow {
+    transform: translateX(4px);
+  }
+}
+
+@media (min-width: 1024px) and (prefers-reduced-motion: reduce) {
+  .ctaArrow {
+    transition: none;
+  }
+
+  .cta:hover .ctaArrow {
+    transform: none;
   }
 }
 
