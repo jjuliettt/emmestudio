@@ -250,7 +250,7 @@
 
 /* ---------------------------------------------
    Portatile: tutta la larghezza della pagina — il titolo verticale a
-   sinistra (in basso, allineato alla riga in fondo), poi la foto 2 con la
+   sinistra (finisce all'altezza del fondo della foto 2), poi la foto 2 con la
    foto 3 sovrapposta e sotto la frase, poi lo slideshow, la foto più
    grande, un po' più in basso; sotto le foto una riga sottile espresso con
    "Photographer based in Belgium" e il link al portfolio. Le due righe del
@@ -262,8 +262,10 @@
   .hero {
     --block-offset: 18px;
     display: grid;
-    grid-template-columns: 7% 26% minmax(0, 1fr);
-    grid-template-rows: auto auto auto;
+    grid-template-columns: 7% 23% minmax(0, 1fr);
+    /* la riga 1 è alta quanto la foto 2: lo spazio in più dello slideshow
+       va alla riga 2 */
+    grid-template-rows: auto 1fr auto;
     column-gap: 3%;
     align-items: start;
     max-width: 110rem;
@@ -276,10 +278,10 @@
     display: contents;
   }
 
-  /* tutta l'altezza: il titolo sta in fondo, all'altezza della riga */
+  /* accanto alla foto 2: il titolo finisce alla stessa altezza della foto */
   .verticalText {
     grid-column: 1;
-    grid-row: 1 / -1;
+    grid-row: 1;
     align-self: stretch;
     padding: 0;
     justify-content: flex-start;
@@ -320,7 +322,7 @@
     grid-row: 2;
     margin: var(--space-m) 0 0;
     padding: 0;
-    font-size: calc(clamp(0.8rem, 1.05vw, 1rem) * var(--fit, 1));
+    font-size: calc(clamp(0.9rem, 1.25vw, 1.2rem) * var(--fit, 1));
   }
 
   .footline {
@@ -340,19 +342,19 @@
     font-weight: 300;
     text-transform: uppercase;
     letter-spacing: var(--tracking-caps);
-    font-size: 0.72rem;
+    font-size: 0.82rem;
   }
 
   .cta {
     display: inline-flex;
     align-items: center;
     gap: 0.6em;
-    font-size: 0.78rem;
+    font-size: 0.88rem;
   }
 
   .ctaArrow {
-    width: 26px;
-    height: 26px;
+    width: 30px;
+    height: 30px;
     fill: none;
     stroke: currentColor;
     stroke-width: 1.5;
