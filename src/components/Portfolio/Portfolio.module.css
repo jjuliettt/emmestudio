@@ -35,10 +35,11 @@
   }
 }
 
-/* Portatile: tutta la larghezza per le tre copertine in riga */
+/* Portatile: tutta la larghezza per le tre copertine in riga, con più aria
+   sopra (--space-l) e sotto (--space-xl + --space-m) */
 @media (min-width: 1024px) {
   .portfolio {
-    padding: var(--space-m) 3rem var(--space-xl);
+    padding: var(--space-l) 3rem calc(var(--space-xl) + var(--space-m));
   }
 
   .portfolio > * {
