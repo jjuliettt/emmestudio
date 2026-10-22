@@ -332,7 +332,8 @@
     justify-content: space-between;
     /* le due scritte sulla stessa linea di base */
     align-items: baseline;
-    margin-top: var(--space-m);
+    /* aria tra il fondo del blocco espresso e le scritte */
+    margin-top: calc(var(--space-l) + var(--space-s));
     padding-bottom: var(--space-s);
     border-bottom: 1px solid var(--espresso);
   }
