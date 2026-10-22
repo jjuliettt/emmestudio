@@ -75,11 +75,3 @@
   }
 }
 
-/* Portatile: email e zona affiancate */
-@media (min-width: 1024px) {
-  .details {
-    flex-direction: row;
-    justify-content: center;
-    gap: var(--space-xl);
-  }
-}
