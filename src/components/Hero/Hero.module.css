@@ -244,55 +244,76 @@
 }
 
 /* ---------------------------------------------
-   Portatile: le due righe del telefono diventano una riga sola — titolo
-   verticale e slideshow a sinistra, le due foto con la frase a destra, che
-   salgono un po' sullo slideshow (come la riga 2 sul telefono)
+   Portatile: tutta la larghezza della pagina, in tre colonne — il titolo
+   verticale grande a sinistra, poi la foto 2 con la foto 3 sovrapposta e
+   sotto la frase, poi lo slideshow, la foto più grande, un po' più in
+   basso. Le due righe del telefono (.rowOne, .rowTwo) si sciolgono nella
+   griglia (display: contents)
 --------------------------------------------- */
 
 @media (min-width: 1024px) {
   .hero {
     --block-offset: 18px;
-    display: flex;
-    align-items: flex-start;
-    max-width: 72rem;
+    display: grid;
+    grid-template-columns: 13% 22% minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    column-gap: 3%;
+    align-items: start;
+    max-width: 110rem;
     margin: 0 auto;
     padding: var(--space-l) 3rem;
   }
 
-  .rowOne {
-    flex: 0 0 58%;
+  .rowOne,
+  .rowTwo {
+    display: contents;
   }
 
-  /* il titolo ha bisogno solo della sua colonna stretta: la misura segue la
-     larghezza, così le due righe non arrivano mai sul blocco espresso */
+  /* il titolo occupa tutta l'altezza, dall'alto fino al fondo dello
+     slideshow (lo misura Hero.tsx) */
   .verticalText {
-    flex: 0 0 13%;
-    padding-bottom: 0.5%;
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    padding: 0;
+    justify-content: flex-start;
   }
 
   .verticalTitle {
-    font-size: calc(min(2.4vw, 1.9rem) * var(--fit, 1));
+    font-size: calc(min(4.4vw, 4rem) * var(--fit, 1));
   }
 
+  /* la foto più grande, che parte un po' più in basso delle altre */
   .slideshow {
-    flex: 1;
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    margin-top: var(--space-l);
   }
 
-  /* parte a metà altezza dello slideshow e ci entra un po' sopra */
-  .rowTwo {
-    flex: 1;
-    margin-top: 15%;
-    margin-left: -8%;
-  }
-
+  /* sopra lo slideshow: la foto 3 ci entra un po' */
   .collage {
-    flex: 0 0 62%;
+    grid-column: 2;
+    grid-row: 1;
+    z-index: 3;
+  }
+
+  .photoTwo {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  /* più piccola, sovrapposta al bordo destro della foto 2 */
+  .photoThree {
+    top: 38%;
+    left: 72%;
+    width: 58%;
   }
 
   .quote {
-    margin-top: 22%;
-    padding: 0 0 0 7%;
-    font-size: calc(clamp(0.7rem, 0.9vw, 0.85rem) * var(--fit, 1));
+    grid-column: 2;
+    grid-row: 2;
+    margin: var(--space-m) 0 0;
+    padding: 0;
+    font-size: calc(clamp(0.75rem, 0.95vw, 0.95rem) * var(--fit, 1));
   }
 }
 

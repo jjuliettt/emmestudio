@@ -41,9 +41,10 @@ const ADJECTIVES = ["confident", "natural", "unforgettable"] as const;
 const SLIDE_INTERVAL = 4500;
 const ADJECTIVE_INTERVAL = 3000;
 
-// Il titolo verticale non deve mai essere più lungo della foto (meno lo
-// spazio sopra e sotto): se lo è, si rimpicciolisce il font, non la
-// spaziatura tra le lettere
+// Il titolo verticale non deve mai andare oltre il fondo dello slideshow
+// (meno lo spazio sopra e sotto): se lo fa, si rimpicciolisce il font, non
+// la spaziatura tra le lettere. Sul telefono titolo e foto partono alla
+// stessa altezza, sul portatile il titolo parte più in alto della foto
 function measureTitle(title: HTMLElement) {
   const column = title.parentElement!;
   const photo = column.nextElementSibling!;
@@ -52,7 +53,8 @@ function measureTitle(title: HTMLElement) {
     // in scrittura verticale l'altezza è la lunghezza della riga
     size: title.offsetHeight,
     room:
-      photo.getBoundingClientRect().height -
+      photo.getBoundingClientRect().bottom -
+      column.getBoundingClientRect().top -
       parseFloat(pad.paddingTop) -
       parseFloat(pad.paddingBottom),
   };
