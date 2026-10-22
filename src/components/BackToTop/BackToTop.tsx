@@ -6,21 +6,31 @@ import { useReducedMotion } from "@/lib/useReducedMotion";
 import styles from "./BackToTop.module.css";
 
 // Pulsante per tornare su, a destra a un terzo dello schermo in tutte le
-// pagine: compare dopo aver sceso di mezza schermata (così anche nelle
-// pagine corte, come Contacts). Con meno movimento il salto è immediato.
+// pagine. Si comporta come l'header: sparisce scorrendo verso il basso e
+// ricompare appena si risale un poco (mai nella prima mezza schermata, dove
+// non serve). Con meno movimento il salto è immediato.
 export default function BackToTop() {
   const [visible, setVisible] = useState(false);
   const reducedMotion = useReducedMotion();
 
   useEffect(() => {
-    const update = () => setVisible(window.scrollY > window.innerHeight / 2);
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-    return () => {
-      window.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
+    let lastY = window.scrollY;
+    let ticking = false;
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        // su → compare, giù → sparisce; vicino all'inizio sempre nascosto
+        setVisible(y < lastY && y > window.innerHeight / 2);
+        lastY = y;
+        ticking = false;
+      });
     };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
