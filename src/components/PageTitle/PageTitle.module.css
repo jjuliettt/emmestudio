@@ -26,3 +26,18 @@
   max-width: 22rem;
   margin: 0 auto;
 }
+
+/* Portatile: titolo un po' più grande, frase più larga */
+@media (min-width: 1024px) {
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .lead {
+    font-size: 1.05rem;
+  }
+
+  .lead p {
+    max-width: 36rem;
+  }
+}

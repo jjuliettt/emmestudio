@@ -25,3 +25,21 @@
 .list > * {
   width: min(70vw, 22rem);
 }
+
+/* ---------------------------------------------
+   Portatile: le tre copertine in riga, stessa larghezza
+--------------------------------------------- */
+
+@media (min-width: 1024px) {
+  .list {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .list > * {
+    width: auto;
+    flex: 0 1 22rem;
+    min-width: 0;
+  }
+}

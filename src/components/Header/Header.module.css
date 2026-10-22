@@ -140,6 +140,57 @@
   color: var(--espresso);
 }
 
+/* le voci in riga: solo dal portatile */
+.inlineNav {
+  display: none;
+}
+
+/* ---------------------------------------------
+   Portatile: nome a sinistra, voci in riga a destra (Quicksand, come nel
+   menu), niente icona né menu a schermo intero
+--------------------------------------------- */
+
+@media (min-width: 1024px) {
+  .bar {
+    padding: 1.4rem 3rem;
+  }
+
+  .burger,
+  .panel {
+    display: none;
+  }
+
+  .name {
+    font-size: 1rem;
+  }
+
+  .inlineNav {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  .inlineLink {
+    font-family: var(--font-menu);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 0.78rem;
+    color: var(--espresso);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.45em;
+    /* sottolineata solo la pagina in cui si è, o passandoci sopra */
+    text-decoration-color: transparent;
+    transition: text-decoration-color 0.25s ease;
+  }
+
+  .inlineLink[aria-current="page"],
+  .inlineLink:hover {
+    text-decoration-color: currentColor;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .header,
   .panel,

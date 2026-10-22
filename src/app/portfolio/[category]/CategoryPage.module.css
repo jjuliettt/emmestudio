@@ -35,3 +35,24 @@
     padding-right: 3rem;
   }
 }
+
+/* ---------------------------------------------
+   Portatile: tutto nella stessa colonna, larga quanto le foto
+--------------------------------------------- */
+
+@media (min-width: 1024px) {
+  .page {
+    padding-top: var(--space-xl);
+  }
+
+  .page > * {
+    max-width: 60rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* il link in alto, in linea con il bordo sinistro delle foto */
+  .page > .back {
+    display: block;
+  }
+}

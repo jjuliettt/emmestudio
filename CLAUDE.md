@@ -22,8 +22,8 @@ phone afterwards and asks for changes if needed.
 - `npm run build` must pass before every push. `npx tsc --noEmit` is a quick
   type check. `npm run lint` doesn't work (Next.js 16 removed `next lint` and
   there is no ESLint config).
-- Check changes at phone width (360 to 430 px): no horizontal scroll, nothing
-  overflowing.
+- Check changes at phone width (360 to 430 px) and laptop width (1024 to
+  1440 px): no horizontal scroll, nothing overflowing.
 
 ## The repository is public
 
@@ -52,7 +52,9 @@ phone afterwards and asks for changes if needed.
 - Text links and calls to action use the global `u-link` class.
 - One shared `Booking` component on every page; only Prices passes
   `onPricesPage`.
-- Mobile first; the `@media (min-width: 768px)` blocks are not refined yet.
+- Mobile first. The laptop layout is in the `@media (min-width: 1024px)`
+  blocks at the bottom of each `.module.css`; the tablet range (768 to
+  1023 px) is still not refined.
 - Keep `alt` text on images and the reduced-motion behaviour.
 
 ## Content
@@ -79,11 +81,15 @@ Trust the code where the handover differs:
   `src/lib/portfolioCategories.ts`), a magazine-style photo layout chosen
   from each photo's shape (`src/components/Gallery/`), a cream full-screen
   view with an Info button (details from an optional `.txt` file with the
-  photo's name; see the README in `public/assets/REPLACE-ME/`), and circle
-  arrows to the previous/next category with "Back to home" underneath
-  (`src/components/CategoryNav/`).
+  photo's name; see the README in `public/assets/REPLACE-ME/`), and
+  hand-drawn arrows to the previous/next category with "Back to home"
+  underneath (`src/components/CategoryNav/`).
 - Every page has a back-to-top button. All arrows are the same hand-drawn
   one (`src/components/HandArrow/`).
 - "A little about me" was removed from About at Elisa's request; don't add
   it back. The FAQ title is Spectral, not Tangerine. Form placeholders are
   upright Spectral 200.
+- Laptop version (from 1024 px): menu links in a row in the header; the
+  hero's two phone rows side by side; About with the photo left and the text
+  right; covers and price packages three in a row; gallery photos never
+  taller than about 80% of the screen.

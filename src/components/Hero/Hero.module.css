@@ -243,6 +243,59 @@
   }
 }
 
+/* ---------------------------------------------
+   Portatile: le due righe del telefono diventano una riga sola — titolo
+   verticale e slideshow a sinistra, le due foto con la frase a destra, che
+   salgono un po' sullo slideshow (come la riga 2 sul telefono)
+--------------------------------------------- */
+
+@media (min-width: 1024px) {
+  .hero {
+    --block-offset: 18px;
+    display: flex;
+    align-items: flex-start;
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: var(--space-l) 3rem;
+  }
+
+  .rowOne {
+    flex: 0 0 58%;
+  }
+
+  /* il titolo ha bisogno solo della sua colonna stretta: la misura segue la
+     larghezza, così le due righe non arrivano mai sul blocco espresso */
+  .verticalText {
+    flex: 0 0 13%;
+    padding-bottom: 0.5%;
+  }
+
+  .verticalTitle {
+    font-size: calc(min(2.4vw, 1.9rem) * var(--fit, 1));
+  }
+
+  .slideshow {
+    flex: 1;
+  }
+
+  /* parte a metà altezza dello slideshow e ci entra un po' sopra */
+  .rowTwo {
+    flex: 1;
+    margin-top: 15%;
+    margin-left: -8%;
+  }
+
+  .collage {
+    flex: 0 0 62%;
+  }
+
+  .quote {
+    margin-top: 22%;
+    padding: 0 0 0 7%;
+    font-size: calc(clamp(0.7rem, 0.9vw, 0.85rem) * var(--fit, 1));
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .slide,
   .adjective {

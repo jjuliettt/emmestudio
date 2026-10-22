@@ -297,3 +297,10 @@
 .thanks:focus {
   outline: none;
 }
+
+/* Portatile: un po' più largo */
+@media (min-width: 1024px) {
+  .form {
+    max-width: 30rem;
+  }
+}

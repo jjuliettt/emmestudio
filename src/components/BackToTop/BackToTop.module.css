@@ -57,3 +57,10 @@
     transition: none;
   }
 }
+
+/* Portatile: più distante dal bordo */
+@media (min-width: 1024px) {
+  .button {
+    right: 2rem;
+  }
+}

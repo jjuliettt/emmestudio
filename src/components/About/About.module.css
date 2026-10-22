@@ -115,3 +115,42 @@
     margin-right: auto;
   }
 }
+
+/* ---------------------------------------------
+   Portatile: il saluto sopra, poi la foto con la firma a sinistra (resta
+   ferma mentre si legge) e il testo a destra
+--------------------------------------------- */
+
+@media (min-width: 1024px) {
+  .about {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: var(--space-xl);
+    align-items: start;
+    padding: var(--space-l) max(3rem, calc((100% - 66rem) / 2));
+  }
+
+  .about > * {
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .greeting {
+    grid-column: 1 / -1;
+    margin: 0 0 var(--space-l);
+    font-size: 0.85rem;
+  }
+
+  .photo {
+    position: sticky;
+    top: var(--space-l);
+    margin: 0;
+  }
+
+  .description {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+}
