@@ -115,10 +115,16 @@
   }
 }
 
-/* Portatile: la citazione più larga e un filo più grande */
+/* Portatile: la citazione più larga e un filo più grande; fascia un po'
+   più bassa (--space-l sopra e sotto) e ogni recensione al centro della
+   sua altezza, anche le più corte */
 @media (min-width: 1024px) {
   .reviews {
-    padding: var(--space-xl) 0;
+    padding: var(--space-l) 0;
+  }
+
+  .slide {
+    justify-content: center;
   }
 
   .quote p {
