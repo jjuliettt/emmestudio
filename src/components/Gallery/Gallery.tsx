@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import type { CategoryPhoto } from "@/lib/categoryPhotos";
 import styles from "./Gallery.module.css";
 
@@ -114,6 +114,9 @@ export default function Gallery({ photos, label }: Props) {
                 key={photos[i].src}
                 type="button"
                 className={styles.thumb}
+                // le proporzioni della foto: sul portatile nessuna foto è
+                // più alta dello schermo (vedi .thumb nel CSS)
+                style={{ "--ratio": photos[i].width / photos[i].height } as CSSProperties}
                 onClick={(e) => {
                   openerRef.current = e.currentTarget;
                   show(i);

@@ -34,3 +34,14 @@
     margin-right: auto;
   }
 }
+
+/* Portatile: tutta la larghezza per le tre copertine in riga */
+@media (min-width: 1024px) {
+  .portfolio {
+    padding: var(--space-m) 3rem var(--space-xl);
+  }
+
+  .portfolio > * {
+    max-width: 72rem;
+  }
+}

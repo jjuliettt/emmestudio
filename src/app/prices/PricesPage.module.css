@@ -286,3 +286,53 @@
     margin-right: auto;
   }
 }
+
+/* ---------------------------------------------
+   Portatile: le tre categorie in riga nella fascia espresso, i tre
+   pacchetti in riga, FAQ e modulo al centro
+--------------------------------------------- */
+
+@media (min-width: 1024px) {
+  .intro {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  .menu {
+    margin-left: -3rem;
+    margin-right: -3rem;
+  }
+
+  .menuList {
+    flex-direction: row;
+    justify-content: center;
+    gap: var(--space-xl);
+    max-width: none;
+  }
+
+  .category {
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-xl);
+  }
+
+  /* tutti alti uguale, anche quello con "most chosen" */
+  .cards {
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+  }
+
+  .card {
+    width: auto;
+    flex: 0 1 20rem;
+    min-width: 0;
+  }
+
+  .lines p {
+    max-width: 36rem;
+  }
+
+  .faq > * {
+    max-width: 40rem;
+  }
+}

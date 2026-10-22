@@ -31,3 +31,10 @@
     margin-right: auto;
   }
 }
+
+/* Portatile: titolo e frase al centro, le tre copertine in riga */
+@media (min-width: 1024px) {
+  .page > * {
+    max-width: 72rem;
+  }
+}

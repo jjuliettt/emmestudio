@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import styles from "./Header.module.css";
 
 const PAGES = [
@@ -15,7 +16,12 @@ const PAGES = [
 // mezzo swipe in cima alla pagina
 const HIDE_THRESHOLD = 80;
 
+// la voce della pagina in cui si è (le categorie contano come Portfolio)
+const isCurrent = (href: string, path: string) =>
+  href === "/" ? path === "/" : path === href || path.startsWith(`${href}/`);
+
 export default function Header() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   // Appare scorrendo verso l'alto, sparisce scorrendo verso il basso
   const [hidden, setHidden] = useState(false);
@@ -100,6 +106,20 @@ export default function Header() {
         <Link href="/" className={styles.name}>
           Elisa Massetti
         </Link>
+
+        {/* dal portatile: le voci sempre visibili, al posto dell'icona */}
+        <nav className={styles.inlineNav} aria-label="Main">
+          {PAGES.map((page) => (
+            <Link
+              key={page.href}
+              href={page.href}
+              className={styles.inlineLink}
+              aria-current={isCurrent(page.href, pathname) ? "page" : undefined}
+            >
+              {page.label}
+            </Link>
+          ))}
+        </nav>
       </div>
 
       {/* Menu a schermo intero: la X sta dove c'è l'icona del menu */}

@@ -114,3 +114,24 @@
     transition: none;
   }
 }
+
+/* Portatile: la citazione più larga e un filo più grande */
+@media (min-width: 1024px) {
+  .reviews {
+    padding: var(--space-xl) 0;
+  }
+
+  .quote p {
+    max-width: 36rem;
+    font-size: 1.15rem;
+  }
+
+  .label {
+    max-width: 36rem;
+  }
+
+  .photo {
+    width: 64px;
+    height: 64px;
+  }
+}

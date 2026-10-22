@@ -262,3 +262,33 @@
     margin: 0 auto;
   }
 }
+
+/* Portatile: foto più grandi e più aria tra un gruppo e l'altro */
+@media (min-width: 1024px) {
+  .layout {
+    max-width: 60rem;
+    gap: var(--space-l);
+  }
+
+  .block {
+    gap: var(--space-m);
+  }
+
+  .block[data-kind="stagger"] > :last-child {
+    margin-top: var(--space-xl);
+  }
+
+  /* nessuna foto più alta di circa quattro quinti dello schermo: si vede
+     sempre intera senza scorrere (--ratio = larghezza / altezza, da
+     Gallery.tsx) */
+  .thumb {
+    max-width: calc(78dvh * var(--ratio, 1));
+  }
+
+  /* se una foto si stringe, il gruppo resta al centro */
+  .block[data-kind="full"],
+  .block[data-kind="pair"],
+  .block[data-kind="stagger"] {
+    justify-content: center;
+  }
+}
