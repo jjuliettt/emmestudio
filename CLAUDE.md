@@ -14,9 +14,10 @@ phone afterwards and asks for changes if needed.
 
 - `main` is the live site. Never push to `main`. Start from the latest
   `main`, work on a new branch, push it and open a pull request, then merge
-  it yourself with `gh pr merge <number> --merge` once the build passes
-  (Elisa's choice since October 2026). Tell her what went live and link the
-  pull request; Vercel can take up to about 10 minutes to publish.
+  it yourself with `gh pr merge <number> --merge --delete-branch` once the
+  build passes (Elisa's choice since October 2026; the branch is deleted
+  right after, so only `main` stays on GitHub). Tell her what went live and
+  link the pull request; Vercel can take up to about 10 minutes to publish.
 - One change, or one group of related changes, per pull request, so each
   one can be undone with GitHub's **Revert**.
 - `npm run build` must pass before every push. `npx tsc --noEmit` is a quick
