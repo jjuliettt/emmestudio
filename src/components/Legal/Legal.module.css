@@ -98,3 +98,10 @@
     margin-right: auto;
   }
 }
+
+/* Portatile: la colonna di testo un po' più larga (non tutta la pagina) */
+@media (min-width: 1024px) {
+  .sections {
+    max-width: 54rem;
+  }
+}
