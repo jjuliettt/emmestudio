@@ -58,6 +58,9 @@ body {
   line-height: 1.5;
   /* niente grassetto finto del browser: solo il corsivo */
   font-synthesis: style;
+  /* in tutto il sito le parole non si spezzano mai a fine riga */
+  -webkit-hyphens: none;
+  hyphens: none;
 }
 
 /* Il grassetto solo dove è previsto, con una classe o una regola apposta */
