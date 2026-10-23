@@ -317,10 +317,11 @@
     width: 55%;
   }
 
+  /* un po' più giù della foto 2 */
   .quote {
     grid-column: 2;
     grid-row: 2;
-    margin: var(--space-m) 0 0;
+    margin: calc(var(--space-m) + var(--space-s)) 0 0;
     padding: 0;
     font-size: calc(clamp(0.9rem, 1.25vw, 1.2rem) * var(--fit, 1));
   }
@@ -333,7 +334,7 @@
     /* le due scritte sulla stessa linea di base */
     align-items: baseline;
     /* aria tra il fondo del blocco espresso e le scritte */
-    margin-top: calc(var(--space-l) + var(--space-s));
+    margin-top: var(--space-l);
     padding-bottom: var(--space-s);
     border-bottom: 1px solid var(--espresso);
   }
