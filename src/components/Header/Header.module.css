@@ -189,6 +189,68 @@
   .inlineLink:hover {
     text-decoration-color: currentColor;
   }
+
+  .inlineItem {
+    position: relative;
+  }
+
+  /* le tre categorie sotto PORTFOLIO, sul fondo dell'header: nascoste
+     finché il puntatore non è su PORTFOLIO o su di loro */
+  .sub {
+    position: absolute;
+    top: 100%;
+    left: -1rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-s);
+    padding: 1.1rem 1rem var(--space-m);
+    background-color: var(--beige);
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease,
+      visibility 0s linear 0.25s;
+  }
+
+  .inlineItem:hover .sub,
+  .inlineItem:focus-within .sub {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease,
+      visibility 0s;
+  }
+
+  /* più piccole e più chiare (un'espresso schiarita col beige del fondo);
+     col puntatore sopra diventano espresso e si sottolineano come
+     PORTFOLIO */
+  .subLink {
+    font-size: 0.7rem;
+    color: color-mix(in srgb, var(--espresso) 50%, var(--beige));
+    transition:
+      color 0.25s ease,
+      text-decoration-color 0.25s ease;
+  }
+
+  .subLink:hover,
+  .subLink:focus-visible,
+  .subLink[aria-current="page"] {
+    color: var(--espresso);
+  }
+}
+
+@media (min-width: 1024px) and (prefers-reduced-motion: reduce) {
+  .sub,
+  .inlineItem:hover .sub,
+  .inlineItem:focus-within .sub {
+    transform: none;
+    transition: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

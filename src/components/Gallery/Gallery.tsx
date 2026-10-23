@@ -164,10 +164,10 @@ export default function Gallery({ photos, label }: Props) {
         ))}
       </div>
 
-      {/* portatile: tre colonne sfalsate su tutta la larghezza (solo una
+      {/* portatile: quattro colonne sfalsate su tutta la larghezza (solo una
           delle due impaginazioni si vede, l'altra è nascosta dal CSS) */}
       <div className={styles.columns}>
-        {columns(photos, 3).map((column, c) => (
+        {columns(photos, 4).map((column, c) => (
           <div key={c} className={styles.column}>
             {column.map(thumb)}
           </div>
