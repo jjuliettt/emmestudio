@@ -33,17 +33,15 @@
   line-height: 1.45;
 }
 
-/* Spectral 300: i paragrafi giustificati con la sillabazione (lang="en");
-   i punti con il titoletto in grassetto restano a sinistra, giustificati
-   lascerebbero buchi */
+/* Spectral 300: paragrafi e punti giustificati (allineati a destra e a
+   sinistra), senza sillabazione: le parole non si spezzano mai a fine riga */
 .paragraph,
 .list {
-  -webkit-hyphens: auto;
-  hyphens: auto;
-}
-
-.paragraph {
   text-align: justify;
+  -webkit-hyphens: none;
+  hyphens: none;
+  overflow-wrap: normal;
+  text-wrap: pretty;
 }
 
 .paragraph {
