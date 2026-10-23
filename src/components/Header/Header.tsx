@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { PORTFOLIO_CATEGORIES } from "@/lib/portfolioCategories";
 import styles from "./Header.module.css";
 
 const PAGES = [
@@ -110,14 +111,32 @@ export default function Header() {
         {/* dal portatile: le voci sempre visibili, al posto dell'icona */}
         <nav className={styles.inlineNav} aria-label="Main">
           {PAGES.map((page) => (
-            <Link
-              key={page.href}
-              href={page.href}
-              className={styles.inlineLink}
-              aria-current={isCurrent(page.href, pathname) ? "page" : undefined}
-            >
-              {page.label}
-            </Link>
+            <div key={page.href} className={styles.inlineItem}>
+              <Link
+                href={page.href}
+                className={styles.inlineLink}
+                aria-current={isCurrent(page.href, pathname) ? "page" : undefined}
+              >
+                {page.label}
+              </Link>
+
+              {/* passando su PORTFOLIO (o col tasto Tab) compaiono sotto le
+                  tre categorie, più chiare */}
+              {page.href === "/portfolio" && (
+                <div className={styles.sub}>
+                  {PORTFOLIO_CATEGORIES.map((category) => (
+                    <Link
+                      key={category.href}
+                      href={category.href}
+                      className={`${styles.inlineLink} ${styles.subLink}`}
+                      aria-current={pathname === category.href ? "page" : undefined}
+                    >
+                      {category.title}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
         </nav>
       </div>

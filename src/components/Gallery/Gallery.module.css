@@ -313,8 +313,8 @@
 }
 
 /* ---------------------------------------------
-   Portatile: tre colonne sfalsate su tutta la larghezza della pagina, foto
-   più piccole che sul telefono, sempre intere; "Info" a destra della foto
+   Portatile: quattro colonne sfalsate su tutta la larghezza della pagina,
+   foto piccole, sempre intere; "Info" a destra della foto
    a schermo intero, nella parte alta
 --------------------------------------------- */
 
@@ -325,7 +325,7 @@
 
   .columns {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     align-items: start;
     column-gap: var(--space-l);
   }
@@ -337,12 +337,17 @@
     gap: var(--space-l);
   }
 
-  /* la colonna di mezzo parte più in basso, la terza un po' meno */
+  /* le colonne partono ad altezze diverse: seconda la più bassa, poi la
+     quarta, poi la terza */
   .column:nth-child(2) {
     margin-top: var(--space-xl);
   }
 
   .column:nth-child(3) {
+    margin-top: var(--space-m);
+  }
+
+  .column:nth-child(4) {
     margin-top: var(--space-l);
   }
 
