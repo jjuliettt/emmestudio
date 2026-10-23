@@ -49,7 +49,7 @@ export default function ContactsPage() {
           )}
           <div>
             <dt>Area</dt>
-            <dd>Based in Belgium, open to work across Belgium.</dd>
+            <dd>Based in Antwerp, open to work across Belgium.</dd>
           </div>
         </dl>
       </section>
