@@ -56,6 +56,9 @@ phone afterwards and asks for changes if needed.
 - Mobile first. The laptop layout is in the `@media (min-width: 1024px)`
   blocks at the bottom of each `.module.css`; the tablet range (768 to
   1023 px) is still not refined.
+- Never split words at the end of a line (no hyphenation anywhere; set
+  once on `body` in `globals.css`). Long texts are justified only where
+  Elisa asked (About, FAQ answers, Privacy & Legal).
 - Keep `alt` text on images and the reduced-motion behaviour.
 
 ## Content
