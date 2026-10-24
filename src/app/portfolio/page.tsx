@@ -15,12 +15,15 @@ export default function PortfolioPage() {
   return (
     <>
       <section className={styles.page}>
-        <PageTitle>Portfolio</PageTitle>
-        <PageLead
-          lines={[
-            "From busy events to quieter moments in front of the camera, here’s a look at the people and stories I’ve had the chance to photograph.",
-          ]}
-        />
+        {/* titolo e frase in un blocco centrato, come in Prices e Contacts */}
+        <div className={styles.intro}>
+          <PageTitle>Portfolio</PageTitle>
+          <PageLead
+            lines={[
+              "From busy events to quieter moments in front of the camera, here’s a look at the people and stories I’ve had the chance to photograph.",
+            ]}
+          />
+        </div>
 
         {/* stesso spazio sopra (titolo → frase) e sotto (frase → copertine) */}
         <div className={styles.covers}>
