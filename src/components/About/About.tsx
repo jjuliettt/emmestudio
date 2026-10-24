@@ -20,9 +20,10 @@ const TEXT = [
   "Whether I'm working with a business, documenting an event or taking someone's portrait, my approach is relaxed and people-focused. I want the experience to feel natural, to make people feel comfortable in front of the camera, and to create images that capture something genuine about the people and moments in front of me.",
 ];
 
-// La versione breve per la home: due frasi prese dal testo qui sopra
+// La versione breve per la home (testo di Elisa)
 const SHORT_TEXT = [
-  "I'm an Italian photographer from Bergamo, now based in Belgium. Whether I'm working with a business, documenting an event or taking someone's portrait, my approach is relaxed and people-focused.",
+  "I'm Elisa, an Italian photographer from Bergamo, based in Belgium. What started as a childhood curiosity has grown into a way of meeting people and telling their stories through photography.",
+  "From individual portraits and small businesses to corporate events and community gatherings, I focus on the people, interactions and little details that make every story unique. My approach is relaxed, observant and natural, creating images that feel genuine and capture more than just how things looked, but how they felt.",
 ];
 
 type Props = {
