@@ -1,0 +1,11 @@
+/* ---------------------------------------------
+   Pagina About — il titolo come nelle altre pagine, poi la fascia beige
+   (About) che prima stava in home
+--------------------------------------------- */
+
+.intro {
+  padding: var(--space-xl) 1.25rem var(--space-l);
+  background-color: var(--cream);
+  color: var(--espresso);
+  text-align: center;
+}
