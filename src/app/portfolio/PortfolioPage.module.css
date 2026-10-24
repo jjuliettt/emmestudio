@@ -11,6 +11,11 @@
   padding: var(--space-xl) 1.25rem 0;
 }
 
+/* titolo e frase: sempre al centro della pagina */
+.intro {
+  text-align: center;
+}
+
 /* frase → copertine: --space-l, come frase → contenuto nelle altre pagine */
 .covers {
   margin-top: var(--space-l);
