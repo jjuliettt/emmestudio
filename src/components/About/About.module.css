@@ -100,11 +100,16 @@
   margin-top: var(--space-s);
 }
 
-/* in home, sotto le due frasi: il link alla pagina About */
+/* in home, sotto le due frasi: il link alla pagina About, con un po'
+   d'aria sotto prima della fine della fascia */
 .more {
   display: table;
   margin: var(--space-m) auto 0;
   font-size: 0.75rem;
+}
+
+.description[data-short] {
+  padding-bottom: var(--space-m);
 }
 
 /* ---------------------------------------------
@@ -145,7 +150,7 @@
 
   .greeting {
     grid-column: 1 / -1;
-    margin: 0 0 var(--space-l);
+    margin: 0 0 var(--space-m);
     font-size: 0.85rem;
   }
 
@@ -165,6 +170,7 @@
      sinistra sotto */
   .description[data-short] {
     align-self: center;
+    padding-bottom: 0;
   }
 
   .description[data-short] .more {

@@ -91,16 +91,20 @@ Trust the code where the handover differs:
 - Every page has a back-to-top button. All arrows are the same hand-drawn
   one (`src/components/HandArrow/`).
 - "A little about me" was removed from About at Elisa's request; don't add
-  it back. The FAQ title is Spectral, not Tangerine. Form placeholders are
+  it back. About has its own page (`/about`, menu: Home, Portfolio, About,
+  Prices, Contacts) with the full text; Home shows the same band (greeting,
+  signature on the photo) with two sentences and "More about me"
+  (`<About short />`). The FAQ title is Spectral, not Tangerine. Form placeholders are
   upright Spectral 200.
-- Laptop version (from 1024 px): menu links in a row in the header; the
+- Laptop version (from 1024 px): menu links in a row in the header (the
+  three categories drop down under Portfolio on hover); the
   hero across the full width in three columns (vertical title at the bottom
   left, photo 2 with photo 3 overlapping and the sentence under it, the
   slideshow as the biggest photo) over a thin espresso line with
   "Photographer based in Belgium" and a "View my portfolio" link (laptop
   only); About with the photo left and the text
   right; covers and price packages three in a row (covers blur and show
-  "VIEW" in the middle on hover); category photos in three staggered
+  "VIEW" in the middle on hover); category photos in four staggered
   columns across the page (never taller than about 80% of the screen), with
   "Info" to the right of the full-screen photo; the booking photo as wide as
   the page with a horizontal box.

@@ -8,8 +8,8 @@ import styles from "./Header.module.css";
 
 const PAGES = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
   { label: "Portfolio", href: "/portfolio" },
+  { label: "About", href: "/about" },
   { label: "Prices", href: "/prices" },
   { label: "Contacts", href: "/contacts" },
 ];
