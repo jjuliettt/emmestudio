@@ -100,6 +100,13 @@
   margin-top: var(--space-s);
 }
 
+/* in home, sotto le due frasi: il link alla pagina About */
+.more {
+  display: table;
+  margin: var(--space-m) auto 0;
+  font-size: 0.75rem;
+}
+
 /* ---------------------------------------------
    Tablet / desktop (non ancora rifinito)
 --------------------------------------------- */
@@ -152,5 +159,16 @@
     margin: 0;
     font-size: 1rem;
     line-height: 1.6;
+  }
+
+  /* in home il testo è corto: sta a metà altezza della foto, il link a
+     sinistra sotto */
+  .description[data-short] {
+    align-self: center;
+  }
+
+  .description[data-short] .more {
+    margin-left: 0;
+    font-size: 0.8rem;
   }
 }

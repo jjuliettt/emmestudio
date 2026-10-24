@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { publicFileExists } from "@/lib/publicFiles";
 import styles from "./About.module.css";
 
@@ -19,7 +20,18 @@ const TEXT = [
   "Whether I'm working with a business, documenting an event or taking someone's portrait, my approach is relaxed and people-focused. I want the experience to feel natural, to make people feel comfortable in front of the camera, and to create images that capture something genuine about the people and moments in front of me.",
 ];
 
-export default function About() {
+// La versione breve per la home: due frasi prese dal testo qui sopra
+const SHORT_TEXT = [
+  "I'm an Italian photographer from Bergamo, now based in Belgium. Whether I'm working with a business, documenting an event or taking someone's portrait, my approach is relaxed and people-focused.",
+];
+
+type Props = {
+  // in home: la stessa fascia (saluto, firma, foto) con le due frasi e il
+  // link alla pagina About; nella pagina About il testo intero
+  short?: boolean;
+};
+
+export default function About({ short = false }: Props) {
   const photo = publicFileExists(PHOTO_FILE) ? PHOTO_FILE : PHOTO_PLACEHOLDER;
   const signature = publicFileExists(SIGNATURE_FILE) ? SIGNATURE_FILE : null;
 
@@ -44,10 +56,15 @@ export default function About() {
         <img src={photo} alt="Elisa Massetti" className={styles.image} />
       </div>
 
-      <div className={styles.description}>
-        {TEXT.map((paragraph) => (
+      <div className={styles.description} data-short={short || undefined}>
+        {(short ? SHORT_TEXT : TEXT).map((paragraph) => (
           <p key={paragraph.slice(0, 24)}>{paragraph}</p>
         ))}
+        {short && (
+          <Link href="/about" className={`u-link ${styles.more}`}>
+            More about me
+          </Link>
+        )}
       </div>
     </section>
   );
