@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <About />
+      <About short />
       <Portfolio />
       <Reviews />
       <Booking />

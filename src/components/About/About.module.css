@@ -100,6 +100,18 @@
   margin-top: var(--space-s);
 }
 
+/* in home, sotto le due frasi: il link alla pagina About, con un po'
+   d'aria sotto prima della fine della fascia */
+.more {
+  display: table;
+  margin: var(--space-m) auto 0;
+  font-size: 0.75rem;
+}
+
+.description[data-short] {
+  padding-bottom: var(--space-m);
+}
+
 /* ---------------------------------------------
    Tablet / desktop (non ancora rifinito)
 --------------------------------------------- */
@@ -138,7 +150,7 @@
 
   .greeting {
     grid-column: 1 / -1;
-    margin: 0 0 var(--space-l);
+    margin: 0 0 var(--space-m);
     font-size: 0.85rem;
   }
 
@@ -152,5 +164,17 @@
     margin: 0;
     font-size: 1rem;
     line-height: 1.6;
+  }
+
+  /* in home il testo è corto: sta a metà altezza della foto, il link a
+     sinistra sotto */
+  .description[data-short] {
+    align-self: center;
+    padding-bottom: 0;
+  }
+
+  .description[data-short] .more {
+    margin-left: 0;
+    font-size: 0.8rem;
   }
 }
