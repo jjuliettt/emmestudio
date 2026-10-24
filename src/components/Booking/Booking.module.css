@@ -1,6 +1,6 @@
 /* ---------------------------------------------
    Booking — mobile first
-   Finestra quadrata con la foto in parallax e un piccolo riquadro
+   Finestra orizzontale con la foto in parallax e un piccolo riquadro
    di testo al centro
 --------------------------------------------- */
 
@@ -14,22 +14,23 @@
   position: relative;
 }
 
+/* orizzontale anche sul telefono (16:9), come la fascia del portatile */
 .window {
   position: relative;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
 }
 
-/* 2:3, più alta della finestra. Senza JS o con meno movimento: taglio
-   centrale (la foto è alta 1.5 volte la finestra, ne avanza 1/3) */
+/* La foto intera, larga quanto la finestra e nelle sue proporzioni (3:2):
+   è più alta della finestra, e scorrendo la pagina si vede passare da
+   cima a fondo (Booking.tsx). Nessun taglio ai lati */
 .photo {
   position: absolute;
   top: 0;
   left: 0;
+  display: block;
   width: 100%;
-  aspect-ratio: 2 / 3;
-  object-fit: cover;
-  transform: translateY(-16.667%);
+  height: auto;
   will-change: transform;
 }
 

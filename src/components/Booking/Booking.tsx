@@ -5,8 +5,9 @@ import Link from "next/link";
 import { useReducedMotion } from "@/lib/useReducedMotion";
 import styles from "./Booking.module.css";
 
-// Placeholder: foto di gattini, da sostituire con la foto reale (2:3).
-const PHOTO_SRC = "https://placecats.com/neo/1000/1500";
+// La foto di Elisa (orizzontale, 3:2): larga quanto la finestra, più alta
+// di lei, ci scorre dietro. Larghezza e altezza del file per le proporzioni.
+const PHOTO = { src: "/images/booking.jpg", width: 2000, height: 1333 };
 
 type Props = {
   // solo nella pagina prezzi: "See portfolio" al posto di "See prices"
@@ -29,15 +30,17 @@ export default function Booking({ onPricesPage = false }: Props) {
     const frame = windowRef.current;
     const photo = photoRef.current;
     if (!frame || !photo) return;
-    if (reducedMotion) {
-      photo.style.transform = "";
-      return;
-    }
 
     let raf = 0;
     const update = () => {
       raf = 0;
       const box = frame.getBoundingClientRect();
+      const travel = photo.offsetHeight - box.height;
+      // con meno movimento: ferma, tagliata al centro
+      if (reducedMotion) {
+        photo.style.transform = `translate3d(0, ${-travel / 2}px, 0)`;
+        return;
+      }
       const viewport = window.innerHeight;
       // 0 quando la finestra entra dal basso, 1 quando esce in alto, o a
       // fine pagina se prima non si riesce a scorrere fin lì
@@ -51,7 +54,6 @@ export default function Booking({ onPricesPage = false }: Props) {
         1,
         Math.max(0, (window.scrollY - start) / Math.max(1, end - start))
       );
-      const travel = photo.offsetHeight - box.height;
       photo.style.transform = `translate3d(0, ${(progress - 1) * travel}px, 0)`;
     };
     const onScroll = () => {
@@ -59,10 +61,13 @@ export default function Booking({ onPricesPage = false }: Props) {
     };
 
     update();
-    window.addEventListener("scroll", onScroll, { passive: true });
+    // la foto arriva dopo: le misure giuste solo quando è caricata
+    photo.addEventListener("load", onScroll);
+    if (!reducedMotion) window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     return () => {
       cancelAnimationFrame(raf);
+      photo.removeEventListener("load", onScroll);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };
@@ -73,7 +78,14 @@ export default function Booking({ onPricesPage = false }: Props) {
       <div className={styles.frame}>
         {/* Finestra quadrata: la foto ci scorre dietro */}
         <div ref={windowRef} className={styles.window}>
-          <img ref={photoRef} src={PHOTO_SRC} alt="" className={styles.photo} />
+          <img
+            ref={photoRef}
+            src={PHOTO.src}
+            width={PHOTO.width}
+            height={PHOTO.height}
+            alt=""
+            className={styles.photo}
+          />
 
           <div className={styles.box}>
             <p className={styles.ask}>

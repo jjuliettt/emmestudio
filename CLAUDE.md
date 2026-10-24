@@ -80,7 +80,11 @@ Trust the code where the handover differs:
   `REPLACE-ME_events-NN`.
 - The three covers are Elisa's finished graphics (4:5 `.webp` in
   `public/images/portfolio/`); no more cat photos there. The booking photo
-  is still a placeholder.
+  is Elisa's (`public/images/booking.jpg`, 3:2, `PHOTO` in `Booking.tsx`):
+  a 16:9 window on the phone, a wide band on the laptop, and the whole
+  photo slides through as you scroll. A replacement should be horizontal,
+  at least about 2000 px wide (2400 to 2560 is better), with a quiet centre
+  where the box sits.
 - Category pages: a description under the title (`description` in
   `src/lib/portfolioCategories.ts`), a magazine-style photo layout chosen
   from each photo's shape (`src/components/Gallery/`), a cream full-screen
