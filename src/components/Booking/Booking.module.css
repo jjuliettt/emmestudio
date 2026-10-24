@@ -21,15 +21,18 @@
   overflow: hidden;
 }
 
-/* La foto intera, larga quanto la finestra e nelle sue proporzioni (3:2):
-   è più alta della finestra, e scorrendo la pagina si vede passare da
-   cima a fondo (Booking.tsx). Nessun taglio ai lati */
+/* La foto nelle sue proporzioni (3:2), più alta della finestra: scorrendo
+   la pagina si vede passare da cima a fondo (Booking.tsx). Sul telefono è
+   un po' più larga della finestra (125%, centrata: si perde un ottavo per
+   lato) perché abbia abbastanza strada da fare; sul portatile è larga
+   quanto la finestra */
 .photo {
   position: absolute;
   top: 0;
-  left: 0;
+  left: -12.5%;
   display: block;
-  width: 100%;
+  width: 125%;
+  max-width: none;
   height: auto;
   will-change: transform;
 }
@@ -119,6 +122,11 @@
   .window {
     aspect-ratio: auto;
     height: min(60dvh, 42vw);
+  }
+
+  .photo {
+    left: 0;
+    width: 100%;
   }
 
   /* orizzontale: la domanda a sinistra, i due link uno sotto l'altro a
