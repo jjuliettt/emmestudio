@@ -75,3 +75,32 @@
   }
 }
 
+
+/* ---------------------------------------------
+   Portatile: modulo largo quanto il contenuto della pagina Portfolio
+   (72rem); nome ed email affiancati, poi interesse e data, da lì in poi
+   (messaggio, consenso, privacy, pulsante) su tutta la larghezza
+--------------------------------------------- */
+
+@media (min-width: 1024px) {
+  .formSection form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--space-l);
+    max-width: 72rem;
+  }
+
+  .formSection form > :nth-child(n + 5) {
+    grid-column: 1 / -1;
+  }
+
+  /* il pulsante resta al centro */
+  .formSection form > button[type="submit"] {
+    justify-self: center;
+  }
+
+  .direct {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
