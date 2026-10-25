@@ -53,8 +53,9 @@ phone afterwards and asks for changes if needed.
   pattern (October 2026): page titles 72 px under the header, title →
   sentence 24, sentence → content 48, and 48 between one section and the
   next, on phone and laptop. Elisa's own exceptions: the Home bands on the
-  phone (tighter), Selected work on the laptop (72) and the extra space
-  under the Portfolio covers (72 on the phone, 120 on the laptop).
+  phone (tighter) and Selected work on the laptop (72). From the last
+  item of any page to the booking photo it is always 72 px on the phone
+  and 96 px on the laptop (48 from the page, 24/48 from the booking).
 - Laptop width: every page's content is `--page-width` (66rem) wide,
   centred, with at least 3rem at the sides; only the hero, the category
   photos, the reviews and the booking photo go across the full width.

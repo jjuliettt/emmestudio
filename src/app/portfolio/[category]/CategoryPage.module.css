@@ -2,8 +2,9 @@
    Pagina di una categoria — mobile first
    Link per tornare, titolo e frase, foto, frecce per le altre categorie.
    Gli stessi passi delle altre pagine: titolo → frase --space-m, frase →
-   foto e foto → frecce --space-l, frecce → foto di "Want to work
-   together" --space-l
+   foto e foto → frecce --space-l; sotto le frecce --space-l, come in
+   fondo alle altre pagine (con lo spazio sopra la foto di "Want to work
+   together" sempre 72px sul telefono, 96px sul portatile)
 --------------------------------------------- */
 
 .page {
@@ -38,16 +39,11 @@
 
 /* ---------------------------------------------
    Portatile: foto e frecce su tutta la larghezza della pagina (con il
-   margine ai lati), link più grandi. In alto lo stesso spazio del
-   telefono (--space-l prima di "Back to portfolio"); sotto "Back to home",
-   prima della foto di "Want to work together", --space-xl in tutto
+   margine ai lati), link più grandi. In alto e in fondo gli stessi spazi
+   del telefono
 --------------------------------------------- */
 
 @media (min-width: 1024px) {
-  .page {
-    padding-bottom: var(--space-xl);
-  }
-
   .back {
     font-size: 0.85rem;
   }
