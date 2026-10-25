@@ -165,22 +165,24 @@
 }
 
 /* ---------------------------------------------
-   Portatile: la foto con la firma a sinistra (resta ferma mentre si
-   legge), a destra il saluto e il testo. Finché il testo è chiuso stanno
-   a metà altezza della foto; aprendolo salgono piano verso l'alto
+   Portatile: il saluto al centro, sopra; la foto con la firma a sinistra
+   (resta ferma mentre si legge), il testo a destra. Saluto e foto più
+   vicini: la firma sale accanto al saluto e la foto comincia --space-m
+   sotto. Finché il testo è chiuso sta a metà altezza della foto; aprendolo
+   sale piano fino al bordo alto della foto
 --------------------------------------------- */
 
 @media (min-width: 1024px) {
   .about {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    /* due righe vuote che si dividono lo spazio sopra e sotto saluto e
-       testo; quando il testo aperto è più alto della foto si riducono a
-       zero */
-    grid-template-rows: 1fr auto auto 1fr;
+    /* il saluto; poi due righe vuote che si dividono lo spazio sopra e
+       sotto il testo, accanto alla foto; quando il testo aperto è più
+       alto della foto si riducono a zero */
+    grid-template-rows: auto 1fr auto 1fr;
     column-gap: var(--space-xl);
     align-items: start;
-    padding: var(--space-l) max(3rem, calc((100% - 66rem) / 2));
+    padding: var(--space-l) max(3rem, calc((100% - var(--page-width)) / 2));
     scroll-margin-top: 70px;
   }
 
@@ -190,40 +192,40 @@
     margin-right: 0;
   }
 
-  /* sopra il testo, allineato a sinistra come "Read more". Sopra lo
-     spazio che la firma occupa sopra la foto (17% della larghezza, con la
-     firma di adesso): così saluto e testo stanno a metà della foto, non
-     della foto più la firma, e aperti partono in linea con la foto */
+  /* al centro, sopra le due colonne. Sopra il saluto lo spazio che serve
+     perché la firma, che gli sale accanto, cominci all'inizio della fascia
+     (--space-l): la sporgenza della firma (17% di una colonna, con la
+     firma di adesso: larga metà foto, 1058×581, meno la parte che scende
+     sulla foto; qui il 100% è la larghezza di tutte e due le colonne)
+     meno il saluto e --space-m */
   .greeting {
-    grid-column: 2;
-    grid-row: 2;
-    margin: 17% 0 var(--space-m);
+    grid-column: 1 / -1;
+    grid-row: 1;
+    margin: max(0px, calc((100% - var(--space-xl)) / 2 * 0.17 - 1.19rem - var(--space-m)))
+      0 var(--space-m);
     font-size: 0.85rem;
-    text-align: left;
+    line-height: 1.4;
   }
 
+  /* la foto comincia --space-m sotto il saluto; la firma sale accanto */
   .photo {
     grid-column: 1;
-    grid-row: 1 / -1;
+    grid-row: 2 / -1;
     position: sticky;
     top: var(--space-l);
-    margin: 0;
+    margin: -17% 0 0;
   }
 
   .description {
     grid-column: 2;
     grid-row: 3;
     margin: 0;
+    padding-bottom: 0;
     font-size: 1rem;
     line-height: 1.6;
   }
 
-  .description {
-    padding-bottom: 0;
-  }
-
-  /* si apre più piano che sul telefono: il testo è più lungo da leggere
-     e saluto e testo salgono insieme */
+  /* si apre più piano che sul telefono: il testo è più lungo da leggere */
   .rest {
     transition-duration: 0.8s;
   }
