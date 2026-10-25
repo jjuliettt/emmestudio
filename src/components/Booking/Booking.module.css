@@ -39,8 +39,12 @@
 
 /* ---------- Riquadro di testo ---------- */
 
-/* Impaginazione di Giulia (colonna, link uno sotto l'altro), da non
-   cambiare; colori e font sono quelli attuali del sito */
+/* Orizzontale come sul portatile, in piccolo: la domanda a sinistra, i due
+   link uno sotto l'altro a destra. Stesse proporzioni del portatile, a
+   metà: intorno lo stesso spazio che tra domanda e link, tra un link e
+   l'altro la metà. Appare solo arrivati in fondo alla pagina, quando la
+   finestra si vede quasi tutta (Booking.tsx), con una dissolvenza che
+   sale appena */
 .box {
   position: absolute;
   top: 50%;
@@ -53,8 +57,21 @@
   text-align: center;
   line-height: 1.2;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.25rem;
   padding: var(--space-m) 1.25rem;
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+}
+
+/* finché non si arriva in fondo: invisibile, un filo più in basso (con
+   la tastiera, sul link, ricompare) */
+.box[data-shown="false"]:not(:focus-within) {
+  opacity: 0;
+  transform: translate(-50%, calc(-50% + var(--space-s)));
+  pointer-events: none;
 }
 
 .ask {
@@ -62,14 +79,12 @@
   font-weight: 300;
   text-transform: uppercase;
   letter-spacing: var(--tracking-caps);
-  /* grande quanto i link; con "work together" a 2.7 volte (27px) Tangerine
-     resta sopra i 24px */
-  font-size: 0.62rem;
+  /* grande quanto i link; con "work together" a 2.7 volte Tangerine resta
+     a 24px, il minimo */
+  font-size: 0.56rem;
   /* la riga alta quanto il corsivo, non di più */
   line-height: 1;
-  /* frase → primo link un po' più distante che link → link (la "g" di
-     "together" scende sotto la riga e si mangia parte dello spazio) */
-  margin: 0 0 calc(var(--space-m) + var(--space-s));
+  margin: 0;
 }
 
 /* "work together": Tangerine (è già un corsivo, niente inclinazione
@@ -87,14 +102,20 @@
 .links {
   display: flex;
   justify-content: center;
-  gap: var(--space-m);
+  gap: var(--space-s);
   margin: 0;
   flex-direction: column;
 }
 
 /* stile dei link del sito (.u-link), qui un po' più piccolo */
 .link {
-  font-size: 0.62rem;
+  font-size: 0.56rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .box {
+    transition: none;
+  }
 }
 
 /* ---------------------------------------------
@@ -129,21 +150,18 @@
     width: 100%;
   }
 
-  /* orizzontale: la domanda a sinistra, i due link uno sotto l'altro a
-     destra; tra domanda e link più spazio che tra un link e l'altro */
+  /* più grande: tra domanda e link più spazio che tra un link e l'altro */
   .box {
-    flex-direction: row;
-    align-items: center;
     gap: var(--space-l);
     padding: var(--space-l) 3rem;
   }
 
   .ask {
-    margin: 0;
+    font-size: 0.85rem;
   }
 
-  .ask {
-    font-size: 0.85rem;
+  .links {
+    gap: var(--space-m);
   }
 
   .link {

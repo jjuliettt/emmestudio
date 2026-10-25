@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useReducedMotion } from "@/lib/useReducedMotion";
 import styles from "./Booking.module.css";
@@ -23,6 +23,23 @@ export default function Booking({ onPricesPage = false }: Props) {
   const windowRef = useRef<HTMLDivElement>(null);
   const photoRef = useRef<HTMLImageElement>(null);
   const reducedMotion = useReducedMotion();
+  // il riquadro appare solo in fondo alla pagina, quando la finestra si
+  // vede quasi tutta; prima di saperlo (e con meno movimento) resta visibile
+  const [shown, setShown] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const frame = windowRef.current;
+    if (reducedMotion || !frame) {
+      setShown(null);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => setShown(entry.intersectionRatio >= 0.85),
+      { threshold: [0, 0.85, 1] }
+    );
+    observer.observe(frame);
+    return () => observer.disconnect();
+  }, [reducedMotion]);
 
   // Parallax: la foto 2:3, più alta della finestra quadrata, scorre più
   // lenta della pagina. Con meno movimento resta il taglio centrale (CSS).
@@ -87,7 +104,7 @@ export default function Booking({ onPricesPage = false }: Props) {
             className={styles.photo}
           />
 
-          <div className={styles.box}>
+          <div className={styles.box} data-shown={shown ?? undefined}>
             <p className={styles.ask}>
               Want to <em>work together</em>?
             </p>

@@ -90,7 +90,9 @@ Trust the code where the handover differs:
   `public/images/portfolio/`); no more cat photos there. The booking photo
   is Elisa's (`public/images/booking.jpg`, 3:2, `PHOTO` in `Booking.tsx`):
   a 16:9 window on the phone, a wide band on the laptop, and the whole
-  photo slides through as you scroll. A replacement should be horizontal,
+  photo slides through as you scroll. The box is horizontal on both
+  (small on the phone) and fades in only when the window is almost fully
+  in view, at the bottom of the page. A replacement should be horizontal,
   at least about 2000 px wide (2400 to 2560 is better), with a quiet centre
   where the box sits.
 - Category pages: a description under the title (`description` in
