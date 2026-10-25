@@ -95,11 +95,12 @@ Trust the code where the handover differs:
 - Every page has a back-to-top button. All arrows are the same hand-drawn
   one (`src/components/HandArrow/`).
 - "A little about me" was removed from About at Elisa's request; don't add
-  it back. About has its own page (`/about`, menu: Home, Portfolio, About,
-  Prices, Contacts) with the full text; Home shows the same band (greeting,
-  signature on the photo) with two sentences and "More about me"
-  (`<About short />`). The FAQ title is Spectral, not Tangerine. Form placeholders are
-  upright Spectral 200.
+  it back. There is no separate About page: Home has the whole About band
+  (greeting, signature on the photo) with the first two paragraphs of
+  `TEXT` and the rest behind "Read more" (`ReadMore.tsx`, opens in place);
+  the menu's About goes to `/#about` (menu: Home, Portfolio, About,
+  Prices, Contacts). The FAQ title is Spectral, not Tangerine. Form
+  placeholders are upright Spectral 200.
 - Laptop version (from 1024 px): menu links in a row in the header (the
   three categories drop down under Portfolio on hover); the
   hero across the full width in three columns (vertical title at the bottom
