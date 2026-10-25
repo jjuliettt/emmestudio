@@ -9,6 +9,9 @@
   background-color: var(--beige);
   color: var(--espresso);
   padding: var(--space-m) 0;
+  /* tornandoci con "Read less" il saluto resta sotto l'header, non
+     dietro: alto quanto l'header */
+  scroll-margin-top: 58px;
 }
 
 /* ---------- Saluto ---------- */
@@ -82,6 +85,8 @@
    Niente sillabazione: le parole non si spezzano mai */
 .description {
   margin: var(--space-m) 2.25rem 0;
+  /* sotto "Read more" un po' d'aria prima della fine della fascia */
+  padding-bottom: var(--space-m);
   font-family: var(--font-main);
   font-weight: 300;
   font-size: 0.92rem;
@@ -100,16 +105,47 @@
   margin-top: var(--space-s);
 }
 
-/* in home, sotto le due frasi: il link alla pagina About, con un po'
-   d'aria sotto prima della fine della fascia */
+/* Il resto del testo (ReadMore.tsx): chiuso è alto zero e si apre
+   scivolando verso il basso */
+.rest {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s ease;
+}
+
+.rest[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+
+.restInner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* tra l'ultimo paragrafo visibile e il primo nascosto lo stesso spazio
+   che tra gli altri */
+.restInner > p:first-child {
+  margin-top: var(--space-s);
+}
+
+/* "Read more" / "Read less": come i link del sito (.u-link), centrato
+   sotto il testo, con un po' d'aria sotto prima della fine della fascia */
 .more {
   display: table;
   margin: var(--space-m) auto 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
   font-size: 0.75rem;
+  line-height: 1.55;
+  cursor: pointer;
 }
 
-.description[data-short] {
-  padding-bottom: var(--space-m);
+@media (prefers-reduced-motion: reduce) {
+  .rest {
+    transition: none;
+  }
 }
 
 /* ---------------------------------------------
@@ -140,6 +176,7 @@
     column-gap: var(--space-xl);
     align-items: start;
     padding: var(--space-l) max(3rem, calc((100% - 66rem) / 2));
+    scroll-margin-top: 70px;
   }
 
   .about > * {
@@ -150,7 +187,7 @@
 
   .greeting {
     grid-column: 1 / -1;
-    margin: 0 0 var(--space-m);
+    margin: 0 0 var(--space-l);
     font-size: 0.85rem;
   }
 
@@ -166,14 +203,13 @@
     line-height: 1.6;
   }
 
-  /* in home il testo è corto: sta a metà altezza della foto, il link a
+  /* il testo parte in alto, all'altezza della foto; "Read more" a
      sinistra sotto */
-  .description[data-short] {
-    align-self: center;
+  .description {
     padding-bottom: 0;
   }
 
-  .description[data-short] .more {
+  .more {
     margin-left: 0;
     font-size: 0.8rem;
   }

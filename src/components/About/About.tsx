@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { publicFileExists } from "@/lib/publicFiles";
+import ReadMore from "./ReadMore";
 import styles from "./About.module.css";
 
 // File provvisori in public/assets/REPLACE-ME/: si sostituiscono con file
@@ -20,19 +20,11 @@ const TEXT = [
   "Whether I'm working with a business, documenting an event or taking someone's portrait, my approach is relaxed and people-focused. I want the experience to feel natural, to make people feel comfortable in front of the camera, and to create images that capture something genuine about the people and moments in front of me.",
 ];
 
-// La versione breve per la home (testo di Elisa)
-const SHORT_TEXT = [
-  "I'm Elisa, an Italian photographer from Bergamo, based in Belgium. What started as a childhood curiosity has grown into a way of meeting people and telling their stories through photography.",
-  "From individual portraits and small businesses to corporate events and community gatherings, I focus on the people, interactions and little details that make every story unique. My approach is relaxed, observant and natural, creating images that feel genuine and capture more than just how things looked, but how they felt.",
-];
+// In home si vedono i primi due paragrafi; gli altri si aprono con
+// "Read more"
+const VISIBLE = 2;
 
-type Props = {
-  // in home: la stessa fascia (saluto, firma, foto) con le due frasi e il
-  // link alla pagina About; nella pagina About il testo intero
-  short?: boolean;
-};
-
-export default function About({ short = false }: Props) {
+export default function About() {
   const photo = publicFileExists(PHOTO_FILE) ? PHOTO_FILE : PHOTO_PLACEHOLDER;
   const signature = publicFileExists(SIGNATURE_FILE) ? SIGNATURE_FILE : null;
 
@@ -57,15 +49,15 @@ export default function About({ short = false }: Props) {
         <img src={photo} alt="Elisa Massetti" className={styles.image} />
       </div>
 
-      <div className={styles.description} data-short={short || undefined}>
-        {(short ? SHORT_TEXT : TEXT).map((paragraph) => (
+      <div className={styles.description}>
+        {TEXT.slice(0, VISIBLE).map((paragraph) => (
           <p key={paragraph.slice(0, 24)}>{paragraph}</p>
         ))}
-        {short && (
-          <Link href="/about" className={`u-link ${styles.more}`}>
-            More about me
-          </Link>
-        )}
+        <ReadMore>
+          {TEXT.slice(VISIBLE).map((paragraph) => (
+            <p key={paragraph.slice(0, 24)}>{paragraph}</p>
+          ))}
+        </ReadMore>
       </div>
     </section>
   );
