@@ -230,9 +230,10 @@
     transform: scale(1.05);
   }
 
-  /* la copertina finita si sfoca, così "VIEW" al centro si legge */
+  /* la copertina finita si sfoca appena (3px), così "VIEW" al centro si
+     legge ma la copertina si riconosce ancora */
   .cover[data-shape="image"]:hover .photo {
-    filter: blur(6px);
+    filter: blur(3px);
   }
 
   .cover:hover .frame {
@@ -251,7 +252,7 @@
 
 .cover[data-shape="image"]:active .photo,
 .cover[data-shape="image"]:focus-visible .photo {
-  filter: blur(6px);
+  filter: blur(3px);
 }
 
 .cover:active .frame,
