@@ -29,7 +29,7 @@ export default function About() {
   const signature = publicFileExists(SIGNATURE_FILE) ? SIGNATURE_FILE : null;
 
   return (
-    <section id="about" className={styles.about}>
+    <section className={styles.about}>
       {/* se non sta su una riga va a capo solo dopo "Ciao," */}
       <p className={styles.greeting}>
         <span className={styles.nowrap}>Ciao,</span>{" "}

@@ -9,8 +9,8 @@
   background-color: var(--beige);
   color: var(--espresso);
   padding: var(--space-m) 0;
-  /* arrivandoci dal menu (About) o con "Read less" il saluto resta sotto
-     l'header, non dietro: alto quanto l'header */
+  /* tornandoci con "Read less" il saluto resta sotto l'header, non
+     dietro: alto quanto l'header */
   scroll-margin-top: 58px;
 }
 
@@ -187,7 +187,7 @@
 
   .greeting {
     grid-column: 1 / -1;
-    margin: 0 0 var(--space-m);
+    margin: 0 0 var(--space-l);
     font-size: 0.85rem;
   }
 
@@ -203,10 +203,9 @@
     line-height: 1.6;
   }
 
-  /* chiuso il testo sta a metà altezza della foto, "Read more" a
+  /* il testo parte in alto, all'altezza della foto; "Read more" a
      sinistra sotto */
   .description {
-    align-self: center;
     padding-bottom: 0;
   }
 
