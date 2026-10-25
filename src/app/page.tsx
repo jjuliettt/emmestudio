@@ -11,7 +11,8 @@ export default function Home() {
       <About />
       <Portfolio />
       <Reviews />
-      <Booking />
+      {/* dopo la fascia beige delle recensioni */}
+      <Booking after="beige" />
     </>
   );
 }

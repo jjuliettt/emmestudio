@@ -1,37 +1,43 @@
 /* ---------------------------------------------
    Booking — mobile first
    Finestra orizzontale con la foto in parallax e un piccolo riquadro
-   di testo al centro. Niente spazio intorno: sopra c'è lo spazio della
-   sezione precedente, nel suo colore (lo decide la pagina), sotto il
-   footer attaccato
+   di testo al centro. Sopra un po' di spazio in più (--space-m sul
+   telefono, --space-l sul portatile) nel colore della sezione prima
+   (crema o beige, lo dice la pagina); sotto il footer attaccato
 --------------------------------------------- */
 
 .booking {
   color: var(--espresso);
+  background-color: var(--cream);
+  padding-top: var(--space-m);
+}
+
+.booking[data-after="beige"] {
+  background-color: var(--beige);
 }
 
 .frame {
   position: relative;
 }
 
-/* Il formato di una foto orizzontale della macchina (3:2), su tutti i
-   dispositivi; sul portatile non più alta di tre quarti dello schermo */
+/* orizzontale anche sul telefono (16:9), come la fascia del portatile */
 .window {
   position: relative;
-  aspect-ratio: 3 / 2;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
 }
 
 /* La foto nelle sue proporzioni (3:2), più alta della finestra: scorrendo
    la pagina si vede passare da cima a fondo (Booking.tsx). Sul telefono è
-   più larga della finestra (135%, centrata) perché abbia abbastanza
-   strada da fare; sul portatile è larga quanto la finestra */
+   un po' più larga della finestra (125%, centrata: si perde un ottavo per
+   lato) perché abbia abbastanza strada da fare; sul portatile è larga
+   quanto la finestra */
 .photo {
   position: absolute;
   top: 0;
-  left: -17.5%;
+  left: -12.5%;
   display: block;
-  width: 135%;
+  width: 125%;
   max-width: none;
   height: auto;
   will-change: transform;
@@ -125,15 +131,19 @@
 }
 
 /* ---------------------------------------------
-   Portatile: come sul telefono la foto è larga quanto la pagina, la
-   finestra 3:2 ma alta al massimo tre quarti dello schermo (la foto ci
-   scorre dietro); riquadro e testi più grandi, la domanda su una riga
+   Portatile: come sul telefono la foto è larga quanto la pagina (una fascia
+   alta al massimo tre quinti dello schermo, la foto ci scorre dietro);
+   più spazio sopra; riquadro e testi più grandi, la domanda su una riga
 --------------------------------------------- */
 
 @media (min-width: 1024px) {
+  .booking {
+    padding-top: var(--space-l);
+  }
+
   .window {
     aspect-ratio: auto;
-    height: min(calc(100vw * 2 / 3), 75dvh);
+    height: min(60dvh, 42vw);
   }
 
   .photo {

@@ -282,7 +282,8 @@ export default function PricesPage() {
       </section>
 
       {/* qui "See prices" porterebbe alla pagina stessa */}
-      <Booking onPricesPage />
+      {/* dopo la fascia beige del modulo della guida */}
+      <Booking onPricesPage after="beige" />
     </>
   );
 }

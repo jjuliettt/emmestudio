@@ -89,11 +89,11 @@ Trust the code where the handover differs:
 - The three covers are Elisa's finished graphics (4:5 `.webp` in
   `public/images/portfolio/`); no more cat photos there. The booking photo
   is Elisa's (`public/images/booking.jpg`, 3:2, `PHOTO` in `Booking.tsx`):
-  a 3:2 window on the phone, 3:2 but at most three quarters of the
-  screen tall on the laptop, and the photo slides through as you scroll.
-  The section has no space of its own: it follows the section above, in
-  that section's colour (the page decides the space), and the footer is
-  attached right under it. The box is horizontal on both (small on the
+  a 16:9 window on the phone, a wide band on the laptop, and the whole
+  photo slides through as you scroll. Above the photo a little extra
+  space (24 px phone, 48 px laptop) in the colour of the section before
+  (`after="beige"` on Home and Prices), and the footer is attached right
+  under it. The box is horizontal on both (small on the
   phone, the question on two lines) and fades in only when the window is
   almost fully in view, at the bottom of the page. A replacement should be horizontal,
   at least about 2000 px wide (2400 to 2560 is better), with a quiet centre
