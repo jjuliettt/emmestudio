@@ -2,12 +2,12 @@
    Pagina di una categoria — mobile first
    Link per tornare, titolo e frase, foto, frecce per le altre categorie.
    Gli stessi passi delle altre pagine: titolo → frase --space-m, frase →
-   foto e foto → frecce --space-l, frecce → riquadro "Want to work
-   together" --space-l (lo mette il riquadro)
+   foto e foto → frecce --space-l, frecce → foto di "Want to work
+   together" --space-l
 --------------------------------------------- */
 
 .page {
-  padding: var(--space-l) 1.25rem 0;
+  padding: var(--space-l) 1.25rem;
   background-color: var(--cream);
   color: var(--espresso);
 }
@@ -45,7 +45,7 @@
 
 @media (min-width: 1024px) {
   .page {
-    padding-bottom: var(--space-m);
+    padding-bottom: var(--space-xl);
   }
 
   .back {

@@ -54,7 +54,7 @@ phone afterwards and asks for changes if needed.
   sentence 24, sentence → content 48, and 48 between one section and the
   next, on phone and laptop. Elisa's own exceptions: the Home bands on the
   phone (tighter), Selected work on the laptop (72) and the extra space
-  under the Portfolio covers on the laptop.
+  under the Portfolio covers (72 on the phone, 120 on the laptop).
 - Laptop width: every page's content is `--page-width` (66rem) wide,
   centred, with at least 3rem at the sides; only the hero, the category
   photos, the reviews and the booking photo go across the full width.
@@ -89,10 +89,13 @@ Trust the code where the handover differs:
 - The three covers are Elisa's finished graphics (4:5 `.webp` in
   `public/images/portfolio/`); no more cat photos there. The booking photo
   is Elisa's (`public/images/booking.jpg`, 3:2, `PHOTO` in `Booking.tsx`):
-  a 16:9 window on the phone, a wide band on the laptop, and the whole
-  photo slides through as you scroll. The box is horizontal on both
-  (small on the phone) and fades in only when the window is almost fully
-  in view, at the bottom of the page. A replacement should be horizontal,
+  a 3:2 window on the phone, 3:2 but at most three quarters of the
+  screen tall on the laptop, and the photo slides through as you scroll.
+  The section has no space of its own: it follows the section above, in
+  that section's colour (the page decides the space), and the footer is
+  attached right under it. The box is horizontal on both (small on the
+  phone, the question on two lines) and fades in only when the window is
+  almost fully in view, at the bottom of the page. A replacement should be horizontal,
   at least about 2000 px wide (2400 to 2560 is better), with a quiet centre
   where the box sits.
 - Category pages: a description under the title (`description` in
