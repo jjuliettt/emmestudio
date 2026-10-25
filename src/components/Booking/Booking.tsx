@@ -12,11 +12,14 @@ const PHOTO = { src: "/images/booking.jpg", width: 2000, height: 1333 };
 type Props = {
   // solo nella pagina prezzi: "See portfolio" al posto di "See prices"
   onPricesPage?: boolean;
+  // il colore della sezione prima: lo spazio sopra la foto lo continua
+  after?: "cream" | "beige";
 };
 
 // Un solo componente, identico in tutte le pagine (foto, finestra,
-// riquadro, testi). Cambia solo il secondo link nella pagina prezzi.
-export default function Booking({ onPricesPage = false }: Props) {
+// riquadro, testi). Cambia solo il secondo link nella pagina prezzi e il
+// colore dello spazio sopra la foto.
+export default function Booking({ onPricesPage = false, after = "cream" }: Props) {
   const second = onPricesPage
     ? { href: "/portfolio", label: "See portfolio" }
     : { href: "/prices", label: "See prices" };
@@ -91,7 +94,7 @@ export default function Booking({ onPricesPage = false }: Props) {
   }, [reducedMotion]);
 
   return (
-    <section className={styles.booking}>
+    <section className={styles.booking} data-after={after}>
       <div className={styles.frame}>
         {/* Finestra 3:2: la foto ci scorre dietro */}
         <div ref={windowRef} className={styles.window}>
