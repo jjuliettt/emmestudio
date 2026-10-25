@@ -119,8 +119,8 @@ Trust the code where the handover differs:
   "Photographer based in Belgium" and a "View my portfolio" link (laptop
   only); About with the greeting centred above, the photo left (the
   signature rising beside the greeting) and the text right, centred on the
-  photo while closed and rising to its top edge when opened; covers and price packages three in a row (covers blur and show
-  "VIEW" in the middle on hover); the price-guide form's three fields
+  photo while closed and rising to its top edge when opened; covers and price packages three in a row (covers blur lightly and
+  show "VIEW" in the middle on hover); the price-guide form's three fields
   in a row, like the Contacts form in two columns; category photos in four staggered
   columns across the page (never taller than about 80% of the screen), with
   "Info" to the right of the full-screen photo; the booking photo as wide as
