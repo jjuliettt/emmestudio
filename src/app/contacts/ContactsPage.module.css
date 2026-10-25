@@ -87,8 +87,8 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: var(--space-l);
-    /* largo quanto i tre pacchetti della pagina Prices insieme */
-    max-width: calc(3 * 20rem + 2 * var(--space-s));
+    /* larga quanto le altre pagine */
+    max-width: var(--page-width);
   }
 
   .formSection form > :nth-child(n + 5) {

@@ -38,13 +38,13 @@
 
 /* ---------------------------------------------
    Portatile: foto e frecce su tutta la larghezza della pagina (con il
-   margine ai lati), link più grandi; sotto "Back to home", prima della
-   foto di "Want to work together", --space-xl in tutto
+   margine ai lati), link più grandi. In alto lo stesso spazio del
+   telefono (--space-l prima di "Back to portfolio"); sotto "Back to home",
+   prima della foto di "Want to work together", --space-xl in tutto
 --------------------------------------------- */
 
 @media (min-width: 1024px) {
   .page {
-    padding-top: var(--space-xl);
     padding-bottom: var(--space-m);
   }
 

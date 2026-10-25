@@ -49,7 +49,15 @@ phone afterwards and asks for changes if needed.
     Prices category titles, and not below about 24 px.
   - Quicksand (`--font-menu`): only the menu and form labels.
   - No faux bold.
-- Vertical spacing only from `--space-s/m/l/xl` (12/24/48/72 px).
+- Vertical spacing only from `--space-s/m/l/xl` (12/24/48/72 px). The
+  pattern (October 2026): page titles 72 px under the header, title →
+  sentence 24, sentence → content 48, and 48 between one section and the
+  next, on phone and laptop. Elisa's own exceptions: the Home bands on the
+  phone (tighter), Selected work on the laptop (72) and the extra space
+  under the Portfolio covers on the laptop.
+- Laptop width: every page's content is `--page-width` (66rem) wide,
+  centred, with at least 3rem at the sides; only the hero, the category
+  photos, the reviews and the booking photo go across the full width.
 - Text links and calls to action use the global `u-link` class.
 - One shared `Booking` component on every page; only Prices passes
   `onPricesPage`.
@@ -109,7 +117,8 @@ Trust the code where the handover differs:
   "Photographer based in Belgium" and a "View my portfolio" link (laptop
   only); About with the photo left and the greeting and text right
   (halfway down the photo while the text is closed); covers and price packages three in a row (covers blur and show
-  "VIEW" in the middle on hover); category photos in four staggered
+  "VIEW" in the middle on hover); the price-guide form's three fields
+  in a row, like the Contacts form in two columns; category photos in four staggered
   columns across the page (never taller than about 80% of the screen), with
   "Info" to the right of the full-screen photo; the booking photo as wide as
   the page with a horizontal box.
