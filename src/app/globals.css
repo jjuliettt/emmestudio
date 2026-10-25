@@ -25,6 +25,12 @@
   --space-l: 48px;
   --space-xl: 72px;
 
+  /* Portatile: la larghezza del contenuto di tutte le pagine (About,
+     copertine, pacchetti, moduli, FAQ, Privacy), centrato, con almeno
+     3rem ai lati. A tutta larghezza solo hero, foto delle categorie,
+     recensioni e foto di "Want to work together" */
+  --page-width: 66rem;
+
   /* Lo spazio scritto a mano ("selected work") è un'immagine in
      public/assets/REPLACE-ME/; se manca, il testo usa questo font (per ora
      Tangerine) */

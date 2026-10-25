@@ -26,8 +26,9 @@
 --------------------------------------------- */
 
 @media (min-width: 768px) {
+  /* il titolo a --space-xl dall'header, come nelle altre pagine */
   .page {
-    padding: 3rem 3rem 0;
+    padding: var(--space-xl) 3rem 0;
   }
 
   .page > * {
@@ -45,6 +46,6 @@
   }
 
   .page > * {
-    max-width: 72rem;
+    max-width: var(--page-width);
   }
 }

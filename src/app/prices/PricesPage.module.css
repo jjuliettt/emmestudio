@@ -288,8 +288,9 @@
 }
 
 /* ---------------------------------------------
-   Portatile: le tre categorie in riga nella fascia espresso, i tre
-   pacchetti in riga, FAQ e modulo al centro
+   Portatile: le tre categorie in riga nella fascia espresso; pacchetti,
+   FAQ e modulo larghi quanto le altre pagine (--page-width). Tra una
+   sezione e l'altra --space-l, come sul telefono e nelle altre pagine
 --------------------------------------------- */
 
 @media (min-width: 1024px) {
@@ -310,21 +311,18 @@
     max-width: none;
   }
 
-  .category {
-    padding-top: var(--space-xl);
-    padding-bottom: var(--space-xl);
-  }
-
   /* tutti alti uguale, anche quello con "most chosen" */
   .cards {
     flex-direction: row;
     justify-content: center;
     align-items: stretch;
+    width: 100%;
+    max-width: var(--page-width);
   }
 
   .card {
     width: auto;
-    flex: 0 1 20rem;
+    flex: 1 1 0;
     min-width: 0;
   }
 
@@ -333,6 +331,23 @@
   }
 
   .faq > * {
-    max-width: 40rem;
+    max-width: var(--page-width);
+  }
+
+  /* il modulo come quello di Contacts: i tre campi in riga, sotto le
+     caselle e il pulsante al centro */
+  .guide form {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: var(--space-l);
+    max-width: var(--page-width);
+  }
+
+  .guide form > :nth-child(n + 4) {
+    grid-column: 1 / -1;
+  }
+
+  .guide form > button[type="submit"] {
+    justify-self: center;
   }
 }

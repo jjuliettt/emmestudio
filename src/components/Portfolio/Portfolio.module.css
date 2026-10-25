@@ -43,6 +43,6 @@
   }
 
   .portfolio > * {
-    max-width: 72rem;
+    max-width: var(--page-width);
   }
 }

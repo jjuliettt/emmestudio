@@ -4,10 +4,12 @@
    del resto del sito
 --------------------------------------------- */
 
+/* titolo a --space-xl dall'header; in fondo --space-l prima del footer,
+   come nelle altre pagine */
 .page {
   background-color: var(--cream);
   color: var(--espresso);
-  padding: var(--space-xl) 1.25rem;
+  padding: var(--space-xl) 1.25rem var(--space-l);
 }
 
 .updated {
@@ -87,7 +89,7 @@
 
 @media (min-width: 768px) {
   .page {
-    padding: var(--space-xl) 3rem;
+    padding: var(--space-xl) 3rem var(--space-l);
   }
 
   .sections {
@@ -97,9 +99,9 @@
   }
 }
 
-/* Portatile: la colonna di testo un po' più larga (non tutta la pagina) */
+/* Portatile: la colonna di testo larga quanto le altre pagine */
 @media (min-width: 1024px) {
   .sections {
-    max-width: 54rem;
+    max-width: var(--page-width);
   }
 }
