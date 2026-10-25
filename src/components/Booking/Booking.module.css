@@ -1,37 +1,37 @@
 /* ---------------------------------------------
    Booking — mobile first
    Finestra orizzontale con la foto in parallax e un piccolo riquadro
-   di testo al centro
+   di testo al centro. Niente spazio intorno: sopra c'è lo spazio della
+   sezione precedente, nel suo colore (lo decide la pagina), sotto il
+   footer attaccato
 --------------------------------------------- */
 
 .booking {
-  background-color: var(--cream);
   color: var(--espresso);
-  padding: var(--space-l) 0;
 }
 
 .frame {
   position: relative;
 }
 
-/* orizzontale anche sul telefono (16:9), come la fascia del portatile */
+/* Il formato di una foto orizzontale della macchina (3:2), su tutti i
+   dispositivi; sul portatile non più alta di tre quarti dello schermo */
 .window {
   position: relative;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 3 / 2;
   overflow: hidden;
 }
 
 /* La foto nelle sue proporzioni (3:2), più alta della finestra: scorrendo
    la pagina si vede passare da cima a fondo (Booking.tsx). Sul telefono è
-   un po' più larga della finestra (125%, centrata: si perde un ottavo per
-   lato) perché abbia abbastanza strada da fare; sul portatile è larga
-   quanto la finestra */
+   più larga della finestra (135%, centrata) perché abbia abbastanza
+   strada da fare; sul portatile è larga quanto la finestra */
 .photo {
   position: absolute;
   top: 0;
-  left: -12.5%;
+  left: -17.5%;
   display: block;
-  width: 125%;
+  width: 135%;
   max-width: none;
   height: auto;
   will-change: transform;
@@ -39,12 +39,12 @@
 
 /* ---------- Riquadro di testo ---------- */
 
-/* Orizzontale come sul portatile, in piccolo: la domanda a sinistra, i due
-   link uno sotto l'altro a destra. Stesse proporzioni del portatile, a
-   metà: intorno lo stesso spazio che tra domanda e link, tra un link e
-   l'altro la metà. Appare solo arrivati in fondo alla pagina, quando la
-   finestra si vede quasi tutta (Booking.tsx), con una dissolvenza che
-   sale appena */
+/* Orizzontale come sul portatile: la domanda a sinistra, i due link uno
+   sotto l'altro a destra. Sul telefono piccolo, con la domanda su due
+   righe ("Want to" / "work together?"), così resta largo circa tre volte
+   l'altezza come sul portatile. Appare solo arrivati in fondo alla
+   pagina, quando la finestra si vede quasi tutta (Booking.tsx), con una
+   dissolvenza che sale appena */
 .box {
   position: absolute;
   top: 50%;
@@ -59,8 +59,8 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 1.25rem;
-  padding: var(--space-m) 1.25rem;
+  gap: 1rem;
+  padding: var(--space-s) 1rem;
   transition:
     opacity 0.8s ease,
     transform 0.8s ease;
@@ -85,6 +85,12 @@
   /* la riga alta quanto il corsivo, non di più */
   line-height: 1;
   margin: 0;
+}
+
+/* sul telefono "Want to" sopra, "work together?" sotto */
+.askStart,
+.askEnd {
+  display: block;
 }
 
 /* "work together": Tangerine (è già un corsivo, niente inclinazione
@@ -119,30 +125,15 @@
 }
 
 /* ---------------------------------------------
-   Tablet (non ancora rifinito)
---------------------------------------------- */
-
-@media (min-width: 768px) and (max-width: 1023px) {
-  .booking {
-    padding: 3rem;
-  }
-
-  .frame {
-    max-width: 36rem;
-    margin: 0 auto;
-  }
-}
-
-/* ---------------------------------------------
-   Portatile: come sul telefono la foto è larga quanto la pagina (una fascia
-   alta al massimo tre quinti dello schermo, la foto ci scorre dietro);
-   riquadro e testi più grandi, stesse proporzioni
+   Portatile: come sul telefono la foto è larga quanto la pagina, la
+   finestra 3:2 ma alta al massimo tre quarti dello schermo (la foto ci
+   scorre dietro); riquadro e testi più grandi, la domanda su una riga
 --------------------------------------------- */
 
 @media (min-width: 1024px) {
   .window {
     aspect-ratio: auto;
-    height: min(60dvh, 42vw);
+    height: min(calc(100vw * 2 / 3), 75dvh);
   }
 
   .photo {
@@ -158,6 +149,11 @@
 
   .ask {
     font-size: 0.85rem;
+  }
+
+  .askStart,
+  .askEnd {
+    display: inline;
   }
 
   .links {

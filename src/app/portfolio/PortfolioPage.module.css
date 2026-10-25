@@ -3,12 +3,12 @@
    Titolo, frase e copertine (CoverList, le stesse della home)
 --------------------------------------------- */
 
-/* sotto le copertine lo spazio lo mette il riquadro "Want to work
-   together" (--space-l): due spazi di fila sarebbero il doppio */
+/* sotto le copertine, prima della foto di "Want to work together" (che
+   non ha spazio suo), --space-xl */
 .page {
   background-color: var(--cream);
   color: var(--espresso);
-  padding: var(--space-xl) 1.25rem 0;
+  padding: var(--space-xl) 1.25rem var(--space-xl);
 }
 
 /* titolo e frase: sempre al centro della pagina */
@@ -28,7 +28,7 @@
 @media (min-width: 768px) {
   /* il titolo a --space-xl dall'header, come nelle altre pagine */
   .page {
-    padding: var(--space-xl) 3rem 0;
+    padding: var(--space-xl) 3rem;
   }
 
   .page > * {
@@ -39,10 +39,10 @@
 }
 
 /* Portatile: titolo e frase al centro, le tre copertine in riga; sotto,
-   prima della foto di "Want to work together", --space-l + --space-l */
+   prima della foto di "Want to work together", --space-xl + --space-l */
 @media (min-width: 1024px) {
   .page {
-    padding-bottom: var(--space-l);
+    padding-bottom: calc(var(--space-xl) + var(--space-l));
   }
 
   .page > * {

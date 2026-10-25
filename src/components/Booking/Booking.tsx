@@ -41,7 +41,7 @@ export default function Booking({ onPricesPage = false }: Props) {
     return () => observer.disconnect();
   }, [reducedMotion]);
 
-  // Parallax: la foto 2:3, più alta della finestra quadrata, scorre più
+  // Parallax: la foto, più alta della finestra, scorre più
   // lenta della pagina. Con meno movimento resta il taglio centrale (CSS).
   useEffect(() => {
     const frame = windowRef.current;
@@ -93,7 +93,7 @@ export default function Booking({ onPricesPage = false }: Props) {
   return (
     <section className={styles.booking}>
       <div className={styles.frame}>
-        {/* Finestra quadrata: la foto ci scorre dietro */}
+        {/* Finestra 3:2: la foto ci scorre dietro */}
         <div ref={windowRef} className={styles.window}>
           <img
             ref={photoRef}
@@ -106,7 +106,10 @@ export default function Booking({ onPricesPage = false }: Props) {
 
           <div className={styles.box} data-shown={shown ?? undefined}>
             <p className={styles.ask}>
-              Want to <em>work together</em>?
+              <span className={styles.askStart}>Want to</span>{" "}
+              <span className={styles.askEnd}>
+                <em>work together</em>?
+              </span>
             </p>
             <p className={styles.links}>
               <Link href="/contacts" className={`u-link ${styles.link}`}>
