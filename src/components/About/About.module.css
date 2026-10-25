@@ -166,9 +166,8 @@
 
 /* ---------------------------------------------
    Portatile: il saluto al centro, sopra; la foto con la firma a sinistra
-   (resta ferma mentre si legge), il testo a destra. Saluto e foto più
-   vicini: la firma sale accanto al saluto e la foto comincia --space-m
-   sotto. Finché il testo è chiuso sta a metà altezza della foto; aprendolo
+   (resta ferma mentre si legge), il testo a destra. La firma sale
+   accanto al saluto e la foto comincia --space-l sotto. Finché il testo è chiuso sta a metà altezza della foto; aprendolo
    sale piano fino al bordo alto della foto
 --------------------------------------------- */
 
@@ -197,17 +196,17 @@
      (--space-l): la sporgenza della firma (17% di una colonna, con la
      firma di adesso: larga metà foto, 1058×581, meno la parte che scende
      sulla foto; qui il 100% è la larghezza di tutte e due le colonne)
-     meno il saluto e --space-m */
+     meno il saluto e --space-l */
   .greeting {
     grid-column: 1 / -1;
     grid-row: 1;
-    margin: max(0px, calc((100% - var(--space-xl)) / 2 * 0.17 - 1.19rem - var(--space-m)))
-      0 var(--space-m);
+    margin: max(0px, calc((100% - var(--space-xl)) / 2 * 0.17 - 1.19rem - var(--space-l)))
+      0 var(--space-l);
     font-size: 0.85rem;
     line-height: 1.4;
   }
 
-  /* la foto comincia --space-m sotto il saluto; la firma sale accanto */
+  /* la foto comincia --space-l sotto il saluto; la firma sale accanto */
   .photo {
     grid-column: 1;
     grid-row: 2 / -1;
