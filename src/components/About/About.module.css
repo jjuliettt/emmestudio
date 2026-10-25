@@ -165,14 +165,19 @@
 }
 
 /* ---------------------------------------------
-   Portatile: il saluto sopra, poi la foto con la firma a sinistra (resta
-   ferma mentre si legge) e il testo a destra
+   Portatile: la foto con la firma a sinistra (resta ferma mentre si
+   legge), a destra il saluto e il testo. Finché il testo è chiuso stanno
+   a metà altezza della foto; aprendolo salgono piano verso l'alto
 --------------------------------------------- */
 
 @media (min-width: 1024px) {
   .about {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    /* due righe vuote che si dividono lo spazio sopra e sotto saluto e
+       testo; quando il testo aperto è più alto della foto si riducono a
+       zero */
+    grid-template-rows: 1fr auto auto 1fr;
     column-gap: var(--space-xl);
     align-items: start;
     padding: var(--space-l) max(3rem, calc((100% - 66rem) / 2));
@@ -185,28 +190,42 @@
     margin-right: 0;
   }
 
+  /* sopra il testo, allineato a sinistra come "Read more". Sopra lo
+     spazio che la firma occupa sopra la foto (17% della larghezza, con la
+     firma di adesso): così saluto e testo stanno a metà della foto, non
+     della foto più la firma, e aperti partono in linea con la foto */
   .greeting {
-    grid-column: 1 / -1;
-    margin: 0 0 var(--space-l);
+    grid-column: 2;
+    grid-row: 2;
+    margin: 17% 0 var(--space-m);
     font-size: 0.85rem;
+    text-align: left;
   }
 
   .photo {
+    grid-column: 1;
+    grid-row: 1 / -1;
     position: sticky;
     top: var(--space-l);
     margin: 0;
   }
 
   .description {
+    grid-column: 2;
+    grid-row: 3;
     margin: 0;
     font-size: 1rem;
     line-height: 1.6;
   }
 
-  /* il testo parte in alto, all'altezza della foto; "Read more" a
-     sinistra sotto */
   .description {
     padding-bottom: 0;
+  }
+
+  /* si apre più piano che sul telefono: il testo è più lungo da leggere
+     e saluto e testo salgono insieme */
+  .rest {
+    transition-duration: 0.8s;
   }
 
   .more {
