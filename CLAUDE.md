@@ -60,8 +60,10 @@ phone afterwards and asks for changes if needed.
   centred, with at least 3rem at the sides; only the hero, the category
   photos, the reviews and the booking photo go across the full width.
 - Text links and calls to action use the global `u-link` class.
-- One shared `Booking` component on every page; only Prices passes
-  `onPricesPage`.
+- One shared `Booking` component ("Want to work together" photo) on Home,
+  Portfolio and the category pages. Contacts and Prices end instead with
+  the same three centred links (`src/components/ClosingLinks/`), then the
+  footer.
 - Mobile first. The laptop layout is in the `@media (min-width: 1024px)`
   blocks at the bottom of each `.module.css`; the tablet range (768 to
   1023 px) is still not refined.
@@ -93,7 +95,7 @@ Trust the code where the handover differs:
   a 16:9 window on the phone, a wide band on the laptop, and the whole
   photo slides through as you scroll. Above the photo a little extra
   space (24 px phone, 48 px laptop) in the colour of the section before
-  (`after="beige"` on Home and Prices), and the footer is attached right
+  (`after="beige"` on Home), and the footer is attached right
   under it. The box is horizontal on both (small on the
   phone, the question on two lines) and fades in only when the window is
   almost fully in view, at the bottom of the page. A replacement should be horizontal,

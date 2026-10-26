@@ -1,0 +1,22 @@
+/* ---------------------------------------------
+   Link di chiusura — Contacts e Prices
+   Sul fondo crema della pagina, --space-l sopra e sotto, poi il footer
+--------------------------------------------- */
+
+.closing {
+  padding: var(--space-l) 1.25rem;
+  text-align: center;
+}
+
+/* uno sotto l'altro, come nel riquadro "Want to work together" */
+.links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-m);
+  margin: 0;
+}
+
+.link {
+  font-size: 0.75rem;
+}
