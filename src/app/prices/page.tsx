@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Booking from "@/components/Booking/Booking";
+import ClosingLinks from "@/components/ClosingLinks/ClosingLinks";
 import Faq from "@/components/Faq/Faq";
 import PageTitle, { PageLead } from "@/components/PageTitle/PageTitle";
 import PriceGuideForm from "@/components/Prices/PriceGuideForm";
@@ -281,9 +281,14 @@ export default function PricesPage() {
         <PriceGuideForm />
       </section>
 
-      {/* qui "See prices" porterebbe alla pagina stessa */}
-      {/* dopo la fascia beige del modulo della guida */}
-      <Booking onPricesPage after="beige" />
+      {/* in fondo, come in Contacts: tre link, poi il footer */}
+      <ClosingLinks
+        links={[
+          { href: "/contacts", label: "Get in touch" },
+          { href: "/portfolio", label: "See portfolio" },
+          { href: "/", label: "Back to home" },
+        ]}
+      />
     </>
   );
 }

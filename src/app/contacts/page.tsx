@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import ClosingLinks from "@/components/ClosingLinks/ClosingLinks";
 import ContactForm from "@/components/Contact/ContactForm";
 import PageTitle, { PageLead } from "@/components/PageTitle/PageTitle";
 import { EMAIL, INSTAGRAM } from "@/lib/contacts";
@@ -55,19 +55,13 @@ export default function ContactsPage() {
       </section>
 
       {/* ---------- Link ---------- */}
-      <section className={styles.closing}>
-        <p className={styles.links}>
-          <Link href="/prices" className={`u-link ${styles.link}`}>
-            See prices
-          </Link>
-          <Link href="/portfolio" className={`u-link ${styles.link}`}>
-            See portfolio
-          </Link>
-          <Link href="/" className={`u-link ${styles.link}`}>
-            Back to home
-          </Link>
-        </p>
-      </section>
+      <ClosingLinks
+        links={[
+          { href: "/prices", label: "See prices" },
+          { href: "/portfolio", label: "See portfolio" },
+          { href: "/", label: "Back to home" },
+        ]}
+      />
     </>
   );
 }

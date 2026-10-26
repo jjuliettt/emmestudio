@@ -10,19 +10,14 @@ import styles from "./Booking.module.css";
 const PHOTO = { src: "/images/booking.jpg", width: 2000, height: 1333 };
 
 type Props = {
-  // solo nella pagina prezzi: "See portfolio" al posto di "See prices"
-  onPricesPage?: boolean;
   // il colore della sezione prima: lo spazio sopra la foto lo continua
   after?: "cream" | "beige";
 };
 
-// Un solo componente, identico in tutte le pagine (foto, finestra,
-// riquadro, testi). Cambia solo il secondo link nella pagina prezzi e il
-// colore dello spazio sopra la foto.
-export default function Booking({ onPricesPage = false, after = "cream" }: Props) {
-  const second = onPricesPage
-    ? { href: "/portfolio", label: "See portfolio" }
-    : { href: "/prices", label: "See prices" };
+// Un solo componente, identico in Home, Portfolio e nelle categorie (foto,
+// finestra, riquadro, testi); cambia solo il colore dello spazio sopra la
+// foto. Contacts e Prices finiscono invece con ClosingLinks.
+export default function Booking({ after = "cream" }: Props) {
   const windowRef = useRef<HTMLDivElement>(null);
   const photoRef = useRef<HTMLImageElement>(null);
   const reducedMotion = useReducedMotion();
@@ -118,8 +113,8 @@ export default function Booking({ onPricesPage = false, after = "cream" }: Props
               <Link href="/contacts" className={`u-link ${styles.link}`}>
                 Get in touch
               </Link>
-              <Link href={second.href} className={`u-link ${styles.link}`}>
-                {second.label}
+              <Link href="/prices" className={`u-link ${styles.link}`}>
+                See prices
               </Link>
             </p>
           </div>
