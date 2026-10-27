@@ -54,6 +54,14 @@ function layout(photos: CategoryPhoto[]): Block[] {
   return blocks;
 }
 
+// Portatile: quattro colonne, ma tre se almeno metà delle foto sono
+// orizzontali (in quattro colonne un'orizzontale viene piccola, alta due
+// terzi di una verticale)
+const columnCount = (photos: CategoryPhoto[]) =>
+  photos.filter((photo) => shapeOf(photo) === "landscape").length * 2 >= photos.length
+    ? 3
+    : 4;
+
 // Portatile: le foto in colonne, ognuna aggiunta alla colonna più corta
 // (contando le proporzioni), così le colonne finiscono quasi pari e l'ordine
 // resta da sinistra a destra, dall'alto in basso
@@ -166,8 +174,11 @@ export default function Gallery({ photos, label }: Props) {
 
       {/* portatile: quattro colonne sfalsate su tutta la larghezza (solo una
           delle due impaginazioni si vede, l'altra è nascosta dal CSS) */}
-      <div className={styles.columns}>
-        {columns(photos, 4).map((column, c) => (
+      <div
+        className={styles.columns}
+        style={{ "--columns": columnCount(photos) } as CSSProperties}
+      >
+        {columns(photos, columnCount(photos)).map((column, c) => (
           <div key={c} className={styles.column}>
             {column.map(thumb)}
           </div>

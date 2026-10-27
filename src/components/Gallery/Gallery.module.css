@@ -313,8 +313,9 @@
 }
 
 /* ---------------------------------------------
-   Portatile: quattro colonne sfalsate su tutta la larghezza della pagina,
-   foto piccole, sempre intere; "Info" a destra della foto
+   Portatile: colonne sfalsate su tutta la larghezza della pagina (quattro,
+   tre se le foto sono soprattutto orizzontali), foto sempre intere;
+   "Info" a destra della foto
    a schermo intero, nella parte alta
 --------------------------------------------- */
 
@@ -325,7 +326,8 @@
 
   .columns {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    /* 4, o 3 se le foto sono soprattutto orizzontali (Gallery.tsx) */
+    grid-template-columns: repeat(var(--columns, 4), minmax(0, 1fr));
     align-items: start;
     column-gap: var(--space-l);
   }
@@ -338,7 +340,7 @@
   }
 
   /* le colonne partono ad altezze diverse: seconda la più bassa, poi la
-     quarta, poi la terza */
+     quarta, poi la terza (con tre colonne: seconda, poi terza) */
   .column:nth-child(2) {
     margin-top: var(--space-xl);
   }

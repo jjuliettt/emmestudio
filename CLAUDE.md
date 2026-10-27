@@ -138,6 +138,7 @@ Trust the code where the handover differs:
   photo while closed and rising to its top edge when opened; covers and price packages three in a row (covers blur lightly and
   show "VIEW" in the middle on hover); the price-guide form's three fields
   in a row, like the Contacts form in two columns; category photos in four staggered
-  columns across the page (never taller than about 80% of the screen), with
+  columns across the page (three when at least half the photos are
+  horizontal, as on Companies & Events) (never taller than about 80% of the screen), with
   "Info" to the right of the full-screen photo; the booking photo as wide as
   the page with a horizontal box.
