@@ -108,6 +108,13 @@ Trust the code where the handover differs:
   photo's name; see the README in `public/assets/REPLACE-ME/`), and
   hand-drawn arrows to the previous/next category with "Back to home"
   underneath (`src/components/CategoryNav/`).
+- Real category photos since 27 October 2026 (21 Private People, 9 Small
+  Businesses, 64 Companies & Events, 1600 px, sRGB, no metadata), in an
+  order chosen to mix shapes and sessions. The Home slideshow is no longer
+  its own files: it shows every landscape category photo, interleaved by
+  category (`src/lib/heroSlides.ts`), and only keeps the previous, current
+  and next photo in the page. Photos 2 and 3 of the hero
+  (`public/images/hero/`) and the review photos are still placeholders.
 - Every page has a back-to-top button. All arrows are the same hand-drawn
   one (`src/components/HandArrow/`).
 - "A little about me" was removed from About at Elisa's request; don't add

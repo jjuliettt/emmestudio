@@ -3,11 +3,13 @@ import About from "@/components/About/About";
 import Portfolio from "@/components/Portfolio/Portfolio";
 import Reviews from "@/components/Reviews/Reviews";
 import Booking from "@/components/Booking/Booking";
+import { heroSlides } from "@/lib/heroSlides";
 
 export default function Home() {
   return (
     <>
-      <Hero />
+      {/* lo slideshow: tutte le foto orizzontali del portfolio */}
+      <Hero slides={heroSlides()} />
       <About />
       <Portfolio />
       <Reviews />
