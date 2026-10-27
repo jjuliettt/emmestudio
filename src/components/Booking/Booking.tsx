@@ -103,12 +103,13 @@ export default function Booking({ after = "cream" }: Props) {
           />
 
           <div className={styles.box} data-shown={shown ?? undefined}>
-            <p className={styles.ask}>
+            {/* titolo della sezione: h2 sotto l'h1 di ogni pagina */}
+            <h2 className={styles.ask}>
               <span className={styles.askStart}>Want to</span>{" "}
               <span className={styles.askEnd}>
                 <em>work together</em>?
               </span>
-            </p>
+            </h2>
             <p className={styles.links}>
               <Link href="/contacts" className={`u-link ${styles.link}`}>
                 Get in touch

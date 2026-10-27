@@ -56,8 +56,8 @@
 }
 
 .arrow {
-  width: 30px;
-  height: 30px;
+  width: 1.875rem;
+  height: 1.875rem;
   fill: none;
   stroke: currentColor;
   stroke-width: 1.5;
@@ -112,8 +112,8 @@
 /* Portatile: frecce, nomi e "Back to home" più grandi */
 @media (min-width: 1024px) {
   .arrow {
-    width: 38px;
-    height: 38px;
+    width: 2.375rem;
+    height: 2.375rem;
   }
 
   .item[data-side="left"] .arrow {

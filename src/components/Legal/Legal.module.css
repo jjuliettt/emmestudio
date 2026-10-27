@@ -105,3 +105,10 @@
     max-width: var(--page-width);
   }
 }
+
+/* l'email nel testo: stesso font e stile del testo, solo sottolineata */
+.link {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}

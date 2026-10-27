@@ -10,6 +10,7 @@ import styles from "./PricesPage.module.css";
 // Titolo della scheda: "Prices | Elisa Massetti Photo" (modello in layout.tsx)
 export const metadata: Metadata = {
   title: "Prices",
+  alternates: { canonical: "/prices" },
   description:
     "Prices 2026 for private sessions, small businesses, companies and events. Request the full price guide by email.",
 };

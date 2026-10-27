@@ -8,6 +8,7 @@ import styles from "./ContactsPage.module.css";
 // Titolo della scheda: "Contacts | Elisa Massetti Photo" (modello in layout.tsx)
 export const metadata: Metadata = {
   title: "Contacts",
+  alternates: { canonical: "/contacts" },
   description:
     "Get in touch with Elisa Massetti, photographer based in Belgium and open to work across Belgium.",
 };
@@ -34,8 +35,11 @@ export default function ContactsPage() {
         <dl className={styles.details}>
           <div>
             <dt>Email</dt>
-            {/* solo testo finché il dominio non è comprato */}
-            <dd>{EMAIL}</dd>
+            <dd>
+              <a href={`mailto:${EMAIL}`} className={`u-link ${styles.email}`}>
+                {EMAIL}
+              </a>
+            </dd>
           </div>
           {INSTAGRAM && (
             <div>

@@ -121,8 +121,8 @@
 }
 
 .chevron {
-  width: 26px;
-  height: 26px;
+  width: 1.625rem;
+  height: 1.625rem;
   fill: none;
   stroke: currentColor;
   stroke-width: 2;
@@ -376,8 +376,8 @@
   }
 
   .chevron {
-    width: 34px;
-    height: 34px;
+    width: 2.125rem;
+    height: 2.125rem;
   }
 
   .infoButton {

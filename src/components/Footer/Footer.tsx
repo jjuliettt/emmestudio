@@ -11,7 +11,7 @@ function Dot({ className }: { className?: string }) {
 }
 
 // Due righe al massimo. Niente link ai cookie: il sito non ne usa.
-// L'email è solo testo finché il dominio non è comprato.
+// L'email è un link mailto, come il resto del footer senza sottolineatura.
 export default function Footer() {
   return (
     <footer className={styles.footer}>
@@ -30,7 +30,9 @@ export default function Footer() {
             Privacy &amp; Legal
           </Link>
           <Dot />
-          {EMAIL}
+          <a href={`mailto:${EMAIL}`} className={styles.link}>
+            {EMAIL}
+          </a>
         </p>
       </div>
     </footer>

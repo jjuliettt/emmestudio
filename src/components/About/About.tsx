@@ -31,10 +31,11 @@ export default function About() {
   return (
     <section className={styles.about}>
       {/* se non sta su una riga va a capo solo dopo "Ciao," */}
-      <p className={styles.greeting}>
+      {/* titolo della sezione (h2 sotto l'h1 della hero) */}
+      <h2 className={styles.greeting}>
         <span className={styles.nowrap}>Ciao,</span>{" "}
         <span className={styles.nowrap}>I&apos;m Elisa, and</span>
-      </p>
+      </h2>
 
       {/* la firma è nel flusso, sopra la foto, e scende sul suo angolo: lo
           spazio tra il saluto e la firma è quello del margine della foto */}

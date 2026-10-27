@@ -16,7 +16,7 @@
   font-family: var(--font-main);
   font-weight: 300;
   /* sui telefoni più stretti un filo più piccolo: sempre due righe */
-  font-size: min(11px, 2.85vw);
+  font-size: min(0.6875rem, 2.85vw);
   letter-spacing: 0.02em;
   line-height: 1.7;
 }
@@ -42,7 +42,7 @@
 
 @media (min-width: 768px) {
   .line {
-    font-size: 12px;
+    font-size: 0.75rem;
   }
 
   /* Le due righe diventano una sola, affiancate */

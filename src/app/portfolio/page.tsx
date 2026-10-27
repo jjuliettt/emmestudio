@@ -7,6 +7,7 @@ import styles from "./PortfolioPage.module.css";
 // Titolo della scheda: "Portfolio | Elisa Massetti Photo" (modello in layout.tsx)
 export const metadata: Metadata = {
   title: "Portfolio",
+  alternates: { canonical: "/portfolio" },
   description:
     "Private sessions, events and small businesses: a selection of photographs by Elisa Massetti, photographer in Belgium.",
 };

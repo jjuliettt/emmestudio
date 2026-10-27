@@ -43,6 +43,12 @@
   overflow-wrap: anywhere;
 }
 
+/* l'email resta in minuscolo come era scritta: del link solo la linea */
+.email {
+  text-transform: none;
+  letter-spacing: inherit;
+}
+
 /* ---------------------------------------------
    Tablet / desktop (non ancora rifinito)
 --------------------------------------------- */

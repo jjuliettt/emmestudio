@@ -6,6 +6,7 @@ import styles from "@/components/Legal/Legal.module.css";
 
 export const metadata: Metadata = {
   title: "Privacy & Legal",
+  alternates: { canonical: "/privacy-policy" },
   description:
     "Privacy policy and legal information of Elisa Massetti Photo: who I am, what data I collect, why, and your rights.",
 };
@@ -51,7 +52,7 @@ export default function PrivacyPolicyPage() {
             <br />
             VAT: exempt, small enterprise scheme (VAT not applicable).
             <br />
-            Email: {EMAIL}.
+            Email: <a href={`mailto:${EMAIL}`} className={styles.link}>{EMAIL}</a>.
             <br />
             Phone: +32 492 83 61 90.
           </p>
@@ -118,7 +119,7 @@ export default function PrivacyPolicyPage() {
           <p className={styles.paragraph}>
             Access, rectification, erasure, restriction, objection (including
             to direct marketing), portability, and withdrawing consent any
-            time. Write to {EMAIL}. I answer within one month.
+            time. Write to <a href={`mailto:${EMAIL}`} className={styles.link}>{EMAIL}</a>. I answer within one month.
           </p>
         </Section>
 

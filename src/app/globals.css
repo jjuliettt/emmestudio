@@ -20,10 +20,10 @@
 
   /* Spaziature: solo questi quattro valori per gli spazi verticali tra
      blocchi e sezioni. "Spazio uguale" = lo stesso valore sopra e sotto */
-  --space-s: 12px;
-  --space-m: 24px;
-  --space-l: 48px;
-  --space-xl: 72px;
+  --space-s: 0.75rem;
+  --space-m: 1.5rem;
+  --space-l: 3rem;
+  --space-xl: 4.5rem;
 
   /* Portatile: la larghezza del contenuto di tutte le pagine (About,
      copertine, pacchetti, moduli, FAQ, Privacy), centrato, con almeno
