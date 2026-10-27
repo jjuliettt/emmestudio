@@ -19,6 +19,16 @@ proportions. They can also be `.png` or `.webp`. The layout is chosen from
 their shapes: two landscape photos in a row sit side by side, two portrait
 photos are staggered, the others are full width or set to one side.
 
+The big slideshow at the top of Home uses every landscape photo of the
+three category pages (wider than 1.1 × their height), mixed so the
+category changes as often as possible. Adding or removing a landscape
+category photo changes the slideshow too; there are no separate slideshow
+files.
+
+Prepare photos before adding them: about 1600 px on the long side, sRGB,
+no location or camera data (all real category photos here were made this
+way from Elisa's full-size exports, October 2026).
+
 Photo details (the "Info" button in the full-screen view): add a text file
 with the same name as the photo, ending in `.txt`, for example
 `REPLACE-ME_events-01.txt`. Write one detail per line as `Name: value`; any
