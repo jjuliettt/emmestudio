@@ -10,14 +10,16 @@ import styles from "./Hero.module.css";
 
 type Photo = Slide;
 
+// La foto verticale grande (Small Businesses, _DSC2886, ritagliata 2:3) e
+// quella piccola sovrapposta (Private People, _DSC8910), scelte da Elisa
 const PHOTO_2: Photo = {
-  src: "/images/hero/guests.jpg",
-  alt: "Guests chatting during the event",
+  src: "/images/hero/photo-2.jpg",
+  alt: "Young woman resting her head on her hands at a café table with cookies, brownies and a latte",
 };
 
 const PHOTO_3: Photo = {
-  src: "/images/hero/portrait.jpg",
-  alt: "Smiling guest in conversation",
+  src: "/images/hero/photo-3.jpg",
+  alt: "Black-and-white close-up portrait of a young woman looking up",
 };
 
 // Ultima parola della frase, cambia in dissolvenza

@@ -113,8 +113,10 @@ Trust the code where the handover differs:
   order chosen to mix shapes and sessions. The Home slideshow is no longer
   its own files: it shows every landscape category photo, interleaved by
   category (`src/lib/heroSlides.ts`), and only keeps the previous, current
-  and next photo in the page. Photos 2 and 3 of the hero
-  (`public/images/hero/`) and the review photos are still placeholders.
+  and next photo in the page. Hero photos 2 and 3 are Elisa's choice
+  (`public/images/hero/photo-2.jpg` from Small Businesses _DSC2886 cropped
+  2:3, `photo-3.jpg` from Private People _DSC8910); the review photos are
+  still placeholders.
 - Every page has a back-to-top button. All arrows are the same hand-drawn
   one (`src/components/HandArrow/`).
 - "A little about me" was removed from About at Elisa's request; don't add
