@@ -4,28 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import HandArrow from "@/components/HandArrow/HandArrow";
 import { useFitText } from "@/lib/useFitText";
+import type { Slide } from "@/lib/heroSlides";
 import { useReducedMotion } from "@/lib/useReducedMotion";
 import styles from "./Hero.module.css";
 
-type Photo = {
-  src: string;
-  alt: string;
-};
-
-const SLIDES: Photo[] = [
-  {
-    src: "/images/hero/slide-1-circuit.jpg",
-    alt: "Starting grid at Circuit Zolder",
-  },
-  {
-    src: "/images/hero/slide-2-helmet.jpg",
-    alt: "Racing helmet resting on the roof of a car",
-  },
-  {
-    src: "/images/hero/slide-3-champagne.jpg",
-    alt: "Glass of sparkling wine with a race car on the track behind",
-  },
-];
+type Photo = Slide;
 
 const PHOTO_2: Photo = {
   src: "/images/hero/guests.jpg",
@@ -76,7 +59,12 @@ function measureQuote(quote: HTMLElement) {
   };
 }
 
-export default function Hero() {
+type Props = {
+  // le foto orizzontali del portfolio, già mescolate (lib/heroSlides.ts)
+  slides: Slide[];
+};
+
+export default function Hero({ slides }: Props) {
   // la foto precedente resta piena sotto quella che entra in dissolvenza:
   // durante il passaggio non si vede mai il blocco colorato dietro
   const [{ slide, previous }, setSlides] = useState({ slide: 0, previous: -1 });
@@ -86,6 +74,14 @@ export default function Hero() {
   const activeSlide = reducedMotion ? 0 : slide;
   const previousSlide = reducedMotion ? -1 : previous;
   const activeAdjective = reducedMotion ? 0 : adjective;
+  // nella pagina solo la foto precedente (piena sotto), quella attiva e la
+  // prossima (invisibile, intanto si scarica): con decine di foto la home
+  // non le scarica tutte insieme
+  const nextSlide =
+    !reducedMotion && slides.length > 1 ? (activeSlide + 1) % slides.length : -1;
+  const shownSlides = [previousSlide, activeSlide, nextSlide].filter(
+    (i, position, all) => i >= 0 && i < slides.length && all.indexOf(i) === position
+  );
 
   const titleRef = useRef<HTMLHeadingElement>(null);
   const quoteRef = useRef<HTMLParagraphElement>(null);
@@ -93,17 +89,17 @@ export default function Hero() {
   useFitText(quoteRef, measureQuote);
 
   useEffect(() => {
-    if (reducedMotion) return;
+    if (reducedMotion || slides.length < 2) return;
     const id = setInterval(
       () =>
         setSlides(({ slide: i }) => ({
-          slide: (i + 1) % SLIDES.length,
+          slide: (i + 1) % slides.length,
           previous: i,
         })),
       SLIDE_INTERVAL
     );
     return () => clearInterval(id);
-  }, [reducedMotion]);
+  }, [reducedMotion, slides.length]);
 
   useEffect(() => {
     if (reducedMotion) return;
@@ -131,11 +127,13 @@ export default function Hero() {
 
         {/* Dietro alla foto c'è il blocco espresso (CSS) */}
         <div className={styles.slideshow}>
-          {SLIDES.map((photo, i) => (
+          {/* la chiave è il posto nel giro: la prossima diventa attiva senza
+              essere ricreata, quindi è già scaricata quando entra */}
+          {shownSlides.map((i) => (
             <img
-              key={photo.src}
-              src={photo.src}
-              alt={photo.alt}
+              key={i}
+              src={slides[i].src}
+              alt={slides[i].alt}
               className={styles.slide}
               data-active={i === activeSlide}
               data-previous={i === previousSlide}
