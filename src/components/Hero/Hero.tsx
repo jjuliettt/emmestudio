@@ -28,6 +28,13 @@ const ADJECTIVES = ["confident", "natural", "unforgettable"] as const;
 const SLIDE_INTERVAL = 4500;
 const ADJECTIVE_INTERVAL = 3000;
 
+// Dove era arrivato lo slideshow: tornando in home riparte dalla foto dopo,
+// non dalla prima. In memoria finché la pagina non si ricarica (cambiando
+// pagina dal menu o col tasto indietro); in sessionStorage per quando si
+// ricarica, nella stessa scheda
+let lastSlide: number | null = null;
+const SLIDE_KEY = "hero-slide";
+
 // Il titolo verticale non deve mai andare oltre il fondo dello slideshow
 // (meno lo spazio sopra e sotto): se lo fa, si rimpicciolisce il font, non
 // la spaziatura tra le lettere. Sul telefono titolo e foto partono alla
@@ -69,7 +76,13 @@ type Props = {
 export default function Hero({ slides }: Props) {
   // la foto precedente resta piena sotto quella che entra in dissolvenza:
   // durante il passaggio non si vede mai il blocco colorato dietro
-  const [{ slide, previous }, setSlides] = useState({ slide: 0, previous: -1 });
+  // tornando in home senza ricaricare: subito la foto dopo l'ultima vista
+  const [{ slide, previous }, setSlides] = useState(() => ({
+    slide: lastSlide === null || slides.length === 0 ? 0 : (lastSlide + 1) % slides.length,
+    previous: -1,
+  }));
+  // pagina appena caricata (anche ricaricata): non sa ancora dov'era arrivata
+  const freshLoad = useRef(lastSlide === null);
   const [adjective, setAdjective] = useState(0);
   // con meno movimento: prima foto e prima parola, ferme
   const reducedMotion = useReducedMotion();
@@ -89,6 +102,31 @@ export default function Hero({ slides }: Props) {
   const quoteRef = useRef<HTMLParagraphElement>(null);
   useFitText(titleRef, measureTitle);
   useFitText(quoteRef, measureQuote);
+
+  // ricaricata nella stessa scheda: riparte dalla foto dopo l'ultima vista
+  // (letta qui e non al primo disegno, che deve essere uguale a quello del
+  // server)
+  useEffect(() => {
+    if (!freshLoad.current || slides.length < 2) return;
+    freshLoad.current = false;
+    let saved: number | null = null;
+    try {
+      const value = sessionStorage.getItem(SLIDE_KEY);
+      if (value !== null) saved = Number(value);
+    } catch {}
+    if (saved !== null && Number.isInteger(saved) && saved >= 0) {
+      setSlides({ slide: (saved + 1) % slides.length, previous: -1 });
+    }
+  }, [slides.length]);
+
+  // ricorda la foto attiva
+  useEffect(() => {
+    if (reducedMotion) return;
+    lastSlide = slide;
+    try {
+      sessionStorage.setItem(SLIDE_KEY, String(slide));
+    } catch {}
+  }, [slide, reducedMotion]);
 
   useEffect(() => {
     if (reducedMotion || slides.length < 2) return;

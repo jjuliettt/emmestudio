@@ -113,7 +113,9 @@ Trust the code where the handover differs:
   order chosen to mix shapes and sessions. The Home slideshow is no longer
   its own files: it shows every landscape category photo, interleaved by
   category (`src/lib/heroSlides.ts`), and only keeps the previous, current
-  and next photo in the page. Hero photos 2 and 3 are Elisa's choice
+  and next photo in the page. It remembers where it was (in memory, and in
+  sessionStorage for reloads): coming back to Home it continues with the
+  next photo instead of starting over. Hero photos 2 and 3 are Elisa's choice
   (`public/images/hero/photo-2.jpg` from Small Businesses _DSC2886 cropped
   2:3, `photo-3.jpg` from Private People _DSC8910). All four review photos
   are real: 400 px squares cropped on the face, the faces about the same
