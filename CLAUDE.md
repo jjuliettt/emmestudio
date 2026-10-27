@@ -115,9 +115,9 @@ Trust the code where the handover differs:
   category (`src/lib/heroSlides.ts`), and only keeps the previous, current
   and next photo in the page. Hero photos 2 and 3 are Elisa's choice
   (`public/images/hero/photo-2.jpg` from Small Businesses _DSC2886 cropped
-  2:3, `photo-3.jpg` from Private People _DSC8910). Review photos: Paulina
-  (`review-02`) and Tawake (`review-03`) are real, 400 px squares cropped
-  on the face; Hania and Prof. Tacik are still placeholders.
+  2:3, `photo-3.jpg` from Private People _DSC8910). All four review photos
+  are real: 400 px squares cropped on the face, the faces about the same
+  size in the circle.
 - Every page has a back-to-top button. All arrows are the same hand-drawn
   one (`src/components/HandArrow/`).
 - "A little about me" was removed from About at Elisa's request; don't add
